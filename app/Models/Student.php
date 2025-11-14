@@ -18,9 +18,15 @@ class Student extends Model
         return $this->belongsTo(User::class);
     }
 
+    // public function agent()
+    // {
+    //     return $this->belongsTo(User::class, 'agent_id');
+    // }
+
     public function agent()
     {
-        return $this->belongsTo(User::class, 'agent_id');
+        return $this->belongsTo(Agent::class);
     }
 }
+
 

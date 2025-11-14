@@ -11,8 +11,33 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        
+        <!-- Bootstrap Icons -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+        
+        <!-- Font Awesome (alternative option) -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+        <style>
+            /* Custom styles to ensure compatibility */
+            .font-sans {
+                font-family: 'Figtree', sans-serif;
+            }
+            
+            /* Ensure Bootstrap doesn't conflict with existing styles */
+            .bg-gray-100 {
+                background-color: #f8f9fa !important;
+            }
+            
+            .min-h-screen {
+                min-height: 100vh;
+            }
+        </style>
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
@@ -21,7 +46,7 @@
             <!-- Page Heading -->
             @isset($header)
                 <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                    <div class="container-fluid py-3">
                         {{ $header }}
                     </div>
                 </header>
@@ -29,8 +54,14 @@
 
             <!-- Page Content -->
             <main>
-                {{ $slot }}
+                @yield('content')
             </main>
         </div>
+
+        <!-- Bootstrap JavaScript -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+        <!-- Optional: jQuery if needed for Bootstrap components -->
+        <!-- <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> -->
     </body>
 </html>

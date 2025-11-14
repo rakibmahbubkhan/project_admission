@@ -31,4 +31,13 @@ class User extends Authenticatable
     {
         return $this->belongsTo(User::class, 'created_by');
     }
+
+    protected static function booted()
+{
+    static::creating(function ($user) {
+        if ($user->role === 'agent' && empty($user->referral_code)) {
+            $user->referral_code = strtoupper(substr($user->name, 0, 3)) . rand(1000, 9999);
+        }
+    });
+}
 }
