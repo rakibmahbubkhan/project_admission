@@ -3,28 +3,29 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Application extends Model
 {
-    use HasFactory;
-
     protected $fillable = [
-        'student_id', 'agent_id', 'admission_form_id', 'status', 'payment_status', 'remarks'
+        'student_id', 'admission_form_id', 'agent_id', 'form_data', 'status'
+    ];
+
+    protected $casts = [
+        'form_data' => 'array',
     ];
 
     public function student()
     {
-        return $this->belongsTo(User::class, 'student_id');
+        return $this->belongsTo(Student::class);
+    }
+
+    public function admissionForm()
+    {
+        return $this->belongsTo(AdmissionForm::class);
     }
 
     public function agent()
     {
         return $this->belongsTo(User::class, 'agent_id');
-    }
-
-    public function form()
-    {
-        return $this->belongsTo(AdmissionForm::class, 'admission_form_id');
     }
 }

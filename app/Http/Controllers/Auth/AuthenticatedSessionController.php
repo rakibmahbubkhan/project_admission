@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -22,26 +23,55 @@ class AuthenticatedSessionController extends Controller
     /**
      * Handle an incoming authentication request.
      */
-    public function store(LoginRequest $request): RedirectResponse
+    public function store(Request $request)
     {
-        $request->authenticate();
+        // Validate login input
+        $credentials = $request->validate([
+            'email' => ['required', 'string', 'email'],
+            'password' => ['required'],
+        ]);
+
+        // Manual authentication
+        if (!Auth::attempt($credentials, $request->filled('remember'))) {
+            throw ValidationException::withMessages([
+                'email' => __('The provided credentials do not match our records.'),
+            ]);
+        }
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        // Role-wise redirect
+        $user = Auth::user();
+
+        if ($user->role === 'super_admin') {
+            return to_route('super_admin.dashboard');
+        }
+
+        if ($user->role === 'agent') {
+            return to_route('agent.dashboard');
+        }
+
+        if ($user->role === 'student') {
+            return to_route('student.dashboard');
+        }
+
+        // fallback
+        return redirect('/');
     }
 
-    /**
-     * Destroy an authenticated session.
-     */
-    public function destroy(Request $request): RedirectResponse
+    public function destroy(Request $request)
     {
         Auth::guard('web')->logout();
 
         $request->session()->invalidate();
-
         $request->session()->regenerateToken();
 
         return redirect('/');
     }
+
+    protected function authenticated($request, $user)
+{
+    return redirect()->route($user->role . '.dashboard');
+}
+
 }

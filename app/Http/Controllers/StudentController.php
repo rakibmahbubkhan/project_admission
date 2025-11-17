@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
@@ -59,5 +60,54 @@ class StudentController extends Controller
         return redirect()->route('agent.students.index')
             ->with('success', 'Student created successfully!');
     }
+
+    public function forms()
+{
+    $student = Auth::user()->student;
+    $forms = $student?->forms ?? [];
+
+    return view('student.forms', compact('forms'));
+}
+
+// public function applications()
+// {
+//     $student = Auth::user()->student;
+//     $applications = $student?->applications ?? [];
+
+//     return view('student.applications', compact('applications'));
+// }
+
+public function profile()
+{
+    $student = Auth::user()->student;
+    return view('student.profile', compact('student'));
+}
+
+public function applications()
+{
+    $student = Auth::user()->student;
+    $applications = $student->applications()->with('admissionForm.university')->latest()->get();
+
+    return view('student.applications.index', compact('applications'));
+}
+
+public function history()
+{
+    $student = Auth::user()->student;
+
+    $payments = $student->applications()->whereNotNull('payment_id')->get();
+
+    return view('student.history', compact('payments'));
+}
+
+public function notifications()
+{
+    $notifications = Auth::user()->notifications;
+    return view('student.notifications', compact('notifications'));
+}
+
+
+
+
 }
 

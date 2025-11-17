@@ -7,20 +7,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class University extends Model
 {
-    use HasFactory;
-
     protected $fillable = [
-        'name', 'logo', 'location', 'website', 'description', 'created_by'
+        'name', 'country', 'city', 'logo', 'details', 'isActive'
     ];
 
-    public function forms()
+    public function admissionForms()
     {
         return $this->hasMany(AdmissionForm::class);
     }
-
-    public function creator()
-    {
-        return $this->belongsTo(User::class, 'created_by');
-    }
 }
-

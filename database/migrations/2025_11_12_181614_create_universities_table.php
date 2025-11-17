@@ -5,19 +5,20 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
-    public function up(): void
-    {
-        Schema::create('universities', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('logo')->nullable();
-            $table->string('location')->nullable();
-            $table->string('website')->nullable();
-            $table->text('description')->nullable();
-            $table->foreignId('created_by')->constrained('users')->onDelete('cascade');
-            $table->timestamps();
-        });
-    }
+    public function up()
+{
+    Schema::create('universities', function (Blueprint $table) {
+        $table->id();
+        $table->string('name');
+        $table->string('country');
+        $table->string('city')->nullable();
+        $table->string('logo')->nullable();
+        $table->text('details')->nullable();
+        $table->boolean('isActive')->default(true);
+        $table->timestamps();
+    });
+}
+
 
     public function down(): void
     {

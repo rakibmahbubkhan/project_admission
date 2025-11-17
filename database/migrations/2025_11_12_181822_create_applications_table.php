@@ -5,19 +5,23 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
-    public function up(): void
-    {
-        Schema::create('applications', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('student_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('agent_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('admission_form_id')->constrained('admission_forms')->onDelete('cascade');
-            $table->enum('status', ['pending', 'submitted', 'approved', 'rejected'])->default('pending');
-            $table->enum('payment_status', ['unpaid', 'paid'])->default('unpaid');
-            $table->text('remarks')->nullable();
-            $table->timestamps();
-        });
-    }
+    public function up()
+{
+    Schema::create('applications', function (Blueprint $table) {
+        $table->id();
+        $table->unsignedBigInteger('student_id');
+        $table->unsignedBigInteger('admission_form_id');
+        $table->unsignedBigInteger('agent_id')->nullable();
+        $table->json('form_data'); // stores submitted form fields
+        $table->enum('status', ['pending','approved','rejected'])->default('pending');
+        $table->timestamps();
+
+        $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
+        $table->foreign('admission_form_id')->references('id')->on('admission_forms')->onDelete('cascade');
+        $table->foreign('agent_id')->references('id')->on('users')->onDelete('set null');
+    });
+}
+
 
     public function down(): void
     {

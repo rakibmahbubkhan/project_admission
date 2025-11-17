@@ -1,44 +1,48 @@
 @extends('layouts.agent')
 
 @section('content')
-<div class="container py-4">
-    <h2 class="mb-4">Welcome, {{ $agent->company ?? $agent->full_name }}</h2>
+<div class="container mt-4">
+    <h3>Welcome, {{ $agent->name }}</h3>
 
-    <div class="card mb-3">
-        <div class="card-body">
-            <h5>Referral Code: <strong>{{ $agent->user->referral_code }}</strong></h5>
-            <p>Status: 
-                @if($agent->user->status == 'approved')
-                    <span class="badge bg-success">Approved</span>
-                @else
-                    <span class="badge bg-warning text-dark">{{ ucfirst($agent->user->status) }}</span>
-                @endif
-            </p>
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card p-3">
+                <h5>Total Students</h5>
+                <h2>{{ $student_count }}</h2>
+            </div>
         </div>
+        <div class="col-md-4">
+            <div class="card p-3">
+                <h5>Total Applications</h5>
+                <h2>{{ $submission_count }}</h2>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card p-3">
+                <h5>Commission</h5>
+                <h2>$0</h2> <!-- future commission calculation -->
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card p-3">
+                <h5>Total Commission</h5>
+                <h2>${{ number_format($total_commission, 2) }}</h2>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card p-3">
+                <h5>Paid Commission</h5>
+                <h2>${{ number_format($paid_commission, 2) }}</h2>
+            </div>
+        </div>
+
     </div>
 
-    <h4 class="mt-4">Recently Added Students</h4>
-
-    @if($students->isEmpty())
-        <p>No students added yet.</p>
-    @else
-        <table class="table table-bordered mt-3">
-            <thead>
-                <tr>
-                    <th>Name</th><th>Email</th><th>Phone</th><th>Referral Code</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($students as $student)
-                <tr>
-                    <td>{{ $student->name }}</td>
-                    <td>{{ $student->email }}</td>
-                    <td>{{ $student->phone }}</td>
-                    <td>{{ $student->referral_code }}</td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-    @endif
+    <div class="mt-4">
+        <a href="{{ route('agent.students') }}" class="btn btn-primary">Manage Students</a>
+        <a href="{{ route('agent.submissions') }}" class="btn btn-success">View Submissions</a>
+    </div>
 </div>
 @endsection

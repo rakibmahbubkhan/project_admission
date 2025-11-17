@@ -5,17 +5,21 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
-    public function up(): void
+    public function up()
     {
         Schema::create('commissions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('agent_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('student_id')->constrained('users')->onDelete('cascade');
-            $table->decimal('amount', 10, 2)->default(0);
+            $table->unsignedBigInteger('agent_id');
+            $table->unsignedBigInteger('application_id');
+            $table->decimal('amount', 10, 2);
             $table->enum('status', ['pending', 'paid'])->default('pending');
             $table->timestamps();
+
+            $table->foreign('agent_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('application_id')->references('id')->on('applications')->onDelete('cascade');
         });
     }
+
 
     public function down(): void
     {

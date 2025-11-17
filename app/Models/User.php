@@ -40,4 +40,11 @@ class User extends Authenticatable
         }
     });
 }
+
+public function commissions()
+{
+    return $this->hasMany(Commission::class, 'agent_id');
+}
+
+
 }
