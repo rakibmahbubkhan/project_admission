@@ -98,9 +98,9 @@ Route::middleware(['auth', 'role:super_admin'])->prefix('admin')->name('admin.')
 
 
 Route::middleware(['auth', 'role:super_admin'])->prefix('admin')->group(function () {
-    Route::get('/agents', [AgentApprovalController::class, 'index'])->name('admin.agents.index');
-    Route::post('/agents/{id}/approve', [AgentApprovalController::class, 'approve'])->name('admin.agents.approve');
-    Route::post('/agents/{id}/reject', [AgentApprovalController::class, 'reject'])->name('admin.agents.reject');
+    Route::get('/admin/agents', [AgentApprovalController::class, 'index'])->name('admin.agents.index');
+    Route::post('/admin/agents/{id}/approve', [AgentApprovalController::class, 'approve'])->name('admin.agents.approve');
+    Route::post('/admin/agents/{id}/reject', [AgentApprovalController::class, 'reject'])->name('admin.agents.reject');
 });
 
 
@@ -171,14 +171,14 @@ Route::middleware(['auth', 'role:super_admin'])->group(function () {
 });
 
 
-Route::middleware(['auth', 'role:super-admin'])->group(function () {
+Route::middleware(['auth', 'role:super_admin'])->group(function () {
 
     // Universities
     Route::resource('universities', UniversityController::class);
 
     // Admission Forms
     // Route::resource('forms', AdmissionFormController::class);
-Route::resource('forms', AdmissionFormController::class)
+    Route::resource('/admin/forms', AdmissionFormController::class)
      ->names('admin.forms')
      ->middleware(['auth','role:super_admin']);
 
@@ -245,11 +245,8 @@ Route::middleware(['auth', 'role:super_admin'])->prefix('admin')->group(function
     
     Route::get('dashboard', [AdminController::class, 'dashboard'])->name('super_admin.dashboard');
 
-    // Universities
-    Route::resource('universities', UniversityController::class);
-
     // Admission Forms
-    Route::resource('forms', AdmissionFormController::class);
+    Route::resource('/admin/forms', AdmissionFormController::class);
     
     // Agents
     Route::resource('agents', AgentController::class);

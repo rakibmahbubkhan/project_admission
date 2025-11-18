@@ -3093,8 +3093,8 @@ textarea.is-invalid {
   height: 100%;
   overflow: hidden;
   box-sizing: border-box;
-  -webkit-animation: animloader 3s linear infinite;
-          animation: animloader 3s linear infinite;
+  -webkit-animation: animloader 3s linear;
+          animation: animloader 3s linear;
 }
 
 @-webkit-keyframes animloader {

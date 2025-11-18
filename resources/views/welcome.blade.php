@@ -18,10 +18,10 @@
 
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Shared By NULLPHPSCRIPT.COM - Aalokbortika - University Education HTML Template - Home One</title>
+    <title>Aalokbortika - Online Admission Management</title>
     <meta name="author" content="Aalokbortika">
-    <meta name="description" content="Aalokbortika - University Education HTML Template">
-    <meta name="keywords" content="Aalokbortika - University Education HTML Template">
+    <meta name="description" content="Aalokbortika - Online Admission Management">
+    <meta name="keywords" content="Aalokbortika - Online Admission Management">
     <meta name="robots" content="INDEX,FOLLOW">
 
     <!-- Mobile Specific Metas -->
@@ -69,24 +69,18 @@
 
 </head>
 
+
 <body>
 
-    <!--[if lte IE 9]>
-    	<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
-  	<![endif]-->
-
-
-    <!--********************************
+       <!--********************************
    		Code Start From Here 
 	******************************** -->
 
-    <!--==============================
-     Preloader
-  ==============================-->
+    
     <div class="preloader ">
         <button class="th-btn preloaderCls">Cancel Preloader </button>
         <div class="preloader-inner">
-            <img src="assets/img/logo-icon.svg" alt="img">
+            <img src="{{ asset('assets/img/logo.png') }}" style="width:250px;" alt="img">
             <span class="loader">
                 Aalokbortika
                 <span class="loading-text">Aalokbortika</span>
@@ -102,10 +96,10 @@
                 <div class="th-widget-about">
                     <div class="about-logo">
                         <a href="home-university.html">
-                            <img src="assets/img/logo2.svg" alt="Aalokbortika">
+                            <img src="{{ asset('assets/img/logo.png') }}" alt="Stadum">
                         </a>
                     </div>
-                    <p class="about-text">Since 1999, when the newly minted Aalokbortika team embraced its mandate to breathe new life into the downtrodden neighbourhood, East Village’s transformation has been nothing short of remarkable. </p>
+                    <p class="about-text">Since 1999, when the newly minted Stadum team embraced its mandate to breathe new life into the downtrodden neighbourhood, East Village's transformation has been nothing short of remarkable. </p>
                     <div class="footer-info">
                         <a href="#">
                             <span class="footer-info-icon"><i class="fa-solid fa-location-dot"></i></span> 45 New Eskaton Road, Austria
@@ -121,7 +115,7 @@
                 <div class="recent-post-wrap">
                     <div class="recent-post">
                         <div class="media-img">
-                            <a href="blog-details.html"><img src="assets/img/blog/recent-post-1-1.jpg" alt="Blog Image"></a>
+                            <a href="blog-details.html"><img src="{{ asset('assets/img/blog/recent-post-1-1.jpg') }}" alt="Blog Image"></a>
                         </div>
                         <div class="media-body">
                             <h4 class="post-title">
@@ -134,7 +128,7 @@
                     </div>
                     <div class="recent-post">
                         <div class="media-img">
-                            <a href="blog-details.html"><img src="assets/img/blog/recent-post-1-2.jpg" alt="Blog Image"></a>
+                            <a href="blog-details.html"><img src="{{ asset('assets/img/blog/recent-post-1-2.jpg') }}" alt="Blog Image"></a>
                         </div>
                         <div class="media-body">
                             <h4 class="post-title"><a class="text-inherit" href="blog-details.html">Future Focus Preparing for Tomorrow</a></h4>
@@ -145,7 +139,7 @@
                     </div>
                     <div class="recent-post">
                         <div class="media-img">
-                            <a href="blog-details.html"><img src="assets/img/blog/recent-post-1-3.jpg" alt="Blog Image"></a>
+                            <a href="blog-details.html"><img src="{{ asset('assets/img/blog/recent-post-1-3.jpg') }}" alt="Blog Image"></a>
                         </div>
                         <div class="media-body">
                             <h4 class="post-title">
@@ -183,7 +177,7 @@
         <div class="th-menu-area text-center">
             <button class="th-menu-toggle"><i class="fal fa-times"></i></button>
             <div class="mobile-logo">
-                <a href="#"><img src="assets/img/logo.png" alt="Aalokbortika"></a>
+                <a href="home-university.html"><img src="{{ asset('assets/img/logo.png') }}" alt="Stadum"></a>
             </div>
             <div class="th-mobile-menu">
                 <ul>
@@ -268,46 +262,33 @@
                 </ul>
             </div>
         </div>
-    </div>
-    <!--==============================
-	Header Area
+    </div><!--==============================
+    Header Area
 ==============================-->
-    <header class="th-header header-layout1">
+    <header class="th-header header-layout2 header-layout3 onepage-nav">
         <div class="header-top">
-            <div class="container th-container4">
+            <div class="th-container4 container">
                 <div class="row justify-content-center justify-content-lg-between align-items-center gy-2">
                     <div class="col-auto d-none d-lg-block">
-                        <div class="header-links">
+                        <div class="header-links style2">
                             <ul class="header-left-wrap">
-                                <li>
-                                    <div class="dropdown-link">
-                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink1" data-bs-toggle="dropdown" aria-expanded="false"> Studients</a>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink1">
-                                            <li>
-                                                <a href="#">Scrollship</a>
-                                                <a href="#">Forening</a>
-                                                <a href="#">Online</a>
-                                                <a href="#">Bysexual</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </li>
-                                <li><a href="contact.html">Staff</a></li>
-                                <li><a href="alumni.html">Alumni</a></li>
-                                <li><a href="faculty.html">Faculty</a> </li>
-                                <li><a href="contact.html">Community</a></li>
+                                <li><a href="#"><i class="fa-solid fa-location-dot"></i>45 New Eskaton Road, Austria</a></li>
+                                <li><a href="mailto:infomail@example.com"><i class="fa-solid fa-envelope"></i>infomail@example.com</a></li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-auto">
                         <div class="header-links">
                             <ul class="header-right-wrap">
-                                <li><i class="fa-solid fa-user"></i><a href="#login-form" class="popup-content">Login / Register</a></li>
-                                <li><i class="fas fa-comments"></i><a href="faq.html">FAQ</a></li>
+                                <li><i class="fa-solid fa-user"></i><a href="#login-form" class="popup-content">Login /
+                                        Register</a></li>
+                                <li>
+                                    <i class="fas fa-comments"></i><a href="faq.html">FAQ</a>
+                                </li>
                                 <li>
                                     <div class="dropdown-link">
-                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink2" data-bs-toggle="dropdown" aria-expanded="false"><img src="assets/img/icon/lang.svg" alt=""> </a>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink2">
+                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink1" data-bs-toggle="dropdown" aria-expanded="false"><img src="{{ asset('assets/img/icon/lang.png') }}" alt=""> </a>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink1">
                                             <li>
                                                 <a href="#">German</a>
                                                 <a href="#">French</a>
@@ -325,243 +306,117 @@
                 </div>
             </div>
         </div>
-        <div class="header-info d-none d-sm-block">
-            <div class="container th-container2">
-                <div class="row justify-content-between align-items-center">
-                    <div class="col-auto">
-                        <div class="header-logo">
-                            <a href="#">
-                                <img src="assets/img/logo.png" style="width:250px !important;" alt="Aalokbortika">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-auto">
-                        <div class="header-info-right">
-                            <div class="header-info-item">
-                                <div class="header-info-icon">
-                                    <i class="fa-solid fa-location-dot"></i>
-                                </div>
-                                <div class="header-info-content">
-                                    <span class="header-info-text">Address</span>
-                                    <h3 class="header-info-title">
-                                        <a href="#">45 New Eskaton Road, Austria</a>
-                                    </h3>
-                                </div>
-                            </div>
-                            <div class="header-info-item">
-                                <div class="header-info-icon">
-                                    <i class="fa-solid fa-envelope"></i>
-                                </div>
-                                <div class="header-info-content">
-                                    <span class="header-info-text">Email</span>
-                                    <h3 class="header-info-title">
-                                        <a href="tel:mailinfo@example.com">mailinfo@example.com</a>
-                                    </h3>
-                                </div>
-                            </div>
-                            <div class="header-info-item">
-                                <div class="header-info-icon">
-                                    <i class="fa-solid fa-phone"></i>
-                                </div>
-                                <div class="header-info-content">
-                                    <span class="header-info-text">Phone Number</span>
-                                    <h3 class="header-info-title">
-                                        <a href="tel:+0112345678900">+01 123 456 789 00</a>
-                                    </h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="sticky-wrapper">
             <!-- Main Menu Area -->
             <div class="menu-area">
-                <div class="container th-container2">
-                    <div class="menu-wrapp">
-                        <div class="row align-items-center justify-content-between">
-                            <div class="col-auto">
-                                <div class="header-left d-flex align-items-center">
-                                    <div class="header-logo d-block d-sm-none">
-                                        <a href="home-university.html">
-                                            <img src="assets/img/logo.png" style="width:250px !important;" alt="Aalokbortika">
-                                        </a>
-                                    </div>
-                                    <div class="header-button d-none d-sm-block">
-                                        <a href="contact.html" class="th-btn">
-                                            Get More Info
-                                            <img src="assets/img/icon/right-icon.svg" class="th-arrow" alt="icon">
-                                        </a>
-                                    </div>
-                                    <nav class="main-menu d-none d-xl-block">
-                                        <ul>
-                                            <li class="menu-item-has-children">
-                                                <a href="home-university.html">Home</a>
-                                                <ul class="mega-menu mega-menu-content mega-scroll">
-                                                    <li>
-                                                        <div class="container">
-                                                            <div class="row gy-4">
-                                                                <div class="col-lg-4">
-                                                                    <div class="mega-menu-box">
-                                                                        <div class="mega-menu-img">
-                                                                            <img src="assets/img/pages/home-university.jpg" alt="Home One">
-                                                                            <div class="btn-wrap">
-                                                                                <a href="home-university.html" class="th-btn">Multipage</a>
-                                                                                <a href="home-university-op.html" class="th-btn">Onepage</a>
-                                                                            </div>
-                                                                        </div>
-                                                                        <h3 class="mega-menu-title"><a href="home-university.html">Home University</a></h3>
+                <div class="container th-container4">
+                    <div class="row align-items-center justify-content-between">
+                        <div class="col-auto">
+                            <div class="header-logo">
+                                <a href="home-university.html">
+                                    <img src="{{ asset('assets/img/logo.png') }}" style="width:250px;" alt="Stadum">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-auto d-none d-xl-block">
+                            <nav class="main-menu">
+                                <ul>
+                                    <li><a href="#">Home</a></li>
+                                    <!-- <li class="menu-item-has-children">
+                                        <a href="#hero">Home</a>
+                                        <ul class="mega-menu mega-menu-content mega-scroll">
+                                            <li>
+                                                <div class="container">
+                                                    <div class="row gy-4">
+                                                        <div class="col-lg-4">
+                                                            <div class="mega-menu-box">
+                                                                <div class="mega-menu-img">
+                                                                    <img src="{{ asset('assets/img/pages/home-university.jpg') }}" alt="Home One">
+                                                                    <div class="btn-wrap">
+                                                                        <a href="home-university.html" class="th-btn">Multipage</a>
+                                                                        <a href="home-university-op.html" class="th-btn">Onepage</a>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-lg-4">
-                                                                    <div class="mega-menu-box">
-                                                                        <div class="mega-menu-img">
-                                                                            <img src="assets/img/pages/home-admission.jpg" alt="Home Two">
-                                                                            <div class="btn-wrap">
-                                                                                <a href="home-admission.html" class="th-btn">Multipage</a>
-                                                                                <a href="home-admission-op.html" class="th-btn">Onepage</a>
-                                                                            </div>
-                                                                        </div>
-                                                                        <h3 class="mega-menu-title"><a href="home-admission.html">Home Admission</a></h3>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-lg-4">
-                                                                    <div class="mega-menu-box">
-                                                                        <div class="mega-menu-img">
-                                                                            <img src="assets/img/pages/home-courses.jpg" alt="Home Three">
-                                                                            <div class="btn-wrap">
-                                                                                <a href="home-courses.html" class="th-btn">Multipage</a>
-                                                                                <a href="home-courses-op.html" class="th-btn">Onepage</a>
-                                                                            </div>
-                                                                        </div>
-                                                                        <h3 class="mega-menu-title"><a href="home-courses.html">Home Courses</a>
-                                                                        </h3>
-                                                                    </div>
-                                                                </div>
+                                                                <h3 class="mega-menu-title"><a href="home-university.html">Home University</a></h3>
                                                             </div>
                                                         </div>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="about.html">About Us</a></li>
-                                            <li class="menu-item-has-children">
-                                                <a href="#">Programs</a>
-                                                <ul class="sub-menu">
-                                                    <li><a href="program.html">Programs Style 1</a></li>
-                                                    <li><a href="program-2.html">Programs Style 2</a></li>
-                                                    <li><a href="program-details.html">Program Details</a></li>
-                                                    <li><a href="program-details-sidebar.html">Program Details With Sidebar</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="menu-item-has-children">
-                                                <a href="#">Pages</a>
-                                                <ul class="sub-menu">
-                                                    <li class="menu-item-has-children">
-                                                        <a href="#">Shop</a>
-                                                        <ul class="sub-menu">
-                                                            <li><a href="shop.html">Shop</a></li>
-                                                            <li><a href="shop-details.html">Shop Details</a></li>
-                                                            <li><a href="cart.html">Cart Page</a></li>
-                                                            <li><a href="checkout.html">Checkout</a></li>
-                                                            <li><a href="wishlist.html">Wishlist</a></li>
-                                                        </ul>
-                                                    </li>
-
-                                                    <li class="menu-item-has-children">
-                                                        <a href="#">Faculties</a>
-                                                        <ul class="sub-menu">
-                                                            <li><a href="faculty.html">Faculty</a></li>
-                                                            <li><a href="faculty-details.html">Faculty Details</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li><a href="alumni.html">Alumni Page</a></li>
-                                                    <li class="menu-item-has-children">
-                                                        <a href="#">Researches</a>
-                                                        <ul class="sub-menu">
-                                                            <li><a href="research.html">Research</a></li>
-                                                            <li><a href="research-details.html">Research Details</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li class="menu-item-has-children">
-                                                        <a href="#">Teachers</a>
-                                                        <ul class="sub-menu">
-                                                            <li><a href="teacher.html">Teacher</a></li>
-                                                            <li><a href="teacher-details.html">Teacher Details</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li><a href="campus.html">Campus Life</a></li>
-                                                    <li><a href="pricing.html">Pricing Plan</a></li>
-                                                    <li><a href="faq.html">Faqs Page</a></li>
-                                                    <li><a href="error.html">Error Page</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="menu-item-has-children">
-                                                <a href="#">Events</a>
-                                                <ul class="sub-menu">
-                                                    <li><a href="event.html">Events Page</a></li>
-                                                    <li><a href="event-details.html">Event Details</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="menu-item-has-children">
-                                                <a href="#">Blogs</a>
-                                                <ul class="sub-menu">
-                                                    <li><a href="blog.html">Blog</a></li>
-                                                    <li><a href="blog-details.html">Blog Details</a></li>
-                                                    <li><a href="blog-details-sidebar.html">Blog Details With Sidebar</a></li>
-                                                </ul>
-                                            </li>
-                                            <li>
-                                                <a href="contact.html">Contact Us</a>
+                                                        <div class="col-lg-4">
+                                                            <div class="mega-menu-box">
+                                                                <div class="mega-menu-img">
+                                                                    <img src="{{ asset('assets/img/pages/home-admission.jpg') }}" alt="Home Two">
+                                                                    <div class="btn-wrap">
+                                                                        <a href="home-admission.html" class="th-btn">Multipage</a>
+                                                                        <a href="home-admission-op.html" class="th-btn">Onepage</a>
+                                                                    </div>
+                                                                </div>
+                                                                <h3 class="mega-menu-title"><a href="home-admission.html">Home Admission</a></h3>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <div class="mega-menu-box">
+                                                                <div class="mega-menu-img">
+                                                                    <img src="{{ asset('assets/img/pages/home-courses.jpg') }}" alt="Home Three">
+                                                                    <div class="btn-wrap">
+                                                                        <a href="home-courses.html" class="th-btn">Multipage</a>
+                                                                        <a href="home-courses-op.html" class="th-btn">Onepage</a>
+                                                                    </div>
+                                                                </div>
+                                                                <h3 class="mega-menu-title"><a href="home-courses.html">Home Courses</a>
+                                                                </h3>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </li>
                                         </ul>
-                                    </nav>
-                                </div>
+                                    </li> -->
+                                    <li><a href="#about-sec">About Us</a></li>
+                                    <li><a href="#program-sec">Program</a></li>
+                                    <li><a href="#event-sec">Events</a></li>
+                                    <li><a href="#blog-sec">Blog</a></li>
+                                    <li>
+                                        <a href="#contact-sec">Contact Us</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <div class="col-auto">
+                            <div class="header-action d-none d-lg-block">
+                                <a href="contact.html" class="th-btn th-icon"> contact Us</a>
                             </div>
-                            <div class="col-auto ms-lg-auto">
-                                <div class="header-button">
-                                    <form class="search-form">
-                                        <input type="text" placeholder="Search...">
-                                        <button type="submit"><i class="fa-light fa-magnifying-glass"></i></button>
-                                    </form>
-                                    <a href="#" class="icon-btn sideMenuToggler d-none d-xl-block"><img src="assets/img/icon/grid2.svg" alt=""></a>
-
-                                    <button type="button" class="th-menu-toggle d-inline-block d-xl-none"><i class="far fa-bars"></i></button>
-                                </div>
-                            </div>
+                            <button type="button" class="th-menu-toggle d-inline-block d-lg-none"><i class="far fa-bars"></i></button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </header><!--==============================
-Hero Area
+Hero Area 3
 ==============================-->
-    <div class="th-hero-wrapper hero-1" id="hero">
-        <div class="swiper th-slider" id="heroSlide" data-slider-options='{"effect":"fade"}'>
+    <div class="th-hero-wrapper hero-3 position-relative overflow-hidden" id="hero">
+        <div class="swiper th-slider hero-slider3" id="heroSlide" data-slider-options='{"effect":"fade", "autoHeight": "true", "autoplay" : "false"}'>
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
                     <div class="hero-inner">
-                        <div class="th-hero-bg" data-bg-src="assets/img/hero/hero_1_1.jpg"></div>
-                        <div class="container th-container2">
-                            <div class="row gy-60 align-items-center">
-                                <div class="col-xxl-6 col-xl-8 col-lg-9">
-                                    <div class="hero-style1">
-                                        <div class="hero-text-wrap">
-                                            <h1 class="hero-title text-white" data-ani="slideinup" data-ani-delay="0.3s">
-                                                Welcome To The Aalokbortika University
-                                            </h1>
-                                            <p class="hero-text text-white" data-ani="slideinup" data-ani-delay="0.5s">
-                                                We want every student and study partner to feel that they are part of a common good and cohesive team. We help our teams form stronger relationships.</p>
-                                            <div class="btn-wrap justify-content-center justify-content-lg-start" data-ani="slideinup" data-ani-delay="0.8s">
-                                                <a href="contact.html" class="th-btn white-hover th-icon"> Admission Now</a>
-                                                <a href="program.html" class="th-btn style-border1 th-icon white-hover">View Program</a>
-                                            </div>
+                        <div class="th-hero-bg" data-bg-src="{{ asset('assets/img/hero/hero-3-1.jpg') }}"></div>
+                        <div class="container th-container4">
+                            <div class="row align-items-center">
+                                <div class="col-lg-8">
+                                    <div class="hero-style3">
+                                        <h1 class="hero-title text-white" data-ani="slideinup" data-ani-delay="0.3s">Unlock Your Potential With Stadum 2500+ Courses</h1>
+                                        <p class="hero-text text-white" data-ani="slideinup" data-ani-delay="0.5s">We want
+                                            every student and study partner to feel that they are part of a common good and
+                                            cohesive team. We help our teams form stronger relationships.</p>
+                                        <div class="hero-search-wrap" data-ani="slideinup" data-ani-delay="0.7s">
+                                            <form action="#">
+                                                <input type="text" placeholder="What do you want to learn?" autocomplete="off">
+                                                <button type="submit"><i class="fal fa-search"></i></button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-xxl-6 col-xl-4 col-lg-3">
-                                    <div class="hero-video text-center ms-xl-5 ps-xl-5" data-ani="fadeinright" data-ani-delay="0.9s">
+                                <div class="col-lg-3">
+                                    <div class="hero-video" data-ani="slideinup" data-ani-delay="0.8s">
                                         <a href="https://www.youtube.com/watch?v=EZfLOSQ8hW8" class="video-play-btn popup-video">
                                             <i class="fa-sharp fa-solid fa-play"></i>
                                         </a>
@@ -570,30 +425,28 @@ Hero Area
                             </div>
                         </div>
                     </div>
-
                 </div>
                 <div class="swiper-slide">
                     <div class="hero-inner">
-                        <div class="th-hero-bg" data-bg-src="assets/img/hero/hero_1_2.jpg"></div>
-                        <div class="container th-container2">
-                            <div class="row gy-60 align-items-center">
-                                <div class="col-xxl-6 col-xl-8 col-lg-9">
-                                    <div class="hero-style1">
-                                        <div class="hero-text-wrap">
-                                            <h1 class="hero-title text-white" data-ani="slideinup" data-ani-delay="0.3s">
-                                                Shaping the Leaders of Tomorrow
-                                            </h1>
-                                            <p class="hero-text text-white" data-ani="slideinup" data-ani-delay="0.5s">
-                                                We want every student and study partner to feel that they are part of a common good and cohesive team. We help our teams form stronger relationships.</p>
-                                            <div class="btn-wrap justify-content-center justify-content-lg-start" data-ani="slideinup" data-ani-delay="0.8s">
-                                                <a href="contact.html" class="th-btn white-hover th-icon"> Admission Now</a>
-                                                <a href="program.html" class="th-btn style-border1 th-icon white-hover">View Program</a>
-                                            </div>
+                        <div class="th-hero-bg" data-bg-src="{{ asset('assets/img/hero/hero-3-1.jpg') }}"></div>
+                        <div class="container th-container4">
+                            <div class="row align-items-center">
+                                <div class="col-lg-8">
+                                    <div class="hero-style3">
+                                        <h1 class="hero-title text-white" data-ani="slideinup" data-ani-delay="0.3s">Discover Your Future: 2500+ Courses at Stadum</h1>
+                                        <p class="hero-text text-white" data-ani="slideinup" data-ani-delay="0.5s">We want
+                                            every student and study partner to feel that they are part of a common good and
+                                            cohesive team. We help our teams form stronger relationships.</p>
+                                        <div class="hero-search-wrap" data-ani="slideinup" data-ani-delay="0.7s">
+                                            <form action="#">
+                                                <input type="text" placeholder="What do you want to learn?" autocomplete="off">
+                                                <button type="submit"><i class="fal fa-search"></i></button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-xxl-6 col-xl-4 col-lg-3">
-                                    <div class="hero-video text-center ms-xl-5 ps-xl-5" data-ani="fadeinright" data-ani-delay="0.9s">
+                                <div class="col-lg-3">
+                                    <div class="hero-video" data-ani="slideinup" data-ani-delay="0.8s">
                                         <a href="https://www.youtube.com/watch?v=EZfLOSQ8hW8" class="video-play-btn popup-video">
                                             <i class="fa-sharp fa-solid fa-play"></i>
                                         </a>
@@ -602,30 +455,28 @@ Hero Area
                             </div>
                         </div>
                     </div>
-
                 </div>
                 <div class="swiper-slide">
                     <div class="hero-inner">
-                        <div class="th-hero-bg" data-bg-src="assets/img/hero/hero_1_1.jpg"></div>
-                        <div class="container th-container2">
-                            <div class="row gy-60 align-items-center">
-                                <div class="col-xxl-6 col-xl-8 col-lg-9">
-                                    <div class="hero-style1">
-                                        <div class="hero-text-wrap">
-                                            <h1 class="hero-title text-white" data-ani="slideinup" data-ani-delay="0.3s">
-                                                Where Innovation Meets Education
-                                            </h1>
-                                            <p class="hero-text text-white" data-ani="slideinup" data-ani-delay="0.5s">
-                                                We want every student and study partner to feel that they are part of a common good and cohesive team. We help our teams form stronger relationships.</p>
-                                            <div class="btn-wrap justify-content-center justify-content-lg-start" data-ani="slideinup" data-ani-delay="0.8s">
-                                                <a href="contact.html" class="th-btn white-hover th-icon"> Admission Now</a>
-                                                <a href="program.html" class="th-btn style-border1 th-icon white-hover">View Program</a>
-                                            </div>
+                        <div class="th-hero-bg" data-bg-src="{{ asset('assets/img/hero/hero-3-1.jpg') }}"></div>
+                        <div class="container th-container4">
+                            <div class="row align-items-center">
+                                <div class="col-lg-8">
+                                    <div class="hero-style3">
+                                        <h1 class="hero-title text-white" data-ani="slideinup" data-ani-delay="0.3s">Learn. Grow. Excel — 2500+ Courses from Stadum</h1>
+                                        <p class="hero-text text-white" data-ani="slideinup" data-ani-delay="0.5s">We want
+                                            every student and study partner to feel that they are part of a common good and
+                                            cohesive team. We help our teams form stronger relationships.</p>
+                                        <div class="hero-search-wrap" data-ani="slideinup" data-ani-delay="0.7s">
+                                            <form action="#">
+                                                <input type="text" placeholder="What do you want to learn?" autocomplete="off">
+                                                <button type="submit"><i class="fal fa-search"></i></button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-xxl-6 col-xl-4 col-lg-3">
-                                    <div class="hero-video text-center ms-xl-5 ps-xl-5" data-ani="fadeinright" data-ani-delay="0.9s">
+                                <div class="col-lg-3">
+                                    <div class="hero-video" data-ani="slideinup" data-ani-delay="0.8s">
                                         <a href="https://www.youtube.com/watch?v=EZfLOSQ8hW8" class="video-play-btn popup-video">
                                             <i class="fa-sharp fa-solid fa-play"></i>
                                         </a>
@@ -634,30 +485,28 @@ Hero Area
                             </div>
                         </div>
                     </div>
-
                 </div>
                 <div class="swiper-slide">
                     <div class="hero-inner">
-                        <div class="th-hero-bg" data-bg-src="assets/img/hero/hero_1_2.jpg"></div>
-                        <div class="container th-container2">
-                            <div class="row gy-60 align-items-center">
-                                <div class="col-xxl-6 col-xl-8 col-lg-9">
-                                    <div class="hero-style1">
-                                        <div class="hero-text-wrap">
-                                            <h1 class="hero-title text-white" data-ani="slideinup" data-ani-delay="0.3s">
-                                                Welcome To The Aalokbortika University
-                                            </h1>
-                                            <p class="hero-text text-white" data-ani="slideinup" data-ani-delay="0.5s">
-                                                We want every student and study partner to feel that they are part of a common good and cohesive team. We help our teams form stronger relationships.</p>
-                                            <div class="btn-wrap justify-content-center justify-content-lg-start" data-ani="slideinup" data-ani-delay="0.8s">
-                                                <a href="contact.html" class="th-btn white-hover th-icon"> Admission Now</a>
-                                                <a href="program.html" class="th-btn style-border1 th-icon white-hover">View Program</a>
-                                            </div>
+                        <div class="th-hero-bg" data-bg-src="{{ asset('assets/img/hero/hero-3-1.jpg') }}"></div>
+                        <div class="container th-container4">
+                            <div class="row align-items-center">
+                                <div class="col-lg-8">
+                                    <div class="hero-style3">
+                                        <h1 class="hero-title text-white" data-ani="slideinup" data-ani-delay="0.3s">Upgrade Your Skills with Stadum's 2500+ Courses</h1>
+                                        <p class="hero-text text-white" data-ani="slideinup" data-ani-delay="0.5s">We want
+                                            every student and study partner to feel that they are part of a common good and
+                                            cohesive team. We help our teams form stronger relationships.</p>
+                                        <div class="hero-search-wrap" data-ani="slideinup" data-ani-delay="0.7s">
+                                            <form action="#">
+                                                <input type="text" placeholder="What do you want to learn?" autocomplete="off">
+                                                <button type="submit"><i class="fal fa-search"></i></button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-xxl-6 col-xl-4 col-lg-3">
-                                    <div class="hero-video text-center ms-xl-5 ps-xl-5" data-ani="fadeinright" data-ani-delay="0.9s">
+                                <div class="col-lg-3">
+                                    <div class="hero-video" data-ani="slideinup" data-ani-delay="0.8s">
                                         <a href="https://www.youtube.com/watch?v=EZfLOSQ8hW8" class="video-play-btn popup-video">
                                             <i class="fa-sharp fa-solid fa-play"></i>
                                         </a>
@@ -666,1289 +515,1327 @@ Hero Area
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
-            <div class="slider-pagination"></div>
+            <div class="slider-pagination style4"></div>
         </div>
     </div>
     <!--======== / Hero Section ========-->
-    <div class="feature-sec-1 position-relative overflow-hidden space-bottom">
-        <div class="about-shep-2 shape-mockup  d-none d-xxl-block" data-top="19%" data-left="0%">
-            <img src="assets/img/shape/feature-shep-home-1.png" alt="shape">
-        </div>
-        <div class="container th-container2">
-            <div class="row gx-10 gy-10">
-                <div class="col-xl-3 col-md-6 feature-card_wrapp">
-                    <div class="feature-card wow fadeInUp" data-wow-delay=".2s">
-                        <div class="box-icon">
-                            <img src="assets/img/icon/feature-icon1-1.svg" alt="icon">
-                        </div>
-                        <h3 class="box-title">University Life</h3>
-                        <p class="box-text style2">On the other hand denounce with righteous indignation dislike.</p>
-                        <a href="program.html" class="th-btn style-border2 th-icon">Learn More</a>
+    <div class="short-services-area-1 position-relative overflow-hidden ">
+        <div class="container th-container3">
+            <div class="short-services-wrap1">
+                <div class="short-services-social">
+                    <div class="th-social">
+                        <a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.twitter.com/"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.linkedin.com/"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://www.instagram.com/"><i class="fa-brands fa-instagram"></i></a>
                     </div>
                 </div>
-                <div class="col-xl-3 col-md-6 feature-card_wrapp">
-                    <div class="feature-card wow fadeInUp" data-wow-delay=".4s">
-                        <div class="box-icon">
-                            <img src="assets/img/icon/feature-icon1-2.svg" alt="icon">
+                <div class="short-services-items">
+                    <div class="short-services-item">
+                        <div class="icon">
+                            <img src="{{ asset('assets/img/icon/counter-icon1-1.svg') }}" alt="Stadum">
                         </div>
-                        <h3 class="box-title">Research</h3>
-                        <p class="box-text style2">On the other hand denounce with righteous indignation dislike.</p>
-                        <a href="program.html" class="th-btn style-border2 th-icon">Learn More</a>
+                        <div class="short-services-text">
+                            <h3 class="box-title"><span class="counter-number">2300</span> + </h3>
+                            <p class="box-text">Online Courses</p>
+                        </div>
                     </div>
-                </div>
-                <div class="col-xl-3 col-md-6 feature-card_wrapp">
-                    <div class="feature-card wow fadeInUp" data-wow-delay=".6s">
-                        <div class="box-icon">
-                            <img src="assets/img/icon/feature-icon1-3.svg" alt="icon">
+                    <div class="short-services-item">
+                        <div class="icon">
+                            <img src="{{ asset('assets/img/icon/counter-icon1-4.svg') }}" alt="Stadum">
                         </div>
-                        <h3 class="box-title">Athletics</h3>
-                        <p class="box-text style2">On the other hand denounce with righteous indignation dislike.</p>
-                        <a href="program.html" class="th-btn style-border2 th-icon">Learn More</a>
+                        <div class="short-services-text">
+                            <h3 class="box-title">Expert Instructors</h3>
+                            <p class="box-text">Find the right instructor</p>
+                        </div>
                     </div>
-                </div>
-                <div class="col-xl-3 col-md-6 feature-card_wrapp">
-                    <div class="feature-card wow fadeInUp" data-wow-delay=".8s">
-                        <div class="box-icon">
-                            <img src="assets/img/icon/feature-icon1-4.svg" alt="icon">
+                    <div class="short-services-item">
+                        <div class="icon">
+                            <img src="{{ asset('assets/img/icon/counter-icon1-2.svg') }}" alt="Stadum">
                         </div>
-                        <h3 class="box-title">Academics</h3>
-                        <p class="box-text style2">On the other hand denounce with righteous indignation dislike.</p>
-                        <a href="program.html" class="th-btn style-border2 th-icon">Learn More</a>
+                        <div class="short-services-text">
+                            <h3 class="box-title">Lifetime Access</h3>
+                            <p class="box-text">Learn on you rschedule</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div><!--==============================
-About Area  
+About Area  3
 ==============================-->
-    <div class="about1-area position-relative overflow-hidden space-bottom" id="about-sec">
-        <div class="about-shep-2 shape-mockup d-none d-xxl-block" data-bottom="0%" data-right="0%">
-            <img src="assets/img/shape/feature-shep-2-home-1.png" alt="shape">
-        </div>
-        <span class="about-shape-right shape-mockup jump-reverse" data-right="3%" data-top="2%"><img src="assets/img/shape/ab-shape1-2.png" alt=""></span>
-        <div class="container">
-            <div class="about-wrap1 position-relative z-index-2">
-                <div class="row gy-60 align-items-center justify-content-center">
-                    <div class="col-xl-6">
-                        <div class="img-box1">
-                            <div class="img1 text-center text-sm-start wow fadeInLeft" data-wow-delay=".2s">
-                                <img src="assets/img/about/home-1-about-thumb1-1.jpg" alt="About">
-                            </div>
-                            <div class="img2 wow fadeInUp" data-wow-delay=".3s">
-                                <div class="position-relative">
-                                    <img class="mb-25" src="assets/img/about/home-1-about-thumb1-2.jpg" alt="About">
-                                </div>
-                                <div class="position-relative wow fadeInUp" data-wow-delay=".3s">
-                                    <img src="assets/img/about/home-1-about-thumb1-3.jpg" alt="About">
-                                </div>
-                            </div>
-                            <div class="about-wrapp">
-                                <div class="discount-wrapp">
-                                    <div class="logo">
-                                        <img src="assets/img/circle-logo.png" alt="img">
-                                    </div>
-                                    <div class="discount-tag">
-                                        <span class="discount-anime">* 1996 EST * 25 Years Quality Teaching</span>
-                                    </div>
-                                </div>
-                            </div>
-
+    <div class="overflow-hidden about-area-3 space position-relative" id="about-sec">
+        <div class="about-shape shape-mockup jump" data-bottom="0%" data-left="2%"><img src="{{ asset('assets/img/shape/about-3-1.png') }}" alt="Stadum"></div>
+        <div class="container th-container3">
+            <div class="row gy-4 gx-65">
+                <div class="col-xxl-6 col-xl-5 col-md-12">
+                    <div class="img-box5">
+                        <div class="img1 reveal">
+                            <img src="{{ asset('assets/img/about/about-thumb3-1.jpg') }}" alt="Stadum">
+                        </div>
+                        <div class="img2 reveal">
+                            <img src="{{ asset('assets/img/about/about-thumb3-2.jpg') }}" alt="Stadum">
+                        </div>
+                        <div class="counter-card3 wow fadeInUp" data-wow-delay=".3s">
+                            <h3 class="box-number text-white">
+                                <span class="counter-number">280</span> k+
+                            </h3>
+                            <p class="box-text text-white">World-wide Happy Students</p>
                         </div>
                     </div>
-                    <div class="col-xl-6">
-                        <div class="about-content ms-xxl-4 ps-xxl-2 ms-xl-2">
-                            <div class="title-area">
+                </div>
+                <div class="col-xxl-6 col-xl-7 col-md-12">
+                    <div class="about-content">
+                        <div class="title-area-wrap">
+                            <div class="title-area pe-xl-5 mb-40">
                                 <span class="sub-title text-anim">About Us</span>
-                                <h2 class="sec-title text-anim2"> We Offer best program for Shaping the best Future
-                                </h2>
+                                <h2 class="sec-title text-anim2"> Delivering top <span class="text-theme">motivational</span> <span class="d-block">courses to you</span></h2>
+                            </div>
+                            <p class="sec-text mt-25 mb-0 wow fadeInUp" data-wow-delay=".3s">At Stadum, you'll be
+                                welcomed into a diverse community of learners of different races, genders, ages and
+                                ethnicities. With online and on-campus learning available, our students are
+                                scattered around the country and the world.
+                            </p>
+                            <p class="sec-text mt-25 mb-0 wow fadeInUp" data-wow-delay=".4s">We want each student to
+                                feel included, supported and recognized as they earn their degree. No matter where
+                                you come from, earning a degree is a challenging but rewarding.
+                            </p>
+                        </div>
+                        <div class="checklist-wrap mt-45">
+                            <div class="checklist list-two-column style1">
+                                <ul>
+                                    <li class="wow fadeInUp" data-wow-delay=".4s"> Highly Professinal Staff</li>
+                                    <li class="wow fadeInUp" data-wow-delay=".5s"> 100% satisfaction guarantee</li>
+                                    <li class="wow fadeInUp" data-wow-delay=".6s"> Quality control system</li>
+                                    <li class="wow fadeInUp" data-wow-delay=".7s"> Engaging adn dynamic presention</li>
+                                    <li class="wow fadeInUp" data-wow-delay=".8s"> Proven track record of success</li>
+                                    <li class="wow fadeInUp" data-wow-delay=".9s"> 24/7 Enhance customer care</li>
+                                </ul>
+                            </div>
 
-                                <p class="sec-text mt-25 mb-0 wow fadeInUp" data-wow-delay=".2s">We are committed
-                                    to leaving the world a better place. We pursue new technology, encourage
-                                    creativity, engage
-                                    with our communities, and share an entrepreneurial mindset.</p>
-                            </div>
-                            <div class="about-feature-box">
-                                <div class="about-feature wow fadeInUp" data-wow-delay=".3s">
-                                    <span class="box-icon">
-                                        <img src="assets/img/icon/ab-users.svg" alt="icon">
-                                    </span>
-                                    <div class="box-content">
-                                        <h3 class="box-title">Three MBA degrees</h3>
-                                        <p class="box-text">Our team is ready for any challenge! We put our joint efforts to
-                                            generate brave business ideas.</p>
-                                    </div>
-                                </div>
-                                <div class="about-feature wow fadeInUp" data-wow-delay=".4s">
-                                    <span class="box-icon">
-                                        <img src="assets/img/icon/ab-message.svg" alt="icon">
-                                    </span>
-                                    <div class="box-content">
-                                        <h3 class="box-title">Choose From 98+ Degrees</h3>
-                                        <p class="box-text">Our team is ready for any challenge! We put our joint efforts to
-                                            generate brave business ideas.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="btn-wrap wow fadeInUp" data-wow-delay=".5s">
-                                <a href="about.html" class="th-btn th-icon">Learn More</a>
-                            </div>
+                        </div>
+                        <div class="btn-wrap mt-60 wow fadeInUp" data-wow-delay=".9s">
+                            <a href="about.html" class="th-btn th-icon">Apply To Stadum</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <span class="about-shape-left shape-mockup movingX d-none d-xxl-block" data-bottom="0%" data-left="2%"><img src="assets/img/shape/ab-shape1-1.png" alt=""></span>
-    </div>
-    <div class="counter-area1 overflow-hidden ">
-        <div class="container th-container2">
-            <div class="counter-wrap1">
-                <div class="counter-card wow fadeInUp" data-wow-delay=".2s">
-                    <div class="box-icon">
-                        <img src="assets/img/icon/counter-icon1-1.svg" alt="icon">
-                    </div>
-                    <div class="media-body">
-                        <h3 class="box-number"><span class="counter-number">157</span>+</h3>
-                        <p class="box-text">Total Programs</p>
-                    </div>
-                </div>
-                <div class="divider"></div>
-                <div class="counter-card wow fadeInUp" data-wow-delay=".4s">
-                    <div class="box-icon">
-                        <img src="assets/img/icon/counter-icon1-2.svg" alt="icon">
-                    </div>
-                    <div class="media-body">
-                        <h3 class="box-number"><span class="counter-number">18,250</span></h3>
-                        <p class="box-text">Faculty & Staff</p>
-                    </div>
-                </div>
-                <div class="divider"></div>
-                <div class="counter-card wow fadeInUp" data-wow-delay=".6s">
-                    <div class="box-icon">
-                        <img src="assets/img/icon/counter-icon1-3.svg" alt="icon">
-                    </div>
-                    <div class="media-body">
-                        <h3 class="box-number"><span class="counter-number">48</span>k</h3>
-                        <p class="box-text">Worldwide Alumni</p>
-                    </div>
-                </div>
-                <div class="divider"></div>
-                <div class="counter-card wow fadeInUp" data-wow-delay=".7s">
-                    <div class="box-icon">
-                        <img src="assets/img/icon/counter-icon1-4.svg" alt="icon">
-                    </div>
-                    <div class="media-body">
-                        <h3 class="box-number"><span class="counter-number">155</span>k</h3>
-                        <p class="box-text">Total Students</p>
-                    </div>
-                </div>
-                <div class="divider"></div>
-            </div>
-        </div>
-    </div>
-    <section class="academic1-area space overflow-hidden" id="program-sec">
-        <div class="container">
-            <div class="row justify-content-lg-between justify-content-center align-items-center">
-                <div class="col-lg-9 col-12">
-                    <div class="title-area text-center text-lg-start mb-75">
-                        <span class="sub-title text-anim">ACADEMICS</span>
-                        <h2 class="sec-title text-anim2">We have the best programs for you</h2>
-                    </div>
-                </div>
-                <div class="col-auto align-self-end">
-                    <div class="sec-btn wow fadeInUp" data-wow-delay=".3s">
-                        <a href="program.html" class="th-btn style-border1 th-icon"> Explore All </a>
-                    </div>
-                </div>
-            </div>
-            <div class="academic-wrapp">
-                <div class="slider-area">
-                    <div class="swiper th-slider has-shadow" id="academicSlider2" data-slider-options='{"breakpoints":{"0":{"slidesPerView":1},"576":{"slidesPerView":"1"},"768":{"slidesPerView":"1"},"992":{"slidesPerView":"2"},"1200":{"slidesPerView":"3"},"1400":{"slidesPerView":"3", "spaceBetween": "24"}},"autoHeight": "true", "autoplay" : "false"}'>
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide">
-                                <div class="academic-card">
-                                    <div class="academic-img">
-                                        <a href="program-details.html">
-                                            <img src="assets/img/academic/academic1-1.jpg" alt="blog image">
-                                        </a>
-                                        <div class="academic-tag">
-                                            <span><i class="fa-solid fa-tags"></i> Media</span>
-                                        </div>
-                                    </div>
-                                    <div class="academic-content">
-                                        <h3 class="box-title">
-                                            <a href="program-details.html">Bachelor in Applied Mathematics</a>
-                                        </h3>
-                                        <div class="academic-review">
-                                            <span><i class="fa-solid fa-star"></i></span>
-                                            <span><i class="fa-solid fa-star"></i></span>
-                                            <span><i class="fa-solid fa-star"></i></span>
-                                            <span><i class="fa-solid fa-star"></i></span>
-                                            <span><i class="fa-solid fa-star"></i></span>
-                                            <p class="review-text">(4.8)</p>
-                                        </div>
-                                        <p class="box-text style2">Every traditional undergraduate student receives scholarships. Rest assured you can afford us too.</p>
-                                    </div>
-                                    <div class="academic-meta-wrap">
-                                        <div class="academic-meta">
-                                            <a href="program-details.html" class="subject">
-                                                <i class="fa-solid fa-messages"></i> English
-                                            </a>
-                                            <a href="#" class="duration"><i class="fa-solid fa-clock"></i> 04 Years</a>
-                                        </div>
-                                        <a href="program-details.html" class="th-btn style-border1 th-icon">Discover</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="swiper-slide">
-                                <div class="academic-card">
-                                    <div class="academic-img">
-                                        <a href="program-details.html">
-                                            <img src="assets/img/academic/academic1-2.jpg" alt="blog image">
-                                        </a>
-                                        <div class="academic-tag">
-                                            <span><i class="fa-solid fa-tags"></i> Science</span>
-                                        </div>
-                                    </div>
-                                    <div class="academic-content">
-                                        <h3 class="box-title">
-                                            <a href="program-details.html">Bachelor in Applied Architecture</a>
-                                        </h3>
-                                        <div class="academic-review">
-                                            <span><i class="fa-solid fa-star"></i></span>
-                                            <span><i class="fa-solid fa-star"></i></span>
-                                            <span><i class="fa-solid fa-star"></i></span>
-                                            <span><i class="fa-solid fa-star"></i></span>
-                                            <span><i class="fa-solid fa-star"></i></span>
-                                            <p class="review-text">(4.8)</p>
-                                        </div>
-                                        <p class="box-text style2">Every traditional undergraduate student receives scholarships. Rest assured you can afford us too.</p>
-                                    </div>
-                                    <div class="academic-meta-wrap">
-                                        <div class="academic-meta">
-                                            <a href="program-details.html" class="subject">
-                                                <i class="fa-solid fa-messages"></i> Arabic
-                                            </a>
-                                            <a href="#" class="duration"><i class="fa-solid fa-clock"></i> 04 Years</a>
-                                        </div>
-                                        <a href="program-details.html" class="th-btn style-border1 th-icon">Discover</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="swiper-slide">
-                                <div class="academic-card">
-                                    <div class="academic-img">
-                                        <a href="program-details.html">
-                                            <img src="assets/img/academic/academic1-3.jpg" alt="blog image">
-                                        </a>
-                                        <div class="academic-tag">
-                                            <span><i class="fa-solid fa-tags"></i> Public</span>
-                                        </div>
-                                    </div>
-                                    <div class="academic-content">
-                                        <h3 class="box-title">
-                                            <a href="program-details.html">Bachelor in Administration Cse</a>
-                                        </h3>
-                                        <div class="academic-review">
-                                            <span><i class="fa-solid fa-star"></i></span>
-                                            <span><i class="fa-solid fa-star"></i></span>
-                                            <span><i class="fa-solid fa-star"></i></span>
-                                            <span><i class="fa-solid fa-star"></i></span>
-                                            <span><i class="fa-solid fa-star"></i></span>
-                                            <p class="review-text">(4.8)</p>
-                                        </div>
-                                        <p class="box-text style2">Every traditional undergraduate student receives scholarships. Rest assured you can afford us too.</p>
-                                    </div>
-                                    <div class="academic-meta-wrap">
-                                        <div class="academic-meta">
-                                            <a href="program-details.html" class="subject">
-                                                <i class="fa-solid fa-messages"></i> Hindi
-                                            </a>
-                                            <a href="#" class="duration"><i class="fa-solid fa-clock"></i> 04 Years</a>
-                                        </div>
-                                        <a href="program-details.html" class="th-btn style-border1 th-icon">Discover</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="swiper-slide">
-                                <div class="academic-card">
-                                    <div class="academic-img">
-                                        <a href="program-details.html">
-                                            <img src="assets/img/academic/academic1-1.jpg" alt="blog image">
-                                        </a>
-                                        <div class="academic-tag">
-                                            <span><i class="fa-solid fa-tags"></i> Education</span>
-                                        </div>
-                                    </div>
-                                    <div class="academic-content">
-                                        <h3 class="box-title">
-                                            <a href="program-details.html">Bachelor in Applied Mathematics</a>
-                                        </h3>
-                                        <div class="academic-review">
-                                            <span><i class="fa-solid fa-star"></i></span>
-                                            <span><i class="fa-solid fa-star"></i></span>
-                                            <span><i class="fa-solid fa-star"></i></span>
-                                            <span><i class="fa-solid fa-star"></i></span>
-                                            <span><i class="fa-solid fa-star"></i></span>
-                                            <p class="review-text">(4.8)</p>
-                                        </div>
-                                        <p class="box-text style2">Every traditional undergraduate student receives scholarships. Rest assured you can afford us too.</p>
-                                    </div>
-                                    <div class="academic-meta-wrap">
-                                        <div class="academic-meta">
-                                            <a href="program-details.html" class="subject">
-                                                <i class="fa-solid fa-messages"></i> English
-                                            </a>
-                                            <a href="#" class="duration"><i class="fa-solid fa-clock"></i> 04 Years</a>
-                                        </div>
-                                        <a href="program-details.html" class="th-btn style-border1 th-icon">Discover</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="swiper-slide">
-                                <div class="academic-card">
-                                    <div class="academic-img">
-                                        <a href="program-details.html">
-                                            <img src="assets/img/academic/academic1-2.jpg" alt="blog image">
-                                        </a>
-                                        <div class="academic-tag">
-                                            <span><i class="fa-solid fa-tags"></i> Education</span>
-                                        </div>
-                                    </div>
-                                    <div class="academic-content">
-                                        <h3 class="box-title">
-                                            <a href="program-details.html">Bachelor in Applied Architecture</a>
-                                        </h3>
-                                        <div class="academic-review">
-                                            <span><i class="fa-solid fa-star"></i></span>
-                                            <span><i class="fa-solid fa-star"></i></span>
-                                            <span><i class="fa-solid fa-star"></i></span>
-                                            <span><i class="fa-solid fa-star"></i></span>
-                                            <span><i class="fa-solid fa-star"></i></span>
-                                            <p class="review-text">(4.8)</p>
-                                        </div>
-                                        <p class="box-text style2">Every traditional undergraduate student receives scholarships. Rest assured you can afford us too.</p>
-                                    </div>
-                                    <div class="academic-meta-wrap">
-                                        <div class="academic-meta">
-                                            <a href="program-details.html" class="subject">
-                                                <i class="fa-solid fa-messages"></i> Arabic
-                                            </a>
-                                            <a href="#" class="duration"><i class="fa-solid fa-clock"></i> 04 Years</a>
-                                        </div>
-                                        <a href="program-details.html" class="th-btn style-border1 th-icon">Discover</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="swiper-slide">
-                                <div class="academic-card">
-                                    <div class="academic-img">
-                                        <a href="program-details.html">
-                                            <img src="assets/img/academic/academic1-3.jpg" alt="blog image">
-                                        </a>
-                                        <div class="academic-tag">
-                                            <span><i class="fa-solid fa-tags"></i> Education</span>
-                                        </div>
-                                    </div>
-                                    <div class="academic-content">
-                                        <h3 class="box-title">
-                                            <a href="program-details.html">Bachelor in Administration Cse</a>
-                                        </h3>
-                                        <div class="academic-review">
-                                            <span><i class="fa-solid fa-star"></i></span>
-                                            <span><i class="fa-solid fa-star"></i></span>
-                                            <span><i class="fa-solid fa-star"></i></span>
-                                            <span><i class="fa-solid fa-star"></i></span>
-                                            <span><i class="fa-solid fa-star"></i></span>
-                                            <p class="review-text">(4.8)</p>
-                                        </div>
-                                        <p class="box-text style2">Every traditional undergraduate student receives scholarships. Rest assured you can afford us too.</p>
-                                    </div>
-                                    <div class="academic-meta-wrap">
-                                        <div class="academic-meta">
-                                            <a href="program-details.html" class="subject">
-                                                <i class="fa-solid fa-messages"></i> Hindi
-                                            </a>
-                                            <a href="#" class="duration"><i class="fa-solid fa-clock"></i> 04 Years</a>
-                                        </div>
-                                        <a href="program-details.html" class="th-btn style-border1 th-icon">Discover</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="why-area why-bg position-relative space overflow-hidden">
-        <div class="why-shape jump shape-mockup" data-left="0%" data-bottom="10%">
-            <img src="assets/img/shape/why-1-1.png" alt="">
-        </div>
-        <div class="container">
-            <div class="row gy-4">
-                <div class="col-xl-8">
-                    <div class="title-area text-center text-lg-start">
-                        <span class="sub-title text-anim">WHY CHOOSEUS</span>
-                        <h2 class="sec-title text-anim2">We help every student to <span class="d-block"> stantout from the
-                                rest</span></h2>
-                    </div>
-                    <div class="row gy-60">
-                        <!--==============================
-Why Choose Us Area  
+    </div><!--==============================
+Cat Area Home 3
 ==============================-->
-                        <div class="col-lg-6 col-md-6">
-                            <div class="why-card wow fadeInUp" data-wow-delay=".2s">
-                                <div class="why-content">
-                                    <div class="why-titlebox">
-                                        <span class="why-number position-relative">1</span>
-                                        <h3 class="box-title">
-                                            <a href="about.html">Get a Top-Tier Global Education</a>
-                                        </h3>
-                                    </div>
-                                    <div class="box-text-wrap">
-                                        <p class="box-text">A Kingdom perspective is integrated into your studies and woven through the entire Aalokbortika experience.</p>
-                                    </div>
-                                </div>
-                                <a href="about.html" class="th-btn style-border1 th-icon mt-40">Explore More</a>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-6 col-md-6">
-                            <div class="why-card wow fadeInUp" data-wow-delay=".4s">
-                                <div class="why-content">
-                                    <div class="why-titlebox">
-                                        <span class="why-number position-relative">2</span>
-                                        <h3 class="box-title">
-                                            <a href="about.html">Join a Spiritually Vibrant Campus Community</a>
-                                        </h3>
-                                    </div>
-                                    <div class="box-text-wrap">
-                                        <p class="box-text">Opportunities for faith and fellowship are all around, from chapel worship and dorm devotions to communal meals, clubs and activities.</p>
-                                    </div>
-                                </div>
-                                <a href="about.html" class="th-btn style-border1 th-icon mt-40">Explore More</a>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-6 col-md-6">
-                            <div class="why-card wow fadeInUp" data-wow-delay=".6s">
-                                <div class="why-content">
-                                    <div class="why-titlebox">
-                                        <span class="why-number position-relative">3</span>
-                                        <h3 class="box-title">
-                                            <a href="about.html">Be Prepared for a Thriving Career</a>
-                                        </h3>
-                                    </div>
-                                    <div class="box-text-wrap">
-                                        <p class="box-text">A Kingdom perspective is integrated into your studies and woven through the entire Aalokbortika experience.</p>
-                                    </div>
-                                </div>
-                                <a href="about.html" class="th-btn style-border1 th-icon mt-40">Explore More</a>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-6 col-md-6">
-                            <div class="why-card wow fadeInUp" data-wow-delay=".8s">
-                                <div class="why-content">
-                                    <div class="why-titlebox">
-                                        <span class="why-number position-relative">4</span>
-                                        <h3 class="box-title">
-                                            <a href="about.html">Experience a Cost-Competitive Education</a>
-                                        </h3>
-                                    </div>
-                                    <div class="box-text-wrap">
-                                        <p class="box-text">Opportunities for faith and fellowship are all around, from chapel worship and dorm devotions to communal meals, clubs and activities.</p>
-                                    </div>
-                                </div>
-                                <a href="about.html" class="th-btn style-border1 th-icon mt-40">Explore More</a>
-                            </div>
-                        </div>
-
+    <section class="cat-area-1 position-relative overflow-hidden space">
+        <div class="shape-mockup" data-top="0%" data-left="0%"><img src="{{ asset('assets/img/shape/feature-shep-home-1.png') }}" alt="Stadum"></div>
+        <div class="container th-container3">
+            <div class="row justify-content-center text-center">
+                <div class="col-xl-8 col-md-8">
+                    <div class="title-area">
+                        <span class="sub-title text-anim">CATEGORIES</span>
+                        <h2 class="sec-title text-anim2">Browse Top categories</h2>
                     </div>
                 </div>
-                <div class="col-xl-4">
-                    <div class="why-video">
-                        <div class="why-video-bg overflow-hidden gsap-parallax">
-                            <img src="assets/img/why/why-video1-1.jpg" alt="image">
-                            <div class="why-video-btn">
-                                <a href="https://www.youtube.com/watch?v=_sI_Ps7JSEk" class="play-btn popup-video">
-                                    <i class="fa-sharp fa-solid fa-play"></i>
-                                </a>
-                            </div>
+            </div>
+            <div class="cat-wrap1">
+
+                <!--==============================
+Cta Area  
+==============================-->
+                <div class="">
+                    <div class="cat-card wow fadeInUp" data-wow-delay=".1s">
+                        <div class="box-icon">
+                            <img src="{{ asset('assets/img/icon/cat-3-1.png') }}" alt="Stadum">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="box-title"><a href="#">Science & Technology</a></h3>
+                            <p class="box-text">10 Courses</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="">
+                    <div class="cat-card wow fadeInUp" data-wow-delay=".2s">
+                        <div class="box-icon">
+                            <img src="{{ asset('assets/img/icon/cat-3-2.png') }}" alt="Stadum">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="box-title"><a href="#">Design & Arts</a></h3>
+                            <p class="box-text">12 Courses</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="">
+                    <div class="cat-card wow fadeInUp" data-wow-delay=".3s">
+                        <div class="box-icon">
+                            <img src="{{ asset('assets/img/icon/cat-3-3.png') }}" alt="Stadum">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="box-title"><a href="#">Web Development</a></h3>
+                            <p class="box-text">10 Courses</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="">
+                    <div class="cat-card wow fadeInUp" data-wow-delay=".4s">
+                        <div class="box-icon">
+                            <img src="{{ asset('assets/img/icon/cat-3-4.png') }}" alt="Stadum">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="box-title"><a href="#">Data Science</a></h3>
+                            <p class="box-text">18 Courses</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="">
+                    <div class="cat-card wow fadeInUp" data-wow-delay=".5s">
+                        <div class="box-icon">
+                            <img src="{{ asset('assets/img/icon/cat-3-1.png') }}" alt="Stadum">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="box-title"><a href="#">Video & Photography</a></h3>
+                            <p class="box-text">13 Courses</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="">
+                    <div class="cat-card wow fadeInUp" data-wow-delay=".6s">
+                        <div class="box-icon">
+                            <img src="{{ asset('assets/img/icon/cat-3-1.png') }}" alt="Stadum">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="box-title"><a href="#">Artificial Intelligence</a></h3>
+                            <p class="box-text">20 Courses</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="">
+                    <div class="cat-card wow fadeInUp" data-wow-delay=".7s">
+                        <div class="box-icon">
+                            <img src="{{ asset('assets/img/icon/cat-3-1.png') }}" alt="Stadum">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="box-title"><a href="#">Ideology</a></h3>
+                            <p class="box-text">15 Courses</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="">
+                    <div class="cat-card wow fadeInUp" data-wow-delay=".8s">
+                        <div class="box-icon">
+                            <img src="{{ asset('assets/img/icon/cat-3-5.png') }}" alt="Stadum">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="box-title"><a href="#">Mathematics</a></h3>
+                            <p class="box-text">10 Courses</p>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="btn-wrap text-center d-block wow fadeInUp" data-wow-delay=".3s">
+                <a class="th-btn style-border2" href="#">Browse All Categories</a>
+            </div>
         </div>
+        <div class="cat-shape shape-mockup jump" data-bottom="15%" data-left="10%"><img src="{{ asset('assets/img/shape/cat-3-1.png') }}" alt="Stadum"></div>
+        <div class="shape-mockup" data-bottom="0%" data-right="0%"><img src="{{ asset('assets/img/shape/feature-shep-2-home-1.png') }}" alt="Stadum"></div>
     </section>
-    <section class="campus overflow-hidden space">
-        <div class="campus-shape jump shape-mockup  d-none d-xxl-block" data-bottom="22%" data-right="5%">
-            <img src="assets/img/shape/campus-1-1.png" alt="shape">
-        </div>
-        <div class="container">
-            <div class="row justify-content-lg-between justify-content-center align-items-center">
-                <div class="col-lg-8 col-12">
-                    <div class="title-area text-center text-lg-start">
-                        <span class="sub-title text-anim">EXPERIENCE Aalokbortika</span>
-                        <h2 class="sec-title text-anim2">Campus Life</h2>
+    <section class="popular-course-area-1 space">
+        <div class="container th-container4">
+            <div class="row justify-content-xl-between justify-content-center align-items-center">
+                <div class="col-xl-6 col-12">
+                    <div class="title-wrap">
+                        <div class="title-area text-center text-xl-start">
+                            <span class="sub-title text-anim">POPULAR CAUSES</span>
+                            <h2 class="sec-title text-anim2">Pick a course & get start excellent journey</h2>
+                        </div>
                     </div>
                 </div>
                 <div class="col-auto align-self-end">
                     <div class="sec-btn">
-                        <a href="campus.html" class="th-btn style-border1 th-icon wow fadeInUp" data-wow-delay=".2s"> Explore All</a>
+                        <ul class="nav nav-tabs course-tabs popularcourse-tab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active th-btn style-border1" id="undergraduate-tab" data-bs-toggle="tab" data-bs-target="#undergraduateTab" type="button" role="tab" aria-controls="undergraduateTab" aria-selected="true">Undergraduate</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link th-btn style-border1" id="graduate-tab" data-bs-toggle="tab" data-bs-target="#graduateTab" type="button" role="tab" aria-controls="graduateTab" aria-selected="false">Graduate</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link th-btn style-border1" id="online-tab" data-bs-toggle="tab" data-bs-target="#onlineTab" type="button" role="tab" aria-controls="onlineTab" aria-selected="false">Online</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link th-btn style-border1" id="shortcourse-tab" data-bs-toggle="tab" data-bs-target="#shortcourseTab" type="button" role="tab" aria-controls="shortcourseTab" aria-selected="false">Short Course</button>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
-            <div class="row gy-5 justify-content-center">
-                <div class="col-xl-4 col-lg-6">
-                    <div class="campus-card wow fadeInLeft" data-wow-delay=".2s">
-                        <div class="campus-img global-img">
-                            <a href="campus.html" class="d-block position-relative">
-                                <img src="assets/img/campus/campus-1-1.jpg" alt="campus image" class="img-1">
-                            </a>
+            <div class="tab-content">
+                <div class="tab-pane fade show active" id="undergraduateTab" role="tabpanel" aria-labelledby="undergraduate-tab">
+                    <div class="popular-course-wrap1">
+                        <div class="row gy-24">
+
+                            <div class="col-xxl-4 col-lg-6 col-md-12">
+                                <div class="course-card">
+                                    <div class="course-img-thumb global-img">
+                                        <img src="{{ asset('assets/img/popular-course/course-thumb-3-1.jpg') }}" alt="Stadum">
+                                        <a href="#" class="wishlist-icon"><i class="fa-solid fa-heart"></i></a>
+                                    </div>
+                                    <div class="card-content">
+                                        <div class="tag"><a href="#">Engineering</a></div>
+                                        <h3 class="box-title"><a href="program.html">Master Degree Technology Elevate Your Career</a></h3>
+                                        <div class="course-rating">
+                                            <div class="star-rating" role="img" aria-label="Rated 4.00 out of 5">
+                                                <span class="rating-icon"></span>
+                                            </div>
+                                            <p class="rating-text">4.9 (10k)</p>
+                                        </div>
+                                        <div class="blog-meta course-meta">
+                                            <a href="#"><img src="{{ asset('assets/img/icon/open-book-small.svg') }}" alt="Stadum"> 12 Semesters</a>
+                                            <a href="#"><i class="fa-solid fa-calendar-days"></i> 4 Years</a>
+                                            <a href="#"><img src="{{ asset('assets/img/icon/book-read.svg') }}" alt="Stadum">250 Seats</a>
+                                        </div>
+                                        <div class="card-content-bottom">
+                                            <div class="author">
+                                                <img src="{{ asset('assets/img/popular-course/course-mentor-3-1.jpg') }}" alt="Stadum">
+                                                <p><a href="program.html">Michel John</a></p>
+                                            </div>
+                                            <div class="btn-wrap">
+                                                <a class="th-btn th-icon style-border1" href="program.html">Enroll Now</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xxl-4 col-lg-6 col-md-12">
+                                <div class="course-card">
+                                    <div class="course-img-thumb global-img">
+                                        <img src="{{ asset('assets/img/popular-course/course-thumb-3-2.jpg') }}" alt="Stadum">
+                                        <a href="#" class="wishlist-icon"><i class="fa-solid fa-heart"></i></a>
+                                    </div>
+                                    <div class="card-content">
+                                        <div class="tag"><a href="#">Language</a></div>
+                                        <h3 class="box-title"><a href="program.html">A Practical Course for Speaking English Correctly </a></h3>
+                                        <div class="course-rating">
+                                            <div class="star-rating" role="img" aria-label="Rated 4.00 out of 5">
+                                                <span class="rating-icon"></span>
+                                            </div>
+                                            <p class="rating-text">4.9 (10k)</p>
+                                        </div>
+                                        <div class="blog-meta course-meta">
+                                            <a href="#"><img src="{{ asset('assets/img/icon/open-book-small.svg') }}" alt="Stadum"> 12 Semesters</a>
+                                            <a href="#"><i class="fa-solid fa-calendar-days"></i> 4 Years</a>
+                                            <a href="#"><img src="{{ asset('assets/img/icon/book-read.svg') }}" alt="Stadum">250 Seats</a>
+                                        </div>
+                                        <div class="card-content-bottom">
+                                            <div class="author">
+                                                <img src="{{ asset('assets/img/popular-course/course-mentor-3-2.jpg') }}" alt="Stadum">
+                                                <p><a href="program.html">Albert James</a></p>
+                                            </div>
+                                            <div class="btn-wrap">
+                                                <a class="th-btn th-icon style-border1" href="program.html">Enroll Now</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xxl-4 col-lg-6 col-md-12">
+                                <div class="course-card">
+                                    <div class="course-img-thumb global-img">
+                                        <img src="{{ asset('assets/img/popular-course/course-thumb-3-3.jpg') }}" alt="Stadum">
+                                        <a href="#" class="wishlist-icon"><i class="fa-solid fa-heart"></i></a>
+                                    </div>
+                                    <div class="card-content">
+                                        <div class="tag"><a href="#">Web Development</a></div>
+                                        <h3 class="box-title"><a href="program.html">Web Development Fundamental Building your Career</a></h3>
+                                        <div class="course-rating">
+                                            <div class="star-rating" role="img" aria-label="Rated 4.00 out of 5">
+                                                <span class="rating-icon"></span>
+                                            </div>
+                                            <p class="rating-text">4.9 (10k)</p>
+                                        </div>
+                                        <div class="blog-meta course-meta">
+                                            <a href="#"><img src="{{ asset('assets/img/icon/open-book-small.svg') }}" alt="Stadum"> 12 Semesters</a>
+                                            <a href="#"><i class="fa-solid fa-calendar-days"></i> 4 Years</a>
+                                            <a href="#"><img src="{{ asset('assets/img/icon/book-read.svg') }}" alt="Stadum">250 Seats</a>
+                                        </div>
+                                        <div class="card-content-bottom">
+                                            <div class="author">
+                                                <img src="{{ asset('assets/img/popular-course/course-mentor-3-3.jpg') }}" alt="Stadum">
+                                                <p><a href="program.html">Rebeka Smith</a></p>
+                                            </div>
+                                            <div class="btn-wrap">
+                                                <a class="th-btn th-icon style-border1" href="program.html">Enroll Now</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xxl-4 col-lg-6 col-md-12">
+                                <div class="course-card">
+                                    <div class="course-img-thumb global-img">
+                                        <img src="{{ asset('assets/img/popular-course/course-thumb-3-4.jpg') }}" alt="Stadum">
+                                        <a href="#" class="wishlist-icon"><i class="fa-solid fa-heart"></i></a>
+                                    </div>
+                                    <div class="card-content">
+                                        <div class="tag"><a href="#">Fine of Arts</a></div>
+                                        <h3 class="box-title"><a href="program.html">Boost Your Creativity & Expand the Your Career</a></h3>
+                                        <div class="course-rating">
+                                            <div class="star-rating" role="img" aria-label="Rated 4.00 out of 5">
+                                                <span class="rating-icon"></span>
+                                            </div>
+                                            <p class="rating-text">4.9 (10k)</p>
+                                        </div>
+                                        <div class="blog-meta course-meta">
+                                            <a href="#"><img src="{{ asset('assets/img/icon/open-book-small.svg') }}" alt="Stadum"> 12 Semesters</a>
+                                            <a href="#"><i class="fa-solid fa-calendar-days"></i> 4 Years</a>
+                                            <a href="#"><img src="{{ asset('assets/img/icon/book-read.svg') }}" alt="Stadum">250 Seats</a>
+                                        </div>
+                                        <div class="card-content-bottom">
+                                            <div class="author">
+                                                <img src="{{ asset('assets/img/popular-course/course-mentor-3-4.jpg') }}" alt="Stadum">
+                                                <p><a href="program.html">Jenny Wilson</a></p>
+                                            </div>
+                                            <div class="btn-wrap">
+                                                <a class="th-btn th-icon style-border1" href="program.html">Enroll Now</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xxl-4 col-lg-6 col-md-12">
+                                <div class="course-card">
+                                    <div class="course-img-thumb global-img">
+                                        <img src="{{ asset('assets/img/popular-course/course-thumb-3-5.jpg') }}" alt="Stadum">
+                                        <a href="#" class="wishlist-icon"><i class="fa-solid fa-heart"></i></a>
+                                    </div>
+                                    <div class="card-content">
+                                        <div class="tag"><a href="#">Development</a></div>
+                                        <h3 class="box-title"><a href="program.html">Computer Science and Engineering Building </a></h3>
+                                        <div class="course-rating">
+                                            <div class="star-rating" role="img" aria-label="Rated 4.00 out of 5">
+                                                <span class="rating-icon"></span>
+                                            </div>
+                                            <p class="rating-text">4.9 (10k)</p>
+                                        </div>
+                                        <div class="blog-meta course-meta">
+                                            <a href="#"><img src="{{ asset('assets/img/icon/open-book-small.svg') }}" alt="Stadum"> 12 Semesters</a>
+                                            <a href="#"><i class="fa-solid fa-calendar-days"></i> 4 Years</a>
+                                            <a href="#"><img src="{{ asset('assets/img/icon/book-read.svg') }}" alt="Stadum">250 Seats</a>
+                                        </div>
+                                        <div class="card-content-bottom">
+                                            <div class="author">
+                                                <img src="{{ asset('assets/img/popular-course/course-mentor-3-5.jpg') }}" alt="Stadum">
+                                                <p><a href="program.html">Leslie Alexander</a></p>
+                                            </div>
+                                            <div class="btn-wrap">
+                                                <a class="th-btn th-icon style-border1" href="program.html">Enroll Now</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xxl-4 col-lg-6 col-md-12">
+                                <div class="course-card">
+                                    <div class="course-img-thumb global-img">
+                                        <img src="{{ asset('assets/img/popular-course/course-thumb-3-6.jpg') }}" alt="Stadum">
+                                        <a href="#" class="wishlist-icon"><i class="fa-solid fa-heart"></i></a>
+                                    </div>
+                                    <div class="card-content">
+                                        <div class="tag"><a href="#">Engineering</a></div>
+                                        <h3 class="box-title"><a href="program.html">Programming (Python, Java, C++) Building </a></h3>
+                                        <div class="course-rating">
+                                            <div class="star-rating" role="img" aria-label="Rated 4.00 out of 5">
+                                                <span class="rating-icon"></span>
+                                            </div>
+                                            <p class="rating-text">4.9 (10k)</p>
+                                        </div>
+                                        <div class="blog-meta course-meta">
+                                            <a href="#"><img src="{{ asset('assets/img/icon/open-book-small.svg') }}" alt="Stadum"> 12 Semesters</a>
+                                            <a href="#"><i class="fa-solid fa-calendar-days"></i> 4 Years</a>
+                                            <a href="#"><img src="{{ asset('assets/img/icon/book-read.svg') }}" alt="Stadum">250 Seats</a>
+                                        </div>
+                                        <div class="card-content-bottom">
+                                            <div class="author">
+                                                <img src="{{ asset('assets/img/popular-course/course-mentor-3-6.jpg') }}" alt="Stadum">
+                                                <p><a href="program.html">Maliha Doe</a></p>
+                                            </div>
+                                            <div class="btn-wrap">
+                                                <a class="th-btn th-icon style-border1" href="program.html">Enroll Now</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="campus-content">
-                            <h3 class="box-title">
-                                <a href="campus.html">Mentor Lecture</a>
-                            </h3>
-                            <p class="box-text">Schedule a personalized tour of our Ancaster, Ontario campus and a one-on-one meeting with an Admissions Counsellor. Daily visits are offered regularly to accommodate your schedule.</p>
-                        </div>
-                        <a href="campus.html" class="th-btn style-border1 th-icon">View The Campus</a>
                     </div>
                 </div>
-
-                <div class="col-xl-4 col-lg-6">
-                    <div class="campus-card wow fadeInLeft" data-wow-delay=".4s">
-                        <div class="campus-img global-img">
-                            <a href="campus.html" class="d-block position-relative">
-                                <img src="assets/img/campus/campus-1-2.jpg" alt="campus image" class="img-1">
-                            </a>
+                <!-- Repeat the same pattern for other tabs (graduateTab, onlineTab, shortcourseTab) with asset helpers -->
+            </div>
+            <div class="btn-wrap mt-50 text-center d-block">
+                <a class="th-btn th-icon" href="#">Browse All Categories</a>
+            </div>
+        </div>
+        <div class="popular-area-shape shape-mockup jump d-none d-xl-block" data-bottom="0%" data-left="2%"><img src="{{ asset('assets/img/shape/popular-3-1.png') }}" alt="stadum"></div>
+    </section>
+    <!-- Continue adding asset helpers to the remaining sections... -->
+    <section class="why-area-3 overflow-hidden position-relative ">
+        <div class="shape-mockup z-index-3 jump d-none d-xxl-block" data-left="40%" data-top="14%"><img src="assets/img/shape/cat-3-1.png" alt="Stadum"></div>
+        <div class="container th-container4">
+            <div class="row align-items-center">
+                <div class="col-lg-5">
+                    <div class="space">
+                        <div class="title-area">
+                            <span class="sub-title text-anim">WHY CHOOSE US</span>
+                            <h2 class="sec-title text-anim2">The advantages of our Courses</h2>
+                            <p class="sec-text mt-25 mb-0 wow fadeInUp" data-wow-delay=".2s">At Stadum, you’ll be welcomed
+                                into a
+                                diverse community of learners of different races, genders, ages and ethnicities. With online
+                                and on-campus learning available.</p>
                         </div>
-                        <div class="campus-content">
-                            <h3 class="box-title">
-                                <a href="campus.html">Group Study in Campus</a>
-                            </h3>
-                            <p class="box-text">Our scheduled visits are pre-planned days that are specially catered to the different interests of each student. Tour campus and connect with staff, faculty and current students to help discover your place.</p>
+                        <div class="checklist style5">
+                            <ul>
+                                <li class="wow fadeInUp" data-wow-delay=".3s">We offer consistently with your-round
+                                    schedules</li>
+                                <li class="wow fadeInUp" data-wow-delay=".4s">We have highly experienced
+                                    instructors</li>
+                                <li class="wow fadeInUp" data-wow-delay=".5s">We support you to ensure the success
+                                </li>
+                                <li class="wow fadeInUp" data-wow-delay=".6s">Get live class before start courses
+                                </li>
+                            </ul>
                         </div>
-                        <a href="campus.html" class="th-btn style-border1 th-icon">View The Campus</a>
+                        <div class="btn-wrap mt-50 wow fadeInUp" data-wow-delay=".7s">
+                            <a href="about.html" class="th-btn th-icon">Get More Info</a>
+                        </div>
                     </div>
                 </div>
-
-                <div class="col-xl-4 col-lg-6">
-                    <div class="campus-card wow fadeInLeft" data-wow-delay=".6s">
-                        <div class="campus-img global-img">
-                            <a href="campus.html" class="d-block position-relative">
-                                <img src="assets/img/campus/campus-1-3.jpg" alt="campus image" class="img-1">
+                <div class="col-lg-7">
+                    <div class="why-video-bg overflow-hidden gsap-parallax">
+                        <img src="assets/img/why/why-video3-1.jpg" alt="image">
+                        <div class="why-video-btn">
+                            <a href="https://www.youtube.com/watch?v=EZfLOSQ8hW8" class="video-play-btn popup-video">
+                                <i class="fa-sharp fa-solid fa-play"></i>
                             </a>
                         </div>
-                        <div class="campus-content">
-                            <h3 class="box-title">
-                                <a href="campus.html">Art & Culture</a>
-                            </h3>
-                            <p class="box-text">Can’t make it to campus? Explore parts of Redeemer’s 70-acre campus through a series of short videos and get a glimpse of what it has to offer—wherever and whenever works best for you.</p>
-                        </div>
-                        <a href="campus.html" class="th-btn style-border1 th-icon">View The Campus</a>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="why-shape-2 shape-mockup movingX d-none d-xxl-block" data-left="30%" data-bottom="16%"><img src="assets/img/shape/why-3-1.png" alt="Stadum"></div>
+    </section> <!--==============================
+Testimonial Area  
+==============================-->
+    <section class="overflow-hidden testi-area3 space">
+        <div class="shape-mockup testi-bg-shape3-1 jump-reverse d-xl-block d-none" data-right="10%" data-top="8%">
+            <img src="assets/img/shape/shape8.png" alt="img">
+        </div>
+        <div class="shape-mockup testi-bg-shape3-1 spin d-xl-block d-none" data-left="4%" data-top="25%">
+            <img src="assets/img/shape/instr-3-1.png" alt="img">
+        </div>
+        <div class="container th-container4 overflow-hidden">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-xxl-3">
+                    <div class="title-area text-center">
+                        <span class="sub-title text-anim">TESTIMONIALS</span>
+                        <h2 class="sec-title text-anim2">What they’re talking about stadum?</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row gx-0 gy-4">
+                <div class="col-xl-8">
+                    <div class="slider-area">
+                        <div class="swiper th-slider testi-slider2" id="testiSlide2" data-slider-options='{"loop":false,"effect": "slide","thumbs":{"swiper":".testi-thumb-slider"}}'>
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <div class="testi-card2">
+                                        <div class="box-quote"><img src="assets/img/icon/quote2.svg" alt=""></div>
+                                        <p class="box-text">At Stadum University, we prepare you to launch your career by providing a supportive, creative, and professional environment from which to learn practical skills and build a network of industry contacts. Ducamb welcomed every pain avoided but in certa mstances owing to the claims of igation that off bu will frequently occuthe</p>
+                                        <div class="box-review">
+                                            <i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i>
+                                        </div>
+                                        <h3 class="box-title">Maliha Alizabeth</h3>
+                                        <p class="box-desig">Student</p>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="testi-card2">
+                                        <div class="box-quote"><img src="assets/img/icon/quote2.svg" alt=""></div>
+                                        <p class="box-text">At Stadum University, we prepare you to launch your career by providing a supportive, creative, and professional environment from which to learn practical skills and build a network of industry contacts. Ducamb welcomed every pain avoided but in certa mstances owing to the claims of igation that off bu will frequently occuthe</p>
+                                        <div class="box-review">
+                                            <i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i>
+                                        </div>
+                                        <h3 class="box-title">David Ade Smith</h3>
+                                        <p class="box-desig">Student</p>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="testi-card2">
+                                        <div class="box-quote"><img src="assets/img/icon/quote2.svg" alt=""></div>
+                                        <p class="box-text">At Stadum University, we prepare you to launch your career by providing a supportive, creative, and professional environment from which to learn practical skills and build a network of industry contacts. Ducamb welcomed every pain avoided but in certa mstances owing to the claims of igation that off bu will frequently occuthe</p>
+                                        <div class="box-review">
+                                            <i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i>
+                                        </div>
+                                        <h3 class="box-title">Jessica Lauren</h3>
+                                        <p class="box-desig">Student</p>
+                                    </div>
+                                </div>
+                            </div>
 
+                        </div>
+                        <button data-slider-prev="#testiSlide2" class="slider-arrow style-border slider-prev"><i class="far fa-arrow-left"></i></button>
+                        <button data-slider-next="#testiSlide2" class="slider-arrow style-border slider-next"><i class="far fa-arrow-right"></i></button>
+                    </div>
+                </div>
+                <div class="col-xl-4">
+                    <div class="slider-area testi-thumb">
+                        <div class="swiper th-slider testi-thumb-slider" id="testiSlide3" data-slider-options='{"breakpoints":{"0":{"slidesPerView":1},"576":{"slidesPerView":"1"},"600":{"slidesPerView":"1","effect":"slide"},"768":{"slidesPerView":"3"}},"effect":"coverflow","coverflowEffect":{"rotate":"0","stretch":"250","depth":"215","modifier":"1"},"centeredSlides":"true","autoplay":false,"autoHeight": "true"}'>
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <div class="testi-card2-img">
+                                        <img class="testi-img" src="assets/img/testimonial/testimonial_1_1.jpg" alt="img">
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="testi-card2-img">
+                                        <img class="testi-img" src="assets/img/testimonial/testimonial_1_2.jpg" alt="img">
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="testi-card2-img">
+                                        <img class="testi-img" src="assets/img/testimonial/testimonial_1_3.jpg" alt="img">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section><!--==============================
-Story Area  
+Team Area  
 ==============================-->
-    <div class="story-area-1 overflow-hidden">
-        <div class="container">
-            <div class="row justify-content-lg-between justify-content-center align-items-center">
-                <div class="col-lg-8 col-12">
-                    <div class="title-area text-center text-lg-start">
-                        <span class="sub-title text-anim">STUDENT STORIES</span>
-                        <h2 class="sec-title text-anim2">Our Student Stories</h2>
+    <section class="team-area space" id="instr-sec">
+        <div class="instr-shape1 shape-mockup movingX d-none d-xl-block" data-right="14%" data-top="8%"><img src="assets/img/shape/cat-3-1.png" alt="Stadum"></div>
+        <div class="container th-container4">
+            <div class="row justify-content-between">
+                <div class="col-xxl-4 col-xl-9 col-lg-8 col-md-10">
+                    <div class="title-area">
+                        <span class="sub-title text-anim">INSTRUCTORS</span>
+                        <h2 class="sec-title text-anim2">
+                            Our Experienced <span class="text-theme">Instructors</span>
+                        </h2>
                     </div>
                 </div>
                 <div class="col-auto align-self-end">
-                    <div class="sec-btn wow fadeInUp" data-wow-delay=".3s">
-                        <a href="program.html" class="th-btn style-border1 th-icon"> Discover More Stories </a>
+                    <div class="sec-btn">
+                        <div class="icon-box d-none d-lg-flex">
+                            <button data-slider-prev="#teamSlider3" class="slider-arrow style3 default"><i class="far fa-arrow-left"></i></button>
+                            <button data-slider-next="#teamSlider3" class="slider-arrow style3 default"><i class="far fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slider-area">
+                <div class="swiper th-slider instr-slider1" id="teamSlider3" data-slider-options='{"breakpoints": {"0":{"slidesPerView": 1, "autoplay" : "true"},"768":{"slidesPerView": 2},
+                    "992":{"slidesPerView": 3},"1299":   {"slidesPerView": 3},"1300":{"slidesPerView": 4}},"slidesPerView" : "4","spaceBetween": "24","loop": "true","autoplay" : "false"}'>
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="instr-card">
+                                <div class="instr-img">
+                                    <img src="assets/img/mentor/3-1.png" alt="Stadum">
+                                </div>
+                                <div class="box-content">
+                                    <a href="teacher.html" class="card-icon"><img src="assets/img/icon/right-icon-black.svg" alt="Stadum" class="th-arrow"></a>
+                                    <div class="media-body">
+                                        <h3 class="box-title"><a href="teacher.html">Kristin Watson</a></h3>
+                                        <span class="instr-desig">Teacher of Development</span>
+                                    </div>
+                                    <div class="th-social style3">
+                                        <a target="_blank" href="https://facebook.com/"><i class="fab fa-facebook-f"></i></a>
+                                        <div class="line"></div>
+                                        <a target="_blank" href="https://twitter.com/"><i class="fab fa-twitter"></i></a>
+                                        <div class="line"></div>
+                                        <a target="_blank" href="https://linkedin.com/"><i class="fa-brands fa-linkedin-in"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide">
+                            <div class="instr-card">
+                                <div class="instr-img">
+                                    <img src="assets/img/mentor/3-2.png" alt="Stadum">
+                                </div>
+                                <div class="box-content">
+                                    <a href="teacher.html" class="card-icon"><img src="assets/img/icon/right-icon-black.svg" alt="Stadum" class="th-arrow"></a>
+                                    <div class="media-body">
+                                        <h3 class="box-title"><a href="teacher.html">Ralph Edwards</a></h3>
+                                        <span class="instr-desig">Teacher of Development</span>
+                                    </div>
+                                    <div class="th-social style3">
+                                        <a target="_blank" href="https://facebook.com/"><i class="fab fa-facebook-f"></i></a>
+                                        <div class="line"></div>
+                                        <a target="_blank" href="https://twitter.com/"><i class="fab fa-twitter"></i></a>
+                                        <div class="line"></div>
+                                        <a target="_blank" href="https://linkedin.com/"><i class="fa-brands fa-linkedin-in"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide">
+                            <div class="instr-card">
+                                <div class="instr-img">
+                                    <img src="assets/img/mentor/3-3.png" alt="Stadum">
+                                </div>
+                                <div class="box-content">
+                                    <a href="teacher.html" class="card-icon"><img src="assets/img/icon/right-icon-black.svg" alt="Stadum" class="th-arrow"></a>
+                                    <div class="media-body">
+                                        <h3 class="box-title"><a href="teacher.html">Jerome Bell</a></h3>
+                                        <span class="instr-desig">Teacher of Development</span>
+                                    </div>
+                                    <div class="th-social style3">
+                                        <a target="_blank" href="https://facebook.com/"><i class="fab fa-facebook-f"></i></a>
+                                        <div class="line"></div>
+                                        <a target="_blank" href="https://twitter.com/"><i class="fab fa-twitter"></i></a>
+                                        <div class="line"></div>
+                                        <a target="_blank" href="https://linkedin.com/"><i class="fa-brands fa-linkedin-in"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide">
+                            <div class="instr-card">
+                                <div class="instr-img">
+                                    <img src="assets/img/mentor/3-4.png" alt="Stadum">
+                                </div>
+                                <div class="box-content">
+                                    <a href="teacher.html" class="card-icon"><img src="assets/img/icon/right-icon-black.svg" alt="Stadum" class="th-arrow"></a>
+                                    <div class="media-body">
+                                        <h3 class="box-title"><a href="teacher.html">Leslie Alexander</a></h3>
+                                        <span class="instr-desig">Teacher of Development</span>
+                                    </div>
+                                    <div class="th-social style3">
+                                        <a target="_blank" href="https://facebook.com/"><i class="fab fa-facebook-f"></i></a>
+                                        <div class="line"></div>
+                                        <a target="_blank" href="https://twitter.com/"><i class="fab fa-twitter"></i></a>
+                                        <div class="line"></div>
+                                        <a target="_blank" href="https://linkedin.com/"><i class="fa-brands fa-linkedin-in"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide">
+                            <div class="instr-card">
+                                <div class="instr-img">
+                                    <img src="assets/img/mentor/3-5.png" alt="Stadum">
+                                </div>
+                                <div class="box-content">
+                                    <a href="teacher.html" class="card-icon"><img src="assets/img/icon/right-icon-black.svg" alt="Stadum" class="th-arrow"></a>
+                                    <div class="media-body">
+                                        <h3 class="box-title"><a href="teacher.html">Priya Ray</a></h3>
+                                        <span class="instr-desig">Teacher of Development</span>
+                                    </div>
+                                    <div class="th-social style3">
+                                        <a target="_blank" href="https://facebook.com/"><i class="fab fa-facebook-f"></i></a>
+                                        <div class="line"></div>
+                                        <a target="_blank" href="https://twitter.com/"><i class="fab fa-twitter"></i></a>
+                                        <div class="line"></div>
+                                        <a target="_blank" href="https://linkedin.com/"><i class="fa-brands fa-linkedin-in"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide">
+                            <div class="instr-card">
+                                <div class="instr-img">
+                                    <img src="assets/img/mentor/3-6.png" alt="Stadum">
+                                </div>
+                                <div class="box-content">
+                                    <a href="teacher.html" class="card-icon"><img src="assets/img/icon/right-icon-black.svg" alt="Stadum" class="th-arrow"></a>
+                                    <div class="media-body">
+                                        <h3 class="box-title"><a href="teacher.html">Ralph Edwards</a></h3>
+                                        <span class="instr-desig">Teacher of Development</span>
+                                    </div>
+                                    <div class="th-social style3">
+                                        <a target="_blank" href="https://facebook.com/"><i class="fab fa-facebook-f"></i></a>
+                                        <div class="line"></div>
+                                        <a target="_blank" href="https://twitter.com/"><i class="fab fa-twitter"></i></a>
+                                        <div class="line"></div>
+                                        <a target="_blank" href="https://linkedin.com/"><i class="fa-brands fa-linkedin-in"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide">
+                            <div class="instr-card">
+                                <div class="instr-img">
+                                    <img src="assets/img/mentor/3-7.png" alt="Stadum">
+                                </div>
+                                <div class="box-content">
+                                    <a href="teacher.html" class="card-icon"><img src="assets/img/icon/right-icon-black.svg" alt="Stadum" class="th-arrow"></a>
+                                    <div class="media-body">
+                                        <h3 class="box-title"><a href="teacher.html">Jerome Bell</a></h3>
+                                        <span class="instr-desig">Teacher of Development</span>
+                                    </div>
+                                    <div class="th-social style3">
+                                        <a target="_blank" href="https://facebook.com/"><i class="fab fa-facebook-f"></i></a>
+                                        <div class="line"></div>
+                                        <a target="_blank" href="https://twitter.com/"><i class="fab fa-twitter"></i></a>
+                                        <div class="line"></div>
+                                        <a target="_blank" href="https://linkedin.com/"><i class="fa-brands fa-linkedin-in"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide">
+                            <div class="instr-card">
+                                <div class="instr-img">
+                                    <img src="assets/img/mentor/3-8.png" alt="Stadum">
+                                </div>
+                                <div class="box-content">
+                                    <a href="teacher.html" class="card-icon"><img src="assets/img/icon/right-icon-black.svg" alt="Stadum" class="th-arrow"></a>
+                                    <div class="media-body">
+                                        <h3 class="box-title"><a href="teacher.html">Alisa Smith</a></h3>
+                                        <span class="instr-desig">Teacher of Development</span>
+                                    </div>
+                                    <div class="th-social style3">
+                                        <a target="_blank" href="https://facebook.com/"><i class="fab fa-facebook-f"></i></a>
+                                        <div class="line"></div>
+                                        <a target="_blank" href="https://twitter.com/"><i class="fab fa-twitter"></i></a>
+                                        <div class="line"></div>
+                                        <a target="_blank" href="https://linkedin.com/"><i class="fa-brands fa-linkedin-in"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
-        <div class="container-fluid">
-            <div class="swiper th-slider story-slider1" id="storySlider1" data-slider-options='{"breakpoints":{"0":{"slidesPerView":1},"1400":{"slidesPerView":"5"},"1200":{"slidesPerView":"4"},"992":{"slidesPerView":"4"},"768":{"slidesPerView":"3"},"576":{"slidesPerView":"2"}},"spaceBetween":"0"}'>
-                <div class="swiper-wrapper">
-                    <!--==============================
-Story Area  
+        <span class="instr-shape2 shape-mockup spin d-none d-xl-block" data-right="4%" data-bottom="6%"><img src="assets/img/shape/instr-3-1.png" alt="Stadum"></span>
+    </section><!--==============================
+Team Area  
 ==============================-->
-                    <div class="swiper-slide">
-                        <div class="story-card">
-                            <div class="box-img">
-                                <img src="assets/img/story/story-1-1.jpg" alt="img">
-                            </div>
-                            <div class="story-content">
-
-                                <h3 class="box-title"><a href="program.html">Alex Smith</a></h3>
-                            </div>
-                            <div class="story-content hover-style">
-                                <div class="quote-icon">
-                                    <img src="assets/img/icon/quote.svg" alt="">
-                                </div>
-                                <p class="box-text">"Aalokbortika University’s humanities program is helping me develop the perspective, critical thinking and adaptability I need to navigate and contribute to this changing world."</p>
-                                <h3 class="box-title"><a href="program.html">Alex Smith</a></h3>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- <div class="story-card">
-                <div class="story-thumb">
-                    <img src="assets/img/story/story-1-1.jpg" alt="Icon">
-                </div>
-                <div class="story-content text-center">
-                    <h3 class="box-title text-white">
-                        <a href="program.html">Alex Smith</a>
-                    </h3>
-                </div>
-                <div class="story-content hover-style text-center">
-                    <span class="quote-icon">
-                        <img src="assets/img/icon/quote.svg" alt="">
-                    </span>
-                    <p class="box-text text-white">"Aalokbortika University’s humanities program is helping me develop the perspective, critical thinking and adaptability I need to navigate and contribute to this changing world."</p>
-                    <h3 class="box-title text-white">
-                        <a href="program.html">Alex Smith</a>
-                    </h3>
-                </div>
-            </div> -->
-
-                    <div class="swiper-slide">
-                        <div class="story-card">
-                            <div class="box-img">
-                                <img src="assets/img/story/story-1-2.jpg" alt="img">
-                            </div>
-                            <div class="story-content">
-
-                                <h3 class="box-title"><a href="program.html">Brone Due</a></h3>
-                            </div>
-                            <div class="story-content hover-style">
-                                <div class="quote-icon">
-                                    <img src="assets/img/icon/quote.svg" alt="">
-                                </div>
-                                <p class="box-text">"Aalokbortika University’s humanities program is helping me develop the perspective, critical thinking and adaptability I need to navigate and contribute to this changing world."</p>
-                                <h3 class="box-title"><a href="program.html">Brone Due</a></h3>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- <div class="story-card">
-                <div class="story-thumb">
-                    <img src="assets/img/story/story-1-2.jpg" alt="Icon">
-                </div>
-                <div class="story-content text-center">
-                    <h3 class="box-title text-white">
-                        <a href="program.html">Brone Due</a>
-                    </h3>
-                </div>
-                <div class="story-content hover-style text-center">
-                    <span class="quote-icon">
-                        <img src="assets/img/icon/quote.svg" alt="">
-                    </span>
-                    <p class="box-text text-white">"Aalokbortika University’s humanities program is helping me develop the perspective, critical thinking and adaptability I need to navigate and contribute to this changing world."</p>
-                    <h3 class="box-title text-white">
-                        <a href="program.html">Brone Due</a>
-                    </h3>
-                </div>
-            </div> -->
-
-                    <div class="swiper-slide">
-                        <div class="story-card">
-                            <div class="box-img">
-                                <img src="assets/img/story/story-1-3.jpg" alt="img">
-                            </div>
-                            <div class="story-content">
-
-                                <h3 class="box-title"><a href="program.html">Moumita Mira</a></h3>
-                            </div>
-                            <div class="story-content hover-style">
-                                <div class="quote-icon">
-                                    <img src="assets/img/icon/quote.svg" alt="">
-                                </div>
-                                <p class="box-text">"Aalokbortika University’s humanities program is helping me develop the perspective, critical thinking and adaptability I need to navigate and contribute to this changing world."</p>
-                                <h3 class="box-title"><a href="program.html">Moumita Mira</a></h3>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- <div class="story-card">
-                <div class="story-thumb">
-                    <img src="assets/img/story/story-1-3.jpg" alt="Icon">
-                </div>
-                <div class="story-content text-center">
-                    <h3 class="box-title text-white">
-                        <a href="program.html">Moumita Mira</a>
-                    </h3>
-                </div>
-                <div class="story-content hover-style text-center">
-                    <span class="quote-icon">
-                        <img src="assets/img/icon/quote.svg" alt="">
-                    </span>
-                    <p class="box-text text-white">"Aalokbortika University’s humanities program is helping me develop the perspective, critical thinking and adaptability I need to navigate and contribute to this changing world."</p>
-                    <h3 class="box-title text-white">
-                        <a href="program.html">Moumita Mira</a>
-                    </h3>
-                </div>
-            </div> -->
-
-                    <div class="swiper-slide">
-                        <div class="story-card">
-                            <div class="box-img">
-                                <img src="assets/img/story/story-1-4.jpg" alt="img">
-                            </div>
-                            <div class="story-content">
-
-                                <h3 class="box-title"><a href="program.html">Maya Lily</a></h3>
-                            </div>
-                            <div class="story-content hover-style">
-                                <div class="quote-icon">
-                                    <img src="assets/img/icon/quote.svg" alt="">
-                                </div>
-                                <p class="box-text">"Aalokbortika University’s humanities program is helping me develop the perspective, critical thinking and adaptability I need to navigate and contribute to this changing world."</p>
-                                <h3 class="box-title"><a href="program.html">Maya Lily</a></h3>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- <div class="story-card">
-                <div class="story-thumb">
-                    <img src="assets/img/story/story-1-4.jpg" alt="Icon">
-                </div>
-                <div class="story-content text-center">
-                    <h3 class="box-title text-white">
-                        <a href="program.html">Maya Lily</a>
-                    </h3>
-                </div>
-                <div class="story-content hover-style text-center">
-                    <span class="quote-icon">
-                        <img src="assets/img/icon/quote.svg" alt="">
-                    </span>
-                    <p class="box-text text-white">"Aalokbortika University’s humanities program is helping me develop the perspective, critical thinking and adaptability I need to navigate and contribute to this changing world."</p>
-                    <h3 class="box-title text-white">
-                        <a href="program.html">Maya Lily</a>
-                    </h3>
-                </div>
-            </div> -->
-
-                    <div class="swiper-slide">
-                        <div class="story-card">
-                            <div class="box-img">
-                                <img src="assets/img/story/story-1-5.jpg" alt="img">
-                            </div>
-                            <div class="story-content">
-
-                                <h3 class="box-title"><a href="program.html">Sony & Ovi</a></h3>
-                            </div>
-                            <div class="story-content hover-style">
-                                <div class="quote-icon">
-                                    <img src="assets/img/icon/quote.svg" alt="">
-                                </div>
-                                <p class="box-text">"Aalokbortika University’s humanities program is helping me develop the perspective, critical thinking and adaptability I need to navigate and contribute to this changing world."</p>
-                                <h3 class="box-title"><a href="program.html">Sony & Ovi</a></h3>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- <div class="story-card">
-                <div class="story-thumb">
-                    <img src="assets/img/story/story-1-5.jpg" alt="Icon">
-                </div>
-                <div class="story-content text-center">
-                    <h3 class="box-title text-white">
-                        <a href="program.html">Sony & Ovi</a>
-                    </h3>
-                </div>
-                <div class="story-content hover-style text-center">
-                    <span class="quote-icon">
-                        <img src="assets/img/icon/quote.svg" alt="">
-                    </span>
-                    <p class="box-text text-white">"Aalokbortika University’s humanities program is helping me develop the perspective, critical thinking and adaptability I need to navigate and contribute to this changing world."</p>
-                    <h3 class="box-title text-white">
-                        <a href="program.html">Sony & Ovi</a>
-                    </h3>
-                </div>
-            </div> -->
-
-                    <div class="swiper-slide">
-                        <div class="story-card">
-                            <div class="box-img">
-                                <img src="assets/img/story/story-1-1.jpg" alt="img">
-                            </div>
-                            <div class="story-content">
-
-                                <h3 class="box-title"><a href="program.html">Alex Smith</a></h3>
-                            </div>
-                            <div class="story-content hover-style">
-                                <div class="quote-icon">
-                                    <img src="assets/img/icon/quote.svg" alt="">
-                                </div>
-                                <p class="box-text">"Aalokbortika University’s humanities program is helping me develop the perspective, critical thinking and adaptability I need to navigate and contribute to this changing world."</p>
-                                <h3 class="box-title"><a href="program.html">Alex Smith</a></h3>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- <div class="story-card">
-                <div class="story-thumb">
-                    <img src="assets/img/story/story-1-1.jpg" alt="Icon">
-                </div>
-                <div class="story-content text-center">
-                    <h3 class="box-title text-white">
-                        <a href="program.html">Alex Smith</a>
-                    </h3>
-                </div>
-                <div class="story-content hover-style text-center">
-                    <span class="quote-icon">
-                        <img src="assets/img/icon/quote.svg" alt="">
-                    </span>
-                    <p class="box-text text-white">"Aalokbortika University’s humanities program is helping me develop the perspective, critical thinking and adaptability I need to navigate and contribute to this changing world."</p>
-                    <h3 class="box-title text-white">
-                        <a href="program.html">Alex Smith</a>
-                    </h3>
-                </div>
-            </div> -->
-
-                    <div class="swiper-slide">
-                        <div class="story-card">
-                            <div class="box-img">
-                                <img src="assets/img/story/story-1-2.jpg" alt="img">
-                            </div>
-                            <div class="story-content">
-
-                                <h3 class="box-title"><a href="program.html">Brone Due</a></h3>
-                            </div>
-                            <div class="story-content hover-style">
-                                <div class="quote-icon">
-                                    <img src="assets/img/icon/quote.svg" alt="">
-                                </div>
-                                <p class="box-text">"Aalokbortika University’s humanities program is helping me develop the perspective, critical thinking and adaptability I need to navigate and contribute to this changing world."</p>
-                                <h3 class="box-title"><a href="program.html">Brone Due</a></h3>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- <div class="story-card">
-                <div class="story-thumb">
-                    <img src="assets/img/story/story-1-2.jpg" alt="Icon">
-                </div>
-                <div class="story-content text-center">
-                    <h3 class="box-title text-white">
-                        <a href="program.html">Brone Due</a>
-                    </h3>
-                </div>
-                <div class="story-content hover-style text-center">
-                    <span class="quote-icon">
-                        <img src="assets/img/icon/quote.svg" alt="">
-                    </span>
-                    <p class="box-text text-white">"Aalokbortika University’s humanities program is helping me develop the perspective, critical thinking and adaptability I need to navigate and contribute to this changing world."</p>
-                    <h3 class="box-title text-white">
-                        <a href="program.html">Brone Due</a>
-                    </h3>
-                </div>
-            </div> -->
-
-                    <div class="swiper-slide">
-                        <div class="story-card">
-                            <div class="box-img">
-                                <img src="assets/img/story/story-1-3.jpg" alt="img">
-                            </div>
-                            <div class="story-content">
-
-                                <h3 class="box-title"><a href="program.html">Moumita Mira</a></h3>
-                            </div>
-                            <div class="story-content hover-style">
-                                <div class="quote-icon">
-                                    <img src="assets/img/icon/quote.svg" alt="">
-                                </div>
-                                <p class="box-text">"Aalokbortika University’s humanities program is helping me develop the perspective, critical thinking and adaptability I need to navigate and contribute to this changing world."</p>
-                                <h3 class="box-title"><a href="program.html">Moumita Mira</a></h3>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- <div class="story-card">
-                <div class="story-thumb">
-                    <img src="assets/img/story/story-1-3.jpg" alt="Icon">
-                </div>
-                <div class="story-content text-center">
-                    <h3 class="box-title text-white">
-                        <a href="program.html">Moumita Mira</a>
-                    </h3>
-                </div>
-                <div class="story-content hover-style text-center">
-                    <span class="quote-icon">
-                        <img src="assets/img/icon/quote.svg" alt="">
-                    </span>
-                    <p class="box-text text-white">"Aalokbortika University’s humanities program is helping me develop the perspective, critical thinking and adaptability I need to navigate and contribute to this changing world."</p>
-                    <h3 class="box-title text-white">
-                        <a href="program.html">Moumita Mira</a>
-                    </h3>
-                </div>
-            </div> -->
-
-                    <div class="swiper-slide">
-                        <div class="story-card">
-                            <div class="box-img">
-                                <img src="assets/img/story/story-1-4.jpg" alt="img">
-                            </div>
-                            <div class="story-content">
-
-                                <h3 class="box-title"><a href="program.html">Maya Lily</a></h3>
-                            </div>
-                            <div class="story-content hover-style">
-                                <div class="quote-icon">
-                                    <img src="assets/img/icon/quote.svg" alt="">
-                                </div>
-                                <p class="box-text">"Aalokbortika University’s humanities program is helping me develop the perspective, critical thinking and adaptability I need to navigate and contribute to this changing world."</p>
-                                <h3 class="box-title"><a href="program.html">Maya Lily</a></h3>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- <div class="story-card">
-                <div class="story-thumb">
-                    <img src="assets/img/story/story-1-4.jpg" alt="Icon">
-                </div>
-                <div class="story-content text-center">
-                    <h3 class="box-title text-white">
-                        <a href="program.html">Maya Lily</a>
-                    </h3>
-                </div>
-                <div class="story-content hover-style text-center">
-                    <span class="quote-icon">
-                        <img src="assets/img/icon/quote.svg" alt="">
-                    </span>
-                    <p class="box-text text-white">"Aalokbortika University’s humanities program is helping me develop the perspective, critical thinking and adaptability I need to navigate and contribute to this changing world."</p>
-                    <h3 class="box-title text-white">
-                        <a href="program.html">Maya Lily</a>
-                    </h3>
-                </div>
-            </div> -->
-
-                    <div class="swiper-slide">
-                        <div class="story-card">
-                            <div class="box-img">
-                                <img src="assets/img/story/story-1-5.jpg" alt="img">
-                            </div>
-                            <div class="story-content">
-
-                                <h3 class="box-title"><a href="program.html">Sony & Ovi</a></h3>
-                            </div>
-                            <div class="story-content hover-style">
-                                <div class="quote-icon">
-                                    <img src="assets/img/icon/quote.svg" alt="">
-                                </div>
-                                <p class="box-text">"Aalokbortika University’s humanities program is helping me develop the perspective, critical thinking and adaptability I need to navigate and contribute to this changing world."</p>
-                                <h3 class="box-title"><a href="program.html">Sony & Ovi</a></h3>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- <div class="story-card">
-                <div class="story-thumb">
-                    <img src="assets/img/story/story-1-5.jpg" alt="Icon">
-                </div>
-                <div class="story-content text-center">
-                    <h3 class="box-title text-white">
-                        <a href="program.html">Sony & Ovi</a>
-                    </h3>
-                </div>
-                <div class="story-content hover-style text-center">
-                    <span class="quote-icon">
-                        <img src="assets/img/icon/quote.svg" alt="">
-                    </span>
-                    <p class="box-text text-white">"Aalokbortika University’s humanities program is helping me develop the perspective, critical thinking and adaptability I need to navigate and contribute to this changing world."</p>
-                    <h3 class="box-title text-white">
-                        <a href="program.html">Sony & Ovi</a>
-                    </h3>
-                </div>
-            </div> -->
-
-                    <div class="swiper-slide">
-                        <div class="story-card">
-                            <div class="box-img">
-                                <img src="assets/img/story/story-1-1.jpg" alt="img">
-                            </div>
-                            <div class="story-content">
-
-                                <h3 class="box-title"><a href="program.html">Alex Smith</a></h3>
-                            </div>
-                            <div class="story-content hover-style">
-                                <div class="quote-icon">
-                                    <img src="assets/img/icon/quote.svg" alt="">
-                                </div>
-                                <p class="box-text">"Aalokbortika University’s humanities program is helping me develop the perspective, critical thinking and adaptability I need to navigate and contribute to this changing world."</p>
-                                <h3 class="box-title"><a href="program.html">Alex Smith</a></h3>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- <div class="story-card">
-                <div class="story-thumb">
-                    <img src="assets/img/story/story-1-1.jpg" alt="Icon">
-                </div>
-                <div class="story-content text-center">
-                    <h3 class="box-title text-white">
-                        <a href="program.html">Alex Smith</a>
-                    </h3>
-                </div>
-                <div class="story-content hover-style text-center">
-                    <span class="quote-icon">
-                        <img src="assets/img/icon/quote.svg" alt="">
-                    </span>
-                    <p class="box-text text-white">"Aalokbortika University’s humanities program is helping me develop the perspective, critical thinking and adaptability I need to navigate and contribute to this changing world."</p>
-                    <h3 class="box-title text-white">
-                        <a href="program.html">Alex Smith</a>
-                    </h3>
-                </div>
-            </div> -->
-
-                </div>
-            </div>
-        </div>
-    </div><!--==============================
-Event Area 1
-==============================-->
-    <section class="event-area-1 position-relative overflow-hidden space" id="event-sec">
-        <div class="event-shape shape-mockup d-none d-xxl-block" data-top="0%" data-left="0%">
-            <img src="assets/img/shape/shape-2.png" alt="">
-        </div>
-        <div class="event-shape jump shape-mockup  d-none d-xxl-block" data-bottom="0%" data-left="3%">
-            <img src="assets/img/shape/event-1-1.png" alt="">
-        </div>
-        <div class="container">
-            <div class="row justify-content-lg-between justify-content-center align-items-center">
-                <div class="col-lg-8 col-12">
-                    <div class="title-area text-center text-lg-start">
-                        <span class="sub-title text-anim">STUDENT EVENTS</span>
-                        <h2 class="sec-title text-anim2">Alumni Events</h2>
-                    </div>
-                </div>
-                <div class="col-auto align-self-end">
-                    <div class="sec-btn wow fadeInUp" data-wow-delay=".3s">
-                        <a href="event.html" class="th-btn style-border1 th-icon">Explore All</a>
-                    </div>
-                </div>
-            </div>
-            <div class="event-card-wrap">
-                <div class="event-card wow fadeInUp" data-wow-delay=".2s">
-                    <div class="event-card-img global-img">
-                        <img src="assets/img/event/event-1-1.jpg" alt="event">
-                        <p class="event-card-tag"><span class="tag-number">12</span>Jan</p>
-                    </div>
-                    <div class="event-content">
-                        <div class="event-wrapp">
-                            <h3 class="box-title text-anim2"><a href="event-details.html">Programming languages for a better world</a></h3>
-                            <p class="box-text">Come for a quick session on how this question has crucially helped humanity with achieving one of its most impressive feats yet: orchestrating electric currents.</p>
-                            <div class="blog-meta">
-                                <a class="location" href="#">
-                                    <i class="fa-solid fa-location-dot"></i>
-                                    25 Circular Road, New York City </a>
-                                <a class="date" href="#">
-                                    <i class="fa-regular fa-calendar-days"></i>
-                                    25.02.2025 </a>
-                                <a class="time" href="#">
-                                    <i class="fa-solid fa-clock"></i>
-                                    09:00am - 12:00pm </a>
-                            </div>
-                        </div>
-                        <div class="btn-wrap">
-                            <a class="th-btn style-border1 th-icon" href="event-details.html">Details</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="event-card wow fadeInUp" data-wow-delay=".4s">
-                    <div class="event-card-img global-img">
-                        <img src="assets/img/event/event-1-2.jpg" alt="event">
-                        <p class="event-card-tag"><span class="tag-number">07</span>Feb</p>
-                    </div>
-                    <div class="event-content">
-                        <div class="event-wrapp">
-                            <h3 class="box-title text-anim2"><a href="event-details.html">Center for Subjectivity Research 2024</a></h3>
-                            <p class="box-text">Center for subjectivity research at the university of copenhagen was established in 2002 on the basis of a grant from national research.</p>
-                            <div class="blog-meta">
-                                <a class="location" href="#">
-                                    <i class="fa-solid fa-location-dot"></i>
-                                    25 Circular Road, New York City </a>
-                                <a class="date" href="#">
-                                    <i class="fa-regular fa-calendar-days"></i>
-                                    03.08.2025 </a>
-                                <a class="time" href="#">
-                                    <i class="fa-solid fa-clock"></i>
-                                    10:00am - 03:20pm </a>
-                            </div>
-                        </div>
-                        <div class="btn-wrap">
-                            <a class="th-btn style-border1 th-icon" href="event-details.html">Details</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="event-card wow fadeInUp" data-wow-delay=".6s">
-                    <div class="event-card-img global-img">
-                        <img src="assets/img/event/event-1-3.jpg" alt="event">
-                        <p class="event-card-tag"><span class="tag-number">22</span>Sep</p>
-                    </div>
-                    <div class="event-content">
-                        <div class="event-wrapp">
-                            <h3 class="box-title text-anim2"><a href="event-details.html">The Future of Archives in the Digital Age</a></h3>
-                            <p class="box-text">This talk explores the potential future of archives in the digital age, using one of the oldest philosophical archives and research institutes for philosophy in Germany</p>
-                            <div class="blog-meta">
-                                <a class="location" href="#">
-                                    <i class="fa-solid fa-location-dot"></i>
-                                    25 Circular Road, New York City </a>
-                                <a class="date" href="#">
-                                    <i class="fa-regular fa-calendar-days"></i>
-                                    14.11.2025 </a>
-                                <a class="time" href="#">
-                                    <i class="fa-solid fa-clock"></i>
-                                    11:00am - 04:00pm </a>
-                            </div>
-                        </div>
-                        <div class="btn-wrap">
-                            <a class="th-btn style-border1 th-icon" href="event-details.html">Details</a>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-    <section class="apply-stadum-area bg-title position-relative space overflow-hidden">
-        <div class="container">
-            <div class="row gy-4 align-items-center justify-content-between">
-                <div class="col-xl-6 order-1 order-xl-0">
-                    <div class="apply-stadum-titlebox title-area ">
-                        <div class="sec-title-wrap">
-                            <span class="sub-title text-anim">APPLY TO Aalokbortika</span>
-                            <h2 class="sec-title text-white text-anim2">We are one of the largest university</h2>
-                        </div>
-                        <div class="box-text-wrap">
-                            <p class="box-text text-white mt-25 wow fadeInUp" data-wow-delay=".2s">A place to provide students with enough knowledge and skills in a complex world. Are you looking for exceptional education experience? Aalokbortika might be the place for you.
-                            <p>
-                        </div>
-                    </div>
-                    <div class="apply-stadum-wrapp">
-                        <div class="apply-stadum-box">
-                            <div class="checklist">
-                                <ul class="list-unstyled">
-                                    <li class="wow fadeInUp" data-wow-delay=".2s"> Undergraduate Admissions</li>
-                                    <li class="wow fadeInUp" data-wow-delay=".3s"> Graduate Admissions</li>
-                                    <li class="wow fadeInUp" data-wow-delay=".4s"> International Students </li>
-                                    <li class="wow fadeInUp" data-wow-delay=".5s"> Scholarship Opportunities </li>
-                                </ul>
-                            </div>
-                            <div class="checklist">
-                                <ul class="list-unstyled">
-                                    <li class="wow fadeInUp" data-wow-delay=".6s"> Transfer Admissions</li>
-                                    <li class="wow fadeInUp" data-wow-delay=".7s"> Financial Aid Applications</li>
-                                    <li class="wow fadeInUp" data-wow-delay=".8s"> Scholarship Opportunities </li>
-                                    <li class="wow fadeInUp" data-wow-delay=".9s">Campus Visit Scheduling </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="apply-stadum-action th-btn-wrap wow fadeInUp" data-wow-delay=".10s">
-                            <a href="contact.html" class="th-btn th-icon white-hover">
-                                More About Admission </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-6 order-0 order-xl-1">
-                    <div class="apply-stadum-thumb reveal">
-                        <img src="assets/img/apply-stadum/apply-stadum-home-1.jpg" alt="image" class="">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <span class="apply-stadum-shape wow fadeInRight" data-wow-delay=".3s"></span>
-    </section>
-    <section class="chancellor-area position-relative space">
-        <div class="container">
-            <div class="row align-items-center justify-content-between">
-                <div class="col-xl-6">
-                    <div class="chancellor-thumb">
-                        <img src="assets/img/chancellor/chancellor-img-home-1.jpg" alt="image">
-                        <div class="ripple-shape style2">
-                            <span class="ripple-1"></span>
-                            <span class="ripple-2"></span>
-                            <span class="ripple-3"></span>
-                            <span class="ripple-4"></span>
-                            <span class="ripple-5"></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-6">
-                    <div class="chancellor-wrapp">
-                        <div class="chancellor-titlebox title-area">
-                            <span class="sub-title text-anim">OUR CHANCELLOR & LECTURE</span>
-                            <h2 class="sec-title text-anim2">Chancellor & Lecturer
+    <section class="partners-area-1 position-relative overflow-hidden space overflow-hidden" id="partners-sec">
+        <div class="container th-container4">
+            <div class="row gx-70 align-items-center justify-content-center justify-content-xl-start">
+                <div class="col-xxl-3 col-xl-4 col-lg-12">
+                    <div class="title-area text-center text-xl-start mb-75">
+                        <div class="title-wrap">
+                            <span class="sub-title text-anim" data-cue="slideInLeft">PARTNERS</span>
+                            <h2 class="sec-title text-anim2" data-cue="slideInUp"> Learn with our partners
                             </h2>
-                            <p class="box-text mt-25 wow fadeInUp" data-wow-delay=".4s">A place to provide
-                                students with enough knowledge and skills in a complex world. Are you looking for
-                                exceptional
-                                education experience? Aalokbortika might be the place for you.</p>
                         </div>
-                        <div class="chancellor-content">
-                            <!--==============================
-Skill Area Home 1 
-==============================-->
+                        <p class="sec-text mb-0">At Stadum University we are committed to providing a high-quality education</p>
+                    </div>
+                    <div class="btn-wrap justify-content-center justify-content-xl-start">
+                        <a href="contact.html" class="th-btn th-icon">Start Learning</a>
+                    </div>
+                </div>
+                <div class="col-xxl-9 col-xl-8 col-lg-12">
+                    <div class="partners-wrap1">
+                        <div class="">
+                            <div class="partners-card">
+                                <a href="#" class="position-absolute">
+                                    <img src="assets/img/partners/3-1.svg" alt="Stadum">
+                                </a>
+                            </div>
+                        </div>
 
-                            <div class="skill-feature wow fadeInUp" data-wow-delay=".2s">
-                                <h3 class="skill-feature-title">Faculty Skilled</h3>
-                                <div class="progress">
-                                    <div class="progress-bar" style="width: 95%;">
-                                        <div class="progress-value">95%</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="skill-feature wow fadeInUp" data-wow-delay=".4s">
-                                <h3 class="skill-feature-title">Computer Science</h3>
-                                <div class="progress">
-                                    <div class="progress-bar" style="width: 98%;">
-                                        <div class="progress-value">98%</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="skill-feature wow fadeInUp" data-wow-delay=".6s">
-                                <h3 class="skill-feature-title">Communication</h3>
-                                <div class="progress">
-                                    <div class="progress-bar" style="width: 95%;">
-                                        <div class="progress-value">95%</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="chancellor-bottom">
-                                <div class="chancellor-action">
-                                    <a href="contact.html" class="th-btn th-icon">Lecturer at Faculty</a>
-                                </div>
-                                <div class="chancellor-signature-box text-sm-center">
-                                    <p class="box-text">Prof. Dr. Simons Doe, Ph.D</p>
-                                    <img src="assets/img/icon/signature.png" class="chancellor-signature" alt="signature">
-                                </div>
+                        <div class="">
+                            <div class="partners-card">
+                                <a href="#" class="position-absolute">
+                                    <img src="assets/img/partners/3-2.svg" alt="Stadum">
+                                </a>
                             </div>
                         </div>
+
+                        <div class="">
+                            <div class="partners-card">
+                                <a href="#" class="position-absolute">
+                                    <img src="assets/img/partners/3-3.svg" alt="Stadum">
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="">
+                            <div class="partners-card">
+                                <a href="#" class="position-absolute">
+                                    <img src="assets/img/partners/3-4.svg" alt="Stadum">
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="">
+                            <div class="partners-card">
+                                <a href="#" class="position-absolute">
+                                    <img src="assets/img/partners/3-5.svg" alt="Stadum">
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="">
+                            <div class="partners-card">
+                                <a href="#" class="position-absolute">
+                                    <img src="assets/img/partners/3-6.svg" alt="Stadum">
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="">
+                            <div class="partners-card">
+                                <a href="#" class="position-absolute">
+                                    <img src="assets/img/partners/3-7.svg" alt="Stadum">
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="">
+                            <div class="partners-card">
+                                <a href="#" class="position-absolute">
+                                    <img src="assets/img/partners/3-8.svg" alt="Stadum">
+                                </a>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
+        <div class="partners-shape1 shape-mockup jump d-none d-xl-block" data-right="0%" data-bottom="0%"><img src="assets/img/shape/partners-3-1.png" alt="Stadum"></div>
+    </section>
+    <section class="community-area-2 overflow-hidden position-relative " id="community-sec">
+        <div class="container th-container4">
+            <div class="row align-items-center">
+                <div class="col-xl-6">
+                    <div class="space">
+                        <div class="title-area text-center text-xl-start">
+                            <span class="sub-title text-anim">COMMUNITY</span>
+                            <h2 class="sec-title text-anim2">Life long <span class="text-theme">learning</span> <span class="d-block">community</span></h2>
+                            <p class="sec-text3 mt-25 wow fadeInUp" data-wow-delay=".3s">At Stadum University we are
+                                committed to providing a high-quality education that is accessible.</p>
+                        </div>
+                        <div class="community-wrap2">
+                            <div class="community-card2 wow fadeInUp" data-wow-delay=".2s">
+                                <div class="community-icon">
+                                    <img src="assets/img/icon/communiti-3-1.svg" alt="Stadum">
+                                </div>
+                                <div class="card-content">
+                                    <h3 class="box-title">
+                                        <a href="program-details.html">Exclusive Coach</a>
+                                    </h3>
+                                    <p class="box-text">We believe in the power of knowledge to transform</p>
+                                </div>
+                            </div>
+
+                            <div class="community-card2 wow fadeInUp" data-wow-delay=".4s">
+                                <div class="community-icon">
+                                    <img src="assets/img/icon/communiti-3-2.svg" alt="Stadum">
+                                </div>
+                                <div class="card-content">
+                                    <h3 class="box-title">
+                                        <a href="program-details.html">Creative Minds</a>
+                                    </h3>
+                                    <p class="box-text">We believe in the power of knowledge to transform</p>
+                                </div>
+                            </div>
+
+                            <div class="community-card2 wow fadeInUp" data-wow-delay=".6s">
+                                <div class="community-icon">
+                                    <img src="assets/img/icon/communiti-3-3.svg" alt="Stadum">
+                                </div>
+                                <div class="card-content">
+                                    <h3 class="box-title">
+                                        <a href="program-details.html">Video Tutorials</a>
+                                    </h3>
+                                    <p class="box-text">We believe in the power of knowledge to transform</p>
+                                </div>
+                            </div>
+
+                            <div class="community-card2 wow fadeInUp" data-wow-delay=".8s">
+                                <div class="community-icon">
+                                    <img src="assets/img/icon/communiti-3-4.svg" alt="Stadum">
+                                </div>
+                                <div class="card-content">
+                                    <h3 class="box-title">
+                                        <a href="program-details.html">Great Resources</a>
+                                    </h3>
+                                    <p class="box-text">We believe in the power of knowledge to transform</p>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6">
+                    <div class="community-banner">
+                        <img src="assets/img/community/3-1.jpg" alt="image">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="community-shape1 shape-mockup jump d-none d-xxl-block" data-left="0%" data-bottom="0%"><img src="assets/img/shape/communiti-3-1.png" alt="Stadum"></div>
+    </section><!--==============================
+Mentorship Area Home 3
+==============================-->
+    <section class="mentorship-area-1 position-relative overflow-hidden space">
+        <div class="container th-container3">
+            <div class="row justify-content-center text-center">
+                <div class="col-xl-8 col-md-8">
+                    <div class="title-area">
+                        <span class="sub-title text-anim">MENTORSHIP</span>
+                        <h2 class="sec-title text-anim2">Read to Join?</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row gy-24">
+                <div class="col-lg-6">
+                    <div class="mentorship-card">
+                        <div class="mentorship-img global-img">
+                            <img src="assets/img/mentorship/3-1.jpg" alt="Stadum">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="box-title">
+                                <a href="#">Become An Instructor</a>
+                            </h3>
+                            <p class="box-text">Top 20 courses among our 1350+ free online courses by experts</p>
+                            <div class="btn-wrap justify-content-center">
+                                <a href="contact.html" class="th-btn th-icon"> Get More Info</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="mentorship-card">
+                        <div class="mentorship-img global-img">
+                            <img src="assets/img/mentorship/3-2.jpg" alt="Stadum">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="box-title">
+                                <a href="#">Access To Inclusive Education</a>
+                            </h3>
+                            <p class="box-text">Top 20 courses among our 1350+ free online courses by experts</p>
+                            <div class="btn-wrap justify-content-center">
+                                <a href="contact.html" class="th-btn th-icon"> Get More Info</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <section class="banner-area-1  overflow-hidden">
+        <div class="container th-container4">
+            <div class="banner-wrap1">
+                <div class="banner-left-img">
+                    <img src="assets/img/banner/3-2.png" alt="stadum">
+                </div>
+                <div class="banner-content">
+                    <h2 class="box-title">Let’s Find The Right Course For You!</h2>
+                    <div class="btn-wrap mt-50">
+                        <a href="#">
+                            <img src="assets/img/theme-img/home-3-banner-download-1.svg" alt="Stadum">
+                        </a>
+                        <a href="#">
+                            <img src="assets/img/theme-img/home-3-banner-download-2.svg" alt="Stadum">
+                        </a>
+                    </div>
+                </div>
+                <div class="banner-right-img">
+                    <img src="assets/img/banner/3-3.png" alt="Stadum">
+                </div>
+            </div>
+        </div>
+        <div class="shape-mockup d-none d-xl-block" data-bottom="0%" data-left="0%"><img src="assets/img/banner/3-1.png" alt="stadum"></div>
+        <div class="shape-mockup" data-bottom="0%" data-right="3%"><img src="assets/img/shape/banner-3-1.png" alt="stadum">
+        </div>
+    </section> <!--==============================
+Blog Area 3
+==============================-->
+    <section class="blog-arae-3 overflow-hidden space" id="blog-sec">
+        <div class="blog-shape1 shape-mockup jump" data-top="30%" data-left="2%"><img src="assets/img/shape/instr-3-1.png" alt="Stadum"></div>
+        <div class="container th-container4">
+            <div class="row justify-content-lg-between justify-content-center align-items-center">
+                <div class="col-lg-8 col-12">
+                    <div class="title-area text-center text-lg-start">
+                        <span class="sub-title text-anim"> LATEST NEWS & BLOG </span>
+                        <h2 class="sec-title text-anim2"> Get Latest <span class="text-theme">News</span> & Blog </h2>
+                    </div>
+                </div>
+                <div class="col-auto align-self-end">
+                    <div class="sec-btn wow fadeInUp" data-wow-delay=".2s">
+                        <a href="blog.html" class="th-btn style-border1 th-icon"> Explore All </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slider-area">
+                <div class="swiper th-slider has-shadow" id="blogSlider2" data-slider-options='{"autoplay": false,"breakpoints": {"0": {"slidesPerView": 1},"576": {"slidesPerView": "1"},
+                         "768": {"slidesPerView": "1"},"992": {"slidesPerView": 2},"1299": {"slidesPerView": 3},"1400": {"slidesPerView": 3, "spaceBetween": "32"}},"autoHeight": "true"}'>
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide fadeinup wow">
+                            <div class="blog-card blog-card2">
+                                <div class="blog-img2 position-relative">
+                                    <a href="blog-details.html">
+                                        <div class="blog-img-box2 position-relative">
+                                            <img src="assets/img/blog/blog_3_1.jpg" alt="blog image">
+                                        </div>
+                                    </a>
+                                    <div class="blog-date">
+                                        <h5 class="blog-date-title">24</h5>
+                                        <p class="blog-date-text">june, 25</p>
+                                    </div>
+                                </div>
+                                <div class="blog-content">
+                                    <div class="blog-meta">
+                                        <a class="author" href="blog.html">
+                                            <span class="author-icon"><img src="assets/img/blog/author.png" alt="img"></span>
+                                            By themeholy
+                                        </a>
+                                        <a href="blog.html"><span class="comment-icon"><i class="fa-solid fa-comments"></i></span> 0 Comment </a>
+                                    </div>
+                                    <h3 class="box-title"><a href="blog-details.html">How Motivated When Learning Something New</a></h3>
+                                    <p class="box-text">At Stadum University we are committed to providing a high-quality education.</p>
+                                    <div class="btn-wrap">
+                                        <a href="blog-details.html" class="th-btn th-icon style-border1">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide fadeinup wow">
+                            <div class="blog-card blog-card2">
+                                <div class="blog-img2 position-relative">
+                                    <a href="blog-details.html">
+                                        <div class="blog-img-box2 position-relative">
+                                            <img src="assets/img/blog/blog_3_2.jpg" alt="blog image">
+                                        </div>
+                                    </a>
+                                    <div class="blog-date">
+                                        <h5 class="blog-date-title">29</h5>
+                                        <p class="blog-date-text">june, 18</p>
+                                    </div>
+                                </div>
+                                <div class="blog-content">
+                                    <div class="blog-meta">
+                                        <a class="author" href="blog.html">
+                                            <span class="author-icon"><img src="assets/img/blog/author.png" alt="img"></span>
+                                            By themeholy
+                                        </a>
+                                        <a href="blog.html"><span class="comment-icon"><i class="fa-solid fa-comments"></i></span> 0 Comment </a>
+                                    </div>
+                                    <h3 class="box-title"><a href="blog-details.html">What's the Secret to Reading Books Effectively?</a></h3>
+                                    <p class="box-text">At Stadum University we are committed to providing a high-quality education.</p>
+                                    <div class="btn-wrap">
+                                        <a href="blog-details.html" class="th-btn th-icon style-border1">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide fadeinup wow">
+                            <div class="blog-card blog-card2">
+                                <div class="blog-img2 position-relative">
+                                    <a href="blog-details.html">
+                                        <div class="blog-img-box2 position-relative">
+                                            <img src="assets/img/blog/blog_3_3.jpg" alt="blog image">
+                                        </div>
+                                    </a>
+                                    <div class="blog-date">
+                                        <h5 class="blog-date-title">18</h5>
+                                        <p class="blog-date-text">june, 25</p>
+                                    </div>
+                                </div>
+                                <div class="blog-content">
+                                    <div class="blog-meta">
+                                        <a class="author" href="blog.html">
+                                            <span class="author-icon"><img src="assets/img/blog/author.png" alt="img"></span>
+                                            By themeholy
+                                        </a>
+                                        <a href="blog.html"><span class="comment-icon"><i class="fa-solid fa-comments"></i></span> 0 Comment </a>
+                                    </div>
+                                    <h3 class="box-title"><a href="blog-details.html">Why Setting Goals Can Improve Your Learning Skills</a></h3>
+                                    <p class="box-text">At Stadum University we are committed to providing a high-quality education.</p>
+                                    <div class="btn-wrap">
+                                        <a href="blog-details.html" class="th-btn th-icon style-border1">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide fadeinup wow">
+                            <div class="blog-card blog-card2">
+                                <div class="blog-img2 position-relative">
+                                    <a href="blog-details.html">
+                                        <div class="blog-img-box2 position-relative">
+                                            <img src="assets/img/blog/blog_3_1.jpg" alt="blog image">
+                                        </div>
+                                    </a>
+                                    <div class="blog-date">
+                                        <h5 class="blog-date-title">24</h5>
+                                        <p class="blog-date-text">june, 18</p>
+                                    </div>
+                                </div>
+                                <div class="blog-content">
+                                    <div class="blog-meta">
+                                        <a class="author" href="blog.html">
+                                            <span class="author-icon"><img src="assets/img/blog/author.png" alt="img"></span>
+                                            By themeholy
+                                        </a>
+                                        <a href="blog.html"><span class="comment-icon"><i class="fa-solid fa-comments"></i></span> 0 Comment </a>
+                                    </div>
+                                    <h3 class="box-title"><a href="blog-details.html">How to Stay Motivated When Learning Something New</a></h3>
+                                    <p class="box-text">At Stadum University we are committed to providing a high-quality education.</p>
+                                    <div class="btn-wrap">
+                                        <a href="blog-details.html" class="th-btn th-icon style-border1">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide fadeinup wow">
+                            <div class="blog-card blog-card2">
+                                <div class="blog-img2 position-relative">
+                                    <a href="blog-details.html">
+                                        <div class="blog-img-box2 position-relative">
+                                            <img src="assets/img/blog/blog_3_2.jpg" alt="blog image">
+                                        </div>
+                                    </a>
+                                    <div class="blog-date">
+                                        <h5 class="blog-date-title">29</h5>
+                                        <p class="blog-date-text">june, 25</p>
+                                    </div>
+                                </div>
+                                <div class="blog-content">
+                                    <div class="blog-meta">
+                                        <a class="author" href="blog.html">
+                                            <span class="author-icon"><img src="assets/img/blog/author.png" alt="img"></span>
+                                            By themeholy
+                                        </a>
+                                        <a href="blog.html"><span class="comment-icon"><i class="fa-solid fa-comments"></i></span> 0 Comment </a>
+                                    </div>
+                                    <h3 class="box-title"><a href="blog-details.html">What's the Secret to Reading Books Effectively?</a></h3>
+                                    <p class="box-text">At Stadum University we are committed to providing a high-quality education.</p>
+                                    <div class="btn-wrap">
+                                        <a href="blog-details.html" class="th-btn th-icon style-border1">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide fadeinup wow">
+                            <div class="blog-card blog-card2">
+                                <div class="blog-img2 position-relative">
+                                    <a href="blog-details.html">
+                                        <div class="blog-img-box2 position-relative">
+                                            <img src="assets/img/blog/blog_3_3.jpg" alt="blog image">
+                                        </div>
+                                    </a>
+                                    <div class="blog-date">
+                                        <h5 class="blog-date-title">18</h5>
+                                        <p class="blog-date-text">june, 18</p>
+                                    </div>
+                                </div>
+                                <div class="blog-content">
+                                    <div class="blog-meta">
+                                        <a class="author" href="blog.html">
+                                            <span class="author-icon"><img src="assets/img/blog/author.png" alt="img"></span>
+                                            By themeholy
+                                        </a>
+                                        <a href="blog.html"><span class="comment-icon"><i class="fa-solid fa-comments"></i></span> 0 Comment </a>
+                                    </div>
+                                    <h3 class="box-title"><a href="blog-details.html">Why Setting Goals Can Improve Your Learning Skills</a></h3>
+                                    <p class="box-text">At Stadum University we are committed to providing a high-quality education.</p>
+                                    <div class="btn-wrap">
+                                        <a href="blog-details.html" class="th-btn th-icon style-border1">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide fadeinup wow">
+                            <div class="blog-card blog-card2">
+                                <div class="blog-img2 position-relative">
+                                    <a href="blog-details.html">
+                                        <div class="blog-img-box2 position-relative">
+                                            <img src="assets/img/blog/blog_3_1.jpg" alt="blog image">
+                                        </div>
+                                    </a>
+                                    <div class="blog-date">
+                                        <h5 class="blog-date-title">24</h5>
+                                        <p class="blog-date-text">june, 25</p>
+                                    </div>
+                                </div>
+                                <div class="blog-content">
+                                    <div class="blog-meta">
+                                        <a class="author" href="blog.html">
+                                            <span class="author-icon"><img src="assets/img/blog/author.png" alt="img"></span>
+                                            By themeholy
+                                        </a>
+                                        <a href="blog.html"><span class="comment-icon"><i class="fa-solid fa-comments"></i></span> 0 Comment </a>
+                                    </div>
+                                    <h3 class="box-title"><a href="blog-details.html">How to Stay Motivated When Learning Something New</a></h3>
+                                    <p class="box-text">At Stadum University we are committed to providing a high-quality education.</p>
+                                    <div class="btn-wrap">
+                                        <a href="blog-details.html" class="th-btn th-icon style-border1">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide fadeinup wow">
+                            <div class="blog-card blog-card2">
+                                <div class="blog-img2 position-relative">
+                                    <a href="blog-details.html">
+                                        <div class="blog-img-box2 position-relative">
+                                            <img src="assets/img/blog/blog_3_2.jpg" alt="blog image">
+                                        </div>
+                                    </a>
+                                    <div class="blog-date">
+                                        <h5 class="blog-date-title">29</h5>
+                                        <p class="blog-date-text">june, 18</p>
+                                    </div>
+                                </div>
+                                <div class="blog-content">
+                                    <div class="blog-meta">
+                                        <a class="author" href="blog.html">
+                                            <span class="author-icon"><img src="assets/img/blog/author.png" alt="img"></span>
+                                            By themeholy
+                                        </a>
+                                        <a href="blog.html"><span class="comment-icon"><i class="fa-solid fa-comments"></i></span> 0 Comment </a>
+                                    </div>
+                                    <h3 class="box-title"><a href="blog-details.html">What's the Secret to Reading Books Effectively?</a></h3>
+                                    <p class="box-text">At Stadum University we are committed to providing a high-quality education</p>
+                                    <div class="btn-wrap">
+                                        <a href="blog-details.html" class="th-btn th-icon style-border1">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="blog-shape2 shape-mockup jump" data-right="2%" data-bottom="0%"><img src="assets/img/shape/blog-3-1.png" alt="Stadum"></div>
     </section><!--==============================
 Marquee Area  
 ==============================-->
-    <div class="marquee-area space-bottom overflow-hidden">
+    <div class="marquee-area space-bottom  overflow-hidden">
         <div class="container-fluid p-0">
             <div class="swiper th-slider marquee-slider1" data-slider-options='{"breakpoints":{"0":{"slidesPerView":"auto"}},"autoplay":{"delay":0,"disableOnInteraction":false},"noSwiping":"true","speed":10000,"spaceBetween":40}'>
                 <div class="swiper-wrapper">
@@ -2019,299 +1906,73 @@ Marquee Area
                 </div>
             </div>
         </div>
-    </div>
-    <div class="community-area space" data-bg-src="assets/img/bg/community-home-1.png">
-        <div class="container">
-            <div class="row">
-                <div class="col-xxl-7">
-                    <div class="community-wrap">
-                        <div class="title-area">
-                            <span class="sub-title text-anim">INTERESTED IN JOINING WITH US?</span>
-                            <h2 class="sec-title text-anim2 mb-55">Join Us For Information About New Student Admission</h2>
-                            <div class="box-text-wrap mt-30 wow fadeInUp" data-wow-delay=".3s">
-                                <p class="box-text">At Aalokbortika eductin, we redefine consultancy through a dynamic fusion of innovation, expertise, and strategic vision. Our dedicated team is committed to delivering tailored solutions that transcend traditional consulting boundaries.</p>
-                            </div>
-                        </div>
-                        <div class="btn-wrap wow fadeInUp" data-wow-delay=".4s">
-                            <a href="contact.html" class="th-btn th-icon"> Join Community </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div><!--==============================
-Faq Area 1
+Contact Area   
 ==============================-->
-    <section class="faq-area-1 position-relative space overflow-hidden">
-        <div class="faq-shape1 shape-mockup" data-top="0%" data-left="0%">
-            <img src="assets/img/shape/feature-shep-home-1.png" alt="shape">
-        </div>
-        <div class="faq-shape2 shape-mockup" data-bottom="0%" data-right="0%">
-            <img src="assets/img/shape/feature-shep-2-home-1.png" alt="shape">
-        </div>
-        <div class="faq-shape3 movingX shape-mockup" data-bottom="0%" data-right="2%">
-            <img src="assets/img/shape/faq-1-1.png" alt="shape">
-        </div>
-        <div class="ripple-shape d-none d-xl-block">
-            <span class="ripple-1"></span>
-            <span class="ripple-2"></span>
-            <span class="ripple-3"></span>
-            <span class="ripple-4"></span>
-            <span class="ripple-5"></span>
-        </div>
-        <div class="container">
-            <div class="row gy-30 gx-30 align-items-center justify-content-center">
-                <div class="col-xxl-4">
-                    <div class="faq-imgbox wow fadeInLeft" data-wow-delay=".3s">
-                        <div class="img1">
-                            <img src="assets/img/faq/faq-1-2.jpg" alt="image">
-                            <img src="assets/img/faq/faq-1-1.jpg" alt="image">
-                        </div>
-                        <div class="img2">
-                            <img src="assets/img/faq/faq-1-3.jpg" alt="image">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xxl-8">
-                    <div class="faq-content">
-                        <div class="faq-wrap">
-                            <div class="title-area">
-                                <span class="sub-title text-anim">FAQ</span>
-                                <h2 class="sec-title text-anim2">Frequently Ask Questions</h2>
-                                <p class="box-text mt-20 wow fadeInUp" data-wow-delay=".3s">We are committed to leaving the world a better place. We pursue new technology, encourage creativity, </p>
+    <div class="space contact-area-1 position-relative z-index-common" id="contact-sec">
+        <div class="container th-container4">
+            <div class="row gx-0 gy-40">
+                <div class="col-lg-6">
+                    <!--==============================
+Contact Area  
+==============================-->
+                    <div class="contact-form-v1 ">
+                        <form action="mail.php" method="POST" class="contact-form2 ajax-contact">
+                            <div class="title-area mb-60">
+                                <span class="sub-title">GET IN TOUCH</span>
+                                <h2 class="sec-title">Do you have questions?</h2>
                             </div>
-                        </div>
-                        <div class="faq-box">
-
-                            <!--==============================
-Faq Area
-==============================-->
-                            <div class="faq-wrap1">
-                                <div class="accordion" id="faqAccordion">
-
-
-                                    <div class="accordion-card wow fadeInUp" data-wow-delay=".1s">
-                                        <div class="accordion-header" id="collapse-item-1">
-                                            <button class="accordion-button " type="button" data-bs-toggle="collapse" data-bs-target="#collapse-1" aria-expanded="true" aria-controls="collapse-1">01. How this Aalokbortika works?</button>
-                                        </div>
-                                        <div id="collapse-1" class="accordion-collapse collapse show" aria-labelledby="collapse-item-1" data-bs-parent="#faqAccordion">
-                                            <div class="accordion-body">
-                                                <p class="faq-text">At Aalokbortika eductin, we redefine consultancy through a dynamic fusion of innovation, expertise, and strategic vision. Our dedicated team is committed to delivering tailored solutions that transcend traditional consulting boundaries.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="accordion-card wow fadeInUp" data-wow-delay=".2s">
-                                        <div class="accordion-header" id="collapse-item-2">
-                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-2" aria-expanded="false" aria-controls="collapse-2">02. How can i make Cancel here?</button>
-                                        </div>
-                                        <div id="collapse-2" class="accordion-collapse collapse " aria-labelledby="collapse-item-2" data-bs-parent="#faqAccordion">
-                                            <div class="accordion-body">
-                                                <p class="faq-text">At Aalokbortika eductin, we redefine consultancy through a dynamic fusion of innovation, expertise, and strategic vision. Our dedicated team is committed to delivering tailored solutions that transcend traditional consulting boundaries.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="accordion-card wow fadeInUp" data-wow-delay=".3s">
-                                        <div class="accordion-header" id="collapse-item-3">
-                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-3" aria-expanded="false" aria-controls="collapse-3">03. What services do yo offer?</button>
-                                        </div>
-                                        <div id="collapse-3" class="accordion-collapse collapse " aria-labelledby="collapse-item-3" data-bs-parent="#faqAccordion">
-                                            <div class="accordion-body">
-                                                <p class="faq-text">At Aalokbortika eductin, we redefine consultancy through a dynamic fusion of innovation, expertise, and strategic vision. Our dedicated team is committed to delivering tailored solutions that transcend traditional consulting boundaries.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="accordion-card wow fadeInUp" data-wow-delay=".4s">
-                                        <div class="accordion-header" id="collapse-item-4">
-                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-4" aria-expanded="false" aria-controls="collapse-4">04. How can consultant benefits in my business?</button>
-                                        </div>
-                                        <div id="collapse-4" class="accordion-collapse collapse " aria-labelledby="collapse-item-4" data-bs-parent="#faqAccordion">
-                                            <div class="accordion-body">
-                                                <p class="faq-text">At Aalokbortika eductin, we redefine consultancy through a dynamic fusion of innovation, expertise, and strategic vision. Our dedicated team is committed to delivering tailored solutions that transcend traditional consulting boundaries.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="accordion-card wow fadeInUp" data-wow-delay=".5s">
-                                        <div class="accordion-header" id="collapse-item-5">
-                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-5" aria-expanded="false" aria-controls="collapse-5">05. How to get all programs?</button>
-                                        </div>
-                                        <div id="collapse-5" class="accordion-collapse collapse " aria-labelledby="collapse-item-5" data-bs-parent="#faqAccordion">
-                                            <div class="accordion-body">
-                                                <p class="faq-text">At Aalokbortika eductin, we redefine consultancy through a dynamic fusion of innovation, expertise, and strategic vision. Our dedicated team is committed to delivering tailored solutions that transcend traditional consulting boundaries.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="accordion-card wow fadeInUp" data-wow-delay=".6s">
-                                        <div class="accordion-header" id="collapse-item-6">
-                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-6" aria-expanded="false" aria-controls="collapse-6">06. When available community join?</button>
-                                        </div>
-                                        <div id="collapse-6" class="accordion-collapse collapse " aria-labelledby="collapse-item-6" data-bs-parent="#faqAccordion">
-                                            <div class="accordion-body">
-                                                <p class="faq-text">At Aalokbortika eductin, we redefine consultancy through a dynamic fusion of innovation, expertise, and strategic vision. Our dedicated team is committed to delivering tailored solutions that transcend traditional consulting boundaries.</p>
-                                            </div>
-                                        </div>
-                                    </div>
+                            <div class="row">
+                                <div class="form-group style-border col-md-6">
+                                    <input type="text" class="form-control" name="firstname" id="firstname2" placeholder="name*">
+                                </div>
+                                <div class="form-group style-border col-md-6">
+                                    <input type="number" class="form-control" name="number" id="number2" placeholder="Phone*">
+                                </div>
+                                <div class="form-group style-border col-12">
+                                    <input type="email" class="form-control" name="email" id="email2" placeholder="e-mail address*">
+                                </div>
+                                <div class="form-group style-border col-12">
+                                    <select name="subject" id="subject" class="form-select">
+                                        <option value="" disabled selected hidden>Subject</option>
+                                        <option value="Computer Seince">Computer Seince</option>
+                                        <option value="Astrophysics">Astrophysics</option>
+                                        <option value="Mechanical Engineering">Mechanical Engineering</option>
+                                        <option value="Data Science">Data Science</option>
+                                    </select>
+                                </div>
+                                <div class="form-group style-border col-12">
+                                    <textarea name="message" id="message" cols="30" rows="3" class="form-control" placeholder="Write your message*"></textarea>
+                                </div>
+                                <div class="form-btn col-12 mt-15">
+                                    <button class="th-btn">Send Message</button>
                                 </div>
                             </div>
-                        </div>
+                            <p class="form-messages mb-0 mt-3"></p>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="contact-img">
+                        <img src="assets/img/normal/contact-img.jpg" alt="">
                     </div>
                 </div>
             </div>
         </div>
-    </section><!--==============================
-Blog Area 1
-==============================-->
-    <section class="blog-area-1 overflow-hidden space" id="blog-sec">
-        <div class="container">
-            <div class="row justify-content-lg-between justify-content-center align-items-center">
-                <div class="col-lg-8 col-12">
-                    <div class="title-area text-center text-lg-start">
-                        <span class="sub-title text-anim">LATEST NEWS & BLOG</span>
-                        <h2 class="sec-title text-anim2">Blog & Insights</h2>
-                    </div>
-                </div>
-                <div class="col-auto align-self-end">
-                    <div class="sec-btn wow fadeInUp" data-wow-delay=".3s">
-                        <a href="blog.html" class="th-btn style-border1 th-icon"> Our Blogs </a>
-                    </div>
-                </div>
-            </div>
-            <div class="row gy-4">
-                <div class="col-lg-4">
-                    <div class="blog-card wow fadeInUp">
-                        <div class="blog-img position-relative">
-                            <a href="blog-details.html">
-                                <div class="blog-img-box position-relative overflow-hidden">
-                                    <img src="assets/img/blog/blog_1_1.jpg" alt="blog image">
-                                    <img src="assets/img/blog/blog_1_1.jpg" alt="blog image">
-                                </div>
-                            </a>
-                            <div class="blog-date">
-                                <h5 class="blog-date-title">24</h5>
-                                <p class="blog-date-text">FEB,2025</p>
-                            </div>
-                        </div>
-                        <div class="blog-content">
-                            <div class="blog-meta">
-                                <a class="author" href="blog.html">
-                                    <span class="author-icon"><img src="assets/img/blog/author.png" alt="img"></span>By themeholy</a>
-                                <a href="blog.html"><span class="comment-icon"><i class="fa-solid fa-comments"></i></span> 0 Comment
-                                </a>
-                            </div>
-                            <h3 class="box-title"><a href="blog-details.html">Platform Innovation Centre & Parkade for generation</a></h3>
-                            <p class="box-text">Studam fuels student success through smart tools and guides for academic excellence.</p>
-                            <div class="btn-wrap">
-                                <a href="blog-details.html" class="th-btn style-border1 th-icon">Read More</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4">
-                    <div class="blog-card wow fadeInUp">
-                        <div class="blog-img position-relative">
-                            <a href="blog-details.html">
-                                <div class="blog-img-box position-relative overflow-hidden">
-                                    <img src="assets/img/blog/blog_1_2.jpg" alt="blog image">
-                                    <img src="assets/img/blog/blog_1_2.jpg" alt="blog image">
-                                </div>
-                            </a>
-                            <div class="blog-date">
-                                <h5 class="blog-date-title">29</h5>
-                                <p class="blog-date-text">JAN,2025</p>
-                            </div>
-                        </div>
-                        <div class="blog-content">
-                            <div class="blog-meta">
-                                <a class="author" href="blog.html">
-                                    <span class="author-icon"><img src="assets/img/blog/author.png" alt="img"></span>By themeholy</a>
-                                <a href="blog.html"><span class="comment-icon"><i class="fa-solid fa-comments"></i></span> 0 Comment
-                                </a>
-                            </div>
-                            <h3 class="box-title"><a href="blog-details.html">Olympic Plaza Transformar Advence project</a></h3>
-                            <p class="box-text">Studam enables learners with powerful tools and support for every education phase.</p>
-                            <div class="btn-wrap">
-                                <a href="blog-details.html" class="th-btn style-border1 th-icon">Read More</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4">
-                    <div class="blog-card wow fadeInUp">
-                        <div class="blog-img position-relative">
-                            <a href="blog-details.html">
-                                <div class="blog-img-box position-relative overflow-hidden">
-                                    <img src="assets/img/blog/blog_1_3.jpg" alt="blog image">
-                                    <img src="assets/img/blog/blog_1_3.jpg" alt="blog image">
-                                </div>
-                            </a>
-                            <div class="blog-date">
-                                <h5 class="blog-date-title">18</h5>
-                                <p class="blog-date-text">FEB,2025</p>
-                            </div>
-                        </div>
-                        <div class="blog-content">
-                            <div class="blog-meta">
-                                <a class="author" href="blog.html">
-                                    <span class="author-icon"><img src="assets/img/blog/author.png" alt="img"></span>By themeholy</a>
-                                <a href="blog.html"><span class="comment-icon"><i class="fa-solid fa-comments"></i></span> 0 Comment
-                                </a>
-                            </div>
-                            <h3 class="box-title"><a href="blog-details.html">Calgary Municipal Land Corporation launches</a></h3>
-                            <p class="box-text">Studam builds strong student networks and platforms for academic transformation daily.</p>
-                            <div class="btn-wrap">
-                                <a href="blog-details.html" class="th-btn style-border1 th-icon">Read More</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-            </div>
-        </div>
-    </section><!--==============================
-	Footer Area
-==============================-->
-    <footer class="footer-wrapper footer-default footer-overlay" data-bg-src="assets/img/bg/footer-bg-1.jpg">
-        <div class="footer-top">
-            <div class="container">
-                <div class="row gy-40 align-items-center justify-content-between">
-                    <div class="col-xl-auto">
-                        <div class="footer-logo z-index-common" data-cue="slideInLeft">
-                            <a href="home-university.html">
-                                <img src="assets/img/logo-white.svg" alt="Aalokbortika">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-xl-auto">
-                        <div class="client-group-wrap z-index-common" data-cue="slideInRight">
-                            <img src="assets/img/normal/client-group1.png" alt="img">
-                            <h4 class="title">Have any question?
-                                <a href="contact.html"><img src="assets/img/icon/chat2.svg" alt=""> <span class="text-theme">Live</span></a> chat now
-                            </h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container">
+    </div>
+    <footer class="footer-wrapper footer-layout3" data-bg-src="assets/img/bg/footer-bg-2.png">
+        <div class="container th-container4">
             <div class="widget-area">
                 <div class="row justify-content-between">
                     <div class="col-md-6 col-xl-auto">
                         <div class="widget footer-widget">
                             <div class="th-widget-about">
-                                <h3 class="widget_title">About Aalokbortika</h3>
-                                <p class="about-text">Since 1999, when the newly minted Aalokbortika team embraced its mandate to breathe new life into the downtrodden neighbourhood, East Village’s transformation has been nothing short of remarkable. </p>
+                                <div class="about-logo">
+                                    <a href="home-university.html">
+                                        <img src="assets/img/logo2.svg" alt="Stadum">
+                                    </a>
+                                </div>
+                                <p class="about-text">Since 1999, when the newly minted Stadum team embraced its mandate to breathe new life into the downtrodden neighbourhood, East Village’s transformation has been nothing short of remarkable. </p>
                                 <div class="footer-info">
                                     <a href="#">
                                         <span class="footer-info-icon"><i class="fa-solid fa-location-dot"></i></span> 45 New Eskaton Road, Austria
@@ -2372,16 +2033,16 @@ Blog Area 1
                                     <a href="assets/img/widget/insta-feed-1-3.jpg" class="insta-btn popup-image"><i class="fab fa-instagram"></i></a>
                                 </div>
                                 <div class="insta-thumb">
-                                    <img src="assets/img/widget/insta-feed-1-4.jpg" alt="Image">
-                                    <a href="assets/img/widget/insta-feed-1-4.jpg" class="insta-btn popup-image"><i class="fab fa-instagram"></i></a>
+                                    <img src="{{ asset('') }}assets/img/widget/insta-feed-1-4.jpg" alt="Image">
+                                    <a href="{{ asset('') }}assets/img/widget/insta-feed-1-4.jpg" class="insta-btn popup-image"><i class="fab fa-instagram"></i></a>
                                 </div>
                                 <div class="insta-thumb">
-                                    <img src="assets/img/widget/insta-feed-1-5.jpg" alt="Image">
-                                    <a href="assets/img/widget/insta-feed-1-5.jpg" class="insta-btn popup-image"><i class="fab fa-instagram"></i></a>
+                                    <img src="{{ asset('') }}assets/img/widget/insta-feed-1-5.jpg" alt="Image">
+                                    <a href="{{ asset('') }}assets/img/widget/insta-feed-1-5.jpg" class="insta-btn popup-image"><i class="fab fa-instagram"></i></a>
                                 </div>
                                 <div class="insta-thumb">
-                                    <img src="assets/img/widget/insta-feed-1-6.jpg" alt="Image">
-                                    <a href="assets/img/widget/insta-feed-1-6.jpg" class="insta-btn popup-image"><i class="fab fa-instagram"></i></a>
+                                    <img src="{{ asset('') }}assets/img/widget/insta-feed-1-6.jpg" alt="Image">
+                                    <a href="{{ asset('') }}assets/img/widget/insta-feed-1-6.jpg" class="insta-btn popup-image"><i class="fab fa-instagram"></i></a>
                                 </div>
                                 <div class="insta-thumb">
                                     <img src="assets/img/widget/insta-feed-1-7.jpg" alt="Image">
@@ -2402,20 +2063,19 @@ Blog Area 1
             </div>
         </div>
         <div class="copyright-wrap z-index-common">
-            <div class="container">
+            <div class="container th-container4">
                 <div class="row justify-content-center gy-3 align-items-center">
-                    <div class="col-lg-6">
+                    <div class="col-md-7">
                         <p class="copyright-text">
-                            <i class="fal fa-copyright"></i> Copyright 2025 <a href="home-university.html">Aalokbortika</a>. All Rights Reserved.
+                            <i class="fal fa-copyright"></i> Copyright 2025 <a href="home-university.html">Stadum</a>. All Rights Reserved.
                         </p>
                     </div>
-                    <div class="col-lg-6 text-lg-end text-center">
-                        <div class="footer-links">
-                            <ul>
-                                <li><a href="about.html">Privacy Policy</a></li>
-                                <li><a href="about.html">Terms of services</a></li>
-                                <li><a href="about.html">Disclaimer</a></li>
-                            </ul>
+                    <div class="col-md-5 text-md-end text-center">
+                        <div class="th-social">
+                            <a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://www.youtube.com/"><i class="fa-brands fa-instagram"></i></a>
+                            <a href="https://www.twitter.com/"><i class="fab fa-twitter"></i></a>
+                            <a href="https://www.linkedin.com/"><i class="fab fa-linkedin-in"></i></a>
                         </div>
                     </div>
                 </div>
@@ -2440,14 +2100,14 @@ modal Area
     <div id="login-form" class="popup-login-register mfp-hide">
         <ul class="nav" id="pills-tab" role="tablist">
             <li class="nav-item" role="presentation">
-                <button class="nav-menu" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="false">Login</button>
+                <button class="nav-menu active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="false">Login</button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-menu active" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="true">Register</button>
+                <button class="nav-menu" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="true">Register</button>
             </li>
         </ul>
         <div class="tab-content" id="pills-tabContent">
-            <div class="tab-pane fade" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab"> 
+            <div class="tab-pane fade active show" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab"> 
     <h3 class="box-title mb-30">Sign in to your account</h3>
 
     <div class="th-login-form">
@@ -2520,7 +2180,7 @@ modal Area
     </div>
 </div>
 
-            <div class="tab-pane fade active show" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+            <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                 <h3 class="th-form-title mb-30">Sign in to your account</h3>
                 <form action="mail.php" method="POST" class="login-form ajax-contact">
                     <div class="row">
@@ -2561,33 +2221,33 @@ modal Area
     All Js File
 ============================== -->
     <!-- Jquery -->
-    <script src="assets/js/vendor/jquery-3.7.1.min.js"></script>
+    <script src="{{ asset('assets/js/vendor/jquery-3.7.1.min.js') }}"></script>
     <!-- Swiper Js -->
-    <script src="assets/js/swiper-bundle.min.js"></script>
+    <script src="{{ asset('assets/js/swiper-bundle.min.js') }}"></script>
     <!-- Bootstrap -->
-    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
     <!-- Magnific Popup -->
-    <script src="assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="{{ asset('assets/js/jquery.magnific-popup.min.js') }}"></script>
     <!-- Counter Up -->
-    <script src="assets/js/jquery.counterup.min.js"></script>
+    <script src="{{ asset('assets/js/jquery.counterup.min.js') }}"></script>
     <!-- Range Slider -->
-    <script src="assets/js/jquery-ui.min.js"></script>
+    <script src="{{ asset('assets/js/jquery-ui.min.js') }}"></script>
     <!-- Isotope Filter -->
-    <script src="assets/js/imagesloaded.pkgd.min.js"></script>
-    <script src="assets/js/isotope.pkgd.min.js"></script>
+    <script src="{{ asset('assets/js/imagesloaded.pkgd.min.js') }}"></script>
+    <script src="{{ asset('assets/js/isotope.pkgd.min.js') }}"></script>
     <!-- Wow Js -->
-    <script src="assets/js/wow.min.js"></script>
+    <script src="{{ asset('assets/js/wow.min.js') }}"></script>
 
     <!-- Gsap Animation -->
-    <script src="assets/js/gsap.min.js"></script>
+    <script src="{{ asset('assets/js/gsap.min.js') }}"></script>
     <!-- ScrollTrigger -->
-    <script src="assets/js/ScrollTrigger.min.js"></script>
+    <script src="{{ asset('assets/js/ScrollTrigger.min.js') }}"></script>
     <!-- SplitText -->
-    <script src="assets/js/SplitText.min.js"></script>
+    <script src="{{ asset('assets/js/SplitText.min.js') }}"></script>
     <!-- Lenis Js -->
-    <script src="assets/js/lenis.min.js"></script>
+    <script src="{{ asset('assets/js/lenis.min.js') }}"></script>
     <!-- Main Js File -->
-    <script src="assets/js/main.js"></script>
+    <script src="{{ asset('assets/js/main.js') }}"></script>
 
 </body>
 

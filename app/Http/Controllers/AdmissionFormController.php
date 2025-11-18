@@ -9,6 +9,8 @@ use App\Models\Question;
 use App\Models\FormSubmission;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+
 
 class AdmissionFormController extends Controller
 {
@@ -31,39 +33,71 @@ class AdmissionFormController extends Controller
 }
 
 
-    /**
-     * Show create form.
-     */
     public function create()
     {
         $universities = University::where('isActive', true)->get();
-
-        return view('super_admin.forms.create', compact('universities'));
+        $agents = \App\Models\User::where('role', 'agent')->get(); // Add this line
+        
+        return view('super_admin.forms.create', compact('universities', 'agents'));
     }
 
     /**
      * Store new admission form.
      */
     public function store(Request $request)
-    {
-        $request->validate([
-            'university_id' => 'required|exists:universities,id',
-            'title'         => 'required|string|max:255',
-            'description'   => 'nullable|string',
-            'application_fee' => 'required|numeric|min:0',
-            'form_fields'   => 'required|array',
-        ]);
+{
+    // Debug: Check what data is coming in
+    \Log::info('Form submission data:', $request->all());
+    
+    $request->validate([
+        'university_id' => 'required|exists:universities,id',
+        'title'         => 'required|string|max:255',
+        'description'   => 'nullable|string',
+        'application_fee' => 'required|numeric|min:0',
+        'deadline'      => 'nullable|date',
+        'form_fields'   => 'required|string', // Changed to string since we're using JSON
+    ], [
+        'form_fields.required' => 'At least one form field is required.',
+    ]);
 
-        AdmissionForm::create([
+    try {
+        // Parse the JSON form fields
+        $formFieldsArray = json_decode($request->form_fields, true);
+        
+        if (empty($formFieldsArray)) {
+            return back()->withInput()->with('error', 'At least one form field is required.');
+        }
+
+        $form = AdmissionForm::create([
             'university_id' => $request->university_id,
             'title'         => $request->title,
             'description'   => $request->description,
-            'form_fields'   => json_encode($request->form_fields),
+            'form_fields'   => $request->form_fields, // Already JSON string
             'application_fee' => $request->application_fee,
+            'deadline'      => $request->deadline,
+            'isPublished'   => false,
         ]);
 
-        return redirect()->route('admission-forms.index')
+        // Assign to agents if selected
+        if ($request->has('agents')) {
+            $form->agents()->sync($request->agents);
+        }
+
+        \Log::info('Admission form created successfully:', $form->toArray());
+
+        return redirect()->route('admin.forms.index')
                          ->with('success', 'Admission Form created successfully');
+
+    } catch (\Exception $e) {
+        \Log::error('Error creating admission form: ' . $e->getMessage());
+        return back()->withInput()->with('error', 'Error creating form: ' . $e->getMessage());
+    }
+}
+
+     public function show($id)
+    {
+        $form = AdmissionForm::with('university')->findOrFail($id);
+        return view('super_admin.forms.show', compact('form'));
     }
 
     /**
@@ -89,7 +123,8 @@ class AdmissionFormController extends Controller
             'title'         => 'required|string|max:255',
             'description'   => 'nullable|string',
             'application_fee' => 'required|numeric|min:0',
-            'form_fields'   => 'required|array',
+            'form_fields'   => 'required|array|min:1',
+            'form_fields.*' => 'required|string|distinct',
         ]);
 
         $form->update([
@@ -100,7 +135,7 @@ class AdmissionFormController extends Controller
             'application_fee' => $request->application_fee,
         ]);
 
-        return redirect()->route('admission-forms.index')
+        return redirect()->route('admin.forms.index')
                          ->with('success', 'Admission Form updated successfully');
     }
 
@@ -109,9 +144,10 @@ class AdmissionFormController extends Controller
      */
     public function destroy($id)
     {
-        AdmissionForm::findOrFail($id)->delete();
+        $form = AdmissionForm::findOrFail($id);
+        $form->delete();
 
-        return redirect()->route('admission-forms.index')
+        return redirect()->route('admin.forms.index')
                          ->with('success', 'Admission Form deleted successfully');
     }
 
@@ -121,7 +157,6 @@ class AdmissionFormController extends Controller
     public function toggleStatus($id)
     {
         $form = AdmissionForm::findOrFail($id);
-
         $form->isPublished = !$form->isPublished;
         $form->save();
 
@@ -129,62 +164,58 @@ class AdmissionFormController extends Controller
     }
 
     public function showForm($form_id)
-{
-    $student = Auth::user()->student;
-    if (!$student) return redirect()->back()->with('error', 'Only students can apply.');
+    {
+        $student = Auth::user()->student;
+        if (!$student) return redirect()->back()->with('error', 'Only students can apply.');
 
-    $form = AdmissionForm::with('university')->findOrFail($form_id);
+        $form = AdmissionForm::with('university')->findOrFail($form_id);
 
-    // load sections + questions
-    $sections = Section::where('admission_form_id', $form_id)
-                       ->with('questions')
-                       ->orderBy('order')
-                       ->get();
+        // load sections + questions
+        $sections = Section::where('admission_form_id', $form_id)
+                        ->with('questions')
+                        ->orderBy('order')
+                        ->get();
 
-    return view('student.forms.fill', compact('form', 'sections', 'student'));
-}
-
-public function submitForm(Request $request, $form_id)
-{
-    $student = Auth::user()->student;
-    if (!$student) return redirect()->back()->with('error', 'Only students can apply.');
-
-    $form = AdmissionForm::findOrFail($form_id);
-
-    $questions = Question::where('admission_form_id', $form_id)->get();
-
-    $answers = [];
-    foreach ($questions as $question) {
-        $key = "q_{$question->id}";
-        // handle file separately
-        if ($question->type === 'file' && $request->hasFile($key)) {
-            $path = $request->file($key)->store('submissions/files', 'public');
-            $value = $path;
-        } else {
-            $value = $request->input($key);
-        }
-
-        $answers[$question->id] = [
-            'question' => $question->text,
-            'answer' => $value,
-        ];
+        return view('student.forms.fill', compact('form', 'sections', 'student'));
     }
 
-    FormSubmission::create([
-        'student_id' => $student->id,
-        'agent_id' => $student->agent_id,
-        'university_id' => $form->university_id,
-        'form_id' => $form->id,
-        'answers' => $answers,
-        'status' => 'submitted',
-    ]);
+public function submitForm(Request $request, $form_id)
+    {
+        $student = Auth::user()->student;
+        if (!$student) return redirect()->back()->with('error', 'Only students can apply.');
 
-    return redirect()->route('student.dashboard')->with('success', 'Application submitted successfully.');
-}
+        $form = AdmissionForm::findOrFail($form_id);
 
-public function show(AdmissionForm $form)
-{
-    return view('super_admin.forms.show', compact('form'));
-}
+        $questions = Question::where('admission_form_id', $form_id)->get();
+
+        $answers = [];
+        foreach ($questions as $question) {
+            $key = "q_{$question->id}";
+            // handle file separately
+            if ($question->type === 'file' && $request->hasFile($key)) {
+                $path = $request->file($key)->store('submissions/files', 'public');
+                $value = $path;
+            } else {
+                $value = $request->input($key);
+            }
+
+            $answers[$question->id] = [
+                'question' => $question->text,
+                'answer' => $value,
+            ];
+        }
+
+        FormSubmission::create([
+            'student_id' => $student->id,
+            'agent_id' => $student->agent_id,
+            'university_id' => $form->university_id,
+            'form_id' => $form->id,
+            'answers' => $answers,
+            'status' => 'submitted',
+        ]);
+
+        return redirect()->route('student.dashboard')->with('success', 'Application submitted successfully.');
+    }
+
 
 }

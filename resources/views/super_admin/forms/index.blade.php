@@ -3,8 +3,7 @@
 @section('content')
 <div class="container mt-4">
     <h3>Admission Forms</h3>
-    <!-- <a href="{{ route('admin.forms.create') }}" class="btn btn-primary mb-3">Add New Form</a> -->
-    <a href="/admin/forms/create" class="btn btn-primary mb-3">Add New Form</a>
+    <a href="{{ route('admin.forms.create') }}" class="btn btn-primary mb-3">Add New Form</a>
 
     <table class="table table-bordered">
         <thead class="table-light">

@@ -10,19 +10,13 @@ return new class extends Migration {
     Schema::create('admission_forms', function (Blueprint $table) {
         $table->id();
         $table->unsignedBigInteger('university_id');
-
         $table->string('title');
         $table->text('description')->nullable();
-
         // Form Fields (Dynamic)
         $table->json('form_fields')->nullable();
-
         $table->decimal('application_fee', 10, 2)->default(0);
-
         $table->boolean('isPublished')->default(false);
-
         $table->timestamps();
-
         $table->foreign('university_id')
               ->references('id')
               ->on('universities')

@@ -14,7 +14,7 @@ class UniversityController extends Controller
     public function index()
     {
         $universities = University::orderBy('id', 'desc')->get();
-        return view('universities.index', compact('universities'));
+        return view('super_admin.universities.index', compact('universities'));
     }
 
     /**
@@ -22,33 +22,33 @@ class UniversityController extends Controller
      */
     public function create()
     {
-        return view('universities.create');
+        return view('super_admin.universities.create');
     }
 
     /**
      * Store a newly created university.
      */
     public function store(Request $request)
-    {
-        $request->validate([
-            'name'      => 'required|string|max:255',
-            'country'   => 'required|string|max:255',
-            'city'      => 'nullable|string|max:255',
-            'logo'      => 'nullable|image|mimes:jpg,png,jpeg|max:2048',
-            'details'   => 'nullable|string',
-        ]);
+{
+    $request->validate([
+        'name'      => 'required|string|max:255',
+        'country'   => 'required|string|max:255',
+        'city'      => 'nullable|string|max:255',
+        'logo'      => 'nullable|image|mimes:jpg,png,jpeg|max:2048',
+        'details'   => 'nullable|string',
+    ]);
 
-        $data = $request->except('logo');
+    $data = $request->except('logo');
 
-        if ($request->hasFile('logo')) {
-            $data['logo'] = $request->file('logo')->store('university/logos', 'public');
-        }
-
-        University::create($data);
-
-        return redirect()->route('universities.index')
-                         ->with('success', 'University created successfully');
+    if ($request->hasFile('logo')) {
+        $data['logo'] = $request->file('logo')->store('university/logos', 'public');
     }
+
+    University::create($data);
+
+    return redirect()->route('admin.universities.index')
+                     ->with('success', 'University created successfully');
+}
 
     /**
      * Edit university.
@@ -56,7 +56,7 @@ class UniversityController extends Controller
     public function edit($id)
     {
         $university = University::findOrFail($id);
-        return view('universities.edit', compact('university'));
+        return view('super_admin.universities.edit', compact('university'));
     }
 
     /**
@@ -87,7 +87,7 @@ class UniversityController extends Controller
 
         $university->update($data);
 
-        return redirect()->route('universities.index')
+        return redirect()->route('admin.universities.index')
                          ->with('success', 'University updated successfully');
     }
 
@@ -104,7 +104,7 @@ class UniversityController extends Controller
 
         $university->delete();
 
-        return redirect()->route('universities.index')
+        return redirect()->route('admin.universities.index')
                          ->with('success', 'University deleted successfully');
     }
 }
