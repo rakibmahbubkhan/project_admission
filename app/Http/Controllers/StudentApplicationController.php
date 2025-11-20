@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\AdmissionForm;
 use App\Models\Application;
-use App\Models\Student;
+use App\Models\FormSubmission;
 use Illuminate\Support\Facades\Auth;
 use App\Mail\ApplicationSubmittedMail;
 use Illuminate\Support\Facades\Mail;
@@ -26,28 +26,26 @@ class StudentApplicationController extends Controller
         return view('student.forms.show', compact('form'));
     }
 
-    // public function submit(Request $request, $id)
-    // {
-    //     $form = AdmissionForm::findOrFail($id);
+    public function apply($form_id)
+    {
+        $form = AdmissionForm::with('university')->findOrFail($form_id);
 
-    //     $data = [];
-    //     foreach ($form->form_fields as $field) {
-    //         $key = \Str::slug($field['label'], '_');
-    //         $data[$key] = $request->input($key);
-    //     }
+        // --- FIX: Ensure form_fields is always an array ---
+        $raw = $form->form_fields;
 
-    //     $student = Auth::user()->student;
+        if (is_string($raw)) {
+            $decoded = json_decode($raw, true);
+            $fields = is_array($decoded) ? $decoded : [];
+        } elseif (is_array($raw)) {
+            $fields = $raw;
+        } else {
+            $fields = [];
+        }
+        // --------------------------------------------------
 
-    //     Application::create([
-    //         'student_id' => $student->id,
-    //         'admission_form_id' => $form->id,
-    //         'agent_id' => $student->agent_id,
-    //         'form_data' => $data,
-    //         'status' => 'pending'
-    //     ]);
+        return view('student.forms.apply', compact('form', 'fields'));
+    }
 
-    //     return redirect()->route('student.applications')->with('success', 'Application submitted successfully.');
-    // }
 
     public function applications()
     {
@@ -58,36 +56,51 @@ class StudentApplicationController extends Controller
 
 
 
-public function submit(Request $request, $id)
-{
-    $form = AdmissionForm::findOrFail($id);
-    
-    $data = [];
-    foreach ($form->form_fields as $field) {
-        $key = \Str::slug($field['label'], '_');
-        $data[$key] = $request->$key;
+    public function submit(Request $request, $id)
+    {
+        $form = AdmissionForm::findOrFail($id);
+
+        $student_id = Auth::user()->student->id;
+
+        $answers = $request->input('answers', []); // Default empty array
+        if (is_string($answers)) {
+            $answers = json_decode($answers, true) ?? [];
+        }
+
+        // ৪. FormSubmission create
+        $submission = FormSubmission::create([
+            'student_id' => $student_id,
+            'form_id' => $form->id,
+            'university_id' => $form->university_id, 
+            'answers' => $answers,
+            'status' => 'Pending',
+        ]);
+
+        // ৫. Success redirect
+        return redirect()->route('student.forms')
+                        ->with('success', 'Form submitted successfully!');
     }
 
-    $student = Auth::user()->student;
 
-    $application = Application::create([
-        'student_id' => $student->id,
-        'admission_form_id' => $form->id,
-        'agent_id' => $student->agent_id,
-        'form_data' => $data,
-        'status' => 'pending'
-    ]);
 
-    // Send emails
-    Mail::to($student->user->email)->send(new ApplicationSubmittedMail($application));
+public function availableForms()
+    {
+        $forms = AdmissionForm::where('isPublished', 1)->get();
 
-    if ($application->agent) {
-        Mail::to($application->agent->email)->send(new ApplicationSubmittedMail($application));
+        return view('student.forms.available', compact('forms'));
     }
 
-    Mail::to('admin@yourapp.com')->send(new ApplicationSubmittedMail($application));
 
-    return redirect()->route('student.applications')->with('success', 'Application submitted successfully.');
-}
+
+    // Student’s submission list
+    public function submissions()
+    {
+        $submissions = FormSubmission::where('student_id', auth()->id())
+            ->with('form.university')
+            ->latest()
+            ->get();
+
+        return view('student.forms.submissions', compact('submissions'));
+    }
 
 }

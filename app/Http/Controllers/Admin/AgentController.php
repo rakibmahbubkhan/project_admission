@@ -19,7 +19,7 @@ class AgentController extends Controller
         $pendingAgents = User::where('role', 'agent')->where('status', 'pending')->with('agent')->latest()->get();
         $approvedAgents = User::where('role', 'agent')->where('status', 'approved')->with('agent')->latest()->get();
 
-        return view('admin.agents.index', compact('pendingAgents', 'approvedAgents'));
+        return view('super_admin.agents.index', compact('pendingAgents', 'approvedAgents'));
     }
 
     /**
@@ -28,7 +28,7 @@ class AgentController extends Controller
     public function show($id)
     {
         $agentUser = User::with('agent')->findOrFail($id);
-        return view('admin.agents.show', compact('agentUser'));
+        return view('super_admin.agents.show', compact('agentUser'));
     }
 
     /**

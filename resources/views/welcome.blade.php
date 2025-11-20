@@ -77,7 +77,7 @@
 	******************************** -->
 
     
-    <div class="preloader ">
+    <!-- <div class="preloader ">
         <button class="th-btn preloaderCls">Cancel Preloader </button>
         <div class="preloader-inner">
             <img src="{{ asset('assets/img/logo.png') }}" style="width:250px;" alt="img">
@@ -86,7 +86,8 @@
                 <span class="loading-text">Aalokbortika</span>
             </span>
         </div>
-    </div><!--==============================
+    </div> -->
+    <!--==============================
     Sidemenu
 ============================== -->
     <div class="sidemenu-wrapper ">
@@ -96,10 +97,10 @@
                 <div class="th-widget-about">
                     <div class="about-logo">
                         <a href="home-university.html">
-                            <img src="{{ asset('assets/img/logo.png') }}" alt="Stadum">
+                            <img src="{{ asset('assets/img/logo.png') }}" alt="Aalokbortika">
                         </a>
                     </div>
-                    <p class="about-text">Since 1999, when the newly minted Stadum team embraced its mandate to breathe new life into the downtrodden neighbourhood, East Village's transformation has been nothing short of remarkable. </p>
+                    <p class="about-text">Since 1999, when the newly minted Aalokbortika team embraced its mandate to breathe new life into the downtrodden neighbourhood, East Village's transformation has been nothing short of remarkable. </p>
                     <div class="footer-info">
                         <a href="#">
                             <span class="footer-info-icon"><i class="fa-solid fa-location-dot"></i></span> 45 New Eskaton Road, Austria
@@ -177,7 +178,7 @@
         <div class="th-menu-area text-center">
             <button class="th-menu-toggle"><i class="fal fa-times"></i></button>
             <div class="mobile-logo">
-                <a href="home-university.html"><img src="{{ asset('assets/img/logo.png') }}" alt="Stadum"></a>
+                <a href="home-university.html"><img src="{{ asset('assets/img/logo.png') }}" alt="Aalokbortika"></a>
             </div>
             <div class="th-mobile-menu">
                 <ul>
@@ -314,7 +315,7 @@
                         <div class="col-auto">
                             <div class="header-logo">
                                 <a href="home-university.html">
-                                    <img src="{{ asset('assets/img/logo.png') }}" style="width:250px;" alt="Stadum">
+                                    <img src="{{ asset('assets/img/logo.png') }}" style="width:250px;" alt="Aalokbortika">
                                 </a>
                             </div>
                         </div>
@@ -403,7 +404,7 @@ Hero Area 3
                             <div class="row align-items-center">
                                 <div class="col-lg-8">
                                     <div class="hero-style3">
-                                        <h1 class="hero-title text-white" data-ani="slideinup" data-ani-delay="0.3s">Unlock Your Potential With Stadum 2500+ Courses</h1>
+                                        <h1 class="hero-title text-white" data-ani="slideinup" data-ani-delay="0.3s">Unlock Your Potential With Aalokbortika 2500+ Courses</h1>
                                         <p class="hero-text text-white" data-ani="slideinup" data-ani-delay="0.5s">We want
                                             every student and study partner to feel that they are part of a common good and
                                             cohesive team. We help our teams form stronger relationships.</p>
@@ -433,7 +434,7 @@ Hero Area 3
                             <div class="row align-items-center">
                                 <div class="col-lg-8">
                                     <div class="hero-style3">
-                                        <h1 class="hero-title text-white" data-ani="slideinup" data-ani-delay="0.3s">Discover Your Future: 2500+ Courses at Stadum</h1>
+                                        <h1 class="hero-title text-white" data-ani="slideinup" data-ani-delay="0.3s">Discover Your Future: 2500+ Courses at Aalokbortika</h1>
                                         <p class="hero-text text-white" data-ani="slideinup" data-ani-delay="0.5s">We want
                                             every student and study partner to feel that they are part of a common good and
                                             cohesive team. We help our teams form stronger relationships.</p>
@@ -463,7 +464,7 @@ Hero Area 3
                             <div class="row align-items-center">
                                 <div class="col-lg-8">
                                     <div class="hero-style3">
-                                        <h1 class="hero-title text-white" data-ani="slideinup" data-ani-delay="0.3s">Learn. Grow. Excel — 2500+ Courses from Stadum</h1>
+                                        <h1 class="hero-title text-white" data-ani="slideinup" data-ani-delay="0.3s">Learn. Grow. Excel — 2500+ Courses from Aalokbortika</h1>
                                         <p class="hero-text text-white" data-ani="slideinup" data-ani-delay="0.5s">We want
                                             every student and study partner to feel that they are part of a common good and
                                             cohesive team. We help our teams form stronger relationships.</p>
@@ -493,7 +494,7 @@ Hero Area 3
                             <div class="row align-items-center">
                                 <div class="col-lg-8">
                                     <div class="hero-style3">
-                                        <h1 class="hero-title text-white" data-ani="slideinup" data-ani-delay="0.3s">Upgrade Your Skills with Stadum's 2500+ Courses</h1>
+                                        <h1 class="hero-title text-white" data-ani="slideinup" data-ani-delay="0.3s">Upgrade Your Skills with Aalokbortika's 2500+ Courses</h1>
                                         <p class="hero-text text-white" data-ani="slideinup" data-ani-delay="0.5s">We want
                                             every student and study partner to feel that they are part of a common good and
                                             cohesive team. We help our teams form stronger relationships.</p>
@@ -535,7 +536,7 @@ Hero Area 3
                 <div class="short-services-items">
                     <div class="short-services-item">
                         <div class="icon">
-                            <img src="{{ asset('assets/img/icon/counter-icon1-1.svg') }}" alt="Stadum">
+                            <img src="{{ asset('assets/img/icon/counter-icon1-1.svg') }}" alt="Aalokbortika">
                         </div>
                         <div class="short-services-text">
                             <h3 class="box-title"><span class="counter-number">2300</span> + </h3>
@@ -544,7 +545,7 @@ Hero Area 3
                     </div>
                     <div class="short-services-item">
                         <div class="icon">
-                            <img src="{{ asset('assets/img/icon/counter-icon1-4.svg') }}" alt="Stadum">
+                            <img src="{{ asset('assets/img/icon/counter-icon1-4.svg') }}" alt="Aalokbortika">
                         </div>
                         <div class="short-services-text">
                             <h3 class="box-title">Expert Instructors</h3>
@@ -553,7 +554,7 @@ Hero Area 3
                     </div>
                     <div class="short-services-item">
                         <div class="icon">
-                            <img src="{{ asset('assets/img/icon/counter-icon1-2.svg') }}" alt="Stadum">
+                            <img src="{{ asset('assets/img/icon/counter-icon1-2.svg') }}" alt="Aalokbortika">
                         </div>
                         <div class="short-services-text">
                             <h3 class="box-title">Lifetime Access</h3>
@@ -567,16 +568,16 @@ Hero Area 3
 About Area  3
 ==============================-->
     <div class="overflow-hidden about-area-3 space position-relative" id="about-sec">
-        <div class="about-shape shape-mockup jump" data-bottom="0%" data-left="2%"><img src="{{ asset('assets/img/shape/about-3-1.png') }}" alt="Stadum"></div>
+        <div class="about-shape shape-mockup jump" data-bottom="0%" data-left="2%"><img src="{{ asset('assets/img/shape/about-3-1.png') }}" alt="Aalokbortika"></div>
         <div class="container th-container3">
             <div class="row gy-4 gx-65">
                 <div class="col-xxl-6 col-xl-5 col-md-12">
                     <div class="img-box5">
                         <div class="img1 reveal">
-                            <img src="{{ asset('assets/img/about/about-thumb3-1.jpg') }}" alt="Stadum">
+                            <img src="{{ asset('assets/img/about/about-thumb3-1.jpg') }}" alt="Aalokbortika">
                         </div>
                         <div class="img2 reveal">
-                            <img src="{{ asset('assets/img/about/about-thumb3-2.jpg') }}" alt="Stadum">
+                            <img src="{{ asset('assets/img/about/about-thumb3-2.jpg') }}" alt="Aalokbortika">
                         </div>
                         <div class="counter-card3 wow fadeInUp" data-wow-delay=".3s">
                             <h3 class="box-number text-white">
@@ -593,7 +594,7 @@ About Area  3
                                 <span class="sub-title text-anim">About Us</span>
                                 <h2 class="sec-title text-anim2"> Delivering top <span class="text-theme">motivational</span> <span class="d-block">courses to you</span></h2>
                             </div>
-                            <p class="sec-text mt-25 mb-0 wow fadeInUp" data-wow-delay=".3s">At Stadum, you'll be
+                            <p class="sec-text mt-25 mb-0 wow fadeInUp" data-wow-delay=".3s">At Aalokbortika, you'll be
                                 welcomed into a diverse community of learners of different races, genders, ages and
                                 ethnicities. With online and on-campus learning available, our students are
                                 scattered around the country and the world.
@@ -617,7 +618,7 @@ About Area  3
 
                         </div>
                         <div class="btn-wrap mt-60 wow fadeInUp" data-wow-delay=".9s">
-                            <a href="about.html" class="th-btn th-icon">Apply To Stadum</a>
+                            <a href="about.html" class="th-btn th-icon">Apply To Aalokbortika</a>
                         </div>
                     </div>
                 </div>
@@ -627,7 +628,7 @@ About Area  3
 Cat Area Home 3
 ==============================-->
     <section class="cat-area-1 position-relative overflow-hidden space">
-        <div class="shape-mockup" data-top="0%" data-left="0%"><img src="{{ asset('assets/img/shape/feature-shep-home-1.png') }}" alt="Stadum"></div>
+        <div class="shape-mockup" data-top="0%" data-left="0%"><img src="{{ asset('assets/img/shape/feature-shep-home-1.png') }}" alt="Aalokbortika"></div>
         <div class="container th-container3">
             <div class="row justify-content-center text-center">
                 <div class="col-xl-8 col-md-8">
@@ -645,7 +646,7 @@ Cta Area
                 <div class="">
                     <div class="cat-card wow fadeInUp" data-wow-delay=".1s">
                         <div class="box-icon">
-                            <img src="{{ asset('assets/img/icon/cat-3-1.png') }}" alt="Stadum">
+                            <img src="{{ asset('assets/img/icon/cat-3-1.png') }}" alt="Aalokbortika">
                         </div>
                         <div class="card-content">
                             <h3 class="box-title"><a href="#">Science & Technology</a></h3>
@@ -656,7 +657,7 @@ Cta Area
                 <div class="">
                     <div class="cat-card wow fadeInUp" data-wow-delay=".2s">
                         <div class="box-icon">
-                            <img src="{{ asset('assets/img/icon/cat-3-2.png') }}" alt="Stadum">
+                            <img src="{{ asset('assets/img/icon/cat-3-2.png') }}" alt="Aalokbortika">
                         </div>
                         <div class="card-content">
                             <h3 class="box-title"><a href="#">Design & Arts</a></h3>
@@ -667,7 +668,7 @@ Cta Area
                 <div class="">
                     <div class="cat-card wow fadeInUp" data-wow-delay=".3s">
                         <div class="box-icon">
-                            <img src="{{ asset('assets/img/icon/cat-3-3.png') }}" alt="Stadum">
+                            <img src="{{ asset('assets/img/icon/cat-3-3.png') }}" alt="Aalokbortika">
                         </div>
                         <div class="card-content">
                             <h3 class="box-title"><a href="#">Web Development</a></h3>
@@ -678,7 +679,7 @@ Cta Area
                 <div class="">
                     <div class="cat-card wow fadeInUp" data-wow-delay=".4s">
                         <div class="box-icon">
-                            <img src="{{ asset('assets/img/icon/cat-3-4.png') }}" alt="Stadum">
+                            <img src="{{ asset('assets/img/icon/cat-3-4.png') }}" alt="Aalokbortika">
                         </div>
                         <div class="card-content">
                             <h3 class="box-title"><a href="#">Data Science</a></h3>
@@ -689,7 +690,7 @@ Cta Area
                 <div class="">
                     <div class="cat-card wow fadeInUp" data-wow-delay=".5s">
                         <div class="box-icon">
-                            <img src="{{ asset('assets/img/icon/cat-3-1.png') }}" alt="Stadum">
+                            <img src="{{ asset('assets/img/icon/cat-3-1.png') }}" alt="Aalokbortika">
                         </div>
                         <div class="card-content">
                             <h3 class="box-title"><a href="#">Video & Photography</a></h3>
@@ -700,7 +701,7 @@ Cta Area
                 <div class="">
                     <div class="cat-card wow fadeInUp" data-wow-delay=".6s">
                         <div class="box-icon">
-                            <img src="{{ asset('assets/img/icon/cat-3-1.png') }}" alt="Stadum">
+                            <img src="{{ asset('assets/img/icon/cat-3-1.png') }}" alt="Aalokbortika">
                         </div>
                         <div class="card-content">
                             <h3 class="box-title"><a href="#">Artificial Intelligence</a></h3>
@@ -711,7 +712,7 @@ Cta Area
                 <div class="">
                     <div class="cat-card wow fadeInUp" data-wow-delay=".7s">
                         <div class="box-icon">
-                            <img src="{{ asset('assets/img/icon/cat-3-1.png') }}" alt="Stadum">
+                            <img src="{{ asset('assets/img/icon/cat-3-1.png') }}" alt="Aalokbortika">
                         </div>
                         <div class="card-content">
                             <h3 class="box-title"><a href="#">Ideology</a></h3>
@@ -722,7 +723,7 @@ Cta Area
                 <div class="">
                     <div class="cat-card wow fadeInUp" data-wow-delay=".8s">
                         <div class="box-icon">
-                            <img src="{{ asset('assets/img/icon/cat-3-5.png') }}" alt="Stadum">
+                            <img src="{{ asset('assets/img/icon/cat-3-5.png') }}" alt="Aalokbortika">
                         </div>
                         <div class="card-content">
                             <h3 class="box-title"><a href="#">Mathematics</a></h3>
@@ -735,8 +736,8 @@ Cta Area
                 <a class="th-btn style-border2" href="#">Browse All Categories</a>
             </div>
         </div>
-        <div class="cat-shape shape-mockup jump" data-bottom="15%" data-left="10%"><img src="{{ asset('assets/img/shape/cat-3-1.png') }}" alt="Stadum"></div>
-        <div class="shape-mockup" data-bottom="0%" data-right="0%"><img src="{{ asset('assets/img/shape/feature-shep-2-home-1.png') }}" alt="Stadum"></div>
+        <div class="cat-shape shape-mockup jump" data-bottom="15%" data-left="10%"><img src="{{ asset('assets/img/shape/cat-3-1.png') }}" alt="Aalokbortika"></div>
+        <div class="shape-mockup" data-bottom="0%" data-right="0%"><img src="{{ asset('assets/img/shape/feature-shep-2-home-1.png') }}" alt="Aalokbortika"></div>
     </section>
     <section class="popular-course-area-1 space">
         <div class="container th-container4">
@@ -776,7 +777,7 @@ Cta Area
                             <div class="col-xxl-4 col-lg-6 col-md-12">
                                 <div class="course-card">
                                     <div class="course-img-thumb global-img">
-                                        <img src="{{ asset('assets/img/popular-course/course-thumb-3-1.jpg') }}" alt="Stadum">
+                                        <img src="{{ asset('assets/img/popular-course/course-thumb-3-1.jpg') }}" alt="Aalokbortika">
                                         <a href="#" class="wishlist-icon"><i class="fa-solid fa-heart"></i></a>
                                     </div>
                                     <div class="card-content">
@@ -789,13 +790,13 @@ Cta Area
                                             <p class="rating-text">4.9 (10k)</p>
                                         </div>
                                         <div class="blog-meta course-meta">
-                                            <a href="#"><img src="{{ asset('assets/img/icon/open-book-small.svg') }}" alt="Stadum"> 12 Semesters</a>
+                                            <a href="#"><img src="{{ asset('assets/img/icon/open-book-small.svg') }}" alt="Aalokbortika"> 12 Semesters</a>
                                             <a href="#"><i class="fa-solid fa-calendar-days"></i> 4 Years</a>
-                                            <a href="#"><img src="{{ asset('assets/img/icon/book-read.svg') }}" alt="Stadum">250 Seats</a>
+                                            <a href="#"><img src="{{ asset('assets/img/icon/book-read.svg') }}" alt="Aalokbortika">250 Seats</a>
                                         </div>
                                         <div class="card-content-bottom">
                                             <div class="author">
-                                                <img src="{{ asset('assets/img/popular-course/course-mentor-3-1.jpg') }}" alt="Stadum">
+                                                <img src="{{ asset('assets/img/popular-course/course-mentor-3-1.jpg') }}" alt="Aalokbortika">
                                                 <p><a href="program.html">Michel John</a></p>
                                             </div>
                                             <div class="btn-wrap">
@@ -809,7 +810,7 @@ Cta Area
                             <div class="col-xxl-4 col-lg-6 col-md-12">
                                 <div class="course-card">
                                     <div class="course-img-thumb global-img">
-                                        <img src="{{ asset('assets/img/popular-course/course-thumb-3-2.jpg') }}" alt="Stadum">
+                                        <img src="{{ asset('assets/img/popular-course/course-thumb-3-2.jpg') }}" alt="Aalokbortika">
                                         <a href="#" class="wishlist-icon"><i class="fa-solid fa-heart"></i></a>
                                     </div>
                                     <div class="card-content">
@@ -822,13 +823,13 @@ Cta Area
                                             <p class="rating-text">4.9 (10k)</p>
                                         </div>
                                         <div class="blog-meta course-meta">
-                                            <a href="#"><img src="{{ asset('assets/img/icon/open-book-small.svg') }}" alt="Stadum"> 12 Semesters</a>
+                                            <a href="#"><img src="{{ asset('assets/img/icon/open-book-small.svg') }}" alt="Aalokbortika"> 12 Semesters</a>
                                             <a href="#"><i class="fa-solid fa-calendar-days"></i> 4 Years</a>
-                                            <a href="#"><img src="{{ asset('assets/img/icon/book-read.svg') }}" alt="Stadum">250 Seats</a>
+                                            <a href="#"><img src="{{ asset('assets/img/icon/book-read.svg') }}" alt="Aalokbortika">250 Seats</a>
                                         </div>
                                         <div class="card-content-bottom">
                                             <div class="author">
-                                                <img src="{{ asset('assets/img/popular-course/course-mentor-3-2.jpg') }}" alt="Stadum">
+                                                <img src="{{ asset('assets/img/popular-course/course-mentor-3-2.jpg') }}" alt="Aalokbortika">
                                                 <p><a href="program.html">Albert James</a></p>
                                             </div>
                                             <div class="btn-wrap">
@@ -842,7 +843,7 @@ Cta Area
                             <div class="col-xxl-4 col-lg-6 col-md-12">
                                 <div class="course-card">
                                     <div class="course-img-thumb global-img">
-                                        <img src="{{ asset('assets/img/popular-course/course-thumb-3-3.jpg') }}" alt="Stadum">
+                                        <img src="{{ asset('assets/img/popular-course/course-thumb-3-3.jpg') }}" alt="Aalokbortika">
                                         <a href="#" class="wishlist-icon"><i class="fa-solid fa-heart"></i></a>
                                     </div>
                                     <div class="card-content">
@@ -855,13 +856,13 @@ Cta Area
                                             <p class="rating-text">4.9 (10k)</p>
                                         </div>
                                         <div class="blog-meta course-meta">
-                                            <a href="#"><img src="{{ asset('assets/img/icon/open-book-small.svg') }}" alt="Stadum"> 12 Semesters</a>
+                                            <a href="#"><img src="{{ asset('assets/img/icon/open-book-small.svg') }}" alt="Aalokbortika"> 12 Semesters</a>
                                             <a href="#"><i class="fa-solid fa-calendar-days"></i> 4 Years</a>
-                                            <a href="#"><img src="{{ asset('assets/img/icon/book-read.svg') }}" alt="Stadum">250 Seats</a>
+                                            <a href="#"><img src="{{ asset('assets/img/icon/book-read.svg') }}" alt="Aalokbortika">250 Seats</a>
                                         </div>
                                         <div class="card-content-bottom">
                                             <div class="author">
-                                                <img src="{{ asset('assets/img/popular-course/course-mentor-3-3.jpg') }}" alt="Stadum">
+                                                <img src="{{ asset('assets/img/popular-course/course-mentor-3-3.jpg') }}" alt="Aalokbortika">
                                                 <p><a href="program.html">Rebeka Smith</a></p>
                                             </div>
                                             <div class="btn-wrap">
@@ -875,7 +876,7 @@ Cta Area
                             <div class="col-xxl-4 col-lg-6 col-md-12">
                                 <div class="course-card">
                                     <div class="course-img-thumb global-img">
-                                        <img src="{{ asset('assets/img/popular-course/course-thumb-3-4.jpg') }}" alt="Stadum">
+                                        <img src="{{ asset('assets/img/popular-course/course-thumb-3-4.jpg') }}" alt="Aalokbortika">
                                         <a href="#" class="wishlist-icon"><i class="fa-solid fa-heart"></i></a>
                                     </div>
                                     <div class="card-content">
@@ -888,13 +889,13 @@ Cta Area
                                             <p class="rating-text">4.9 (10k)</p>
                                         </div>
                                         <div class="blog-meta course-meta">
-                                            <a href="#"><img src="{{ asset('assets/img/icon/open-book-small.svg') }}" alt="Stadum"> 12 Semesters</a>
+                                            <a href="#"><img src="{{ asset('assets/img/icon/open-book-small.svg') }}" alt="Aalokbortika"> 12 Semesters</a>
                                             <a href="#"><i class="fa-solid fa-calendar-days"></i> 4 Years</a>
-                                            <a href="#"><img src="{{ asset('assets/img/icon/book-read.svg') }}" alt="Stadum">250 Seats</a>
+                                            <a href="#"><img src="{{ asset('assets/img/icon/book-read.svg') }}" alt="Aalokbortika">250 Seats</a>
                                         </div>
                                         <div class="card-content-bottom">
                                             <div class="author">
-                                                <img src="{{ asset('assets/img/popular-course/course-mentor-3-4.jpg') }}" alt="Stadum">
+                                                <img src="{{ asset('assets/img/popular-course/course-mentor-3-4.jpg') }}" alt="Aalokbortika">
                                                 <p><a href="program.html">Jenny Wilson</a></p>
                                             </div>
                                             <div class="btn-wrap">
@@ -908,7 +909,7 @@ Cta Area
                             <div class="col-xxl-4 col-lg-6 col-md-12">
                                 <div class="course-card">
                                     <div class="course-img-thumb global-img">
-                                        <img src="{{ asset('assets/img/popular-course/course-thumb-3-5.jpg') }}" alt="Stadum">
+                                        <img src="{{ asset('assets/img/popular-course/course-thumb-3-5.jpg') }}" alt="Aalokbortika">
                                         <a href="#" class="wishlist-icon"><i class="fa-solid fa-heart"></i></a>
                                     </div>
                                     <div class="card-content">
@@ -921,13 +922,13 @@ Cta Area
                                             <p class="rating-text">4.9 (10k)</p>
                                         </div>
                                         <div class="blog-meta course-meta">
-                                            <a href="#"><img src="{{ asset('assets/img/icon/open-book-small.svg') }}" alt="Stadum"> 12 Semesters</a>
+                                            <a href="#"><img src="{{ asset('assets/img/icon/open-book-small.svg') }}" alt="Aalokbortika"> 12 Semesters</a>
                                             <a href="#"><i class="fa-solid fa-calendar-days"></i> 4 Years</a>
-                                            <a href="#"><img src="{{ asset('assets/img/icon/book-read.svg') }}" alt="Stadum">250 Seats</a>
+                                            <a href="#"><img src="{{ asset('assets/img/icon/book-read.svg') }}" alt="Aalokbortika">250 Seats</a>
                                         </div>
                                         <div class="card-content-bottom">
                                             <div class="author">
-                                                <img src="{{ asset('assets/img/popular-course/course-mentor-3-5.jpg') }}" alt="Stadum">
+                                                <img src="{{ asset('assets/img/popular-course/course-mentor-3-5.jpg') }}" alt="Aalokbortika">
                                                 <p><a href="program.html">Leslie Alexander</a></p>
                                             </div>
                                             <div class="btn-wrap">
@@ -941,7 +942,7 @@ Cta Area
                             <div class="col-xxl-4 col-lg-6 col-md-12">
                                 <div class="course-card">
                                     <div class="course-img-thumb global-img">
-                                        <img src="{{ asset('assets/img/popular-course/course-thumb-3-6.jpg') }}" alt="Stadum">
+                                        <img src="{{ asset('assets/img/popular-course/course-thumb-3-6.jpg') }}" alt="Aalokbortika">
                                         <a href="#" class="wishlist-icon"><i class="fa-solid fa-heart"></i></a>
                                     </div>
                                     <div class="card-content">
@@ -954,13 +955,13 @@ Cta Area
                                             <p class="rating-text">4.9 (10k)</p>
                                         </div>
                                         <div class="blog-meta course-meta">
-                                            <a href="#"><img src="{{ asset('assets/img/icon/open-book-small.svg') }}" alt="Stadum"> 12 Semesters</a>
+                                            <a href="#"><img src="{{ asset('assets/img/icon/open-book-small.svg') }}" alt="Aalokbortika"> 12 Semesters</a>
                                             <a href="#"><i class="fa-solid fa-calendar-days"></i> 4 Years</a>
-                                            <a href="#"><img src="{{ asset('assets/img/icon/book-read.svg') }}" alt="Stadum">250 Seats</a>
+                                            <a href="#"><img src="{{ asset('assets/img/icon/book-read.svg') }}" alt="Aalokbortika">250 Seats</a>
                                         </div>
                                         <div class="card-content-bottom">
                                             <div class="author">
-                                                <img src="{{ asset('assets/img/popular-course/course-mentor-3-6.jpg') }}" alt="Stadum">
+                                                <img src="{{ asset('assets/img/popular-course/course-mentor-3-6.jpg') }}" alt="Aalokbortika">
                                                 <p><a href="program.html">Maliha Doe</a></p>
                                             </div>
                                             <div class="btn-wrap">
@@ -979,11 +980,11 @@ Cta Area
                 <a class="th-btn th-icon" href="#">Browse All Categories</a>
             </div>
         </div>
-        <div class="popular-area-shape shape-mockup jump d-none d-xl-block" data-bottom="0%" data-left="2%"><img src="{{ asset('assets/img/shape/popular-3-1.png') }}" alt="stadum"></div>
+        <div class="popular-area-shape shape-mockup jump d-none d-xl-block" data-bottom="0%" data-left="2%"><img src="{{ asset('assets/img/shape/popular-3-1.png') }}" alt="Aalokbortika"></div>
     </section>
     <!-- Continue adding asset helpers to the remaining sections... -->
     <section class="why-area-3 overflow-hidden position-relative ">
-        <div class="shape-mockup z-index-3 jump d-none d-xxl-block" data-left="40%" data-top="14%"><img src="assets/img/shape/cat-3-1.png" alt="Stadum"></div>
+        <div class="shape-mockup z-index-3 jump d-none d-xxl-block" data-left="40%" data-top="14%"><img src="assets/img/shape/cat-3-1.png" alt="Aalokbortika"></div>
         <div class="container th-container4">
             <div class="row align-items-center">
                 <div class="col-lg-5">
@@ -991,7 +992,7 @@ Cta Area
                         <div class="title-area">
                             <span class="sub-title text-anim">WHY CHOOSE US</span>
                             <h2 class="sec-title text-anim2">The advantages of our Courses</h2>
-                            <p class="sec-text mt-25 mb-0 wow fadeInUp" data-wow-delay=".2s">At Stadum, you’ll be welcomed
+                            <p class="sec-text mt-25 mb-0 wow fadeInUp" data-wow-delay=".2s">At Aalokbortika, you’ll be welcomed
                                 into a
                                 diverse community of learners of different races, genders, ages and ethnicities. With online
                                 and on-campus learning available.</p>
@@ -1025,7 +1026,7 @@ Cta Area
                 </div>
             </div>
         </div>
-        <div class="why-shape-2 shape-mockup movingX d-none d-xxl-block" data-left="30%" data-bottom="16%"><img src="assets/img/shape/why-3-1.png" alt="Stadum"></div>
+        <div class="why-shape-2 shape-mockup movingX d-none d-xxl-block" data-left="30%" data-bottom="16%"><img src="assets/img/shape/why-3-1.png" alt="Aalokbortika"></div>
     </section> <!--==============================
 Testimonial Area  
 ==============================-->
@@ -1041,7 +1042,7 @@ Testimonial Area
                 <div class="col-xxl-3">
                     <div class="title-area text-center">
                         <span class="sub-title text-anim">TESTIMONIALS</span>
-                        <h2 class="sec-title text-anim2">What they’re talking about stadum?</h2>
+                        <h2 class="sec-title text-anim2">What they’re talking about Aalokbortika?</h2>
                     </div>
                 </div>
             </div>
@@ -1053,7 +1054,7 @@ Testimonial Area
                                 <div class="swiper-slide">
                                     <div class="testi-card2">
                                         <div class="box-quote"><img src="assets/img/icon/quote2.svg" alt=""></div>
-                                        <p class="box-text">At Stadum University, we prepare you to launch your career by providing a supportive, creative, and professional environment from which to learn practical skills and build a network of industry contacts. Ducamb welcomed every pain avoided but in certa mstances owing to the claims of igation that off bu will frequently occuthe</p>
+                                        <p class="box-text">At Aalokbortika University, we prepare you to launch your career by providing a supportive, creative, and professional environment from which to learn practical skills and build a network of industry contacts. Ducamb welcomed every pain avoided but in certa mstances owing to the claims of igation that off bu will frequently occuthe</p>
                                         <div class="box-review">
                                             <i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i>
                                         </div>
@@ -1064,7 +1065,7 @@ Testimonial Area
                                 <div class="swiper-slide">
                                     <div class="testi-card2">
                                         <div class="box-quote"><img src="assets/img/icon/quote2.svg" alt=""></div>
-                                        <p class="box-text">At Stadum University, we prepare you to launch your career by providing a supportive, creative, and professional environment from which to learn practical skills and build a network of industry contacts. Ducamb welcomed every pain avoided but in certa mstances owing to the claims of igation that off bu will frequently occuthe</p>
+                                        <p class="box-text">At Aalokbortika University, we prepare you to launch your career by providing a supportive, creative, and professional environment from which to learn practical skills and build a network of industry contacts. Ducamb welcomed every pain avoided but in certa mstances owing to the claims of igation that off bu will frequently occuthe</p>
                                         <div class="box-review">
                                             <i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i>
                                         </div>
@@ -1075,7 +1076,7 @@ Testimonial Area
                                 <div class="swiper-slide">
                                     <div class="testi-card2">
                                         <div class="box-quote"><img src="assets/img/icon/quote2.svg" alt=""></div>
-                                        <p class="box-text">At Stadum University, we prepare you to launch your career by providing a supportive, creative, and professional environment from which to learn practical skills and build a network of industry contacts. Ducamb welcomed every pain avoided but in certa mstances owing to the claims of igation that off bu will frequently occuthe</p>
+                                        <p class="box-text">At Aalokbortika University, we prepare you to launch your career by providing a supportive, creative, and professional environment from which to learn practical skills and build a network of industry contacts. Ducamb welcomed every pain avoided but in certa mstances owing to the claims of igation that off bu will frequently occuthe</p>
                                         <div class="box-review">
                                             <i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i>
                                         </div>
@@ -1119,7 +1120,7 @@ Testimonial Area
 Team Area  
 ==============================-->
     <section class="team-area space" id="instr-sec">
-        <div class="instr-shape1 shape-mockup movingX d-none d-xl-block" data-right="14%" data-top="8%"><img src="assets/img/shape/cat-3-1.png" alt="Stadum"></div>
+        <div class="instr-shape1 shape-mockup movingX d-none d-xl-block" data-right="14%" data-top="8%"><img src="assets/img/shape/cat-3-1.png" alt="Aalokbortika"></div>
         <div class="container th-container4">
             <div class="row justify-content-between">
                 <div class="col-xxl-4 col-xl-9 col-lg-8 col-md-10">
@@ -1146,10 +1147,10 @@ Team Area
                         <div class="swiper-slide">
                             <div class="instr-card">
                                 <div class="instr-img">
-                                    <img src="assets/img/mentor/3-1.png" alt="Stadum">
+                                    <img src="assets/img/mentor/3-1.png" alt="Aalokbortika">
                                 </div>
                                 <div class="box-content">
-                                    <a href="teacher.html" class="card-icon"><img src="assets/img/icon/right-icon-black.svg" alt="Stadum" class="th-arrow"></a>
+                                    <a href="teacher.html" class="card-icon"><img src="assets/img/icon/right-icon-black.svg" alt="Aalokbortika" class="th-arrow"></a>
                                     <div class="media-body">
                                         <h3 class="box-title"><a href="teacher.html">Kristin Watson</a></h3>
                                         <span class="instr-desig">Teacher of Development</span>
@@ -1168,10 +1169,10 @@ Team Area
                         <div class="swiper-slide">
                             <div class="instr-card">
                                 <div class="instr-img">
-                                    <img src="assets/img/mentor/3-2.png" alt="Stadum">
+                                    <img src="assets/img/mentor/3-2.png" alt="Aalokbortika">
                                 </div>
                                 <div class="box-content">
-                                    <a href="teacher.html" class="card-icon"><img src="assets/img/icon/right-icon-black.svg" alt="Stadum" class="th-arrow"></a>
+                                    <a href="teacher.html" class="card-icon"><img src="assets/img/icon/right-icon-black.svg" alt="Aalokbortika" class="th-arrow"></a>
                                     <div class="media-body">
                                         <h3 class="box-title"><a href="teacher.html">Ralph Edwards</a></h3>
                                         <span class="instr-desig">Teacher of Development</span>
@@ -1190,10 +1191,10 @@ Team Area
                         <div class="swiper-slide">
                             <div class="instr-card">
                                 <div class="instr-img">
-                                    <img src="assets/img/mentor/3-3.png" alt="Stadum">
+                                    <img src="assets/img/mentor/3-3.png" alt="Aalokbortika">
                                 </div>
                                 <div class="box-content">
-                                    <a href="teacher.html" class="card-icon"><img src="assets/img/icon/right-icon-black.svg" alt="Stadum" class="th-arrow"></a>
+                                    <a href="teacher.html" class="card-icon"><img src="assets/img/icon/right-icon-black.svg" alt="Aalokbortika" class="th-arrow"></a>
                                     <div class="media-body">
                                         <h3 class="box-title"><a href="teacher.html">Jerome Bell</a></h3>
                                         <span class="instr-desig">Teacher of Development</span>
@@ -1212,10 +1213,10 @@ Team Area
                         <div class="swiper-slide">
                             <div class="instr-card">
                                 <div class="instr-img">
-                                    <img src="assets/img/mentor/3-4.png" alt="Stadum">
+                                    <img src="assets/img/mentor/3-4.png" alt="Aalokbortika">
                                 </div>
                                 <div class="box-content">
-                                    <a href="teacher.html" class="card-icon"><img src="assets/img/icon/right-icon-black.svg" alt="Stadum" class="th-arrow"></a>
+                                    <a href="teacher.html" class="card-icon"><img src="assets/img/icon/right-icon-black.svg" alt="Aalokbortika" class="th-arrow"></a>
                                     <div class="media-body">
                                         <h3 class="box-title"><a href="teacher.html">Leslie Alexander</a></h3>
                                         <span class="instr-desig">Teacher of Development</span>
@@ -1234,10 +1235,10 @@ Team Area
                         <div class="swiper-slide">
                             <div class="instr-card">
                                 <div class="instr-img">
-                                    <img src="assets/img/mentor/3-5.png" alt="Stadum">
+                                    <img src="assets/img/mentor/3-5.png" alt="Aalokbortika">
                                 </div>
                                 <div class="box-content">
-                                    <a href="teacher.html" class="card-icon"><img src="assets/img/icon/right-icon-black.svg" alt="Stadum" class="th-arrow"></a>
+                                    <a href="teacher.html" class="card-icon"><img src="assets/img/icon/right-icon-black.svg" alt="Aalokbortika" class="th-arrow"></a>
                                     <div class="media-body">
                                         <h3 class="box-title"><a href="teacher.html">Priya Ray</a></h3>
                                         <span class="instr-desig">Teacher of Development</span>
@@ -1256,10 +1257,10 @@ Team Area
                         <div class="swiper-slide">
                             <div class="instr-card">
                                 <div class="instr-img">
-                                    <img src="assets/img/mentor/3-6.png" alt="Stadum">
+                                    <img src="assets/img/mentor/3-6.png" alt="Aalokbortika">
                                 </div>
                                 <div class="box-content">
-                                    <a href="teacher.html" class="card-icon"><img src="assets/img/icon/right-icon-black.svg" alt="Stadum" class="th-arrow"></a>
+                                    <a href="teacher.html" class="card-icon"><img src="assets/img/icon/right-icon-black.svg" alt="Aalokbortika" class="th-arrow"></a>
                                     <div class="media-body">
                                         <h3 class="box-title"><a href="teacher.html">Ralph Edwards</a></h3>
                                         <span class="instr-desig">Teacher of Development</span>
@@ -1278,10 +1279,10 @@ Team Area
                         <div class="swiper-slide">
                             <div class="instr-card">
                                 <div class="instr-img">
-                                    <img src="assets/img/mentor/3-7.png" alt="Stadum">
+                                    <img src="assets/img/mentor/3-7.png" alt="Aalokbortika">
                                 </div>
                                 <div class="box-content">
-                                    <a href="teacher.html" class="card-icon"><img src="assets/img/icon/right-icon-black.svg" alt="Stadum" class="th-arrow"></a>
+                                    <a href="teacher.html" class="card-icon"><img src="assets/img/icon/right-icon-black.svg" alt="Aalokbortika" class="th-arrow"></a>
                                     <div class="media-body">
                                         <h3 class="box-title"><a href="teacher.html">Jerome Bell</a></h3>
                                         <span class="instr-desig">Teacher of Development</span>
@@ -1300,10 +1301,10 @@ Team Area
                         <div class="swiper-slide">
                             <div class="instr-card">
                                 <div class="instr-img">
-                                    <img src="assets/img/mentor/3-8.png" alt="Stadum">
+                                    <img src="assets/img/mentor/3-8.png" alt="Aalokbortika">
                                 </div>
                                 <div class="box-content">
-                                    <a href="teacher.html" class="card-icon"><img src="assets/img/icon/right-icon-black.svg" alt="Stadum" class="th-arrow"></a>
+                                    <a href="teacher.html" class="card-icon"><img src="assets/img/icon/right-icon-black.svg" alt="Aalokbortika" class="th-arrow"></a>
                                     <div class="media-body">
                                         <h3 class="box-title"><a href="teacher.html">Alisa Smith</a></h3>
                                         <span class="instr-desig">Teacher of Development</span>
@@ -1323,7 +1324,7 @@ Team Area
                 </div>
             </div>
         </div>
-        <span class="instr-shape2 shape-mockup spin d-none d-xl-block" data-right="4%" data-bottom="6%"><img src="assets/img/shape/instr-3-1.png" alt="Stadum"></span>
+        <span class="instr-shape2 shape-mockup spin d-none d-xl-block" data-right="4%" data-bottom="6%"><img src="assets/img/shape/instr-3-1.png" alt="Aalokbortika"></span>
     </section><!--==============================
 Team Area  
 ==============================-->
@@ -1337,7 +1338,7 @@ Team Area
                             <h2 class="sec-title text-anim2" data-cue="slideInUp"> Learn with our partners
                             </h2>
                         </div>
-                        <p class="sec-text mb-0">At Stadum University we are committed to providing a high-quality education</p>
+                        <p class="sec-text mb-0">At Aalokbortika University we are committed to providing a high-quality education</p>
                     </div>
                     <div class="btn-wrap justify-content-center justify-content-xl-start">
                         <a href="contact.html" class="th-btn th-icon">Start Learning</a>
@@ -1348,7 +1349,7 @@ Team Area
                         <div class="">
                             <div class="partners-card">
                                 <a href="#" class="position-absolute">
-                                    <img src="assets/img/partners/3-1.svg" alt="Stadum">
+                                    <img src="assets/img/partners/3-1.svg" alt="Aalokbortika">
                                 </a>
                             </div>
                         </div>
@@ -1356,7 +1357,7 @@ Team Area
                         <div class="">
                             <div class="partners-card">
                                 <a href="#" class="position-absolute">
-                                    <img src="assets/img/partners/3-2.svg" alt="Stadum">
+                                    <img src="assets/img/partners/3-2.svg" alt="Aalokbortika">
                                 </a>
                             </div>
                         </div>
@@ -1364,7 +1365,7 @@ Team Area
                         <div class="">
                             <div class="partners-card">
                                 <a href="#" class="position-absolute">
-                                    <img src="assets/img/partners/3-3.svg" alt="Stadum">
+                                    <img src="assets/img/partners/3-3.svg" alt="Aalokbortika">
                                 </a>
                             </div>
                         </div>
@@ -1372,7 +1373,7 @@ Team Area
                         <div class="">
                             <div class="partners-card">
                                 <a href="#" class="position-absolute">
-                                    <img src="assets/img/partners/3-4.svg" alt="Stadum">
+                                    <img src="assets/img/partners/3-4.svg" alt="Aalokbortika">
                                 </a>
                             </div>
                         </div>
@@ -1380,7 +1381,7 @@ Team Area
                         <div class="">
                             <div class="partners-card">
                                 <a href="#" class="position-absolute">
-                                    <img src="assets/img/partners/3-5.svg" alt="Stadum">
+                                    <img src="assets/img/partners/3-5.svg" alt="Aalokbortika">
                                 </a>
                             </div>
                         </div>
@@ -1388,7 +1389,7 @@ Team Area
                         <div class="">
                             <div class="partners-card">
                                 <a href="#" class="position-absolute">
-                                    <img src="assets/img/partners/3-6.svg" alt="Stadum">
+                                    <img src="assets/img/partners/3-6.svg" alt="Aalokbortika">
                                 </a>
                             </div>
                         </div>
@@ -1396,7 +1397,7 @@ Team Area
                         <div class="">
                             <div class="partners-card">
                                 <a href="#" class="position-absolute">
-                                    <img src="assets/img/partners/3-7.svg" alt="Stadum">
+                                    <img src="assets/img/partners/3-7.svg" alt="Aalokbortika">
                                 </a>
                             </div>
                         </div>
@@ -1404,7 +1405,7 @@ Team Area
                         <div class="">
                             <div class="partners-card">
                                 <a href="#" class="position-absolute">
-                                    <img src="assets/img/partners/3-8.svg" alt="Stadum">
+                                    <img src="assets/img/partners/3-8.svg" alt="Aalokbortika">
                                 </a>
                             </div>
                         </div>
@@ -1413,7 +1414,7 @@ Team Area
                 </div>
             </div>
         </div>
-        <div class="partners-shape1 shape-mockup jump d-none d-xl-block" data-right="0%" data-bottom="0%"><img src="assets/img/shape/partners-3-1.png" alt="Stadum"></div>
+        <div class="partners-shape1 shape-mockup jump d-none d-xl-block" data-right="0%" data-bottom="0%"><img src="assets/img/shape/partners-3-1.png" alt="Aalokbortika"></div>
     </section>
     <section class="community-area-2 overflow-hidden position-relative " id="community-sec">
         <div class="container th-container4">
@@ -1423,13 +1424,13 @@ Team Area
                         <div class="title-area text-center text-xl-start">
                             <span class="sub-title text-anim">COMMUNITY</span>
                             <h2 class="sec-title text-anim2">Life long <span class="text-theme">learning</span> <span class="d-block">community</span></h2>
-                            <p class="sec-text3 mt-25 wow fadeInUp" data-wow-delay=".3s">At Stadum University we are
+                            <p class="sec-text3 mt-25 wow fadeInUp" data-wow-delay=".3s">At Aalokbortika University we are
                                 committed to providing a high-quality education that is accessible.</p>
                         </div>
                         <div class="community-wrap2">
                             <div class="community-card2 wow fadeInUp" data-wow-delay=".2s">
                                 <div class="community-icon">
-                                    <img src="assets/img/icon/communiti-3-1.svg" alt="Stadum">
+                                    <img src="assets/img/icon/communiti-3-1.svg" alt="Aalokbortika">
                                 </div>
                                 <div class="card-content">
                                     <h3 class="box-title">
@@ -1441,7 +1442,7 @@ Team Area
 
                             <div class="community-card2 wow fadeInUp" data-wow-delay=".4s">
                                 <div class="community-icon">
-                                    <img src="assets/img/icon/communiti-3-2.svg" alt="Stadum">
+                                    <img src="assets/img/icon/communiti-3-2.svg" alt="Aalokbortika">
                                 </div>
                                 <div class="card-content">
                                     <h3 class="box-title">
@@ -1453,7 +1454,7 @@ Team Area
 
                             <div class="community-card2 wow fadeInUp" data-wow-delay=".6s">
                                 <div class="community-icon">
-                                    <img src="assets/img/icon/communiti-3-3.svg" alt="Stadum">
+                                    <img src="assets/img/icon/communiti-3-3.svg" alt="Aalokbortika">
                                 </div>
                                 <div class="card-content">
                                     <h3 class="box-title">
@@ -1465,7 +1466,7 @@ Team Area
 
                             <div class="community-card2 wow fadeInUp" data-wow-delay=".8s">
                                 <div class="community-icon">
-                                    <img src="assets/img/icon/communiti-3-4.svg" alt="Stadum">
+                                    <img src="assets/img/icon/communiti-3-4.svg" alt="Aalokbortika">
                                 </div>
                                 <div class="card-content">
                                     <h3 class="box-title">
@@ -1486,7 +1487,7 @@ Team Area
                 </div>
             </div>
         </div>
-        <div class="community-shape1 shape-mockup jump d-none d-xxl-block" data-left="0%" data-bottom="0%"><img src="assets/img/shape/communiti-3-1.png" alt="Stadum"></div>
+        <div class="community-shape1 shape-mockup jump d-none d-xxl-block" data-left="0%" data-bottom="0%"><img src="assets/img/shape/communiti-3-1.png" alt="Aalokbortika"></div>
     </section><!--==============================
 Mentorship Area Home 3
 ==============================-->
@@ -1504,7 +1505,7 @@ Mentorship Area Home 3
                 <div class="col-lg-6">
                     <div class="mentorship-card">
                         <div class="mentorship-img global-img">
-                            <img src="assets/img/mentorship/3-1.jpg" alt="Stadum">
+                            <img src="assets/img/mentorship/3-1.jpg" alt="Aalokbortika">
                         </div>
                         <div class="card-content">
                             <h3 class="box-title">
@@ -1521,7 +1522,7 @@ Mentorship Area Home 3
                 <div class="col-lg-6">
                     <div class="mentorship-card">
                         <div class="mentorship-img global-img">
-                            <img src="assets/img/mentorship/3-2.jpg" alt="Stadum">
+                            <img src="assets/img/mentorship/3-2.jpg" alt="Aalokbortika">
                         </div>
                         <div class="card-content">
                             <h3 class="box-title">
@@ -1542,32 +1543,32 @@ Mentorship Area Home 3
         <div class="container th-container4">
             <div class="banner-wrap1">
                 <div class="banner-left-img">
-                    <img src="assets/img/banner/3-2.png" alt="stadum">
+                    <img src="assets/img/banner/3-2.png" alt="Aalokbortika">
                 </div>
                 <div class="banner-content">
                     <h2 class="box-title">Let’s Find The Right Course For You!</h2>
                     <div class="btn-wrap mt-50">
                         <a href="#">
-                            <img src="assets/img/theme-img/home-3-banner-download-1.svg" alt="Stadum">
+                            <img src="assets/img/theme-img/home-3-banner-download-1.svg" alt="Aalokbortika">
                         </a>
                         <a href="#">
-                            <img src="assets/img/theme-img/home-3-banner-download-2.svg" alt="Stadum">
+                            <img src="assets/img/theme-img/home-3-banner-download-2.svg" alt="Aalokbortika">
                         </a>
                     </div>
                 </div>
                 <div class="banner-right-img">
-                    <img src="assets/img/banner/3-3.png" alt="Stadum">
+                    <img src="assets/img/banner/3-3.png" alt="Aalokbortika">
                 </div>
             </div>
         </div>
-        <div class="shape-mockup d-none d-xl-block" data-bottom="0%" data-left="0%"><img src="assets/img/banner/3-1.png" alt="stadum"></div>
-        <div class="shape-mockup" data-bottom="0%" data-right="3%"><img src="assets/img/shape/banner-3-1.png" alt="stadum">
+        <div class="shape-mockup d-none d-xl-block" data-bottom="0%" data-left="0%"><img src="assets/img/banner/3-1.png" alt="Aalokbortika"></div>
+        <div class="shape-mockup" data-bottom="0%" data-right="3%"><img src="assets/img/shape/banner-3-1.png" alt="Aalokbortika">
         </div>
     </section> <!--==============================
 Blog Area 3
 ==============================-->
     <section class="blog-arae-3 overflow-hidden space" id="blog-sec">
-        <div class="blog-shape1 shape-mockup jump" data-top="30%" data-left="2%"><img src="assets/img/shape/instr-3-1.png" alt="Stadum"></div>
+        <div class="blog-shape1 shape-mockup jump" data-top="30%" data-left="2%"><img src="assets/img/shape/instr-3-1.png" alt="Aalokbortika"></div>
         <div class="container th-container4">
             <div class="row justify-content-lg-between justify-content-center align-items-center">
                 <div class="col-lg-8 col-12">
@@ -1609,7 +1610,7 @@ Blog Area 3
                                         <a href="blog.html"><span class="comment-icon"><i class="fa-solid fa-comments"></i></span> 0 Comment </a>
                                     </div>
                                     <h3 class="box-title"><a href="blog-details.html">How Motivated When Learning Something New</a></h3>
-                                    <p class="box-text">At Stadum University we are committed to providing a high-quality education.</p>
+                                    <p class="box-text">At Aalokbortika University we are committed to providing a high-quality education.</p>
                                     <div class="btn-wrap">
                                         <a href="blog-details.html" class="th-btn th-icon style-border1">Read More</a>
                                     </div>
@@ -1639,7 +1640,7 @@ Blog Area 3
                                         <a href="blog.html"><span class="comment-icon"><i class="fa-solid fa-comments"></i></span> 0 Comment </a>
                                     </div>
                                     <h3 class="box-title"><a href="blog-details.html">What's the Secret to Reading Books Effectively?</a></h3>
-                                    <p class="box-text">At Stadum University we are committed to providing a high-quality education.</p>
+                                    <p class="box-text">At Aalokbortika University we are committed to providing a high-quality education.</p>
                                     <div class="btn-wrap">
                                         <a href="blog-details.html" class="th-btn th-icon style-border1">Read More</a>
                                     </div>
@@ -1669,7 +1670,7 @@ Blog Area 3
                                         <a href="blog.html"><span class="comment-icon"><i class="fa-solid fa-comments"></i></span> 0 Comment </a>
                                     </div>
                                     <h3 class="box-title"><a href="blog-details.html">Why Setting Goals Can Improve Your Learning Skills</a></h3>
-                                    <p class="box-text">At Stadum University we are committed to providing a high-quality education.</p>
+                                    <p class="box-text">At Aalokbortika University we are committed to providing a high-quality education.</p>
                                     <div class="btn-wrap">
                                         <a href="blog-details.html" class="th-btn th-icon style-border1">Read More</a>
                                     </div>
@@ -1699,7 +1700,7 @@ Blog Area 3
                                         <a href="blog.html"><span class="comment-icon"><i class="fa-solid fa-comments"></i></span> 0 Comment </a>
                                     </div>
                                     <h3 class="box-title"><a href="blog-details.html">How to Stay Motivated When Learning Something New</a></h3>
-                                    <p class="box-text">At Stadum University we are committed to providing a high-quality education.</p>
+                                    <p class="box-text">At Aalokbortika University we are committed to providing a high-quality education.</p>
                                     <div class="btn-wrap">
                                         <a href="blog-details.html" class="th-btn th-icon style-border1">Read More</a>
                                     </div>
@@ -1729,7 +1730,7 @@ Blog Area 3
                                         <a href="blog.html"><span class="comment-icon"><i class="fa-solid fa-comments"></i></span> 0 Comment </a>
                                     </div>
                                     <h3 class="box-title"><a href="blog-details.html">What's the Secret to Reading Books Effectively?</a></h3>
-                                    <p class="box-text">At Stadum University we are committed to providing a high-quality education.</p>
+                                    <p class="box-text">At Aalokbortika University we are committed to providing a high-quality education.</p>
                                     <div class="btn-wrap">
                                         <a href="blog-details.html" class="th-btn th-icon style-border1">Read More</a>
                                     </div>
@@ -1759,7 +1760,7 @@ Blog Area 3
                                         <a href="blog.html"><span class="comment-icon"><i class="fa-solid fa-comments"></i></span> 0 Comment </a>
                                     </div>
                                     <h3 class="box-title"><a href="blog-details.html">Why Setting Goals Can Improve Your Learning Skills</a></h3>
-                                    <p class="box-text">At Stadum University we are committed to providing a high-quality education.</p>
+                                    <p class="box-text">At Aalokbortika University we are committed to providing a high-quality education.</p>
                                     <div class="btn-wrap">
                                         <a href="blog-details.html" class="th-btn th-icon style-border1">Read More</a>
                                     </div>
@@ -1789,7 +1790,7 @@ Blog Area 3
                                         <a href="blog.html"><span class="comment-icon"><i class="fa-solid fa-comments"></i></span> 0 Comment </a>
                                     </div>
                                     <h3 class="box-title"><a href="blog-details.html">How to Stay Motivated When Learning Something New</a></h3>
-                                    <p class="box-text">At Stadum University we are committed to providing a high-quality education.</p>
+                                    <p class="box-text">At Aalokbortika University we are committed to providing a high-quality education.</p>
                                     <div class="btn-wrap">
                                         <a href="blog-details.html" class="th-btn th-icon style-border1">Read More</a>
                                     </div>
@@ -1819,7 +1820,7 @@ Blog Area 3
                                         <a href="blog.html"><span class="comment-icon"><i class="fa-solid fa-comments"></i></span> 0 Comment </a>
                                     </div>
                                     <h3 class="box-title"><a href="blog-details.html">What's the Secret to Reading Books Effectively?</a></h3>
-                                    <p class="box-text">At Stadum University we are committed to providing a high-quality education</p>
+                                    <p class="box-text">At Aalokbortika University we are committed to providing a high-quality education</p>
                                     <div class="btn-wrap">
                                         <a href="blog-details.html" class="th-btn th-icon style-border1">Read More</a>
                                     </div>
@@ -1831,7 +1832,7 @@ Blog Area 3
                 </div>
             </div>
         </div>
-        <div class="blog-shape2 shape-mockup jump" data-right="2%" data-bottom="0%"><img src="assets/img/shape/blog-3-1.png" alt="Stadum"></div>
+        <div class="blog-shape2 shape-mockup jump" data-right="2%" data-bottom="0%"><img src="assets/img/shape/blog-3-1.png" alt="Aalokbortika"></div>
     </section><!--==============================
 Marquee Area  
 ==============================-->
@@ -1964,15 +1965,15 @@ Contact Area
         <div class="container th-container4">
             <div class="widget-area">
                 <div class="row justify-content-between">
-                    <div class="col-md-6 col-xl-auto">
+                    <div class="col-md-6 col-xl-auto" style="background-color:#dc3545;">
                         <div class="widget footer-widget">
                             <div class="th-widget-about">
                                 <div class="about-logo">
                                     <a href="home-university.html">
-                                        <img src="assets/img/logo2.svg" alt="Stadum">
+                                        <img src="{{ asset('assets/img/logo.png') }}" style="width:250px;" alt="Aalokbortika">
                                     </a>
                                 </div>
-                                <p class="about-text">Since 1999, when the newly minted Stadum team embraced its mandate to breathe new life into the downtrodden neighbourhood, East Village’s transformation has been nothing short of remarkable. </p>
+                                <p class="about-text">Since 1999, when the newly minted Aalokbortika team embraced its mandate to breathe new life into the downtrodden neighbourhood, East Village’s transformation has been nothing short of remarkable. </p>
                                 <div class="footer-info">
                                     <a href="#">
                                         <span class="footer-info-icon"><i class="fa-solid fa-location-dot"></i></span> 45 New Eskaton Road, Austria
@@ -2067,7 +2068,7 @@ Contact Area
                 <div class="row justify-content-center gy-3 align-items-center">
                     <div class="col-md-7">
                         <p class="copyright-text">
-                            <i class="fal fa-copyright"></i> Copyright 2025 <a href="home-university.html">Stadum</a>. All Rights Reserved.
+                            <i class="fal fa-copyright"></i> Copyright 2025 <a href="#">Aalokbortika</a>. All Rights Reserved.
                         </p>
                     </div>
                     <div class="col-md-5 text-md-end text-center">

@@ -1,14 +1,21 @@
 @extends('layouts.student')
 
 @section('content')
-<h3>Notifications</h3>
+<div class="card">
+    <div class="card-header">
+        <h4>Your Notifications</h4>
+    </div>
 
-<ul class="list-group mt-4">
-    @foreach($notifications as $note)
-        <li class="list-group-item">
-            {{ $note->data['message'] ?? 'Notification' }}
-            <small class="d-block text-muted">{{ $note->created_at->diffForHumans() }}</small>
-        </li>
-    @endforeach
-</ul>
+    <div class="card-body">
+        @forelse ($notifications as $note)
+            <div class="mb-3 p-3 border rounded">
+                <h5>{{ $note->title }}</h5>
+                <p>{{ $note->message }}</p>
+                <small class="text-muted">{{ $note->created_at->diffForHumans() }}</small>
+            </div>
+        @empty
+            <p>No notifications found.</p>
+        @endforelse
+    </div>
+</div>
 @endsection

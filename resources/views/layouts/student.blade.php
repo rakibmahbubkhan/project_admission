@@ -2,32 +2,118 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Student Panel</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Panel - {{ config('app.name') }}</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
 </head>
-<body>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-success">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="{{ route('student.dashboard') }}">Student Panel</a>
-        <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
-                <span class="nav-link">{{ Auth::user()->name }}</span>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-light" href="{{ route('logout') }}"
-                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
-            </li>
-        </ul>
+<body class="bg-gray-100">
+
+    <!-- Header -->
+    <header class="bg-white shadow p-4 flex justify-between items-center">
+        <h1 class="text-lg font-bold">Student Dashboard</h1>
+
+        <!-- Mobile Menu Button -->
+        <button onclick="toggleSidebar()" class="md:hidden px-3 py-2 bg-gray-800 text-white rounded">
+            ☰
+        </button>
+
+        <!-- User Menu -->
+        <div class="hidden md:block">
+            <div class="flex items-center space-x-4">
+                <span class="text-gray-700">{{ auth()->user()->name }}</span>
+
+                <form action="{{ route('logout') }}" method="POST" class="inline">
+                    @csrf
+                    <button class="px-3 py-2 bg-red-600 text-white rounded">
+                        Logout
+                    </button>
+                </form>
+            </div>
+        </div>
+    </header>
+
+    <div class="flex">
+
+        <!-- Sidebar -->
+        <aside id="sidebar" class="w-64 bg-gray-900 text-white min-h-screen p-5 hidden md:block">
+            <h2 class="text-xl font-bold mb-6">Student Panel</h2>
+
+            <ul class="space-y-3">
+
+                <li>
+                    <a href="{{ route('student.dashboard') }}"
+                       class="block px-3 py-2 rounded hover:bg-gray-700">
+                        Dashboard
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ route('student.profile') }}"
+                       class="block px-3 py-2 rounded hover:bg-gray-700">
+                        My Profile
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ route('student.forms') }}"
+                       class="block px-3 py-2 rounded hover:bg-gray-700">
+                        Available Admission Forms
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ route('student.submissions') }}"
+                       class="block px-3 py-2 rounded hover:bg-gray-700">
+                        My Applications
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ route('student.notifications') }}"
+                       class="block px-3 py-2 rounded hover:bg-gray-700">
+                        Notifications
+                    </a>
+                </li>
+
+                <li class="pt-5 border-t border-gray-700">
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button class="w-full text-left px-3 py-2 rounded hover:bg-red-600">
+                            Logout
+                        </button>
+                    </form>
+                </li>
+
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-6">
+            @yield('content')
+        </main>
     </div>
-</nav>
 
-<div class="container mt-4">
-    @yield('content')
-</div>
+    <script>
+        function toggleSidebar() {
+            let sidebar = document.getElementById("sidebar");
+            sidebar.classList.toggle("hidden");
+        }
+    </script>
 
-<form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">@csrf</form>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

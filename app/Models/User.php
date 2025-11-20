@@ -27,6 +27,11 @@ class User extends Authenticatable
         return $this->hasMany(User::class, 'created_by')->where('role', 'student');
     }
 
+    public function student()
+    {
+        return $this->hasOne(Student::class, 'user_id'); // Explicitly specify foreign key
+    }
+
     public function createdBy()
     {
         return $this->belongsTo(User::class, 'created_by');
