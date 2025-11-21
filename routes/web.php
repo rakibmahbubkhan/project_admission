@@ -107,13 +107,27 @@ Route::middleware(['auth', 'role:super_admin'])->prefix('admin')->name('admin.')
 Route::middleware(['auth', 'role:agent'])->prefix('agent')->name('agent.')->group(function () {
     Route::get('/dashboard', [AgentDashboardController::class, 'index'])->name('dashboard');
     
-    // Student Management
+
+    // Student management
+    Route::get('agent/students', [AgentDashboardController::class, 'students'])
+        ->name('students');
+
+    Route::get('agent/students/create', [AgentDashboardController::class, 'createStudent'])
+        ->name('students.create');
+
+    Route::post('agent/students', [AgentDashboardController::class, 'storeStudent'])
+        ->name('students.store');
+
+    // View submissions of students
+    Route::get('agent/submissions', [AgentDashboardController::class, 'submissions'])
+        ->name('submissions');
+
     Route::resource('students', AgentStudentController::class);
     Route::get('/students-list', [AgentDashboardController::class, 'students'])->name('students.list');
     
     // Submissions
-    Route::get('submissions', [FormSubmissionController::class, 'agentIndex'])->name('submissions.index');
-    Route::get('submissions/{id}', [FormSubmissionController::class, 'agentView'])->name('submissions.view');
+//     Route::get('submissions', [FormSubmissionController::class, 'agentIndex'])->name('submissions.index');
+//     Route::get('submissions/{id}', [FormSubmissionController::class, 'agentView'])->name('submissions.view');
 });
 
 // Student Routes
