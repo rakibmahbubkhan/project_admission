@@ -8,7 +8,7 @@ class DashboardController extends Controller
 {
     public function admin()
     {
-        return view('admin.dashboard');
+        return view('super_admin.dashboard');
     }
 
     public function agent()

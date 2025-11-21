@@ -36,6 +36,19 @@ Route::post('/student/register', [StudentRegisterController::class, 'register'])
 // Authentication routes
 require __DIR__.'/auth.php';
 
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', function () {
+        $user = Auth::user();
+        
+        return match($user->role) {
+            'super_admin' => view('super_admin.dashboard'),
+            'agent' => view('agent.dashboard'),
+            'student' => view('student.dashboard'),
+            default => abort(403, 'Unauthorized')
+        };
+    })->name('dashboard');
+});
+
 // Shared auth routes
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', function () {
@@ -60,6 +73,8 @@ Route::middleware('auth')->group(function () {
 
 // Admin Routes
 Route::middleware(['auth', 'role:super_admin'])->prefix('admin')->name('admin.')->group(function () {
+   
+   
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
     
     // Agents Management

@@ -24,7 +24,7 @@
                 <td>{{ $university->created_at->format('d M, Y') }}</td>
                 <td>
                     <a href="{{ route('admin.universities.edit', $university->id) }}" class="btn btn-sm btn-warning">Edit</a>
-                    <form action="{{ route('admin.universities.delete', $university->id) }}" method="POST" class="d-inline">
+                    <form action="{{ route('admin.universities.destroy', $university->id) }}" method="POST" class="d-inline">
                         @csrf
                         @method('DELETE')
                         <button class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</button>

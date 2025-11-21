@@ -16,7 +16,7 @@
             Admin Panel
         </div>
         <div class="list-group list-group-flush">
-            <a href="{{ route('super_admin.dashboard') }}" class="list-group-item list-group-item-action bg-dark text-white">Dashboard</a>
+            <a href="{{ route('admin.dashboard') }}" class="list-group-item list-group-item-action bg-dark text-white">Dashboard</a>
             <a href="{{ route('admin.universities.index') }}" class="list-group-item list-group-item-action bg-dark text-white">Universities</a>
             <a href="{{ route('admin.forms.index') }}" class="list-group-item list-group-item-action bg-dark text-white">Admission Forms</a>
             <a href="{{ route('admin.agents.index') }}" class="list-group-item list-group-item-action bg-dark text-white">Agents</a>
