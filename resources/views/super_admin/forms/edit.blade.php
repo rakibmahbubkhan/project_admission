@@ -4,7 +4,7 @@
 <div class="container mt-4">
     <h3>Edit Admission Form</h3>
 
-    <form action="{{ route('super_admin.forms.update', $form->id) }}" method="POST">
+    <form action="{{ route('admin.forms.update', $form->id) }}" method="POST">
         @csrf
         @method('PUT')
 

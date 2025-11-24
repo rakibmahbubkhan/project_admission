@@ -12,6 +12,8 @@ use Illuminate\Support\Str;
 
 class StudentApplicationController extends Controller
 {
+
+    public function index() { $forms = AdmissionForm::where('isActive', 1)->get(); return view('student.forms.index', compact('forms')); }
     public function availableForms()
     {
         $forms = AdmissionForm::where('isPublished', 1)->get();
@@ -137,7 +139,7 @@ class StudentApplicationController extends Controller
 
     public function submissions()
     {
-        $submissions = FormSubmission::where('student_id', auth()->user()->student->id)
+        $submissions = FormSubmission::where('student_id', Auth::user()->student->id)
             ->with('form.university')
             ->latest()
             ->get();
