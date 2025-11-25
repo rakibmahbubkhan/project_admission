@@ -2,72 +2,116 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Super Admin Panel</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - {{ config('app.name') }}</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
 </head>
-<body>
+<body class="bg-gray-100">
+<!-- Header -->
+    <header class="bg-white shadow p-4 flex justify-between items-center">
+        <h1 class="text-lg font-bold">Admin Dashboard</h1>
 
-<div class="d-flex" id="wrapper">
+        <!-- Mobile Menu Button -->
+        <button onclick="toggleSidebar()" class="md:hidden px-3 py-2 bg-gray-800 text-white rounded">
+            ☰
+        </button>
 
-    {{-- Sidebar --}}
-    <div class="bg-dark text-white border-end" id="sidebar-wrapper" style="min-width:250px;">
-        <div class="sidebar-heading text-center py-4 fs-4 fw-bold border-bottom">
-            Admin Panel
-        </div>
-        <div class="list-group list-group-flush">
-            <a href="{{ route('admin.dashboard') }}" class="list-group-item list-group-item-action bg-dark text-white">Dashboard</a>
-            <a href="{{ route('admin.universities.index') }}" class="list-group-item list-group-item-action bg-dark text-white">Universities</a>
-            <a href="{{ route('admin.forms.index') }}" class="list-group-item list-group-item-action bg-dark text-white">Admission Forms</a>
-            <a href="{{ route('admin.agents.index') }}" class="list-group-item list-group-item-action bg-dark text-white">Agents</a>
-            <a href="{{ route('admin.submissions') }}" class="list-group-item list-group-item-action bg-dark text-white">Submissions</a>
-        </div>
-    </div>
+        <!-- User Menu -->
+        <div class="hidden md:block">
+            <div class="flex items-center space-x-4">
+                <span class="text-gray-700">{{ Auth::user()->name }}</span>
 
-    {{-- Page Content --}}
-    <div id="page-content-wrapper" class="w-100">
-        {{-- Top Navbar --}}
-        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-            <div class="container-fluid">
-                <button class="btn btn-primary" id="menu-toggle">Toggle Menu</button>
-
-                <div class="collapse navbar-collapse">
-                    <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
-                        <li class="nav-item">
-                            <span class="nav-link">{{ Auth::user()->name }}</span>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-danger" href="{{ route('logout') }}"
-                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                               Logout
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+                <form action="{{ route('logout') }}" method="POST" class="inline">
+                    @csrf
+                    <button class="px-3 py-2 bg-red-600 text-white rounded">
+                        Logout
+                    </button>
+                </form>
             </div>
-        </nav>
-
-        {{-- Main Content --}}
-        <div class="container-fluid mt-4">
-            @yield('content')
         </div>
+    </header>
+
+    <div class="flex">
+
+        <!-- Sidebar -->
+        <aside id="sidebar" class="w-64 bg-gray-900 text-white min-h-screen p-5 hidden md:block">
+            <h2 class="text-xl font-bold mb-6">Admin Panel</h2>
+
+            <ul class="space-y-3">
+
+                <li>
+                    <a href="{{ route('admin.dashboard') }}"
+                       class="block px-3 py-2 rounded hover:bg-gray-700">
+                        Dashboard
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ route('admin.universities.index') }}"
+                       class="block px-3 py-2 rounded hover:bg-gray-700">
+                        Universities
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ route('admin.forms.index') }}"
+                       class="block px-3 py-2 rounded hover:bg-gray-700">
+                        Admission Forms
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ route('admin.agents.index') }}"
+                       class="block px-3 py-2 rounded hover:bg-gray-700">
+                        Agents
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ route('admin.submissions') }}"
+                       class="block px-3 py-2 rounded hover:bg-gray-700">
+                        Submissions
+                    </a>
+                </li>
+
+                <li class="pt-5 border-t border-gray-700">
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button class="w-full text-left px-3 py-2 rounded hover:bg-red-600">
+                            Logout
+                        </button>
+                    </form>
+                </li>
+
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-6">
+            @yield('content')
+        </main>
     </div>
 
-</div>
-
-{{-- Logout form --}}
-<form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-    @csrf
-</form>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-    const menuToggle = document.getElementById('menu-toggle');
-    const wrapper = document.getElementById('wrapper');
-    menuToggle.addEventListener('click', () => {
-        wrapper.classList.toggle('toggled');
-    });
-</script>
+    <script>
+        function toggleSidebar() {
+            let sidebar = document.getElementById("sidebar");
+            sidebar.classList.toggle("hidden");
+        }
+    </script>
 
 </body>
 </html>

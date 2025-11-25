@@ -18,13 +18,48 @@ class AdmissionForm extends Model
         'form_fields',
         'application_fee',
         'isPublished',
-        'isActive'
+        'isActive',
+        // New Fields
+        'offer_title', 
+        'intake', 
+        'degree', 
+        'major', 
+        'teaching_language', 
+        'scholarship_type', 
+        'location', 
+        'university_name_override',
+        'tuition_fees', 
+        'dorm_fees', 
+        'medical_fees', 
+        'insurance_fees', 
+        'resident_permit_fee', 
+        'text_book_fee', 
+        'deposit_fee', 
+        'dorm_deposit', 
+        'other_fees',
+        'scholarship_coverage', '
+        stipend_amount', 
+        'scholarship_other_facilities',
+        'after_scholarship_tuition_fees', 
+        'after_scholarship_dorm_fees',
+        'age_restriction', 
+        'country_restriction', 
+        'accept_in_china', 
+        'accept_studied_in_china',
+        'has_exclusive_service_policy', 
+        'has_premium_service_policy', 
+        'partner_rate', 
+        'student_rate'
     ];
 
     protected $casts = [
         'form_fields' => 'array',
         'isPublished' => 'boolean',
         'isActive' => 'boolean',
+        'accept_in_china' => 'boolean',
+        'accept_studied_in_china' => 'boolean',
+        'has_exclusive_service_policy' => 'boolean',
+        'has_premium_service_policy' => 'boolean',
     ];
 
     

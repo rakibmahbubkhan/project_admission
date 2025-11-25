@@ -77,57 +77,178 @@
 
             <!-- Tailwind Modal -->
             <div id="modal-{{ $form->id }}" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 hidden">
-                <div class="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-                    <div class="flex justify-between items-center p-6 border-b">
-                        <h3 class="text-xl font-semibold">{{ $form->title }}</h3>
-                        <button onclick="closeModal('modal-{{ $form->id }}')" class="text-gray-500 hover:text-gray-700">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
-                    <div class="p-6">
-                        <h6 class="font-semibold mb-2">Description</h6>
-                        <p class="text-gray-600 mb-4">{{ $form->description ?? 'No description available.' }}</p>
-                        
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                            <div>
-                                <h6 class="font-semibold">University</h6>
-                                <p class="text-gray-600">{{ $form->university->name ?? 'N/A' }}</p>
-                            </div>
-                            <div>
-                                <h6 class="font-semibold">Published Date</h6>
-                                <p class="text-gray-600">{{ $form->created_at->format('F d, Y') }}</p>
-                            </div>
-                        </div>
-                        
-                        @if($form->deadline)
-                            <div class="{{ $form->deadline->isPast() ? 'bg-red-100 border border-red-200' : 'bg-blue-100 border border-blue-200' }} rounded p-3 mb-4">
-                                <i class="fas fa-clock mr-2"></i>
-                                Application deadline: {{ $form->deadline->format('F d, Y') }}
-                                @if($form->deadline->isPast())
-                                    <span class="bg-red-500 text-white text-xs px-2 py-1 rounded ml-2">Expired</span>
-                                @endif
-                            </div>
-                        @endif
+    <div class="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+        
+        <div class="flex justify-between items-center p-6 border-b bg-gray-50 sticky top-0 z-10">
+            <div>
+                <h3 class="text-xl font-bold text-gray-800">{{ $form->offer_title ?? $form->title }}</h3>
+                <p class="text-sm text-gray-500">{{ $form->university_name_override ?? ($form->university->name ?? 'N/A') }}</p>
+            </div>
+            <button onclick="closeModal('modal-{{ $form->id }}')" class="text-gray-400 hover:text-gray-600 transition-colors">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+        </div>
 
-                        @if($form->requirements)
-                            <div class="mt-4">
-                                <h6 class="font-semibold mb-2">Requirements</h6>
-                                <p class="text-gray-600">{{ $form->requirements }}</p>
-                            </div>
-                        @endif
-                    </div>
-                    <div class="flex justify-end space-x-3 p-6 border-t">
-                        <button onclick="closeModal('modal-{{ $form->id }}')" class="bg-gray-300 hover:bg-gray-400 text-gray-800 py-2 px-4 rounded transition-colors">
-                            Close
-                        </button>
-                        @if($form->deadline && !$form->deadline->isPast())
-                            <a href="{{ route('student.forms.apply', $form->id) }}" class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded transition-colors">
-                                <i class="fas fa-edit mr-2"></i>Start Application
-                            </a>
-                        @endif
-                    </div>
+        <div class="p-6 space-y-6">
+
+            @if($form->description)
+            <div>
+                <h4 class="text-sm uppercase tracking-wide text-gray-500 font-bold mb-2">Description</h4>
+                <p class="text-gray-700 text-sm leading-relaxed">{{ $form->description }}</p>
+            </div>
+            @endif
+
+            <div class="bg-gray-50 rounded-lg p-4 border border-gray-100">
+                <h4 class="text-sm uppercase tracking-wide text-blue-600 font-bold mb-3">Offer Details</h4>
+                <div class="grid grid-cols-2 gap-y-3 gap-x-4 text-sm">
+                    @if(!empty($form->intake))
+                        <div><span class="text-gray-500 block text-xs">Intake</span> <span class="font-medium">{{ $form->intake }}</span></div>
+                    @endif
+                    @if(!empty($form->degree))
+                        <div><span class="text-gray-500 block text-xs">Degree</span> <span class="font-medium">{{ $form->degree }}</span></div>
+                    @endif
+                    @if(!empty($form->major))
+                        <div><span class="text-gray-500 block text-xs">Major</span> <span class="font-medium">{{ $form->major }}</span></div>
+                    @endif
+                    @if(!empty($form->teaching_language))
+                        <div><span class="text-gray-500 block text-xs">Language</span> <span class="font-medium">{{ $form->teaching_language }}</span></div>
+                    @endif
+                    @if(!empty($form->location))
+                        <div><span class="text-gray-500 block text-xs">Location</span> <span class="font-medium">{{ $form->location }}</span></div>
+                    @endif
+                    @if(!empty($form->scholarship_type))
+                        <div><span class="text-gray-500 block text-xs">Scholarship Type</span> <span class="font-medium text-green-600">{{ $form->scholarship_type }}</span></div>
+                    @endif
+                    <div><span class="text-gray-500 block text-xs">Published</span> <span class="font-medium">{{ $form->created_at->format('M d, Y') }}</span></div>
                 </div>
             </div>
+
+            @if($form->tuition_fees || $form->dorm_fees || $form->medical_fees || $form->insurance_fees || $form->resident_permit_fee || $form->text_book_fee || $form->deposit_fee || $form->dorm_deposit || $form->other_fees)
+            <div>
+                <h4 class="text-sm uppercase tracking-wide text-gray-500 font-bold mb-3">Fees Structure</h4>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-3 text-sm">
+                    @if($form->tuition_fees) 
+                        <div class="bg-gray-50 p-2 rounded"><span class="text-xs text-gray-500 block">Tuition (Yearly)</span> <span class="font-semibold">{{ $form->tuition_fees }}</span></div> 
+                    @endif
+                    @if($form->dorm_fees) 
+                        <div class="bg-gray-50 p-2 rounded"><span class="text-xs text-gray-500 block">Dorm Fees</span> <span class="font-semibold">{{ $form->dorm_fees }}</span></div> 
+                    @endif
+                    @if($form->application_fee) 
+                        <div class="bg-gray-50 p-2 rounded"><span class="text-xs text-gray-500 block">Application Fee</span> <span class="font-semibold">{{ $form->application_fee }}</span></div> 
+                    @endif
+                    @if($form->medical_fees) 
+                        <div class="bg-gray-50 p-2 rounded"><span class="text-xs text-gray-500 block">Medical</span> <span class="font-semibold">{{ $form->medical_fees }}</span></div> 
+                    @endif
+                    @if($form->insurance_fees) 
+                        <div class="bg-gray-50 p-2 rounded"><span class="text-xs text-gray-500 block">Insurance</span> <span class="font-semibold">{{ $form->insurance_fees }}</span></div> 
+                    @endif
+                    @if($form->resident_permit_fee) 
+                        <div class="bg-gray-50 p-2 rounded"><span class="text-xs text-gray-500 block">Visa/Permit</span> <span class="font-semibold">{{ $form->resident_permit_fee }}</span></div> 
+                    @endif
+                    @if($form->text_book_fee) 
+                        <div class="bg-gray-50 p-2 rounded"><span class="text-xs text-gray-500 block">Books</span> <span class="font-semibold">{{ $form->text_book_fee }}</span></div> 
+                    @endif
+                    @if($form->deposit_fee) 
+                        <div class="bg-gray-50 p-2 rounded"><span class="text-xs text-gray-500 block">Deposit</span> <span class="font-semibold">{{ $form->deposit_fee }}</span></div> 
+                    @endif
+                    @if($form->dorm_deposit) 
+                        <div class="bg-gray-50 p-2 rounded"><span class="text-xs text-gray-500 block">Dorm Deposit</span> <span class="font-semibold">{{ $form->dorm_deposit }}</span></div> 
+                    @endif
+                    @if($form->other_fees) 
+                        <div class="bg-gray-50 p-2 rounded"><span class="text-xs text-gray-500 block">Others</span> <span class="font-semibold">{{ $form->other_fees }}</span></div> 
+                    @endif
+                </div>
+            </div>
+            @endif
+
+            @if(!empty($form->scholarship_coverage) || !empty($form->stipend_amount))
+            <div class="bg-green-50 p-4 rounded-lg border border-green-100">
+                <h4 class="text-sm uppercase tracking-wide text-green-700 font-bold mb-2">Scholarship Information</h4>
+                <ul class="space-y-1 text-sm text-green-800">
+                    @if(!empty($form->scholarship_coverage))
+                        <li class="flex items-start"><i class="fas fa-check-circle mt-1 mr-2 text-green-600"></i> <span><strong>Coverage:</strong> {{ $form->scholarship_coverage }}</span></li>
+                    @endif
+                    @if(!empty($form->stipend_amount))
+                        <li class="flex items-start"><i class="fas fa-money-bill-wave mt-1 mr-2 text-green-600"></i> <span><strong>Stipend:</strong> {{ $form->stipend_amount }} / month</span></li>
+                    @endif
+                    @if(!empty($form->scholarship_other_facilities))
+                        <li class="flex items-start"><i class="fas fa-star mt-1 mr-2 text-green-600"></i> <span><strong>Facilities:</strong> {{ $form->scholarship_other_facilities }}</span></li>
+                    @endif
+                </ul>
+                
+                @if($form->after_scholarship_tuition_fees || $form->after_scholarship_dorm_fees)
+                    <div class="mt-3 pt-3 border-t border-green-200">
+                        <p class="text-xs font-bold text-green-800 uppercase mb-1">Payable After Scholarship:</p>
+                        <div class="flex gap-4 text-sm">
+                            @if($form->after_scholarship_tuition_fees)
+                                <span>Tuition: <b>{{ $form->after_scholarship_tuition_fees }}</b></span>
+                            @endif
+                            @if($form->after_scholarship_dorm_fees)
+                                <span>Dorm: <b>{{ $form->after_scholarship_dorm_fees }}</b></span>
+                            @endif
+                        </div>
+                    </div>
+                @endif
+            </div>
+            @endif
+
+            @if(!empty($form->age_restriction) || !empty($form->country_restriction) || $form->accept_in_china || $form->accept_studied_in_china)
+            <div class="bg-yellow-50 p-4 rounded-lg border border-yellow-100">
+                <h4 class="text-sm uppercase tracking-wide text-yellow-700 font-bold mb-2">Eligibility & Restrictions</h4>
+                <ul class="space-y-1 text-sm text-yellow-800">
+                    @if(!empty($form->age_restriction))
+                        <li><span class="font-semibold">Age Limit:</span> {{ $form->age_restriction }}</li>
+                    @endif
+                    @if(!empty($form->country_restriction))
+                        <li><span class="font-semibold">Country Restrictions:</span> {{ $form->country_restriction }}</li>
+                    @endif
+                    @if($form->accept_in_china)
+                        <li><i class="fas fa-info-circle mr-1"></i> Accepts students currently in China</li>
+                    @endif
+                    @if($form->accept_studied_in_china)
+                        <li><i class="fas fa-info-circle mr-1"></i> Accepts students who have studied in China before</li>
+                    @endif
+                </ul>
+            </div>
+            @endif
+
+            @if($form->has_exclusive_service_policy || $form->has_premium_service_policy)
+            <div class="flex items-center gap-3">
+                <span class="text-xs text-gray-500 uppercase font-bold">Service Policy:</span>
+                @if($form->has_exclusive_service_policy)
+                    <span class="px-2 py-1 bg-purple-100 text-purple-700 text-xs rounded font-semibold">Exclusive</span>
+                @endif
+                @if($form->has_premium_service_policy)
+                    <span class="px-2 py-1 bg-indigo-100 text-indigo-700 text-xs rounded font-semibold">Premium</span>
+                @endif
+            </div>
+            @endif
+
+            @if($form->deadline)
+                <div class="flex items-center p-3 rounded-lg {{ $form->deadline->isPast() ? 'bg-red-50 text-red-700' : 'bg-blue-50 text-blue-700' }}">
+                    <i class="fas fa-clock mr-2"></i>
+                    <span class="text-sm font-medium">
+                        Application Deadline: {{ $form->deadline->format('F d, Y') }}
+                    </span>
+                    @if($form->deadline->isPast())
+                        <span class="ml-2 text-xs bg-red-200 text-red-800 px-2 py-0.5 rounded-full">Expired</span>
+                    @endif
+                </div>
+            @endif
+        </div>
+
+        <div class="flex justify-end items-center space-x-3 p-6 border-t bg-gray-50 sticky bottom-0">
+            <button onclick="closeModal('modal-{{ $form->id }}')" class="px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 font-medium transition-colors">
+                Close
+            </button>
+            @if($form->deadline && !$form->deadline->isPast())
+                <a href="{{ route('student.forms.apply', $form->id) }}" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 font-medium shadow-sm transition-colors flex items-center">
+                    <i class="fas fa-paper-plane mr-2"></i> Apply Now
+                </a>
+            @endif
+        </div>
+    </div>
+</div>
         @empty
             <div class="col-span-full">
                 <div class="bg-white rounded-lg shadow-sm border border-gray-200">
