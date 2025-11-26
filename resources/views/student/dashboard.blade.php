@@ -47,7 +47,7 @@
                     Apply to a University
                 </a>
 
-                <a href="{{ route('student.submissions') }}"
+                <a href="{{ route('student.forms.submissions') }}"
                    class="p-4 bg-green-600 text-white rounded shadow hover:bg-green-700">
                     View My Applications
                 </a>

@@ -30,6 +30,9 @@ class RedirectIfAuthenticated
             elseif ($role === 'student') {
                 return redirect('/student/dashboard');
             }
+            else{
+                return redirect('/student/dashboard');
+            }
         }
     }
 

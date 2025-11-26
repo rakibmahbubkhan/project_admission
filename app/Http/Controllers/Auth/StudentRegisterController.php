@@ -54,6 +54,6 @@ class StudentRegisterController extends Controller
             'address' => $request->address,
         ]);
 
-        return redirect()->route('login')->with('success', 'Registration successful! Please log in.');
+        return redirect()->route('student.dashboard')->with('success', 'Registration successful! Please log in.');
     }
 }

@@ -2183,38 +2183,60 @@ modal Area
 
             <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                 <h3 class="th-form-title mb-30">Sign in to your account</h3>
-                <form action="mail.php" method="POST" class="login-form ajax-contact">
-                    <div class="row">
-                        <div class="form-group col-12">
-                            <label>Username*</label>
-                            <input type="text" class="form-control" name="usename" id="usename" required="required">
-                        </div>
-                        <div class="form-group col-12">
-                            <label>First name*</label>
-                            <input type="text" class="form-control" name="firstname" id="firstname" required="required">
-                        </div>
-                        <div class="form-group col-12">
-                            <label>Last name*</label>
-                            <input type="text" class="form-control" name="lastname" id="lastname" required="required">
-                        </div>
-                        <div class="form-group col-12">
-                            <label for="new_email">Your email*</label>
-                            <input type="text" class="form-control" name="new_email" id="new_email" required="required">
-                        </div>
-                        <div class="form-group col-12">
-                            <label for="new_email_confirm">Confirm email*</label>
-                            <input type="text" class="form-control" name="new_email_confirm" id="new_email_confirm" required="required">
-                        </div>
-                        <div class="statement">
-                            <span class="register-notes">A password will be emailed to you.</span>
-                        </div>
+                <form method="POST" action="{{ route('register') }}" class="login-form">
+    @csrf
 
-                        <div class="form-btn mt-20 col-12">
-                            <button class="th-btn btn-fw th-radius2 ">Sign up</button>
-                        </div>
-                    </div>
-                    <p class="form-messages mb-0 mt-3"></p>
-                </form>
+    <div class="row">
+
+        <!-- Name -->
+        <div class="form-group col-12">
+            <label>Name*</label>
+            <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}" required autofocus>
+            @error('name')
+                <span class="text-danger">{{ $message }}</span>
+            @enderror
+        </div>
+
+        <!-- Email -->
+        <div class="form-group col-12">
+            <label>Email*</label>
+            <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}" required>
+            @error('email')
+                <span class="text-danger">{{ $message }}</span>
+            @enderror
+        </div>
+
+        <!-- Password -->
+        <div class="form-group col-12">
+            <label>Password*</label>
+            <input type="password" class="form-control" id="password" name="password" required>
+            @error('password')
+                <span class="text-danger">{{ $message }}</span>
+            @enderror
+        </div>
+
+        <!-- Confirm Password -->
+        <div class="form-group col-12">
+            <label>Confirm Password*</label>
+            <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" required>
+            @error('password_confirmation')
+                <span class="text-danger">{{ $message }}</span>
+            @enderror
+        </div>
+
+        <!-- Login redirect -->
+        <div class="col-12 mt-2">
+            <a href="{{ route('login') }}" class="text-sm">Already registered?</a>
+        </div>
+
+        <!-- Submit button -->
+        <div class="form-btn mt-20 col-12">
+            <button type="submit" class="th-btn btn-fw th-radius2">Sign up</button>
+        </div>
+    </div>
+
+</form>
+
             </div>
         </div>
     </div>
