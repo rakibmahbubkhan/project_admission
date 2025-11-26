@@ -17,6 +17,7 @@ return new class extends Migration {
         $table->decimal('application_fee', 10, 2)->default(0);
         $table->boolean('isPublished')->default(false);
         $table->boolean('isActive')->default(true);
+        $table->dateTime('deadline')->nullable();
         $table->timestamps();
         $table->foreign('university_id')
               ->references('id')

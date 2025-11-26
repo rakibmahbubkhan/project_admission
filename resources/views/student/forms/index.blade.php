@@ -1,296 +1,291 @@
 @extends('layouts.student')
 
-@section('title', 'Available Forms')
+@section('title', 'Available Programs')
 
 @section('content')
-<div class="container mx-auto px-4">
-    <!-- Header Section -->
-    <div class="flex justify-between items-center pt-3 pb-2 mb-4 border-b">
-        <div>
-            <h1 class="text-2xl font-bold mb-1">Available Admission Forms</h1>
-            <p class="text-gray-600 mb-0">Browse and apply to available university admission forms</p>
-        </div>
+<div class="container mx-auto px-4 py-8">
+    
+    <!-- Page Header -->
+    <div class="mb-8 text-center md:text-left">
+        <h1 class="text-3xl font-bold text-gray-800">Find Your Program</h1>
+        <p class="text-gray-500 mt-2">Browse and apply for admission to top universities.</p>
     </div>
 
-    @if (session('success'))
-        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4 flex items-center" role="alert">
-            <i class="fas fa-check-circle mr-2"></i>
-            <div class="flex-grow-1">{{ session('success') }}</div>
-            <button type="button" class="text-green-700" onclick="this.parentElement.style.display='none'">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-    @endif
-
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        @forelse($forms as $form)
-            <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow duration-200">
-                <div class="p-6 border-b border-gray-200">
-                    <h5 class="text-lg font-semibold text-blue-600 mb-1">{{ $form->title }}</h5>
-                    <small class="text-gray-500">
-                        <i class="fas fa-university mr-1"></i>
-                        {{ $form->university->name ?? 'University' }}
-                    </small>
-                </div>
-                <div class="p-6">
-                    <p class="text-gray-600 mb-3 text-sm">
-                        {{ Str::limit($form->description, 120) }}
-                    </p>
-                    
-                    <div class="mb-3">
-                        <small class="text-gray-500">
-                            <i class="fas fa-calendar mr-1"></i>
-                            Published: {{ $form->created_at->format('M d, Y') }}
-                        </small>
-                    </div>
-                    
-                    @if($form->deadline)
-                        <div class="mb-3">
-                            <small class="{{ $form->deadline->isPast() ? 'text-red-600' : 'text-green-600' }}">
-                                <i class="fas fa-clock mr-1"></i>
-                                Deadline: {{ $form->deadline->format('M d, Y') }}
-                                @if($form->deadline->isPast())
-                                    <span class="bg-red-100 text-red-800 text-xs px-2 py-1 rounded ml-1">Expired</span>
-                                @endif
-                            </small>
-                        </div>
-                    @endif
-                </div>
-                <div class="p-6 pt-0">
-                    <div class="space-y-2">
-                        @if($form->deadline && $form->deadline->isPast())
-                            <button class="w-full bg-gray-200 text-gray-500 py-2 px-4 rounded cursor-not-allowed" disabled>
-                                <i class="fas fa-ban mr-2"></i>Application Closed
-                            </button>
-                        @else
-                            <a href="{{ route('student.forms.apply', $form->id) }}" class="block w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded text-center transition-colors">
-                                <i class="fas fa-edit mr-2"></i>Apply Now
-                            </a>
-                        @endif
-                        
-                        <button onclick="openModal('modal-{{ $form->id }}')" class="w-full border border-blue-600 text-blue-600 hover:bg-blue-50 py-2 px-4 rounded transition-colors">
-                            <i class="fas fa-eye mr-2"></i>View Details
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Tailwind Modal -->
-            <div id="modal-{{ $form->id }}" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 hidden">
-    <div class="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-        
-        <div class="flex justify-between items-center p-6 border-b bg-gray-50 sticky top-0 z-10">
-            <div>
-                <h3 class="text-xl font-bold text-gray-800">{{ $form->offer_title ?? $form->title }}</h3>
-                <p class="text-sm text-gray-500">{{ $form->university_name_override ?? ($form->university->name ?? 'N/A') }}</p>
-            </div>
-            <button onclick="closeModal('modal-{{ $form->id }}')" class="text-gray-400 hover:text-gray-600 transition-colors">
-                <i class="fas fa-times text-xl"></i>
-            </button>
-        </div>
-
-        <div class="p-6 space-y-6">
-
-            @if($form->description)
-            <div>
-                <h4 class="text-sm uppercase tracking-wide text-gray-500 font-bold mb-2">Description</h4>
-                <p class="text-gray-700 text-sm leading-relaxed">{{ $form->description }}</p>
-            </div>
-            @endif
-
-            <div class="bg-gray-50 rounded-lg p-4 border border-gray-100">
-                <h4 class="text-sm uppercase tracking-wide text-blue-600 font-bold mb-3">Offer Details</h4>
-                <div class="grid grid-cols-2 gap-y-3 gap-x-4 text-sm">
-                    @if(!empty($form->intake))
-                        <div><span class="text-gray-500 block text-xs">Intake</span> <span class="font-medium">{{ $form->intake }}</span></div>
-                    @endif
-                    @if(!empty($form->degree))
-                        <div><span class="text-gray-500 block text-xs">Degree</span> <span class="font-medium">{{ $form->degree }}</span></div>
-                    @endif
-                    @if(!empty($form->major))
-                        <div><span class="text-gray-500 block text-xs">Major</span> <span class="font-medium">{{ $form->major }}</span></div>
-                    @endif
-                    @if(!empty($form->teaching_language))
-                        <div><span class="text-gray-500 block text-xs">Language</span> <span class="font-medium">{{ $form->teaching_language }}</span></div>
-                    @endif
-                    @if(!empty($form->location))
-                        <div><span class="text-gray-500 block text-xs">Location</span> <span class="font-medium">{{ $form->location }}</span></div>
-                    @endif
-                    @if(!empty($form->scholarship_type))
-                        <div><span class="text-gray-500 block text-xs">Scholarship Type</span> <span class="font-medium text-green-600">{{ $form->scholarship_type }}</span></div>
-                    @endif
-                    <div><span class="text-gray-500 block text-xs">Published</span> <span class="font-medium">{{ $form->created_at->format('M d, Y') }}</span></div>
-                </div>
-            </div>
-
-            @if($form->tuition_fees || $form->dorm_fees || $form->medical_fees || $form->insurance_fees || $form->resident_permit_fee || $form->text_book_fee || $form->deposit_fee || $form->dorm_deposit || $form->other_fees)
-            <div>
-                <h4 class="text-sm uppercase tracking-wide text-gray-500 font-bold mb-3">Fees Structure</h4>
-                <div class="grid grid-cols-2 md:grid-cols-3 gap-3 text-sm">
-                    @if($form->tuition_fees) 
-                        <div class="bg-gray-50 p-2 rounded"><span class="text-xs text-gray-500 block">Tuition (Yearly)</span> <span class="font-semibold">{{ $form->tuition_fees }}</span></div> 
-                    @endif
-                    @if($form->dorm_fees) 
-                        <div class="bg-gray-50 p-2 rounded"><span class="text-xs text-gray-500 block">Dorm Fees</span> <span class="font-semibold">{{ $form->dorm_fees }}</span></div> 
-                    @endif
-                    @if($form->application_fee) 
-                        <div class="bg-gray-50 p-2 rounded"><span class="text-xs text-gray-500 block">Application Fee</span> <span class="font-semibold">{{ $form->application_fee }}</span></div> 
-                    @endif
-                    @if($form->medical_fees) 
-                        <div class="bg-gray-50 p-2 rounded"><span class="text-xs text-gray-500 block">Medical</span> <span class="font-semibold">{{ $form->medical_fees }}</span></div> 
-                    @endif
-                    @if($form->insurance_fees) 
-                        <div class="bg-gray-50 p-2 rounded"><span class="text-xs text-gray-500 block">Insurance</span> <span class="font-semibold">{{ $form->insurance_fees }}</span></div> 
-                    @endif
-                    @if($form->resident_permit_fee) 
-                        <div class="bg-gray-50 p-2 rounded"><span class="text-xs text-gray-500 block">Visa/Permit</span> <span class="font-semibold">{{ $form->resident_permit_fee }}</span></div> 
-                    @endif
-                    @if($form->text_book_fee) 
-                        <div class="bg-gray-50 p-2 rounded"><span class="text-xs text-gray-500 block">Books</span> <span class="font-semibold">{{ $form->text_book_fee }}</span></div> 
-                    @endif
-                    @if($form->deposit_fee) 
-                        <div class="bg-gray-50 p-2 rounded"><span class="text-xs text-gray-500 block">Deposit</span> <span class="font-semibold">{{ $form->deposit_fee }}</span></div> 
-                    @endif
-                    @if($form->dorm_deposit) 
-                        <div class="bg-gray-50 p-2 rounded"><span class="text-xs text-gray-500 block">Dorm Deposit</span> <span class="font-semibold">{{ $form->dorm_deposit }}</span></div> 
-                    @endif
-                    @if($form->other_fees) 
-                        <div class="bg-gray-50 p-2 rounded"><span class="text-xs text-gray-500 block">Others</span> <span class="font-semibold">{{ $form->other_fees }}</span></div> 
-                    @endif
-                </div>
-            </div>
-            @endif
-
-            @if(!empty($form->scholarship_coverage) || !empty($form->stipend_amount))
-            <div class="bg-green-50 p-4 rounded-lg border border-green-100">
-                <h4 class="text-sm uppercase tracking-wide text-green-700 font-bold mb-2">Scholarship Information</h4>
-                <ul class="space-y-1 text-sm text-green-800">
-                    @if(!empty($form->scholarship_coverage))
-                        <li class="flex items-start"><i class="fas fa-check-circle mt-1 mr-2 text-green-600"></i> <span><strong>Coverage:</strong> {{ $form->scholarship_coverage }}</span></li>
-                    @endif
-                    @if(!empty($form->stipend_amount))
-                        <li class="flex items-start"><i class="fas fa-money-bill-wave mt-1 mr-2 text-green-600"></i> <span><strong>Stipend:</strong> {{ $form->stipend_amount }} / month</span></li>
-                    @endif
-                    @if(!empty($form->scholarship_other_facilities))
-                        <li class="flex items-start"><i class="fas fa-star mt-1 mr-2 text-green-600"></i> <span><strong>Facilities:</strong> {{ $form->scholarship_other_facilities }}</span></li>
-                    @endif
-                </ul>
+    <!-- Search & Filter Section -->
+    <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 mb-8">
+        <form action="{{ route('student.forms') }}" method="GET">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
                 
-                @if($form->after_scholarship_tuition_fees || $form->after_scholarship_dorm_fees)
-                    <div class="mt-3 pt-3 border-t border-green-200">
-                        <p class="text-xs font-bold text-green-800 uppercase mb-1">Payable After Scholarship:</p>
-                        <div class="flex gap-4 text-sm">
-                            @if($form->after_scholarship_tuition_fees)
-                                <span>Tuition: <b>{{ $form->after_scholarship_tuition_fees }}</b></span>
-                            @endif
-                            @if($form->after_scholarship_dorm_fees)
-                                <span>Dorm: <b>{{ $form->after_scholarship_dorm_fees }}</b></span>
-                            @endif
-                        </div>
+                <!-- Search Input -->
+                <div class="md:col-span-5">
+                    <label for="search" class="block text-xs font-bold text-gray-500 uppercase mb-1">Search</label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i class="fas fa-search text-gray-400"></i>
+                        </span>
+                        <input type="text" 
+                               name="search" 
+                               id="search" 
+                               value="{{ request('search') }}" 
+                               class="pl-10 block w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500 text-sm py-2.5" 
+                               placeholder="Search program or university...">
                     </div>
-                @endif
-            </div>
-            @endif
+                </div>
 
-            @if(!empty($form->age_restriction) || !empty($form->country_restriction) || $form->accept_in_china || $form->accept_studied_in_china)
-            <div class="bg-yellow-50 p-4 rounded-lg border border-yellow-100">
-                <h4 class="text-sm uppercase tracking-wide text-yellow-700 font-bold mb-2">Eligibility & Restrictions</h4>
-                <ul class="space-y-1 text-sm text-yellow-800">
-                    @if(!empty($form->age_restriction))
-                        <li><span class="font-semibold">Age Limit:</span> {{ $form->age_restriction }}</li>
-                    @endif
-                    @if(!empty($form->country_restriction))
-                        <li><span class="font-semibold">Country Restrictions:</span> {{ $form->country_restriction }}</li>
-                    @endif
-                    @if($form->accept_in_china)
-                        <li><i class="fas fa-info-circle mr-1"></i> Accepts students currently in China</li>
-                    @endif
-                    @if($form->accept_studied_in_china)
-                        <li><i class="fas fa-info-circle mr-1"></i> Accepts students who have studied in China before</li>
-                    @endif
-                </ul>
-            </div>
-            @endif
+                <!-- University Filter -->
+                <div class="md:col-span-3">
+                    <label for="university_id" class="block text-xs font-bold text-gray-500 uppercase mb-1">University</label>
+                    <select name="university_id" id="university_id" class="block w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500 text-sm py-2.5">
+                        <option value="">All Universities</option>
+                        @foreach($universities as $uni)
+                            <option value="{{ $uni->id }}" {{ request('university_id') == $uni->id ? 'selected' : '' }}>
+                                {{ $uni->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
 
-            @if($form->has_exclusive_service_policy || $form->has_premium_service_policy)
-            <div class="flex items-center gap-3">
-                <span class="text-xs text-gray-500 uppercase font-bold">Service Policy:</span>
-                @if($form->has_exclusive_service_policy)
-                    <span class="px-2 py-1 bg-purple-100 text-purple-700 text-xs rounded font-semibold">Exclusive</span>
-                @endif
-                @if($form->has_premium_service_policy)
-                    <span class="px-2 py-1 bg-indigo-100 text-indigo-700 text-xs rounded font-semibold">Premium</span>
-                @endif
-            </div>
-            @endif
+                <!-- Language Filter -->
+                <div class="md:col-span-2">
+                    <label for="language" class="block text-xs font-bold text-gray-500 uppercase mb-1">Language</label>
+                    <select name="language" id="language" class="block w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500 text-sm py-2.5">
+                        <option value="">All Languages</option>
+                        @foreach($languages as $lang)
+                            <option value="{{ $lang }}" {{ request('language') == $lang ? 'selected' : '' }}>
+                                {{ ucfirst($lang) }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
 
-            @if($form->deadline)
-                <div class="flex items-center p-3 rounded-lg {{ $form->deadline->isPast() ? 'bg-red-50 text-red-700' : 'bg-blue-50 text-blue-700' }}">
-                    <i class="fas fa-clock mr-2"></i>
-                    <span class="text-sm font-medium">
-                        Application Deadline: {{ $form->deadline->format('F d, Y') }}
-                    </span>
-                    @if($form->deadline->isPast())
-                        <span class="ml-2 text-xs bg-red-200 text-red-800 px-2 py-0.5 rounded-full">Expired</span>
-                    @endif
+                <!-- Filter Button -->
+                <div class="md:col-span-2 flex items-end">
+                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 px-4 rounded-lg shadow-md transition duration-200 text-sm">
+                        <i class="fas fa-filter mr-2"></i> Filter
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Active Filters Reset -->
+            @if(request()->anyFilled(['search', 'university_id', 'language']))
+                <div class="mt-4 flex items-center gap-2">
+                    <a href="{{ route('student.forms') }}" class="text-xs font-medium text-red-600 hover:text-red-800 bg-red-50 hover:bg-red-100 px-3 py-1 rounded-full transition">
+                        <i class="fas fa-times mr-1"></i> Clear Filters
+                    </a>
                 </div>
             @endif
-        </div>
-
-        <div class="flex justify-end items-center space-x-3 p-6 border-t bg-gray-50 sticky bottom-0">
-            <button onclick="closeModal('modal-{{ $form->id }}')" class="px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 font-medium transition-colors">
-                Close
-            </button>
-            @if($form->deadline && !$form->deadline->isPast())
-                <a href="{{ route('student.forms.apply', $form->id) }}" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 font-medium shadow-sm transition-colors flex items-center">
-                    <i class="fas fa-paper-plane mr-2"></i> Apply Now
-                </a>
-            @endif
-        </div>
+        </form>
     </div>
-</div>
-        @empty
-            <div class="col-span-full">
-                <div class="bg-white rounded-lg shadow-sm border border-gray-200">
-                    <div class="text-center py-12">
-                        <i class="fas fa-inbox text-5xl text-gray-400 mb-4"></i>
-                        <h4 class="text-gray-500 text-xl mb-2">No Forms Available</h4>
-                        <p class="text-gray-400">There are no admission forms available at the moment.</p>
+
+    <!-- Results Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        @forelse($forms as $form)
+            <div class="bg-white rounded-xl shadow-sm hover:shadow-lg transition-shadow duration-300 border border-gray-100 flex flex-col h-full relative group">
+                
+                <!-- University / Program Image -->
+                <div class="h-32 bg-gradient-to-r from-blue-50 to-indigo-50 relative overflow-hidden rounded-t-xl">
+                    @if($form->university && $form->university->image)
+                        <img src="{{ asset('storage/' . $form->university->image) }}" alt="{{ $form->university->name }}" class="w-full h-full object-cover">
+                    @else
+                        <div class="w-full h-full flex items-center justify-center text-blue-100">
+                            <i class="fas fa-university text-5xl"></i>
+                        </div>
+                    @endif
+                    <div class="absolute top-3 right-3">
+                         <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-bold bg-white/90 text-blue-600 shadow-sm">
+                            {{ $form->program_type ?? 'Degree' }}
+                        </span>
                     </div>
+                </div>
+
+                <!-- Card Content -->
+                <div class="p-5 flex-1 flex flex-col">
+                    <div class="mb-1">
+                        <span class="text-xs font-bold text-gray-400 uppercase tracking-wide flex items-center">
+                            <i class="fas fa-school mr-1.5"></i>
+                            {{ $form->university->name ?? 'Unknown University' }}
+                        </span>
+                    </div>
+
+                    <h3 class="text-lg font-bold text-gray-900 mb-3 leading-tight group-hover:text-blue-600 transition-colors">
+                        {{ $form->program_name ?? $form->title }}
+                    </h3>
+
+                    <div class="grid grid-cols-2 gap-y-2 gap-x-4 text-sm text-gray-600 mb-6">
+                        <div class="flex items-center">
+                            <i class="fas fa-globe text-gray-400 w-5"></i>
+                            <span>{{ ucfirst($form->language ?? 'English') }}</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-tag text-gray-400 w-5"></i>
+                            <span>${{ number_format($form->application_fee ?? 0) }}</span>
+                        </div>
+                        <div class="flex items-center col-span-2">
+                            <i class="far fa-calendar-alt text-gray-400 w-5"></i>
+                            <span class="{{ ($form->deadline && $form->deadline < now()) ? 'text-red-600 font-semibold' : '' }}">
+                                {{ $form->deadline ? \Carbon\Carbon::parse($form->deadline)->format('M d, Y') : 'Open Admission' }}
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="mt-auto pt-4 border-t border-gray-100 flex gap-3">
+                        <!-- Button to Open Modal -->
+                        <button type="button" onclick="openModal('modal-{{ $form->id }}')" class="flex-1 bg-white border border-blue-600 text-blue-600 hover:bg-blue-50 font-semibold py-2 px-4 rounded-lg transition duration-200 text-sm">
+                            View Details
+                        </button>
+                        
+                        @if(!$form->deadline || $form->deadline >= now())
+                            <a href="{{ route('student.forms.apply', $form->id) }}" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg text-center transition duration-200 text-sm shadow-md">
+                                Apply
+                            </a>
+                        @else
+                            <button disabled class="flex-1 bg-gray-100 text-gray-400 font-semibold py-2 px-4 rounded-lg cursor-not-allowed text-sm">
+                                Closed
+                            </button>
+                        @endif
+                    </div>
+                </div>
+            </div>
+
+            <!-- DETAILS MODAL (Generated inside loop for each form) -->
+            <div id="modal-{{ $form->id }}" class="fixed inset-0 z-50 hidden overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+                <!-- Backdrop -->
+                <div class="fixed inset-0 bg-gray-900 bg-opacity-50 transition-opacity backdrop-blur-sm" onclick="closeModal('modal-{{ $form->id }}')"></div>
+
+                <div class="flex items-center justify-center min-h-screen p-4 text-center sm:p-0">
+                    <div class="relative bg-white rounded-2xl text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:max-w-2xl w-full">
+                        
+                        <!-- Modal Header -->
+                        <div class="bg-gray-50 px-6 py-4 border-b border-gray-100 flex justify-between items-center">
+                            <h3 class="text-lg leading-6 font-bold text-gray-900" id="modal-title">
+                                Program Overview
+                            </h3>
+                            <button type="button" class="text-gray-400 hover:text-gray-500 focus:outline-none transition-colors" onclick="closeModal('modal-{{ $form->id }}')">
+                                <span class="sr-only">Close</span>
+                                <i class="fas fa-times text-xl"></i>
+                            </button>
+                        </div>
+
+                        <!-- Modal Body -->
+                        <div class="px-6 py-6 max-h-[70vh] overflow-y-auto">
+                            <div class="flex items-center gap-4 mb-6">
+                                <div class="h-16 w-16 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                    @if($form->university && $form->university->logo)
+                                        <img src="{{ asset('storage/' . $form->university->logo) }}" alt="Logo" class="h-12 w-12 object-contain">
+                                    @else
+                                        <i class="fas fa-university text-blue-500 text-2xl"></i>
+                                    @endif
+                                </div>
+                                <div>
+                                    <h2 class="text-2xl font-bold text-gray-900 leading-tight">{{ $form->program_name }}</h2>
+                                    <p class="text-sm text-gray-500 font-medium">{{ $form->university->name ?? 'Unknown University' }}</p>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+                                <div class="bg-blue-50 p-3 rounded-lg text-center border border-blue-100">
+                                    <p class="text-xs font-bold text-blue-600 uppercase tracking-wider mb-1">Fee</p>
+                                    <p class="text-lg font-bold text-gray-900">${{ number_format($form->application_fee ?? 0, 0) }}</p>
+                                </div>
+                                <div class="bg-green-50 p-3 rounded-lg text-center border border-green-100">
+                                    <p class="text-xs font-bold text-green-600 uppercase tracking-wider mb-1">Deadline</p>
+                                    <p class="text-lg font-bold text-gray-900">
+                                        {{ $form->deadline ? \Carbon\Carbon::parse($form->deadline)->format('M d') : 'Rolling' }}
+                                    </p>
+                                </div>
+                                <div class="bg-purple-50 p-3 rounded-lg text-center border border-purple-100">
+                                    <p class="text-xs font-bold text-purple-600 uppercase tracking-wider mb-1">Language</p>
+                                    <p class="text-lg font-bold text-gray-900">{{ ucfirst($form->language ?? 'English') }}</p>
+                                </div>
+                            </div>
+
+                            <div class="space-y-6">
+                                <div>
+                                    <h4 class="flex items-center text-sm font-bold text-gray-900 uppercase tracking-wider mb-3">
+                                        <i class="fas fa-align-left mr-2 text-blue-500"></i> Description
+                                    </h4>
+                                    <div class="text-gray-600 text-sm leading-relaxed bg-gray-50 p-4 rounded-lg border border-gray-100">
+                                        {!! nl2br(e($form->description)) !!}
+                                    </div>
+                                </div>
+
+                                @if(!empty($form->requirements))
+                                <div>
+                                    <h4 class="flex items-center text-sm font-bold text-gray-900 uppercase tracking-wider mb-3">
+                                        <i class="fas fa-list-check mr-2 text-blue-500"></i> Requirements
+                                    </h4>
+                                    <div class="text-gray-600 text-sm leading-relaxed bg-gray-50 p-4 rounded-lg border border-gray-100">
+                                        {!! nl2br(e($form->requirements)) !!}
+                                    </div>
+                                </div>
+                                @endif
+                            </div>
+                        </div>
+
+                        <!-- Modal Footer -->
+                        <div class="bg-gray-50 px-6 py-4 sm:px-6 sm:flex sm:flex-row-reverse gap-3 border-t border-gray-100">
+                            @if(!$form->deadline || $form->deadline >= now())
+                                <a href="{{ route('student.forms.apply', $form->id) }}" class="w-full inline-flex justify-center items-center rounded-lg border border-transparent shadow-sm px-6 py-2.5 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:w-auto sm:text-sm transition-colors">
+                                    Start Application <i class="fas fa-arrow-right ml-2"></i>
+                                </a>
+                            @endif
+                            <button type="button" class="mt-3 w-full inline-flex justify-center rounded-lg border border-gray-300 shadow-sm px-4 py-2.5 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:mt-0 sm:w-auto sm:text-sm transition-colors" onclick="closeModal('modal-{{ $form->id }}')">
+                                Close
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END MODAL -->
+
+        @empty
+            <div class="col-span-1 md:col-span-2 lg:col-span-3">
+                <div class="flex flex-col items-center justify-center py-16 bg-gray-50 rounded-xl border-2 border-dashed border-gray-300">
+                    <div class="bg-white p-4 rounded-full shadow-sm mb-4">
+                        <i class="fas fa-search text-gray-400 text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-1">No programs found</h3>
+                    <p class="text-gray-500 text-sm mb-6">We couldn't find any programs matching your current filters.</p>
+                    <a href="{{ route('student.forms') }}" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-blue-700 bg-blue-100 hover:bg-blue-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors">
+                        <i class="fas fa-redo mr-2"></i> Clear all filters
+                    </a>
                 </div>
             </div>
         @endforelse
     </div>
+
+    <!-- Pagination -->
+    <div class="mt-8">
+        {{ $forms->links() }}
+    </div>
 </div>
 
+<!-- Modal Scripts -->
 <script>
-function openModal(modalId) {
-    document.getElementById(modalId).classList.remove('hidden');
-    document.body.style.overflow = 'hidden';
-}
-
-function closeModal(modalId) {
-    document.getElementById(modalId).classList.add('hidden');
-    document.body.style.overflow = 'auto';
-}
-
-// Close modal when clicking outside
-document.addEventListener('click', function(event) {
-    if (event.target.classList.contains('fixed')) {
-        event.target.classList.add('hidden');
-        document.body.style.overflow = 'auto';
+    function openModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if(modal) {
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
     }
-});
 
-// Close modal with Escape key
-document.addEventListener('keydown', function(event) {
-    if (event.key === 'Escape') {
-        const modals = document.querySelectorAll('.fixed.bg-opacity-50');
-        modals.forEach(modal => {
+    function closeModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if(modal) {
             modal.classList.add('hidden');
-        });
-        document.body.style.overflow = 'auto';
+            document.body.style.overflow = ''; // Restore scrolling
+        }
     }
-});
+
+    // Close modal on Escape key press
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+            const modals = document.querySelectorAll('[id^="modal-"]:not(.hidden)');
+            modals.forEach(modal => {
+                closeModal(modal.id);
+            });
+        }
+    });
 </script>
 @endsection

@@ -12,25 +12,17 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 
-class AdmissionFormController extends Controller
+class copyAdmissionFormController extends Controller
 {
     /**
      * List all admission forms.
      */
-    // public function index()
-    // {
-    //     $forms = AdmissionForm::with('university')
-    //                 ->orderBy('id', 'desc')
-    //                 ->get();
-
-    //     return view('admission_forms.index', compact('forms'));
-    // }
 
     public function index()
-{
-    $forms = AdmissionForm::latest()->get();
-    return view('super_admin.forms.index', compact('forms'));
-}
+    {
+        $forms = AdmissionForm::latest()->get();
+        return view('super_admin.forms.index', compact('forms'));
+    }
 
 
     public function create()

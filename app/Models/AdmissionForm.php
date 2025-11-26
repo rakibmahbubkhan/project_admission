@@ -19,6 +19,7 @@ class AdmissionForm extends Model
         'application_fee',
         'isPublished',
         'isActive',
+        'deadline',
         // New Fields
         'offer_title', 
         'intake', 
@@ -37,8 +38,8 @@ class AdmissionForm extends Model
         'deposit_fee', 
         'dorm_deposit', 
         'other_fees',
-        'scholarship_coverage', '
-        stipend_amount', 
+        'scholarship_coverage', 
+        'stipend_amount', 
         'scholarship_other_facilities',
         'after_scholarship_tuition_fees', 
         'after_scholarship_dorm_fees',
@@ -96,6 +97,12 @@ class AdmissionForm extends Model
     public function applications()
     {
         return $this->hasMany(Application::class, 'form_id');
+    }
+
+    public function formSections()
+    {
+        // Using standard foreign key 'admission_form_id' based on previous stack trace insights
+        return $this->hasMany(Section::class, 'admission_form_id')->orderBy('order');
     }
 
 }

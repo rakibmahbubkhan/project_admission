@@ -10,10 +10,11 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        // Clear the users table first
-        //DB::table('users')->truncate();
+        // ---------------------------------------------------------
+        // 1. Seed Users (Super Admin → Agents → Students)
+        // ---------------------------------------------------------
 
-        // Create Super Admin (first user, created_by is null)
+        // SUPER ADMIN
         $superAdminId = DB::table('users')->insertGetId([
             'name' => 'Super Admin',
             'email' => 'superadmin@example.com',
@@ -27,7 +28,7 @@ class DatabaseSeeder extends Seeder
             'updated_at' => now(),
         ]);
 
-        // Create Agents (created by super admin)
+        // AGENTS
         $agent1Id = DB::table('users')->insertGetId([
             'name' => 'John Agent',
             'email' => 'agent1@example.com',
@@ -54,9 +55,8 @@ class DatabaseSeeder extends Seeder
             'updated_at' => now(),
         ]);
 
-        // Create Students (created by agents)
-        $students = [
-            // Created by Agent 1
+        // STUDENTS
+        DB::table('users')->insert([
             [
                 'name' => 'Alice Student',
                 'email' => 'alice@example.com',
@@ -81,7 +81,6 @@ class DatabaseSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
-            // Created by Agent 2
             [
                 'name' => 'Charlie Student',
                 'email' => 'charlie@example.com',
@@ -106,14 +105,27 @@ class DatabaseSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
-        ];
+        ]);
 
-        DB::table('users')->insert($students);
+        // ---------------------------------------------------------
+        // 2. Call Other Seeders (universities + admission forms)
+        // ---------------------------------------------------------
 
+        $this->call([
+            UniversitySeeder::class,
+            AdmissionFormSeeder::class,
+        ]);
+
+        // ---------------------------------------------------------
+        // CLI Output
+        // ---------------------------------------------------------
+
+        $this->command->info('------------------------------------------------');
         $this->command->info('Users seeded successfully!');
         $this->command->info('Super Admin: superadmin@example.com / password123');
         $this->command->info('Agent 1: agent1@example.com / password123');
         $this->command->info('Agent 2: agent2@example.com / password123');
         $this->command->info('Student 1: alice@example.com / password123');
+        $this->command->info('------------------------------------------------');
     }
 }

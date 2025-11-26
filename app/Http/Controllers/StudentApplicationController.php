@@ -24,40 +24,42 @@ class StudentApplicationController extends Controller
     public function index(Request $request)
     {
         // Start the query for available admission forms
-        // Assuming 'status' column exists and 'active' means available
-        // Adjust 'status' clause if your logic differs (e.g., checking dates)
-        $query = AdmissionForm::with('university')
-            ->where('isActive', '1'); // Ensure we only show active forms
+        $query = AdmissionForm::with('university');
 
-        // 1. Search Filter (Program Name or University Name)
+        // 1. Availability Filter: Show only forms where deadline is future or null
+        $query->where(function ($q) {
+            $q->whereNull('deadline')
+              ->orWhereDate('deadline', '>=', now());
+        });
+
+        // 2. Search Keyword Filter (Program Name or University Name)
         if ($request->filled('search')) {
             $search = $request->search;
             $query->where(function($q) use ($search) {
-                $q->where('program_name', 'like', "%{$search}%")
+                $q->where('title', 'like', "%{$search}%")
                   ->orWhereHas('university', function($subQ) use ($search) {
                       $subQ->where('name', 'like', "%{$search}%");
                   });
             });
         }
 
-        // 2. University Filter
+        // 3. University Filter
         if ($request->filled('university_id')) {
             $query->where('university_id', $request->university_id);
         }
 
-        // 3. Language Filter
-        // Assuming 'language' or 'medium' column exists in your table
+        // 4. Language Filter
         if ($request->filled('language')) {
             $query->where('language', $request->language);
         }
 
-        // Get results with pagination
+        // Execute Query with Pagination
         $forms = $query->latest()->paginate(9)->withQueryString();
 
-        // Get data for filter dropdowns
+        // Fetch Filter Data
         $universities = University::orderBy('name')->get();
         
-        // Get unique languages present in the forms table for the dropdown
+        // Fetch distinct languages for the dropdown to fix the "Undefined variable" error
         $languages = AdmissionForm::select('teaching_language')
             ->whereNotNull('teaching_language')
             ->distinct()
@@ -68,7 +70,7 @@ class StudentApplicationController extends Controller
 
     public function show($id)
     {
-        $form = AdmissionForm::with('university_id')->findOrFail($id);
+        $form = AdmissionForm::with('university', 'sections.questions')->findOrFail($id);
         return view('student.forms.show', compact('form'));
     }
     
