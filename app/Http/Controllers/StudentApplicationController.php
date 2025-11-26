@@ -13,11 +13,52 @@ use Illuminate\Support\Str;
 class StudentApplicationController extends Controller
 {
 
-    public function index() { $forms = AdmissionForm::where('isActive', 1)->get(); return view('student.forms.index', compact('forms')); }
+    public function index() 
+    { 
+        $forms = AdmissionForm::where('isActive', 1)->get(); 
+        return view('student.forms.index', compact('forms')); 
+    }
     public function availableForms()
     {
-        $forms = AdmissionForm::where('isPublished', 1)->get();
-        return view('student.forms.available', compact('forms'));
+
+        $query = AdmissionForm::where('isPublished', 1)->with('university');
+
+        // 1. Search Filter (Title, Offer Title, or Major)
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function($q) use ($search) {
+                $q->where('title', 'LIKE', "%{$search}%")
+                  ->orWhere('offer_title', 'LIKE', "%{$search}%") // Assumes new column exists
+                  ->orWhere('major', 'LIKE', "%{$search}%");      // Assumes new column exists
+            });
+        }
+
+        // 2. University Filter
+        if ($request->filled('university')) {
+            $query->where('university_id', $request->university);
+        }
+
+        // 3. Language Filter
+        if ($request->filled('language')) {
+            $query->where('teaching_language', $request->language);
+        }
+
+        // Get results with pagination
+        $forms = $query->latest()->paginate(9);
+
+        // Get data for dropdowns
+        $universities = University::whereHas('admissionForms', function($q){
+            $q->where('isPublished', 1);
+        })->orderBy('name')->get();
+
+        // Get available languages dynamically
+        $languages = AdmissionForm::where('isPublished', 1)
+            ->whereNotNull('teaching_language')
+            ->distinct()
+            ->pluck('teaching_language');
+
+        return view('student.forms.available', compact('forms', 'universities', 'languages'));
+
     }
 
     public function apply($form_id)

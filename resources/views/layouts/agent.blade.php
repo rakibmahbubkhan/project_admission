@@ -2,61 +2,102 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Agent Panel</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent Panel - {{ config('app.name') }}</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
 </head>
-<body>
+<body class="bg-gray-100">
+<!-- Header -->
+    <header class="bg-white shadow p-4 flex justify-between items-center">
+        <h1 class="text-lg font-bold">Admin Dashboard</h1>
 
-<div class="d-flex" id="wrapper">
+        <!-- Mobile Menu Button -->
+        <button onclick="toggleSidebar()" class="md:hidden px-3 py-2 bg-gray-800 text-white rounded">
+            ☰
+        </button>
 
-    {{-- Sidebar --}}
-    <div class="bg-primary text-white border-end" id="sidebar-wrapper" style="min-width:220px;">
-        <div class="sidebar-heading text-center py-4 fs-4 fw-bold">Agent Panel</div>
-        <div class="list-group list-group-flush">
-            <a href="{{ route('agent.dashboard') }}" class="list-group-item list-group-item-action bg-primary text-white">Dashboard</a>
-            <a href="{{ route('agent.students') }}" class="list-group-item list-group-item-action bg-primary text-white">Students</a>
-            <a href="{{ route('agent.submissions') }}" class="list-group-item list-group-item-action bg-primary text-white">Submissions</a>
-        </div>
-    </div>
+        <!-- User Menu -->
+        <div class="hidden md:block">
+            <div class="flex items-center space-x-4">
+                <span class="text-gray-700">{{ Auth::user()->name }}</span>
 
-    {{-- Page Content --}}
-    <div id="page-content-wrapper" class="w-100">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-            <div class="container-fluid">
-                <button class="btn btn-primary" id="menu-toggle">Toggle Menu</button>
-
-                <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
-                    <li class="nav-item">
-                        <span class="nav-link">{{ Auth::user()->name }}</span>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-danger" href="{{ route('logout') }}"
-                           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                           Logout
-                        </a>
-                    </li>
-                </ul>
+                <form action="{{ route('logout') }}" method="POST" class="inline">
+                    @csrf
+                    <button class="px-3 py-2 bg-red-600 text-white rounded">
+                        Logout
+                    </button>
+                </form>
             </div>
-        </nav>
-
-        <div class="container-fluid mt-4">
-            @yield('content')
         </div>
+    </header>
+
+    <div class="flex">
+
+        <!-- Sidebar -->
+        <aside id="sidebar" class="w-64 bg-gray-900 text-white min-h-screen p-5 hidden md:block">
+            <h2 class="text-xl font-bold mb-6">Partner Panel</h2>
+
+            <ul class="space-y-3">
+
+                <li>
+                    <a href="{{ route('agent.dashboard') }}"
+                       class="block px-3 py-2 rounded hover:bg-gray-700">
+                        Dashboard
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ route('agent.students') }}"
+                       class="block px-3 py-2 rounded hover:bg-gray-700">
+                        Students
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ route('agent.submissions') }}"
+                       class="block px-3 py-2 rounded hover:bg-gray-700">
+                        Submissions
+                    </a>
+                </li>
+
+                <li class="pt-5 border-t border-gray-700">
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button class="w-full text-left px-3 py-2 rounded hover:bg-red-600">
+                            Logout
+                        </button>
+                    </form>
+                </li>
+
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-6">
+            @yield('content')
+        </main>
     </div>
-</div>
 
-<form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-    @csrf
-</form>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-    const menuToggle = document.getElementById('menu-toggle');
-    const wrapper = document.getElementById('wrapper');
-    menuToggle.addEventListener('click', () => {
-        wrapper.classList.toggle('toggled');
-    });
-</script>
+    <script>
+        function toggleSidebar() {
+            let sidebar = document.getElementById("sidebar");
+            sidebar.classList.toggle("hidden");
+        }
+    </script>
 
 </body>
 </html>

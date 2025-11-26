@@ -22,6 +22,7 @@ class StudentProfileController extends Controller
 
         return view('student.profile', compact('student', 'submissions'));
     }
+    
     public function create()
     {
         $user = Auth::user();
