@@ -77,8 +77,14 @@ class AdmissionForm extends Model
     // If you later allow structured sections (builder 2.0)
     public function sections()
     {
-        return $this->hasMany(Section::class, 'form_id')->orderBy('order');
+        return $this->hasMany(Section::class, 'admission_form_id')->orderBy('order');
     }
+
+
+    //  public function sections()
+    // {
+    //     return $this->hasMany(Section::class, 'form_id')->orderBy('order');
+    // }
 
     // Questions under each form (if not using form_fields JSON)
     public function questions()

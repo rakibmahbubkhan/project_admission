@@ -16,13 +16,22 @@ class Section extends Model
         'order',
     ];
 
-    public function form()
-    {
-        return $this->belongsTo(AdmissionForm::class, 'admission_form_id');
-    }
+    //    public function form()
+    // {
+    //     return $this->belongsTo(AdmissionForm::class, 'admission_form_id');
+    // }
 
-    public function questions()
+    // public function questions()
+    // {
+    //     return $this->hasMany(Question::class)->orderBy('order');
+    // }
+
+    public function admissionForm()
     {
-        return $this->hasMany(Question::class)->orderBy('order');
+        return $this->belongsTo(AdmissionForm::class);
+    }
+     public function questions()
+    {
+        return $this->hasMany(Question::class, 'section_id')->orderBy('order');
     }
 }
