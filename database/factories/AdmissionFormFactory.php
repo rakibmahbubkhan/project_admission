@@ -21,11 +21,19 @@ class AdmissionFormFactory extends Factory
             'MSc in Artificial Intelligence',
             'MBBS',
             'LLB',
+            '軟體工程理學士學位',
+        ];
+
+        $batchs = [
+            '2025 Spring Batch',
+            '2025 Fall Batch',
+            '2026 Spring Batch',
+            '2026 Fall Batch',
         ];
 
         return [
             'university_id' => University::inRandomOrder()->first()->id,
-            'title' => $this->faker->randomElement($programs),
+            'title' => $this->faker->randomElement($batchs),
             'description' => $this->faker->paragraph(),
             'form_fields' => [],
             'application_fee' => rand(30, 200),
@@ -34,7 +42,7 @@ class AdmissionFormFactory extends Factory
             'deadline' => $this->faker->dateTimeBetween('+1 month', '+6 months'),
 
             // Extra fields
-            'offer_title' => $this->faker->sentence(),
+            'offer_title' => $this->faker->randomElement($programs),
             'intake' => 'Fall ' . rand(2025, 2027),
             'degree' => $this->faker->randomElement(['Bachelor', 'Master', 'Doctorate']),
             'major' => $this->faker->word(),

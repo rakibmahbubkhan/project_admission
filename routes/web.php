@@ -154,7 +154,7 @@ Route::middleware(['auth', 'role:student'])->prefix('student')->name('student.')
     
     // Applications History
     Route::get('/applications', [StudentApplicationController::class, 'applications'])->name('applications');
-    Route::get('/submissions', [StudentApplicationController::class, 'submissions'])->name('submissions');
+    Route::get('/submissions', [StudentApplicationController::class, 'submissions'])->name('forms.submissions');
     Route::get('/history', [StudentController::class, 'history'])->name('history');
     
     // Notifications

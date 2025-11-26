@@ -49,8 +49,8 @@ class StudentApplicationController extends Controller
         }
 
         // 4. Language Filter
-        if ($request->filled('language')) {
-            $query->where('language', $request->language);
+        if ($request->filled('teaching_language')) {
+            $query->where('teaching_language', $request->teaching_language);
         }
 
         // Execute Query with Pagination

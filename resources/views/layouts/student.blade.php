@@ -77,7 +77,7 @@
                 </li>
 
                 <li>
-                    <a href="{{ route('student.submissions') }}"
+                    <a href="{{ route('student.forms.submissions') }}"
                        class="block px-3 py-2 rounded hover:bg-gray-700">
                         My Applications
                     </a>
