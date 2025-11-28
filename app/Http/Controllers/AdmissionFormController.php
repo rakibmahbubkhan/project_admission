@@ -10,9 +10,35 @@ use Illuminate\Support\Facades\Log;
 
 class AdmissionFormController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $forms = AdmissionForm::with('university')->latest()->get();
+        $query = AdmissionForm::with('university');
+
+        // 1. General Search (Title, Offer, University Name, Intake)
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function($q) use ($search) {
+                // Checking both 'title' and 'program_name' to cover schema variations
+                $q->where('title', 'like', "%{$search}%")
+                  ->orWhere('offer_title', 'like', "%{$search}%")
+                  ->orWhere('intake', 'like', "%{$search}%")
+                  ->orWhereHas('university', function($subQ) use ($search) {
+                      $subQ->where('name', 'like', "%{$search}%");
+                  });
+            });
+        }
+
+        // 2. Status Filter (using isActive boolean)
+        if ($request->filled('status')) {
+            if ($request->status === 'active') {
+                $query->where('isActive', true);
+            } elseif ($request->status === 'inactive') {
+                $query->where('isActive', false);
+            }
+        }
+
+        $forms = $query->latest()->paginate(10)->withQueryString();
+        
         return view('super_admin.forms.index', compact('forms'));
     }
 

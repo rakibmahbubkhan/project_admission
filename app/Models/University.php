@@ -10,7 +10,23 @@ class University extends Model
 {
      use HasFactory;
     protected $fillable = [
-        'name', 'country', 'city', 'logo', 'details', 'isActive'
+        'name',
+        'country',
+        'city',
+        'currency',
+        'logo',
+        'image',
+        'content',
+        'ranking',
+        'intake',
+        'deadline',
+        'description',
+        'isActive'
+    ];
+
+     protected $casts = [
+        'deadline' => 'date',
+        'isActive' => 'boolean'
     ];
 
     public function admissionForms()
