@@ -273,8 +273,9 @@
                     <div class="col-auto d-none d-lg-block">
                         <div class="header-links style2">
                             <ul class="header-left-wrap">
-                                <li><a href="#"><i class="fa-solid fa-location-dot"></i>45 New Eskaton Road, Austria</a></li>
-                                <li><a href="mailto:infomail@example.com"><i class="fa-solid fa-envelope"></i>infomail@example.com</a></li>
+                                <li><a href="#"><i class="fa-solid fa-location-dot"></i>16/1 Saha Para Road, Magura Sadar</a></li>
+                                <li><a href="mailto:infomail@example.com"><i class="fa-solid fa-envelope"></i>info@aalokbortika-bd.com</a></li>
+                                <li><a href="mailto:infomail@example.com"><i class="fa-solid fa-phone"></i>+880 182 2108003</a></li>
                             </ul>
                         </div>
                     </div>
@@ -311,11 +312,11 @@
             <!-- Main Menu Area -->
             <div class="menu-area">
                 <div class="container th-container4">
-                    <div class="row align-items-center justify-content-between">
+                    <div class="row align-items-center justify-content-between" style="background-color: white;">
                         <div class="col-auto">
                             <div class="header-logo">
-                                <a href="home-university.html">
-                                    <img src="{{ asset('assets/img/logo.png') }}" style="width:250px;" alt="Aalokbortika">
+                                <a href="#">
+                                    <img src="{{ asset('assets/img/logo.png') }}" style="height:80px;" alt="Aalokbortika">
                                 </a>
                             </div>
                         </div>
@@ -1539,7 +1540,7 @@ Mentorship Area Home 3
             </div>
         </div>
     </section>
-    <section class="banner-area-1  overflow-hidden">
+    <!-- <section class="banner-area-1  overflow-hidden">
         <div class="container th-container4">
             <div class="banner-wrap1">
                 <div class="banner-left-img">
@@ -1564,7 +1565,9 @@ Mentorship Area Home 3
         <div class="shape-mockup d-none d-xl-block" data-bottom="0%" data-left="0%"><img src="assets/img/banner/3-1.png" alt="Aalokbortika"></div>
         <div class="shape-mockup" data-bottom="0%" data-right="3%"><img src="assets/img/shape/banner-3-1.png" alt="Aalokbortika">
         </div>
-    </section> <!--==============================
+    </section> -->
+    
+    <!--==============================
 Blog Area 3
 ==============================-->
     <section class="blog-arae-3 overflow-hidden space" id="blog-sec">
@@ -1961,108 +1964,7 @@ Contact Area
             </div>
         </div>
     </div>
-    <footer class="footer-wrapper footer-layout3" data-bg-src="assets/img/bg/footer-bg-2.png">
-        <div class="container th-container4">
-            <div class="widget-area">
-                <div class="row justify-content-between">
-                    <div class="col-md-6 col-xl-auto" style="background-color:#dc3545;">
-                        <div class="widget footer-widget">
-                            <div class="th-widget-about">
-                                <div class="about-logo">
-                                    <a href="home-university.html">
-                                        <img src="{{ asset('assets/img/logo.png') }}" style="width:250px;" alt="Aalokbortika">
-                                    </a>
-                                </div>
-                                <p class="about-text">Since 1999, when the newly minted Aalokbortika team embraced its mandate to breathe new life into the downtrodden neighbourhood, East Village’s transformation has been nothing short of remarkable. </p>
-                                <div class="footer-info">
-                                    <a href="#">
-                                        <span class="footer-info-icon"><i class="fa-solid fa-location-dot"></i></span> 45 New Eskaton Road, Austria
-                                    </a>
-                                    <a href="mailto:infomail@example.com">
-                                        <span class="footer-info-icon"><i class="fa-solid fa-envelope"></i></span> infomail@example.com
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-xl-auto">
-                        <div class="widget widget_nav_menu footer-widget">
-                            <h3 class="widget_title">Useful Links</h3>
-                            <div class="menu-all-pages-container">
-                                <ul class="menu">
-                                    <li><a href="index.html">Students</a></li>
-                                    <li><a href="about.html">Admission</a></li>
-                                    <li><a href="pricing.html">Faculty & Stuffs</a></li>
-                                    <li><a href="service.html">Media Relations</a></li>
-                                    <li><a href="about.html">Alumni</a></li>
-                                    <li><a href="about.html">All Awards</a></li>
-                                    <li><a href="contact.html">Recent Events</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-xl-auto">
-                        <div class="widget widget_nav_menu footer-widget">
-                            <h3 class="widget_title">Our Programs</h3>
-                            <div class="menu-all-pages-container">
-                                <ul class="menu">
-                                    <li><a href="about.html">Ungraduate Programs</a></li>
-                                    <li><a href="about.html">Graduate Programs</a></li>
-                                    <li><a href="about.html">Certificate Programs</a></li>
-                                    <li><a href="about.html">Accelerate Programs</a></li>
-                                    <li><a href="about.html">Online Programs</a></li>
-                                    <li><a href="about.html">Financial Planning</a></li>
-                                    <li><a href="about.html">Business Advisory</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-xl-auto">
-                        <div class="widget th-widget-instagram footer-widget">
-                            <h3 class="widget_title">Instagram</h3>
-                            <div class="instagram-feeds">
-                                <div class="insta-thumb">
-                                    <img src="assets/img/widget/insta-feed-1-1.jpg" alt="Image">
-                                    <a href="assets/img/widget/insta-feed-1-1.jpg" class="insta-btn popup-image"><i class="fab fa-instagram"></i></a>
-                                </div>
-                                <div class="insta-thumb">
-                                    <img src="assets/img/widget/insta-feed-1-2.jpg" alt="Image">
-                                    <a href="assets/img/widget/insta-feed-1-2.jpg" class="insta-btn popup-image"><i class="fab fa-instagram"></i></a>
-                                </div>
-                                <div class="insta-thumb">
-                                    <img src="assets/img/widget/insta-feed-1-3.jpg" alt="Image">
-                                    <a href="assets/img/widget/insta-feed-1-3.jpg" class="insta-btn popup-image"><i class="fab fa-instagram"></i></a>
-                                </div>
-                                <div class="insta-thumb">
-                                    <img src="{{ asset('') }}assets/img/widget/insta-feed-1-4.jpg" alt="Image">
-                                    <a href="{{ asset('') }}assets/img/widget/insta-feed-1-4.jpg" class="insta-btn popup-image"><i class="fab fa-instagram"></i></a>
-                                </div>
-                                <div class="insta-thumb">
-                                    <img src="{{ asset('') }}assets/img/widget/insta-feed-1-5.jpg" alt="Image">
-                                    <a href="{{ asset('') }}assets/img/widget/insta-feed-1-5.jpg" class="insta-btn popup-image"><i class="fab fa-instagram"></i></a>
-                                </div>
-                                <div class="insta-thumb">
-                                    <img src="{{ asset('') }}assets/img/widget/insta-feed-1-6.jpg" alt="Image">
-                                    <a href="{{ asset('') }}assets/img/widget/insta-feed-1-6.jpg" class="insta-btn popup-image"><i class="fab fa-instagram"></i></a>
-                                </div>
-                                <div class="insta-thumb">
-                                    <img src="assets/img/widget/insta-feed-1-7.jpg" alt="Image">
-                                    <a href="assets/img/widget/insta-feed-1-7.jpg" class="insta-btn popup-image"><i class="fab fa-instagram"></i></a>
-                                </div>
-                                <div class="insta-thumb">
-                                    <img src="assets/img/widget/insta-feed-1-8.jpg" alt="Image">
-                                    <a href="assets/img/widget/insta-feed-1-8.jpg" class="insta-btn popup-image"><i class="fab fa-instagram"></i></a>
-                                </div>
-                                <div class="insta-thumb">
-                                    <img src="assets/img/widget/insta-feed-1-9.jpg" alt="Image">
-                                    <a href="assets/img/widget/insta-feed-1-9.jpg" class="insta-btn popup-image"><i class="fab fa-instagram"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <footer class="footer-wrapper footer-layout3" data-bg-src="{{ asset('assets/img/bg/footer-bg-2.png') }}">
         <div class="copyright-wrap z-index-common">
             <div class="container th-container4">
                 <div class="row justify-content-center gy-3 align-items-center">
