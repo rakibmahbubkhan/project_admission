@@ -44,7 +44,9 @@ class StudentProfileController extends Controller
         'phone' => 'required|string|max:20',
         'dob' => 'required|date',
         'gender' => 'required|in:male,female,other',
-        'address' => 'required|string|max:500',
+        'current_address' => 'required|string|max:500',
+        'emergency_contact_name' => 'required|string|max:255',
+        'emergency_contact_number' => 'required|string|max:255',
     ]);
 
     $user = Auth::user();
@@ -64,7 +66,7 @@ class StudentProfileController extends Controller
             'phone' => $request->phone,
             'dob' => $request->dob,
             'gender' => $request->gender,
-            'address' => $request->address,
+            'current_address' => $request->current_address,
         ];
 
         // Only add agent_id if agent exists and is available
@@ -100,10 +102,15 @@ class StudentProfileController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'phone' => 'required|string|max:20',
-            'address' => 'required|string',
-            // Add other validation rules as needed
+        'name' => 'required|string|max:255',
+        'nationality' => 'required|string|max:100',
+        'phone' => 'required|string|max:20',
+        'dob' => 'required|date',
+        'gender' => 'required|in:male,female,other',
+        'current_address' => 'required|string|max:500',
+        'emergency_contact_name' => 'required|string|max:255',
+        'emergency_contact_number' => 'required|string|max:255',
+
         ]);
 
         $user = Auth::user();

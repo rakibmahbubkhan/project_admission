@@ -17,7 +17,8 @@ class Student extends Model
         'studied_in_china', 'studied_in_china_from', 'studied_in_china_institute',
         'passport_number', 'passport_issue_date', 'passport_expiry_date',
         'street', 'city', 'country', 'zip_code', 'phone', 'email',
-        'sponsor_info', 'parents_info', 'education_background', 'work_experience', 'other_info'
+        'sponsor_info', 'parents_info', 'education_background', 'work_experience', 'other_info',
+        'emergency_contact_number','emergency_contact_name','current_address'
     ];
 
     protected $casts = [

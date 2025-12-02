@@ -25,6 +25,9 @@ return new class extends Migration {
             $table->string('height')->nullable();
             $table->string('weight')->nullable();
             $table->string('blood_group')->nullable();
+            $table->string('emergency_contact_name')->nullable();
+            $table->string('emergency_contact_number')->nullable();
+            $table->string('current_address')->nullable();
 
             // China Status
             $table->boolean('in_china')->default(false);

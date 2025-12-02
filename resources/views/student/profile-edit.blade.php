@@ -65,7 +65,7 @@
                                     <i class="fas fa-user text-gray-400"></i>
                                 </div>
                                 <input type="text" name="name" id="name" value="{{ old('name', $student->user->name ?? '') }}" 
-                                    class="focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md" 
+                                    class="peer py-2.5 sm:py-3 pe-0 ps-8 block w-full bg-transparent border-t-transparent border-b-2 border-x-transparent border-b-gray-200 sm:text-sm focus:border-t-transparent focus:border-x-transparent focus:border-b-blue-500 focus:ring-0 disabled:opacity-50 disabled:pointer-events-none dark:border-b-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 dark:focus:border-b-neutral-600" 
                                     placeholder="John Doe" required>
                             </div>
                         </div>
@@ -77,17 +77,17 @@
                                     <i class="fas fa-phone text-gray-400"></i>
                                 </div>
                                 <input type="text" name="phone" id="phone" value="{{ old('phone', $student->phone) }}" 
-                                    class="focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md" 
+                                    class="peer py-2.5 sm:py-3 pe-0 ps-8 block w-full bg-transparent border-t-transparent border-b-2 border-x-transparent border-b-gray-200 sm:text-sm focus:border-t-transparent focus:border-x-transparent focus:border-b-blue-500 focus:ring-0 disabled:opacity-50 disabled:pointer-events-none dark:border-b-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 dark:focus:border-b-neutral-600" 
                                     placeholder="+1234567890" required>
                             </div>
                         </div>
 
                         <div class="sm:col-span-6">
-                            <label for="address" class="block text-sm font-medium text-gray-700">Address <span class="text-red-500">*</span></label>
+                            <label for="current_address" class="block text-sm font-medium text-gray-700">Address <span class="text-red-500">*</span></label>
                             <div class="mt-1 relative rounded-md shadow-sm">
-                                <textarea id="address" name="address" rows="3" 
+                                <textarea id="current_address" name="current_address" rows="3" 
                                     class="focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md" 
-                                    placeholder="Enter your full address" required>{{ old('address', $student->address) }}</textarea>
+                                    placeholder="Enter your full address" required>{{ old('current_address', $student->current_address) }}</textarea>
                             </div>
                         </div>
                     </div>
@@ -100,10 +100,10 @@
                     <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
                         
                         <div class="sm:col-span-3">
-                            <label for="date_of_birth" class="block text-sm font-medium text-gray-700">Date of Birth</label>
+                            <label for="dob" class="block text-sm font-medium text-gray-700">Date of Birth</label>
                             <div class="mt-1 relative rounded-md shadow-sm">
-                                <input type="date" name="date_of_birth" id="date_of_birth" 
-                                    value="{{ old('date_of_birth', $student->date_of_birth ? \Carbon\Carbon::parse($student->date_of_birth)->format('Y-m-d') : '') }}"
+                                <input type="date" name="dob" id="dob" 
+                                    value="{{ old('dob', $student->dob ? \Carbon\Carbon::parse($student->dob)->format('Y-m-d') : '') }}"
                                     max="{{ date('Y-m-d') }}"
                                     class="focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md">
                             </div>
@@ -126,7 +126,7 @@
                                     <i class="fas fa-globe text-gray-400"></i>
                                 </div>
                                 <input type="text" name="nationality" id="nationality" value="{{ old('nationality', $student->nationality) }}" 
-                                    class="focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md" 
+                                    class="peer py-2.5 sm:py-3 pe-0 ps-8 block w-full bg-transparent border-t-transparent border-b-2 border-x-transparent border-b-gray-200 sm:text-sm focus:border-t-transparent focus:border-x-transparent focus:border-b-blue-500 focus:ring-0 disabled:opacity-50 disabled:pointer-events-none dark:border-b-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 dark:focus:border-b-neutral-600" 
                                     placeholder="e.g. American">
                             </div>
                         </div>
@@ -138,7 +138,7 @@
                                     <i class="fas fa-passport text-gray-400"></i>
                                 </div>
                                 <input type="text" name="passport_number" id="passport_number" value="{{ old('passport_number', $student->passport_number) }}" 
-                                    class="focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md" 
+                                    class="peer py-2.5 sm:py-3 pe-0 ps-8 block w-full bg-transparent border-t-transparent border-b-2 border-x-transparent border-b-gray-200 sm:text-sm focus:border-t-transparent focus:border-x-transparent focus:border-b-blue-500 focus:ring-0 disabled:opacity-50 disabled:pointer-events-none dark:border-b-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 dark:focus:border-b-neutral-600" 
                                     placeholder="A12345678">
                             </div>
                         </div>
@@ -150,7 +150,33 @@
                         <i class="fas fa-phone-alt mr-2 text-gray-400"></i> Emergency Contact
                     </h3>
                     <div class="grid grid-cols-1 gap-y-6 sm:grid-cols-6">
-                        <div class="sm:col-span-6">
+
+
+                    <div class="sm:col-span-3">
+                            <label for="nationality" class="block text-sm font-medium text-gray-700">Emergency Contact Name</label>
+                            <div class="mt-1 relative rounded-md shadow-sm">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fas fa-user text-gray-400"></i>
+                                </div>
+                                <input type="text" name="emergency_contact_name" id="emergency_contact_name" value="{{ old('emergency_contact_name', $student->emergency_contact_name) }}" 
+                                    class="peer py-2.5 sm:py-3 pe-0 ps-8 block w-full bg-transparent border-t-transparent border-b-2 border-x-transparent border-b-gray-200 sm:text-sm focus:border-t-transparent focus:border-x-transparent focus:border-b-blue-500 focus:ring-0 disabled:opacity-50 disabled:pointer-events-none dark:border-b-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 dark:focus:border-b-neutral-600" 
+                                    placeholder="e.g. Jhon Diddy">
+                            </div>
+                        </div>
+
+                        <div class="sm:col-span-3">
+                            <label for="passport_number" class="block text-sm font-medium text-gray-700">Emergency Contact Mobile</label>
+                            <div class="mt-1 relative rounded-md shadow-sm">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fas fa-phone text-gray-400"></i>
+                                </div>
+                                <input type="text" name="emergency_contact_number" id="emergency_contact_number" value="{{ old('emergency_contact_number', $student->emergency_contact_number) }}" 
+                                    class="peer py-2.5 sm:py-3 pe-0 ps-8 block w-full bg-transparent border-t-transparent border-b-2 border-x-transparent border-b-gray-200 sm:text-sm focus:border-t-transparent focus:border-x-transparent focus:border-b-blue-500 focus:ring-0 disabled:opacity-50 disabled:pointer-events-none dark:border-b-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 dark:focus:border-b-neutral-600" 
+                                    placeholder="e.g 123456789">
+                            </div>
+                        </div>
+
+                        <!-- <div class="sm:col-span-6">
                             <label for="emergency_contact" class="block text-sm font-medium text-gray-700">Contact Details</label>
                             <div class="mt-1">
                                 <input type="text" name="emergency_contact" id="emergency_contact" value="{{ old('emergency_contact', $student->emergency_contact) }}" 
@@ -158,7 +184,9 @@
                                     placeholder="Name and Phone Number">
                             </div>
                             <p class="mt-2 text-sm text-gray-500">Provide the name and phone number of a person to contact in case of emergency.</p>
-                        </div>
+                        </div> -->
+
+
                     </div>
                 </div>
 
