@@ -56,7 +56,7 @@ class UniversityController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255|unique:universities,name,' . $university->id, // Unique check ignoring current ID
+            'name' => 'required|string|max:255|unique:universities,name',
             'country' => 'required|string|max:255',
             'city' => 'required|string|max:255',
             'currency' => 'nullable|string|max:10',
