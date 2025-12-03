@@ -35,13 +35,24 @@
                     
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <!-- Name -->
-                        <div class="col-span-2">
+                        <div>
                             <label class="block text-sm">
                                 <span class="text-gray-700 dark:text-gray-400">University Name <span class="text-red-600">*</span></span>
                                 <input type="text" name="name" value="{{ old('name', $university->name) }}" required
-                                    class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input rounded-md" />
+                                    class="peer py-2.5 sm:py-3 pe-0 ps-8 block w-full bg-transparent border-t-transparent border-b-2 border-x-transparent border-b-gray-200 sm:text-sm focus:border-t-transparent focus:border-x-transparent focus:border-b-blue-500 focus:ring-0 disabled:opacity-50 disabled:pointer-events-none dark:border-b-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 dark:focus:border-b-neutral-600" />
                                 @error('name') <span class="text-xs text-red-600 dark:text-red-400">{{ $message }}</span> @enderror
                             </label>
+                        </div>
+
+                         <!-- University Type -->
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-1">University Type <span class="text-red-500">*</span></label>
+                            <select name="type" class="peer py-2.5 sm:py-3 pe-0 ps-8 block w-full bg-transparent border-t-transparent border-b-2 border-x-transparent border-b-gray-200 sm:text-sm focus:border-t-transparent focus:border-x-transparent focus:border-b-blue-500 focus:ring-0 disabled:opacity-50 disabled:pointer-events-none dark:border-b-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 dark:focus:border-b-neutral-600">
+                            <option value="">Select Type</option>
+                            @foreach(['Public', 'Private'] as $opt)
+                                <option value="{{ $opt }}" {{ old('type') == $opt ? 'selected' : '' }}>{{ $opt }}</option>
+                            @endforeach
+                            </select>
                         </div>
 
                         <!-- Intake -->
@@ -49,7 +60,7 @@
                             <label class="block text-sm">
                                 <span class="text-gray-700 dark:text-gray-400">Intake Month</span>
                                 <input type="text" name="intake" value="{{ old('intake', $university->intake) }}"
-                                    class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input rounded-md" />
+                                    class="peer py-2.5 sm:py-3 pe-0 ps-8 block w-full bg-transparent border-t-transparent border-b-2 border-x-transparent border-b-gray-200 sm:text-sm focus:border-t-transparent focus:border-x-transparent focus:border-b-blue-500 focus:ring-0 disabled:opacity-50 disabled:pointer-events-none dark:border-b-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 dark:focus:border-b-neutral-600" />
                                 @error('intake') <span class="text-xs text-red-600 dark:text-red-400">{{ $message }}</span> @enderror
                             </label>
                         </div>
@@ -59,7 +70,7 @@
                             <label class="block text-sm">
                                 <span class="text-gray-700 dark:text-gray-400">Application Deadline</span>
                                 <input type="date" name="deadline" value="{{ old('deadline', $university->deadline ? \Carbon\Carbon::parse($university->deadline)->format('Y-m-d') : '') }}"
-                                    class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input rounded-md" />
+                                    class="peer py-2.5 sm:py-3 pe-0 ps-8 block w-full bg-transparent border-t-transparent border-b-2 border-x-transparent border-b-gray-200 sm:text-sm focus:border-t-transparent focus:border-x-transparent focus:border-b-blue-500 focus:ring-0 disabled:opacity-50 disabled:pointer-events-none dark:border-b-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 dark:focus:border-b-neutral-600" />
                                 @error('deadline') <span class="text-xs text-red-600 dark:text-red-400">{{ $message }}</span> @enderror
                             </label>
                         </div>
@@ -78,7 +89,7 @@
                             <label class="block text-sm">
                                 <span class="text-gray-700 dark:text-gray-400">Country <span class="text-red-600">*</span></span>
                                 <input type="text" name="country" value="{{ old('country', $university->country) }}" required
-                                    class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input rounded-md" />
+                                    class="peer py-2.5 sm:py-3 pe-0 ps-8 block w-full bg-transparent border-t-transparent border-b-2 border-x-transparent border-b-gray-200 sm:text-sm focus:border-t-transparent focus:border-x-transparent focus:border-b-blue-500 focus:ring-0 disabled:opacity-50 disabled:pointer-events-none dark:border-b-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 dark:focus:border-b-neutral-600" />
                                 @error('country') <span class="text-xs text-red-600 dark:text-red-400">{{ $message }}</span> @enderror
                             </label>
                         </div>
@@ -88,7 +99,7 @@
                             <label class="block text-sm">
                                 <span class="text-gray-700 dark:text-gray-400">City <span class="text-red-600">*</span></span>
                                 <input type="text" name="city" value="{{ old('city', $university->city) }}" required
-                                    class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input rounded-md" />
+                                    class="peer py-2.5 sm:py-3 pe-0 ps-8 block w-full bg-transparent border-t-transparent border-b-2 border-x-transparent border-b-gray-200 sm:text-sm focus:border-t-transparent focus:border-x-transparent focus:border-b-blue-500 focus:ring-0 disabled:opacity-50 disabled:pointer-events-none dark:border-b-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 dark:focus:border-b-neutral-600" />
                                 @error('city') <span class="text-xs text-red-600 dark:text-red-400">{{ $message }}</span> @enderror
                             </label>
                         </div>
@@ -98,7 +109,7 @@
                             <label class="block text-sm">
                                 <span class="text-gray-700 dark:text-gray-400">Global Ranking</span>
                                 <input type="number" name="ranking" value="{{ old('ranking', $university->ranking) }}"
-                                    class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input rounded-md" />
+                                    class="peer py-2.5 sm:py-3 pe-0 ps-8 block w-full bg-transparent border-t-transparent border-b-2 border-x-transparent border-b-gray-200 sm:text-sm focus:border-t-transparent focus:border-x-transparent focus:border-b-blue-500 focus:ring-0 disabled:opacity-50 disabled:pointer-events-none dark:border-b-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 dark:focus:border-b-neutral-600" />
                                 @error('ranking') <span class="text-xs text-red-600 dark:text-red-400">{{ $message }}</span> @enderror
                             </label>
                         </div>
@@ -108,7 +119,7 @@
                             <label class="block text-sm">
                                 <span class="text-gray-700 dark:text-gray-400">Currency</span>
                                 <input type="text" name="currency" value="{{ old('currency', $university->currency) }}"
-                                    class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input rounded-md" />
+                                    class="peer py-2.5 sm:py-3 pe-0 ps-8 block w-full bg-transparent border-t-transparent border-b-2 border-x-transparent border-b-gray-200 sm:text-sm focus:border-t-transparent focus:border-x-transparent focus:border-b-blue-500 focus:ring-0 disabled:opacity-50 disabled:pointer-events-none dark:border-b-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 dark:focus:border-b-neutral-600" />
                                 @error('currency') <span class="text-xs text-red-600 dark:text-red-400">{{ $message }}</span> @enderror
                             </label>
                         </div>
@@ -126,7 +137,7 @@
                         <label class="block text-sm">
                             <span class="text-gray-700 dark:text-gray-400">Short Description</span>
                             <textarea name="description" rows="3"
-                                class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray form-textarea rounded-md">{{ old('description', $university->description) }}</textarea>
+                                class="peer py-2.5 sm:py-3 pe-0 ps-8 block w-full bg-transparent border-t-transparent border-b-2 border-x-transparent border-b-gray-200 sm:text-sm focus:border-t-transparent focus:border-x-transparent focus:border-b-blue-500 focus:ring-0 disabled:opacity-50 disabled:pointer-events-none dark:border-b-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 dark:focus:border-b-neutral-600">{{ old('description', $university->description) }}</textarea>
                             @error('description') <span class="text-xs text-red-600 dark:text-red-400">{{ $message }}</span> @enderror
                         </label>
 
@@ -134,7 +145,7 @@
                         <label class="block text-sm">
                             <span class="text-gray-700 dark:text-gray-400">Full Content</span>
                             <textarea name="content" rows="6"
-                                class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray form-textarea rounded-md">{{ old('content', $university->content) }}</textarea>
+                                class="peer py-2.5 sm:py-3 pe-0 ps-8 block w-full bg-transparent border-t-transparent border-b-2 border-x-transparent border-b-gray-200 sm:text-sm focus:border-t-transparent focus:border-x-transparent focus:border-b-blue-500 focus:ring-0 disabled:opacity-50 disabled:pointer-events-none dark:border-b-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 dark:focus:border-b-neutral-600">{{ old('content', $university->content) }}</textarea>
                             @error('content') <span class="text-xs text-red-600 dark:text-red-400">{{ $message }}</span> @enderror
                         </label>
                     </div>

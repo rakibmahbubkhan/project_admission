@@ -31,6 +31,11 @@ class AdmissionFormFactory extends Factory
             '2026 Fall Batch',
         ];
 
+        $types = [
+            'Annual',
+            'Semister',
+        ];
+
         return [
             'university_id' => University::inRandomOrder()->first()->id,
             'title' => $this->faker->randomElement($batchs),
@@ -75,8 +80,14 @@ class AdmissionFormFactory extends Factory
             'has_exclusive_service_policy' => $this->faker->boolean(),
             'has_premium_service_policy' => $this->faker->boolean(),
 
-            'partner_rate' => rand(100, 500),
-            'student_rate' => rand(200, 600),
+            'exclusive_partner_rate'=> rand(100, 500),
+            'exclusive_student_rate'=> rand(100, 500),
+            'premium_partner_rate'=> rand(100, 500),
+            'premium_student_rate'=> rand(100, 500),
+            'tuition_fee_type'=> $this->faker->randomElement($types),
+            'dorm_fee_type'=> $this->faker->randomElement($types),
+            'after_scholarship_tuition_fee_type'=> $this->faker->randomElement($types),
+            'after_scholarship_dorm_fee_type'=> $this->faker->randomElement($types),
         ];
     }
 }

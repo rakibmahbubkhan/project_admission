@@ -14,6 +14,7 @@ return new class extends Migration
             $table->string('country');
             $table->string('city');
             $table->string('currency', 10)->nullable();
+            $table->string('type')->nullable();
             $table->string('logo')->nullable();
             $table->string('image')->nullable();
             $table->longText('content')->nullable();

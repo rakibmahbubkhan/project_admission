@@ -48,8 +48,21 @@ return new class extends Migration
             // Service Policy
             $table->boolean('has_exclusive_service_policy')->default(false);
             $table->boolean('has_premium_service_policy')->default(false);
-            $table->decimal('partner_rate', 10, 2)->nullable();
-            $table->decimal('student_rate', 10, 2)->nullable();
+            
+
+            // Add specific columns for Exclusive Policy
+            $table->decimal('exclusive_partner_rate', 10, 2)->nullable()->after('has_exclusive_service_policy');
+            $table->decimal('exclusive_student_rate', 10, 2)->nullable()->after('exclusive_partner_rate');
+
+            // Add specific columns for Premium Policy
+            $table->decimal('premium_partner_rate', 10, 2)->nullable()->after('has_premium_service_policy');
+            $table->decimal('premium_student_rate', 10, 2)->nullable()->after('premium_partner_rate');
+
+             $table->string('tuition_fee_type')->default('Annual')->nullable()->after('tuition_fees');
+            $table->string('dorm_fee_type')->default('Annual')->nullable()->after('dorm_fees');
+            
+            $table->string('after_scholarship_tuition_fee_type')->default('Annual')->nullable()->after('after_scholarship_tuition_fees');
+            $table->string('after_scholarship_dorm_fee_type')->default('Annual')->nullable()->after('after_scholarship_dorm_fees');
         });
     }
 
@@ -64,7 +77,15 @@ return new class extends Migration
                 'scholarship_coverage', 'stipend_amount', 'scholarship_other_facilities',
                 'after_scholarship_tuition_fees', 'after_scholarship_dorm_fees',
                 'age_restriction', 'country_restriction', 'accept_in_china', 'accept_studied_in_china',
-                'has_exclusive_service_policy', 'has_premium_service_policy', 'partner_rate', 'student_rate'
+                'has_exclusive_service_policy', 'has_premium_service_policy',
+                'exclusive_partner_rate',
+                'exclusive_student_rate',
+                'premium_partner_rate',
+                'premium_student_rate',
+                'tuition_fee_type',
+                'dorm_fee_type',
+                'after_scholarship_tuition_fee_type',
+                'after_scholarship_dorm_fee_type',
             ]);
         });
     }

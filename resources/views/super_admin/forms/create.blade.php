@@ -44,7 +44,7 @@
             <div class="p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">University <span class="text-red-500">*</span></label>
-                    <select name="university_id" required class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
+                    <select name="university_id" required class="peer py-2.5 sm:py-3 pe-0 ps-8 block w-full bg-transparent border-t-transparent border-b-2 border-x-transparent border-b-gray-200 sm:text-sm focus:border-t-transparent focus:border-x-transparent focus:border-b-blue-500 focus:ring-0 disabled:opacity-50 disabled:pointer-events-none dark:border-b-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 dark:focus:border-b-neutral-600">
                         <option value="">Select University</option>
                         @foreach($universities as $uni)
                             <option value="{{ $uni->id }}" {{ old('university_id') == $uni->id ? 'selected' : '' }}>{{ $uni->name }}</option>
@@ -55,23 +55,23 @@
 
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Form Title (Internal) <span class="text-red-500">*</span></label>
-                    <input type="text" name="title" value="{{ old('title') }}" required placeholder="e.g. 2025 Spring Batch" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
+                    <input type="text" name="title" value="{{ old('title') }}" required placeholder="e.g. 2025 Spring Batch" class="peer py-2.5 sm:py-3 pe-0 ps-8 block w-full bg-transparent border-t-transparent border-b-2 border-x-transparent border-b-gray-200 sm:text-sm focus:border-t-transparent focus:border-x-transparent focus:border-b-blue-500 focus:ring-0 disabled:opacity-50 disabled:pointer-events-none dark:border-b-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 dark:focus:border-b-neutral-600">
                     @error('title') <span class="text-xs text-red-500">{{ $message }}</span> @enderror
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Offer Title (Public)</label>
-                    <input type="text" name="offer_title" value="{{ old('offer_title') }}" placeholder="e.g. MBBS Scholarship Offer" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
+                    <input type="text" name="offer_title" value="{{ old('offer_title') }}" placeholder="e.g. MBBS Scholarship Offer" class="peer py-2.5 sm:py-3 pe-0 ps-8 block w-full bg-transparent border-t-transparent border-b-2 border-x-transparent border-b-gray-200 sm:text-sm focus:border-t-transparent focus:border-x-transparent focus:border-b-blue-500 focus:ring-0 disabled:opacity-50 disabled:pointer-events-none dark:border-b-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 dark:focus:border-b-neutral-600">
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Intake</label>
-                    <input type="text" name="intake" value="{{ old('intake') }}" placeholder="e.g. September 2025" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
+                    <input type="text" name="intake" value="{{ old('intake') }}" placeholder="e.g. September 2025" class="peer py-2.5 sm:py-3 pe-0 ps-8 block w-full bg-transparent border-t-transparent border-b-2 border-x-transparent border-b-gray-200 sm:text-sm focus:border-t-transparent focus:border-x-transparent focus:border-b-blue-500 focus:ring-0 disabled:opacity-50 disabled:pointer-events-none dark:border-b-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 dark:focus:border-b-neutral-600">
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Degree</label>
-                    <select name="degree" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
+                    <select name="degree" class="peer py-2.5 sm:py-3 pe-0 ps-8 block w-full bg-transparent border-t-transparent border-b-2 border-x-transparent border-b-gray-200 sm:text-sm focus:border-t-transparent focus:border-x-transparent focus:border-b-blue-500 focus:ring-0 disabled:opacity-50 disabled:pointer-events-none dark:border-b-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 dark:focus:border-b-neutral-600">
                         <option value="">Select Degree</option>
                         @foreach(['Non-Degree', 'Diploma', 'Bachelor', 'Master', 'Ph.D.'] as $deg)
                             <option value="{{ $deg }}" {{ old('degree') == $deg ? 'selected' : '' }}>{{ $deg }}</option>
@@ -81,12 +81,12 @@
 
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Major</label>
-                    <input type="text" name="major" value="{{ old('major') }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
+                    <input type="text" name="major" value="{{ old('major') }}" class="peer py-2.5 sm:py-3 pe-0 ps-8 block w-full bg-transparent border-t-transparent border-b-2 border-x-transparent border-b-gray-200 sm:text-sm focus:border-t-transparent focus:border-x-transparent focus:border-b-blue-500 focus:ring-0 disabled:opacity-50 disabled:pointer-events-none dark:border-b-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 dark:focus:border-b-neutral-600">
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Teaching Language</label>
-                    <select name="teaching_language" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
+                    <select name="teaching_language" class="peer py-2.5 sm:py-3 pe-0 ps-8 block w-full bg-transparent border-t-transparent border-b-2 border-x-transparent border-b-gray-200 sm:text-sm focus:border-t-transparent focus:border-x-transparent focus:border-b-blue-500 focus:ring-0 disabled:opacity-50 disabled:pointer-events-none dark:border-b-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 dark:focus:border-b-neutral-600">
                         <option value="English" {{ old('teaching_language') == 'English' ? 'selected' : '' }}>English</option>
                         <option value="Chinese" {{ old('teaching_language') == 'Chinese' ? 'selected' : '' }}>Chinese</option>
                     </select>
@@ -94,23 +94,23 @@
 
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Location</label>
-                    <input type="text" name="location" value="{{ old('location') }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
+                    <input type="text" name="location" value="{{ old('location') }}" class="peer py-2.5 sm:py-3 pe-0 ps-8 block w-full bg-transparent border-t-transparent border-b-2 border-x-transparent border-b-gray-200 sm:text-sm focus:border-t-transparent focus:border-x-transparent focus:border-b-blue-500 focus:ring-0 disabled:opacity-50 disabled:pointer-events-none dark:border-b-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 dark:focus:border-b-neutral-600">
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">University Name Override</label>
-                    <input type="text" name="university_name_override" value="{{ old('university_name_override') }}" placeholder="Optional custom name" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
+                    <input type="text" name="university_name_override" value="{{ old('university_name_override') }}" placeholder="Optional custom name" class="peer py-2.5 sm:py-3 pe-0 ps-8 block w-full bg-transparent border-t-transparent border-b-2 border-x-transparent border-b-gray-200 sm:text-sm focus:border-t-transparent focus:border-x-transparent focus:border-b-blue-500 focus:ring-0 disabled:opacity-50 disabled:pointer-events-none dark:border-b-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 dark:focus:border-b-neutral-600">
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Scholarship Type</label>
-                    <input type="text" name="scholarship_type" value="{{ old('scholarship_type') }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
+                    <input type="text" name="scholarship_type" value="{{ old('scholarship_type') }}" class="peer py-2.5 sm:py-3 pe-0 ps-8 block w-full bg-transparent border-t-transparent border-b-2 border-x-transparent border-b-gray-200 sm:text-sm focus:border-t-transparent focus:border-x-transparent focus:border-b-blue-500 focus:ring-0 disabled:opacity-50 disabled:pointer-events-none dark:border-b-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 dark:focus:border-b-neutral-600">
                 </div>
             </div>
 
             <div class="px-6 pb-6">
                 <label class="block text-sm font-medium text-gray-700 mb-1">Description</label>
-                <textarea name="description" rows="3" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">{{ old('description') }}</textarea>
+                <textarea name="description" rows="3" class="peer py-2.5 sm:py-3 pe-0 ps-8 block w-full bg-transparent border-t-transparent border-b-2 border-x-transparent border-b-gray-200 sm:text-sm focus:border-t-transparent focus:border-x-transparent focus:border-b-blue-500 focus:ring-0 disabled:opacity-50 disabled:pointer-events-none dark:border-b-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 dark:focus:border-b-neutral-600">{{ old('description') }}</textarea>
             </div>
         </div>
 
@@ -123,45 +123,60 @@
             </div>
 
             <div class="p-6 grid grid-cols-1 md:grid-cols-4 gap-6">
-                <div>
-                    <label class="block text-xs font-bold text-gray-600 uppercase mb-1">Tuition (Yearly)</label>
-                    <input type="number" step="0.01" name="tuition_fees" value="{{ old('tuition_fees') }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
+                     <!-- Tuition Fees with Type -->
+            <div>
+                <label class="block text-sm text-gray-700 dark:text-gray-400 mb-2">Tuition Fees</label>
+                <div class="flex">
+                    <input type="number" step="0.01" name="tuition_fees" value="" class="block w-2/3 text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 form-input rounded-l-md border-gray-300 focus:border-purple-400 focus:shadow-outline-purple" placeholder="Amount">
+                    <select name="tuition_fee_type" class="peer py-2.5 sm:py-3 pe-0 ps-8 block w-full bg-transparent border-t-transparent border-b-2 border-x-transparent border-b-gray-200 sm:text-sm focus:border-t-transparent focus:border-x-transparent focus:border-b-blue-500 focus:ring-0 disabled:opacity-50 disabled:pointer-events-none dark:border-b-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 dark:focus:border-b-neutral-600">
+                        <option value="Annual">Annual</option>
+                        <option value="Semester">Semester</option>
+                    </select>
                 </div>
-                <div>
-                    <label class="block text-xs font-bold text-gray-600 uppercase mb-1">Dorm Fees</label>
-                    <input type="text" name="dorm_fees" value="{{ old('dorm_fees') }}" placeholder="As per type" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
+            </div>
+
+            <!-- Dorm Fees with Type -->
+            <div>
+                <label class="block text-sm text-gray-700 dark:text-gray-400 mb-2">Dorm Fees</label>
+                <div class="flex">
+                    <input type="text" name="dorm_fees" value="" class="block w-2/3 text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 form-input rounded-l-md border-gray-300 focus:border-purple-400 focus:shadow-outline-purple" placeholder="Amount">
+                     <select name="dorm_fee_type" class="peer py-2.5 sm:py-3 pe-0 ps-8 block w-full bg-transparent border-t-transparent border-b-2 border-x-transparent border-b-gray-200 sm:text-sm focus:border-t-transparent focus:border-x-transparent focus:border-b-blue-500 focus:ring-0 disabled:opacity-50 disabled:pointer-events-none dark:border-b-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 dark:focus:border-b-neutral-600">
+                        <option value="Annual">Annual</option>
+                        <option value="Semester">Semester</option>
+                    </select>
                 </div>
+            </div>
                 <div>
                     <label class="block text-xs font-bold text-gray-600 uppercase mb-1">App Fee <span class="text-red-500">*</span></label>
-                    <input type="number" step="0.01" name="application_fee" value="{{ old('application_fee', 0) }}" required class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
+                    <input type="number" step="0.01" name="application_fee" value="{{ old('application_fee', 0) }}" required class="peer py-2.5 sm:py-3 pe-0 ps-8 block w-full bg-transparent border-t-transparent border-b-2 border-x-transparent border-b-gray-200 sm:text-sm focus:border-t-transparent focus:border-x-transparent focus:border-b-blue-500 focus:ring-0 disabled:opacity-50 disabled:pointer-events-none dark:border-b-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 dark:focus:border-b-neutral-600">
                 </div>
                 <div>
                     <label class="block text-xs font-bold text-gray-600 uppercase mb-1">Medical Fees</label>
-                    <input type="number" step="0.01" name="medical_fees" value="{{ old('medical_fees') }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
+                    <input type="number" step="0.01" name="medical_fees" value="{{ old('medical_fees') }}" class="peer py-2.5 sm:py-3 pe-0 ps-8 block w-full bg-transparent border-t-transparent border-b-2 border-x-transparent border-b-gray-200 sm:text-sm focus:border-t-transparent focus:border-x-transparent focus:border-b-blue-500 focus:ring-0 disabled:opacity-50 disabled:pointer-events-none dark:border-b-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 dark:focus:border-b-neutral-600">
                 </div>
                 <div>
                     <label class="block text-xs font-bold text-gray-600 uppercase mb-1">Insurance Fees</label>
-                    <input type="number" step="0.01" name="insurance_fees" value="{{ old('insurance_fees') }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
+                    <input type="number" step="0.01" name="insurance_fees" value="{{ old('insurance_fees') }}" class="peer py-2.5 sm:py-3 pe-0 ps-8 block w-full bg-transparent border-t-transparent border-b-2 border-x-transparent border-b-gray-200 sm:text-sm focus:border-t-transparent focus:border-x-transparent focus:border-b-blue-500 focus:ring-0 disabled:opacity-50 disabled:pointer-events-none dark:border-b-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 dark:focus:border-b-neutral-600">
                 </div>
                 <div>
                     <label class="block text-xs font-bold text-gray-600 uppercase mb-1">Resident Permit</label>
-                    <input type="number" step="0.01" name="resident_permit_fee" value="{{ old('resident_permit_fee') }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
+                    <input type="number" step="0.01" name="resident_permit_fee" value="{{ old('resident_permit_fee') }}" class="peer py-2.5 sm:py-3 pe-0 ps-8 block w-full bg-transparent border-t-transparent border-b-2 border-x-transparent border-b-gray-200 sm:text-sm focus:border-t-transparent focus:border-x-transparent focus:border-b-blue-500 focus:ring-0 disabled:opacity-50 disabled:pointer-events-none dark:border-b-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 dark:focus:border-b-neutral-600">
                 </div>
                 <div>
                     <label class="block text-xs font-bold text-gray-600 uppercase mb-1">Text Book</label>
-                    <input type="number" step="0.01" name="text_book_fee" value="{{ old('text_book_fee') }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
+                    <input type="number" step="0.01" name="text_book_fee" value="{{ old('text_book_fee') }}" class="peer py-2.5 sm:py-3 pe-0 ps-8 block w-full bg-transparent border-t-transparent border-b-2 border-x-transparent border-b-gray-200 sm:text-sm focus:border-t-transparent focus:border-x-transparent focus:border-b-blue-500 focus:ring-0 disabled:opacity-50 disabled:pointer-events-none dark:border-b-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 dark:focus:border-b-neutral-600">
                 </div>
                 <div>
                     <label class="block text-xs font-bold text-gray-600 uppercase mb-1">Deposit</label>
-                    <input type="number" step="0.01" name="deposit_fee" value="{{ old('deposit_fee') }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
+                    <input type="number" step="0.01" name="deposit_fee" value="{{ old('deposit_fee') }}" class="peer py-2.5 sm:py-3 pe-0 ps-8 block w-full bg-transparent border-t-transparent border-b-2 border-x-transparent border-b-gray-200 sm:text-sm focus:border-t-transparent focus:border-x-transparent focus:border-b-blue-500 focus:ring-0 disabled:opacity-50 disabled:pointer-events-none dark:border-b-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 dark:focus:border-b-neutral-600">
                 </div>
                 <div>
                     <label class="block text-xs font-bold text-gray-600 uppercase mb-1">Dorm Deposit</label>
-                    <input type="number" step="0.01" name="dorm_deposit" value="{{ old('dorm_deposit') }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
+                    <input type="number" step="0.01" name="dorm_deposit" value="{{ old('dorm_deposit') }}" class="peer py-2.5 sm:py-3 pe-0 ps-8 block w-full bg-transparent border-t-transparent border-b-2 border-x-transparent border-b-gray-200 sm:text-sm focus:border-t-transparent focus:border-x-transparent focus:border-b-blue-500 focus:ring-0 disabled:opacity-50 disabled:pointer-events-none dark:border-b-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 dark:focus:border-b-neutral-600">
                 </div>
                 <div>
                     <label class="block text-xs font-bold text-gray-600 uppercase mb-1">Others</label>
-                    <input type="text" name="other_fees" value="{{ old('other_fees') }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
+                    <input type="text" name="other_fees" value="{{ old('other_fees') }}" class="peer py-2.5 sm:py-3 pe-0 ps-8 block w-full bg-transparent border-t-transparent border-b-2 border-x-transparent border-b-gray-200 sm:text-sm focus:border-t-transparent focus:border-x-transparent focus:border-b-blue-500 focus:ring-0 disabled:opacity-50 disabled:pointer-events-none dark:border-b-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 dark:focus:border-b-neutral-600">
                 </div>
             </div>
         </div>
@@ -178,36 +193,54 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Coverage</label>
-                        <select name="scholarship_coverage" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
+                        <select name="scholarship_coverage" class="peer py-2.5 sm:py-3 pe-0 ps-8 block w-full bg-transparent border-t-transparent border-b-2 border-x-transparent border-b-gray-200 sm:text-sm focus:border-t-transparent focus:border-x-transparent focus:border-b-blue-500 focus:ring-0 disabled:opacity-50 disabled:pointer-events-none dark:border-b-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 dark:focus:border-b-neutral-600">
                             <option value="">Select Coverage</option>
-                            @foreach(['Full Tuition', 'Partial Tuition', 'Dorm Fees', 'Stipend', 'Insurance', 'Others Facilities'] as $opt)
+                            @foreach(['Full Tuition', 'Partial Tuition', 'Dorm Fees', 'Stipend', 'Insurance', 'Self Funded', 'Others Facilities'] as $opt)
                                 <option value="{{ $opt }}" {{ old('scholarship_coverage') == $opt ? 'selected' : '' }}>{{ $opt }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Stipend (Amount/Month)</label>
-                        <input type="number" step="0.01" name="stipend_amount" value="{{ old('stipend_amount') }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
+                        <input type="number" step="0.01" name="stipend_amount" value="{{ old('stipend_amount') }}" class="peer py-2.5 sm:py-3 pe-0 ps-8 block w-full bg-transparent border-t-transparent border-b-2 border-x-transparent border-b-gray-200 sm:text-sm focus:border-t-transparent focus:border-x-transparent focus:border-b-blue-500 focus:ring-0 disabled:opacity-50 disabled:pointer-events-none dark:border-b-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 dark:focus:border-b-neutral-600">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Other Facilities</label>
-                        <input type="text" name="scholarship_other_facilities" value="{{ old('scholarship_other_facilities') }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
+                        <input type="text" name="scholarship_other_facilities" value="{{ old('scholarship_other_facilities') }}" class="peer py-2.5 sm:py-3 pe-0 ps-8 block w-full bg-transparent border-t-transparent border-b-2 border-x-transparent border-b-gray-200 sm:text-sm focus:border-t-transparent focus:border-x-transparent focus:border-b-blue-500 focus:ring-0 disabled:opacity-50 disabled:pointer-events-none dark:border-b-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 dark:focus:border-b-neutral-600">
                     </div>
                 </div>
 
-                <div class="bg-blue-50 rounded-lg p-4 border border-blue-100">
-                    <h4 class="text-sm font-bold text-blue-800 mb-3 uppercase tracking-wider">Payable After Scholarship</h4>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <label class="block text-xs text-gray-600 mb-1">Tuition Fees (Yearly)</label>
-                            <input type="number" step="0.01" name="after_scholarship_tuition_fees" value="{{ old('after_scholarship_tuition_fees') }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
-                        </div>
-                        <div>
-                            <label class="block text-xs text-gray-600 mb-1">Dorm Fees</label>
-                            <input type="text" name="after_scholarship_dorm_fees" value="{{ old('after_scholarship_dorm_fees') }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
-                        </div>
+                <!-- Scholarship Section -->
+         <div class="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4 border border-blue-100 dark:border-blue-800 mb-6">
+            <h4 class="text-sm font-bold text-blue-800 dark:text-blue-300 mb-3 uppercase tracking-wider">Payable After Scholarship</h4>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                
+                <!-- After Scholarship Tuition with Type -->
+                <div>
+                    <label class="block text-xs text-gray-600 dark:text-gray-400 mb-1 uppercase font-bold">Tuition Fees</label>
+                    <div class="flex">
+                        <input type="number" step="0.01" name="after_scholarship_tuition_fees" value="" class="peer py-2.5 sm:py-3 pe-0 ps-8 block w-full bg-transparent border-t-transparent border-b-2 border-x-transparent border-b-gray-200 sm:text-sm focus:border-t-transparent focus:border-x-transparent focus:border-b-blue-500 focus:ring-0 disabled:opacity-50 disabled:pointer-events-none dark:border-b-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 dark:focus:border-b-neutral-600" placeholder="Amount">
+                        <select name="after_scholarship_tuition_fee_type" class="peer py-2.5 sm:py-3 pe-0 ps-8 block w-full bg-transparent border-t-transparent border-b-2 border-x-transparent border-b-gray-200 sm:text-sm focus:border-t-transparent focus:border-x-transparent focus:border-b-blue-500 focus:ring-0 disabled:opacity-50 disabled:pointer-events-none dark:border-b-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 dark:focus:border-b-neutral-600">
+                            <option value="Annual">Annual</option>
+                            <option value="Semester">Semester</option>
+                        </select>
                     </div>
                 </div>
+
+                <!-- After Scholarship Dorm with Type -->
+                <div>
+                    <label class="block text-xs text-gray-600 dark:text-gray-400 mb-1 uppercase font-bold">Dorm Fees</label>
+                    <div class="flex">
+                        <input type="text" name="after_scholarship_dorm_fees" value="" class="peer py-2.5 sm:py-3 pe-0 ps-8 block w-full bg-transparent border-t-transparent border-b-2 border-x-transparent border-b-gray-200 sm:text-sm focus:border-t-transparent focus:border-x-transparent focus:border-b-blue-500 focus:ring-0 disabled:opacity-50 disabled:pointer-events-none dark:border-b-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 dark:focus:border-b-neutral-600" placeholder="Amount">
+                         <select name="after_scholarship_dorm_fee_type" class="peer py-2.5 sm:py-3 pe-0 ps-8 block w-full bg-transparent border-t-transparent border-b-2 border-x-transparent border-b-gray-200 sm:text-sm focus:border-t-transparent focus:border-x-transparent focus:border-b-blue-500 focus:ring-0 disabled:opacity-50 disabled:pointer-events-none dark:border-b-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 dark:focus:border-b-neutral-600">
+                            <option value="Annual">Annual</option>
+                            <option value="Semester">Semester</option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+        </div>
             </div>
         </div>
 
@@ -258,11 +291,11 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Age Restriction</label>
-                        <input type="text" name="age_restriction" value="{{ old('age_restriction') }}" placeholder="e.g. 18-25" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
+                        <input type="text" name="age_restriction" value="{{ old('age_restriction') }}" placeholder="e.g. 18-25" class="peer py-2.5 sm:py-3 pe-0 ps-8 block w-full bg-transparent border-t-transparent border-b-2 border-x-transparent border-b-gray-200 sm:text-sm focus:border-t-transparent focus:border-x-transparent focus:border-b-blue-500 focus:ring-0 disabled:opacity-50 disabled:pointer-events-none dark:border-b-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 dark:focus:border-b-neutral-600">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Country Restriction</label>
-                        <input type="text" name="country_restriction" value="{{ old('country_restriction') }}" placeholder="Comma separated (e.g. USA, UK)" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
+                        <input type="text" name="country_restriction" value="{{ old('country_restriction') }}" placeholder="Comma separated (e.g. USA, UK)" class="peer py-2.5 sm:py-3 pe-0 ps-8 block w-full bg-transparent border-t-transparent border-b-2 border-x-transparent border-b-gray-200 sm:text-sm focus:border-t-transparent focus:border-x-transparent focus:border-b-blue-500 focus:ring-0 disabled:opacity-50 disabled:pointer-events-none dark:border-b-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 dark:focus:border-b-neutral-600">
                     </div>
                 </div>
 
@@ -283,28 +316,70 @@
                     </div>
                 </div>
 
-                <div class="border-t pt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Service Policy Available</label>
-                        <div class="space-y-2">
-                            <label class="flex items-center space-x-3">
-                                <input type="checkbox" name="has_exclusive_service_policy" value="1" {{ old('has_exclusive_service_policy') ? 'checked' : '' }} class="rounded text-blue-600 focus:ring-blue-500 h-4 w-4 border-gray-300">
-                                <span class="text-gray-700">Exclusive Service Policy</span>
-                            </label>
-                            <label class="flex items-center space-x-3">
-                                <input type="checkbox" name="has_premium_service_policy" value="1" {{ old('has_premium_service_policy') ? 'checked' : '' }} class="rounded text-blue-600 focus:ring-blue-500 h-4 w-4 border-gray-300">
-                                <span class="text-gray-700">Premium Service Policy</span>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-2 gap-4">
+                <!-- Service Policies & Rates (DYNAMIC SECTION) -->
+                <div class="border-t border-gray-200 dark:border-gray-700 pt-6 mb-6">
+                    <h4 class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
+                        Service Policy & Rates
+                    </h4>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Policy Selection -->
                         <div>
-                            <label class="block text-xs font-bold text-gray-600 uppercase mb-1">Partner Rate</label>
-                            <input type="number" step="0.01" name="partner_rate" value="{{ old('partner_rate') }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-400 mb-3">Available Policies</label>
+                            <div class="space-y-3">
+                                <label class="flex items-center space-x-3 cursor-pointer">
+                                    <input type="checkbox" id="check_exclusive" name="has_exclusive_service_policy" value="1" {{ old('has_exclusive_service_policy') ? 'checked' : '' }} 
+                                        class="rounded text-purple-600 focus:ring-purple-500 h-5 w-5 border-gray-300 dark:bg-gray-700 dark:border-gray-600"
+                                        onchange="toggleRates()">
+                                    <span class="text-gray-700 dark:text-gray-300 font-medium">Exclusive Service Policy</span>
+                                </label>
+
+                                <label class="flex items-center space-x-3 cursor-pointer">
+                                    <input type="checkbox" id="check_premium" name="has_premium_service_policy" value="1" {{ old('has_premium_service_policy') ? 'checked' : '' }} 
+                                        class="rounded text-purple-600 focus:ring-purple-500 h-5 w-5 border-gray-300 dark:bg-gray-700 dark:border-gray-600"
+                                        onchange="toggleRates()">
+                                    <span class="text-gray-700 dark:text-gray-300 font-medium">Premium Service Policy</span>
+                                </label>
+                            </div>
                         </div>
-                        <div>
-                            <label class="block text-xs font-bold text-gray-600 uppercase mb-1">Student Rate</label>
-                            <input type="number" step="0.01" name="student_rate" value="{{ old('student_rate') }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
+
+                        <!-- Dynamic Inputs Container -->
+                        <div class="space-y-4">
+                            
+                            <!-- Exclusive Rates Inputs -->
+                            <div id="exclusive_rates" class="bg-purple-50 dark:bg-gray-700 p-4 rounded-lg border border-purple-100 dark:border-gray-600 hidden transition-all">
+                                <h5 class="text-xs font-bold text-purple-700 dark:text-purple-300 uppercase mb-3">Exclusive Policy Rates</h5>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-xs text-gray-600 dark:text-gray-400 mb-1">Partner Rate</label>
+                                        <input type="number" step="0.01" name="exclusive_partner_rate" value="{{ old('exclusive_partner_rate') }}" 
+                                            class="block w-full text-sm dark:bg-gray-600 dark:text-gray-200 form-input rounded border-gray-300 focus:border-purple-400">
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs text-gray-600 dark:text-gray-400 mb-1">Student Rate</label>
+                                        <input type="number" step="0.01" name="exclusive_student_rate" value="{{ old('exclusive_student_rate') }}" 
+                                            class="block w-full text-sm dark:bg-gray-600 dark:text-gray-200 form-input rounded border-gray-300 focus:border-purple-400">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Premium Rates Inputs -->
+                            <div id="premium_rates" class="bg-blue-50 dark:bg-gray-700 p-4 rounded-lg border border-blue-100 dark:border-gray-600 hidden transition-all">
+                                <h5 class="text-xs font-bold text-blue-700 dark:text-blue-300 uppercase mb-3">Premium Policy Rates</h5>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-xs text-gray-600 dark:text-gray-400 mb-1">Partner Rate</label>
+                                        <input type="number" step="0.01" name="premium_partner_rate" value="{{ old('premium_partner_rate') }}" 
+                                            class="block w-full text-sm dark:bg-gray-600 dark:text-gray-200 form-input rounded border-gray-300 focus:border-blue-400">
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs text-gray-600 dark:text-gray-400 mb-1">Student Rate</label>
+                                        <input type="number" step="0.01" name="premium_student_rate" value="{{ old('premium_student_rate') }}" 
+                                            class="block w-full text-sm dark:bg-gray-600 dark:text-gray-200 form-input rounded border-gray-300 focus:border-blue-400">
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -315,7 +390,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Deadline</label>
-                    <input type="date" name="deadline" value="{{ old('deadline') }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
+                    <input type="date" name="deadline" value="{{ old('deadline') }}" class="peer py-2.5 sm:py-3 pe-0 ps-8 block w-full bg-transparent border-t-transparent border-b-2 border-x-transparent border-b-gray-200 sm:text-sm focus:border-t-transparent focus:border-x-transparent focus:border-b-blue-500 focus:ring-0 disabled:opacity-50 disabled:pointer-events-none dark:border-b-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 dark:focus:border-b-neutral-600">
                 </div>
                 <div class="flex items-end pb-2">
                     <label class="flex items-center space-x-3 cursor-pointer select-none">
@@ -323,9 +398,16 @@
                         <span class="text-gray-800 font-bold">Publish Immediately</span>
                     </label>
                 </div>
+                <!-- Status Checkbox -->
+                <div class="mb-6">
+                    <label class="flex items-center space-x-2 cursor-pointer">
+                        <input type="checkbox" name="isActive" value="1" {{ old('isActive', true) ? 'checked' : '' }} class="form-checkbox h-5 w-5 text-purple-600 border-gray-300 rounded focus:ring-purple-500 dark:bg-gray-700 dark:border-gray-600">
+                        <span class="text-gray-800 font-bold">Active (Publish Form)</span>
+                    </label>
+                </div>
             </div>
 
-            @if(isset($agents) && $agents->count() > 0)
+            <!-- @if(isset($agents) && $agents->count() > 0)
             <div class="mt-6">
                 <label class="block text-sm font-medium text-gray-700 mb-1">Assign to Agents (Optional)</label>
                 <select multiple name="agents[]" class="w-full rounded-lg border-gray-300 focus:border-blue-500 h-32">
@@ -337,7 +419,7 @@
                 </select>
                 <p class="text-xs text-gray-500 mt-1">Hold Ctrl (Windows) or Cmd (Mac) to select multiple agents.</p>
             </div>
-            @endif
+            @endif -->
 
             <div class="mt-8 pt-6 border-t flex justify-end space-x-4">
                 <a href="{{ route('admin.forms.index') }}" class="px-6 py-2.5 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition">Cancel</a>
@@ -451,5 +533,32 @@
             btn.style.display = 'none';
         }
     }
+</script>
+
+<script>
+    // Javascript to handle dynamic fields display
+    function toggleRates() {
+        const exclusiveCheck = document.getElementById('check_exclusive');
+        const premiumCheck = document.getElementById('check_premium');
+        const exclusiveRates = document.getElementById('exclusive_rates');
+        const premiumRates = document.getElementById('premium_rates');
+
+        if (exclusiveCheck.checked) {
+            exclusiveRates.classList.remove('hidden');
+        } else {
+            exclusiveRates.classList.add('hidden');
+        }
+
+        if (premiumCheck.checked) {
+            premiumRates.classList.remove('hidden');
+        } else {
+            premiumRates.classList.add('hidden');
+        }
+    }
+
+    // Run on load to handle old input retention on validation failure
+    document.addEventListener('DOMContentLoaded', function() {
+        toggleRates();
+    });
 </script>
 @endsection

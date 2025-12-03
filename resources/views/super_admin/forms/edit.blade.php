@@ -124,14 +124,29 @@
             </div>
 
             <div class="p-6 grid grid-cols-1 md:grid-cols-4 gap-6">
-                <div>
-                    <label class="block text-xs font-bold text-gray-600 uppercase mb-1">Tuition (Yearly)</label>
-                    <input type="number" step="0.01" name="tuition_fees" value="{{ old('tuition_fees', $form->tuition_fees) }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
+                 <!-- Tuition Fees with Type -->
+            <div>
+                <label class="block text-sm text-gray-700 dark:text-gray-400 mb-2">Tuition Fees</label>
+                <div class="flex">
+                    <input type="number" step="0.01" name="tuition_fees" value="{{ old('tuition_fees', $form->tuition_fees) }}" class="block w-2/3 text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 form-input rounded-l-md border-gray-300 focus:border-purple-400 focus:shadow-outline-purple" placeholder="Amount">
+                    <select name="tuition_fee_type" class="block w-1/3 text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 form-select rounded-r-md border-l-0 border-gray-300 focus:border-purple-400 focus:shadow-outline-purple bg-gray-50 dark:bg-gray-600">
+                        <option value="Annual" {{ old('tuition_fee_type', $form->tuition_fee_type) == 'Annual' ? 'selected' : '' }}>Annual</option>
+                        <option value="Semester" {{ old('tuition_fee_type', $form->tuition_fee_type) == 'Semester' ? 'selected' : '' }}>Semester</option>
+                    </select>
                 </div>
-                <div>
-                    <label class="block text-xs font-bold text-gray-600 uppercase mb-1">Dorm Fees</label>
-                    <input type="text" name="dorm_fees" value="{{ old('dorm_fees', $form->dorm_fees) }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
+            </div>
+
+            <!-- Dorm Fees with Type -->
+            <div>
+                <label class="block text-sm text-gray-700 dark:text-gray-400 mb-2">Dorm Fees</label>
+                <div class="flex">
+                    <input type="text" name="dorm_fees" value="{{ old('dorm_fees', $form->dorm_fees) }}" class="block w-2/3 text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 form-input rounded-l-md border-gray-300 focus:border-purple-400 focus:shadow-outline-purple" placeholder="Amount">
+                     <select name="dorm_fee_type" class="block w-1/3 text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 form-select rounded-r-md border-l-0 border-gray-300 focus:border-purple-400 focus:shadow-outline-purple bg-gray-50 dark:bg-gray-600">
+                        <option value="Annual" {{ old('dorm_fee_type', $form->dorm_fee_type) == 'Annual' ? 'selected' : '' }}>Annual</option>
+                        <option value="Semester" {{ old('dorm_fee_type', $form->dorm_fee_type) == 'Semester' ? 'selected' : '' }}>Semester</option>
+                    </select>
                 </div>
+            </div>
                 <div>
                     <label class="block text-xs font-bold text-gray-600 uppercase mb-1">App Fee <span class="text-red-500">*</span></label>
                     <input type="number" step="0.01" name="application_fee" value="{{ old('application_fee', $form->application_fee) }}" required class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
@@ -196,19 +211,37 @@
                     </div>
                 </div>
 
-                <div class="bg-blue-50 rounded-lg p-4 border border-blue-100">
-                    <h4 class="text-sm font-bold text-blue-800 mb-3 uppercase tracking-wider">Payable After Scholarship</h4>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <label class="block text-xs text-gray-600 mb-1">Tuition Fees (Yearly)</label>
-                            <input type="number" step="0.01" name="after_scholarship_tuition_fees" value="{{ old('after_scholarship_tuition_fees', $form->after_scholarship_tuition_fees) }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
-                        </div>
-                        <div>
-                            <label class="block text-xs text-gray-600 mb-1">Dorm Fees</label>
-                            <input type="text" name="after_scholarship_dorm_fees" value="{{ old('after_scholarship_dorm_fees', $form->after_scholarship_dorm_fees) }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
-                        </div>
+                 <!-- Scholarship Section -->
+         <div class="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4 border border-blue-100 dark:border-blue-800 mb-6">
+            <h4 class="text-sm font-bold text-blue-800 dark:text-blue-300 mb-3 uppercase tracking-wider">Payable After Scholarship</h4>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                
+                <!-- After Scholarship Tuition with Type -->
+                <div>
+                    <label class="block text-xs text-gray-600 dark:text-gray-400 mb-1 uppercase font-bold">Tuition Fees</label>
+                    <div class="flex">
+                        <input type="number" step="0.01" name="after_scholarship_tuition_fees" value="{{ old('after_scholarship_tuition_fees', $form->after_scholarship_tuition_fees) }}" class="block w-2/3 text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 form-input rounded-l-md border-gray-300 focus:border-blue-400" placeholder="Amount">
+                        <select name="after_scholarship_tuition_fee_type" class="block w-1/3 text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 form-select rounded-r-md border-l-0 border-gray-300 focus:border-blue-400 bg-white dark:bg-gray-600">
+                            <option value="Annual" {{ old('after_scholarship_tuition_fee_type', $form->after_scholarship_tuition_fee_type) == 'Annual' ? 'selected' : '' }}>Annual</option>
+                            <option value="Semester" {{ old('after_scholarship_tuition_fee_type', $form->after_scholarship_tuition_fee_type) == 'Semester' ? 'selected' : '' }}>Semester</option>
+                        </select>
                     </div>
                 </div>
+
+                <!-- After Scholarship Dorm with Type -->
+                <div>
+                    <label class="block text-xs text-gray-600 dark:text-gray-400 mb-1 uppercase font-bold">Dorm Fees</label>
+                    <div class="flex">
+                        <input type="text" name="after_scholarship_dorm_fees" value="{{ old('after_scholarship_dorm_fees', $form->after_scholarship_dorm_fees) }}" class="block w-2/3 text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 form-input rounded-l-md border-gray-300 focus:border-blue-400" placeholder="Amount">
+                         <select name="after_scholarship_dorm_fee_type" class="block w-1/3 text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 form-select rounded-r-md border-l-0 border-gray-300 focus:border-blue-400 bg-white dark:bg-gray-600">
+                            <option value="Annual" {{ old('after_scholarship_dorm_fee_type', $form->after_scholarship_dorm_fee_type) == 'Annual' ? 'selected' : '' }}>Annual</option>
+                            <option value="Semester" {{ old('after_scholarship_dorm_fee_type', $form->after_scholarship_dorm_fee_type) == 'Semester' ? 'selected' : '' }}>Semester</option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+        </div>
             </div>
         </div>
 
@@ -283,31 +316,74 @@
                     </div>
                 </div>
 
-                <div class="border-t pt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Service Policy Available</label>
-                        <div class="space-y-2">
-                            <label class="flex items-center space-x-3">
-                                <input type="checkbox" name="has_exclusive_service_policy" value="1" {{ old('has_exclusive_service_policy', $form->has_exclusive_service_policy) ? 'checked' : '' }} class="rounded text-blue-600 focus:ring-blue-500 h-4 w-4 border-gray-300">
-                                <span class="text-gray-700">Exclusive Service Policy</span>
-                            </label>
-                            <label class="flex items-center space-x-3">
-                                <input type="checkbox" name="has_premium_service_policy" value="1" {{ old('has_premium_service_policy', $form->has_premium_service_policy) ? 'checked' : '' }} class="rounded text-blue-600 focus:ring-blue-500 h-4 w-4 border-gray-300">
-                                <span class="text-gray-700">Premium Service Policy</span>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-xs font-bold text-gray-600 uppercase mb-1">Partner Rate</label>
-                            <input type="number" step="0.01" name="partner_rate" value="{{ old('partner_rate', $form->partner_rate) }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold text-gray-600 uppercase mb-1">Student Rate</label>
-                            <input type="number" step="0.01" name="student_rate" value="{{ old('student_rate', $form->student_rate) }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
-                        </div>
+                <!-- Service Policies & Rates (DYNAMIC SECTION) -->
+        <div class="border-t border-gray-200 dark:border-gray-700 pt-6 mb-6">
+            <h4 class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
+                Service Policy & Rates
+            </h4>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Policy Selection -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-400 mb-3">Available Policies</label>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 cursor-pointer">
+                            <input type="checkbox" id="check_exclusive" name="has_exclusive_service_policy" value="1" {{ old('has_exclusive_service_policy', $form->has_exclusive_service_policy) ? 'checked' : '' }} 
+                                   class="rounded text-purple-600 focus:ring-purple-500 h-5 w-5 border-gray-300 dark:bg-gray-700 dark:border-gray-600"
+                                   onchange="toggleRates()">
+                            <span class="text-gray-700 dark:text-gray-300 font-medium">Exclusive Service Policy</span>
+                        </label>
+
+                        <label class="flex items-center space-x-3 cursor-pointer">
+                            <input type="checkbox" id="check_premium" name="has_premium_service_policy" value="1" {{ old('has_premium_service_policy', $form->has_premium_service_policy) ? 'checked' : '' }} 
+                                   class="rounded text-purple-600 focus:ring-purple-500 h-5 w-5 border-gray-300 dark:bg-gray-700 dark:border-gray-600"
+                                   onchange="toggleRates()">
+                            <span class="text-gray-700 dark:text-gray-300 font-medium">Premium Service Policy</span>
+                        </label>
                     </div>
                 </div>
+
+                <!-- Dynamic Inputs Container -->
+                <div class="space-y-4">
+                    
+                    <!-- Exclusive Rates Inputs -->
+                    <div id="exclusive_rates" class="bg-purple-50 dark:bg-gray-700 p-4 rounded-lg border border-purple-100 dark:border-gray-600 hidden transition-all">
+                        <h5 class="text-xs font-bold text-purple-700 dark:text-purple-300 uppercase mb-3">Exclusive Policy Rates</h5>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs text-gray-600 dark:text-gray-400 mb-1">Partner Rate</label>
+                                <input type="number" step="0.01" name="exclusive_partner_rate" value="{{ old('exclusive_partner_rate', $form->exclusive_partner_rate) }}" 
+                                       class="block w-full text-sm dark:bg-gray-600 dark:text-gray-200 form-input rounded border-gray-300 focus:border-purple-400">
+                            </div>
+                            <div>
+                                <label class="block text-xs text-gray-600 dark:text-gray-400 mb-1">Student Rate</label>
+                                <input type="number" step="0.01" name="exclusive_student_rate" value="{{ old('exclusive_student_rate', $form->exclusive_student_rate) }}" 
+                                       class="block w-full text-sm dark:bg-gray-600 dark:text-gray-200 form-input rounded border-gray-300 focus:border-purple-400">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Premium Rates Inputs -->
+                    <div id="premium_rates" class="bg-blue-50 dark:bg-gray-700 p-4 rounded-lg border border-blue-100 dark:border-gray-600 hidden transition-all">
+                        <h5 class="text-xs font-bold text-blue-700 dark:text-blue-300 uppercase mb-3">Premium Policy Rates</h5>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs text-gray-600 dark:text-gray-400 mb-1">Partner Rate</label>
+                                <input type="number" step="0.01" name="premium_partner_rate" value="{{ old('premium_partner_rate', $form->premium_partner_rate) }}" 
+                                       class="block w-full text-sm dark:bg-gray-600 dark:text-gray-200 form-input rounded border-gray-300 focus:border-blue-400">
+                            </div>
+                            <div>
+                                <label class="block text-xs text-gray-600 dark:text-gray-400 mb-1">Student Rate</label>
+                                <input type="number" step="0.01" name="premium_student_rate" value="{{ old('premium_student_rate', $form->premium_student_rate) }}" 
+                                       class="block w-full text-sm dark:bg-gray-600 dark:text-gray-200 form-input rounded border-gray-300 focus:border-blue-400">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
             </div>
         </div>
 
@@ -321,6 +397,12 @@
                     <label class="flex items-center space-x-3 cursor-pointer select-none">
                         <input type="checkbox" name="isPublished" value="1" {{ old('isPublished', $form->isPublished) ? 'checked' : '' }} class="form-checkbox h-5 w-5 text-green-600 rounded focus:ring-green-500">
                         <span class="text-gray-800 font-bold">Publish Immediately</span>
+                    </label>
+                </div>
+                <div class="flex items-end pb-2">
+                    <label class="flex items-center space-x-2 cursor-pointer">
+                        <input type="checkbox" name="isActive" value="1" {{ old('isActive', $form->isActive) ? 'checked' : '' }} class="form-checkbox h-5 w-5 text-purple-600 border-gray-300 rounded focus:ring-purple-500 dark:bg-gray-700 dark:border-gray-600">
+                        <span class="text-gray-800 font-bold">Active (Publish Form)</span>
                     </label>
                 </div>
             </div>
@@ -455,5 +537,33 @@
             btn.style.display = 'none';
         }
     }
+</script>
+
+
+<script>
+    // Javascript to handle dynamic fields display
+    function toggleRates() {
+        const exclusiveCheck = document.getElementById('check_exclusive');
+        const premiumCheck = document.getElementById('check_premium');
+        const exclusiveRates = document.getElementById('exclusive_rates');
+        const premiumRates = document.getElementById('premium_rates');
+
+        if (exclusiveCheck.checked) {
+            exclusiveRates.classList.remove('hidden');
+        } else {
+            exclusiveRates.classList.add('hidden');
+        }
+
+        if (premiumCheck.checked) {
+            premiumRates.classList.remove('hidden');
+        } else {
+            premiumRates.classList.add('hidden');
+        }
+    }
+
+    // Run on load to handle old input retention or existing data
+    document.addEventListener('DOMContentLoaded', function() {
+        toggleRates();
+    });
 </script>
 @endsection

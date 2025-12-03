@@ -49,8 +49,14 @@ class AdmissionForm extends Model
         'accept_studied_in_china',
         'has_exclusive_service_policy', 
         'has_premium_service_policy', 
-        'partner_rate', 
-        'student_rate'
+        'exclusive_partner_rate',
+        'exclusive_student_rate',
+        'premium_partner_rate',
+        'premium_student_rate',
+        'tuition_fee_type',
+        'dorm_fee_type',
+        'after_scholarship_tuition_fee_type',
+        'after_scholarship_dorm_fee_type',
     ];
 
     protected $casts = [

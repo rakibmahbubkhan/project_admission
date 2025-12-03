@@ -37,6 +37,11 @@ class UniversityFactory extends Factory
             '3.00',
         ];
 
+        $types = [
+            'Public',
+            'Private',
+        ];
+
         $boolians =['0', '1'];
 
         return [
@@ -46,6 +51,7 @@ class UniversityFactory extends Factory
             'logo' => null,
             'content' => $this->faker->paragraph(),
             'currency'=> $this->faker->randomElement($currencies),
+            'type'=> $this->faker->randomElement($types),
             'image'=> null ,
             'ranking'=> $this->faker->randomElement($rankings),
             'intake'=>  'Fall ' . rand(2025, 2027),

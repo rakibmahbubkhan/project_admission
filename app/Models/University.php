@@ -14,6 +14,7 @@ class University extends Model
         'country',
         'city',
         'currency',
+        'type',
         'logo',
         'image',
         'content',
