@@ -43,15 +43,16 @@
             </div>
             
             <div class="p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">University <span class="text-red-500">*</span></label>
-                    <select name="university_id" required class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
-                        <option value="">Select University</option>
-                        @foreach($universities as $uni)
-                            <option value="{{ $uni->id }}" {{ old('university_id', $form->university_id) == $uni->id ? 'selected' : '' }}>{{ $uni->name }}</option>
-                        @endforeach
-                    </select>
-                    @error('university_id') <span class="text-xs text-red-500">{{ $message }}</span> @enderror
+                    <label class="block text-sm font-medium text-gray-700 mb-1">University</label>
+                    <input type="text" 
+                        value="{{ $form->university ? $form->university->name : 'N/A' }}" 
+                        class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" 
+                        readonly>
+                    @error('university_id') 
+                        <span class="text-xs text-red-500">{{ $message }}</span> 
+                    @enderror
                 </div>
 
                 <div>

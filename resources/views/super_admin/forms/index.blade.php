@@ -5,7 +5,7 @@
 @section('content')
 <div class="container px-6 mx-auto grid">
     <div class="flex justify-between items-center my-6">
-        <h2 class="text-2xl font-semibold text-gray-700 dark:text-gray-200">
+        <h2 class="text-2xl font-semibold text-gray-700 ">
             Admission Forms
         </h2>
         <a href="{{ route('admin.forms.create') }}" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded shadow-md transition duration-150 ease-in-out">
@@ -108,9 +108,9 @@
                         </td>
                         <td class="px-4 py-3 text-sm text-right">
                             <div class="flex items-center justify-end gap-2">
-                                <a href="{{ route('admin.forms.show', $form->id) }}" class="p-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-purple-400 focus:outline-none focus:shadow-outline-gray" aria-label="View" title="View Details">
+                                <!-- <a href="{{ route('admin.forms.show', $form->id) }}" class="p-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-purple-400 focus:outline-none focus:shadow-outline-gray" aria-label="View" title="View Details">
                                     <i class="fas fa-eye"></i>
-                                </a>
+                                </a> -->
                                 <a href="{{ route('admin.forms.edit', $form->id) }}" class="p-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-blue-400 focus:outline-none focus:shadow-outline-gray" aria-label="Edit" title="Edit">
                                     <i class="fas fa-edit"></i>
                                 </a>

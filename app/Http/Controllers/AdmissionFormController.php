@@ -104,8 +104,8 @@ class AdmissionFormController extends Controller
 
     public function edit($id)
     {
-        $form = AdmissionForm::findOrFail($id);
-        $universities = University::where('isActive', true)->get();
+        $form = AdmissionForm::with('university')->findOrFail($id);
+        $universities = University::all();
         return view('super_admin.forms.edit', compact('form', 'universities'));
     }
 
