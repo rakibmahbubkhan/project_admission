@@ -118,7 +118,7 @@
                         </div>
                         <div class="flex items-center">
                             <i class="fas fa-tag text-gray-400 w-5"></i>
-                            <span>${{ number_format($form->application_fee ?? 0) }}</span>
+                            <span>{{ number_format($form->application_fee ?? 0) }} {{ $form->university->currency }}</span>
                         </div>
                         <div class="flex items-center col-span-2">
                             <i class="far fa-calendar-alt text-gray-400 w-5"></i>

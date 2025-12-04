@@ -1,6 +1,6 @@
 @extends('layouts.agent')
 
-@section('title', 'Agent Dashboard')
+@section('title', 'Partner Dashboard')
 
 @section('content')
 <div class="container mx-auto px-4 py-8">

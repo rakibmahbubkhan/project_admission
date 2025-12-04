@@ -23,7 +23,7 @@
 <body class="bg-gray-100">
 <!-- Header -->
     <header class="bg-white shadow p-4 flex justify-between items-center">
-        <h1 class="text-lg font-bold">Admin Dashboard</h1>
+        <h1 class="text-lg font-bold">Partner Dashboard</h1>
 
         <!-- Mobile Menu Button -->
         <button onclick="toggleSidebar()" class="md:hidden px-3 py-2 bg-gray-800 text-white rounded">

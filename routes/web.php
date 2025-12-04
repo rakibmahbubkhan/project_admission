@@ -109,20 +109,12 @@ Route::middleware(['auth', 'role:agent'])->prefix('agent')->name('agent.')->grou
     
 
     // Student management
-    Route::get('agent/students', [AgentDashboardController::class, 'students'])
-        ->name('students');
-
-    Route::get('agent/students/create', [AgentDashboardController::class, 'createStudent'])
-        ->name('students.create');
-
-    Route::post('agent/students', [AgentDashboardController::class, 'storeStudent'])
-        ->name('students.store');
-
+    Route::get('/students', [AgentDashboardController::class, 'students'])->name('students');
+    Route::get('/students/create', [AgentDashboardController::class, 'createStudent'])->name('students.create');
+    Route::post('/students', [AgentDashboardController::class, 'storeStudent'])->name('students.store');
     // View submissions of students
-    Route::get('agent/submissions', [AgentDashboardController::class, 'submissions'])
-        ->name('submissions');
-
-    Route::resource('students', AgentStudentController::class);
+    Route::get('/submissions', [AgentDashboardController::class, 'submissions'])->name('submissions');
+    //Route::resource('students', AgentStudentController::class);
     Route::get('/students-list', [AgentDashboardController::class, 'students'])->name('students.list');
     
     // Submissions
