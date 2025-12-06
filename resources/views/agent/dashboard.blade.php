@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div class="mt-4">
-                <a href="{{ route('agent.students') }}" class="text-sm text-blue-600 hover:text-blue-800 font-medium flex items-center">
+                <a href="{{ route('Partner.students') }}" class="text-sm text-blue-600 hover:text-blue-800 font-medium flex items-center">
                     View All Students <i class="fas fa-arrow-right ml-1 text-xs"></i>
                 </a>
             </div>
@@ -40,7 +40,7 @@
                 </div>
             </div>
             <div class="mt-4">
-                <a href="{{ route('agent.submissions') }}" class="text-sm text-purple-600 hover:text-purple-800 font-medium flex items-center">
+                <a href="{{ route('Partner.submissions') }}" class="text-sm text-purple-600 hover:text-purple-800 font-medium flex items-center">
                     Track Status <i class="fas fa-arrow-right ml-1 text-xs"></i>
                 </a>
             </div>
@@ -68,7 +68,7 @@
                 <h3 class="text-2xl font-bold mb-2">Ready to add a new student?</h3>
                 <p class="text-blue-100">Expand your network and help students achieve their dreams.</p>
             </div>
-            <a href="{{ route('agent.students.create') }}" class="bg-white text-blue-600 hover:bg-gray-50 font-bold py-3 px-6 rounded-lg shadow transition duration-200 transform hover:scale-105 flex items-center">
+            <a href="{{ route('Partner.students.create') }}" class="bg-white text-blue-600 hover:bg-gray-50 font-bold py-3 px-6 rounded-lg shadow transition duration-200 transform hover:scale-105 flex items-center">
                 <i class="fas fa-plus-circle mr-2"></i> Add New Student
             </a>
         </div>

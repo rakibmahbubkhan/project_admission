@@ -97,7 +97,7 @@ class AgentRegisterController extends Controller
 
         Agent::create($agentData);
 
-        return redirect()->route('agent.register')
+        return redirect()->route('Partner.register')
             ->with('success', 'Registration submitted successfully! Please wait for approval.');
     }
 }

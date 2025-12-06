@@ -49,7 +49,7 @@ class AuthenticatedSessionController extends Controller
         }
 
         if ($user->role === 'agent') {
-            return to_route('agent.dashboard');
+            return to_route('Partner.dashboard');
         }
 
         if ($user->role === 'student') {

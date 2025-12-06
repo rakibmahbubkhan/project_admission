@@ -40,7 +40,7 @@
                 </div>
             @endif
 
-            <form method="POST" action="{{ route('agent.register.store') }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('Partner.register.store') }}" enctype="multipart/form-data">
                 @csrf
 
                 <!-- Type Selector -->

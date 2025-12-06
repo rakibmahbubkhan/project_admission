@@ -70,21 +70,42 @@
                 <li>
                     <a href="{{ route('admin.forms.index') }}"
                        class="block px-3 py-2 rounded hover:bg-gray-700">
-                        Admission Forms
+                        Available Offers
                     </a>
                 </li>
 
                 <li>
                     <a href="{{ route('admin.agents.index') }}"
                        class="block px-3 py-2 rounded hover:bg-gray-700">
-                        Agents
+                        Partners
                     </a>
                 </li>
 
                 <li>
                     <a href="{{ route('admin.submissions') }}"
                        class="block px-3 py-2 rounded hover:bg-gray-700">
-                        Submissions
+                        Submitted Applications
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ route('admin.submissions') }}"
+                       class="block px-3 py-2 rounded hover:bg-gray-700">
+                        Wallet
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ route('admin.submissions') }}"
+                       class="block px-3 py-2 rounded hover:bg-gray-700">
+                        Courses
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ route('admin.submissions') }}"
+                       class="block px-3 py-2 rounded hover:bg-gray-700">
+                        Reports
                     </a>
                 </li>
 

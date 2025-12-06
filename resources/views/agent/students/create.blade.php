@@ -9,18 +9,18 @@
         <!-- Breadcrumb and back navigation -->
         <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-8 gap-4">
             <div class="flex items-center space-x-2">
-                <a href="{{ route('agent.dashboard') }}" class="text-gray-500 hover:text-blue-600 transition">
+                <a href="{{ route('Partner.dashboard') }}" class="text-gray-500 hover:text-blue-600 transition">
                     <i class="fas fa-home"></i>
                 </a>
                 <span class="text-gray-300">/</span>
-                <a href="{{ route('agent.students') }}" class="text-gray-500 hover:text-blue-600 transition">
+                <a href="{{ route('Partner.students') }}" class="text-gray-500 hover:text-blue-600 transition">
                     Students
                 </a>
                 <span class="text-gray-300">/</span>
                 <span class="text-blue-600 font-medium">Add New</span>
             </div>
             
-            <a href="{{ route('agent.students') }}" class="inline-flex items-center px-4 py-2.5 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-all duration-200 shadow-sm hover:shadow">
+            <a href="{{ route('Partner.students') }}" class="inline-flex items-center px-4 py-2.5 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-all duration-200 shadow-sm hover:shadow">
                 <i class="fas fa-arrow-left mr-2 text-gray-500"></i>
                 <span class="font-medium text-gray-700">Back to List</span>
             </a>
@@ -68,7 +68,7 @@
                 </div>
 
                 <!-- Form -->
-                <form action="{{ route('agent.students.store') }}" method="POST" class="p-8" id="studentForm">
+                <form action="{{ route('Partner.students.store') }}" method="POST" class="p-8" id="studentForm">
                     @csrf
 
                     <!-- Validation Errors -->

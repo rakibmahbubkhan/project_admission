@@ -93,7 +93,7 @@ public function storeStudent(Request $request)
         
         DB::commit();
         
-        return redirect()->route('agent.students')->with('success', 'Student created successfully.');
+        return redirect()->route('Partner.students')->with('success', 'Student created successfully.');
         
     } catch (\Exception $e) {
         DB::rollBack();

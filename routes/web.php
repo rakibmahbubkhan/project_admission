@@ -60,7 +60,7 @@ Route::middleware('auth')->group(function () {
         if ($user->isAdmin()) {
             return redirect()->route('admin.dashboard');
         } elseif ($user->isAgent()) {
-            return redirect()->route('agent.dashboard');
+            return redirect()->route('Partner.dashboard');
         } else {
             return redirect()->route('student.dashboard');
         }
@@ -78,13 +78,13 @@ Route::middleware(['auth', 'role:super_admin'])->prefix('admin')->name('admin.')
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
     
     // Agents Management
-    Route::get('/agents', [AgentApprovalController::class, 'index'])->name('agents.index');
-    Route::get('/agents/{id}', [AgentApprovalController::class, 'show'])->name('agents.show');
-    Route::post('/agents/{id}/update-status', [AgentApprovalController::class, 'updateStatus'])->name('agents.update-status');
-    Route::post('/agents/{id}/approve', [AgentApprovalController::class, 'approve'])->name('agents.approve');
-    Route::post('/agents/{id}/disable', [AgentApprovalController::class, 'disable'])->name('agents.disable');
-    Route::post('/agents/{id}/enable', [AgentApprovalController::class, 'enable'])->name('agents.enable');
-    Route::post('/agents/{id}/reject', [AgentApprovalController::class, 'reject'])->name('agents.reject');
+    Route::get('/Partners', [AgentApprovalController::class, 'index'])->name('agents.index');
+    Route::get('/Partners/{id}', [AgentApprovalController::class, 'show'])->name('agents.show');
+    Route::post('/Partners/{id}/update-status', [AgentApprovalController::class, 'updateStatus'])->name('agents.update-status');
+    Route::post('/Partners/{id}/approve', [AgentApprovalController::class, 'approve'])->name('agents.approve');
+    Route::post('/Partners/{id}/disable', [AgentApprovalController::class, 'disable'])->name('agents.disable');
+    Route::post('/Partners/{id}/enable', [AgentApprovalController::class, 'enable'])->name('agents.enable');
+    Route::post('/Partners/{id}/reject', [AgentApprovalController::class, 'reject'])->name('agents.reject');
     
     // Universities Management
     Route::resource('universities', UniversityController::class);
@@ -94,17 +94,17 @@ Route::middleware(['auth', 'role:super_admin'])->prefix('admin')->name('admin.')
     Route::post('forms/{id}/toggle-status', [AdmissionFormController::class, 'toggleStatus'])->name('forms.toggleStatus');
     
     // Applications Management
-    Route::get('/applications', [AdminApplicationController::class, 'index'])->name('applications.index');
-    Route::get('/applications/{id}/approve', [AdminApplicationController::class, 'approve'])->name('applications.approve');
-    Route::get('/applications/{id}/reject', [AdminApplicationController::class, 'reject'])->name('applications.reject');
+    // Route::get('/applications', [AdminApplicationController::class, 'index'])->name('applications.index');
+    // Route::get('/applications/{id}/approve', [AdminApplicationController::class, 'approve'])->name('applications.approve');
+    // Route::get('/applications/{id}/reject', [AdminApplicationController::class, 'reject'])->name('applications.reject');
     
     // Submissions
-    Route::get('submissions', [AdminFormSubmissionController::class, 'index'])->name('submissions');
-    Route::post('submissions/{submission}/mark-paid', [AdminFormSubmissionController::class, 'markPaid'])->name('submissions.markPaid');
+    Route::get('/applications', [AdminFormSubmissionController::class, 'index'])->name('submissions');
+    Route::post('/applications/{submission}/mark-paid', [AdminFormSubmissionController::class, 'markPaid'])->name('submissions.markPaid');
 });
 
 // Agent Routes
-Route::middleware(['auth', 'role:agent'])->prefix('agent')->name('agent.')->group(function () {
+Route::middleware(['auth', 'role:agent'])->prefix('Partner')->name('Partner.')->group(function () {
     Route::get('/dashboard', [AgentDashboardController::class, 'index'])->name('dashboard');
     
 

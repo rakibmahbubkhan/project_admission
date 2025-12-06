@@ -10,7 +10,7 @@
             <h2 class="text-2xl font-bold text-gray-800">Managed Students</h2>
             <p class="text-sm text-gray-500 mt-1">View and manage all students registered under your agency.</p>
         </div>
-        <a href="{{ route('agent.students.create') }}" class="mt-4 md:mt-0 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 px-5 rounded-lg shadow transition duration-200 flex items-center">
+        <a href="{{ route('Partner.students.create') }}" class="mt-4 md:mt-0 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 px-5 rounded-lg shadow transition duration-200 flex items-center">
             <i class="fas fa-plus mr-2"></i> Add Student
         </a>
     </div>

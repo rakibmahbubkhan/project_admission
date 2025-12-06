@@ -54,21 +54,21 @@
             <ul class="space-y-3">
 
                 <li>
-                    <a href="{{ route('agent.dashboard') }}"
+                    <a href="{{ route('Partner.dashboard') }}"
                        class="block px-3 py-2 rounded hover:bg-gray-700">
                         Dashboard
                     </a>
                 </li>
 
                 <li>
-                    <a href="{{ route('agent.students') }}"
+                    <a href="{{ route('Partner.students') }}"
                        class="block px-3 py-2 rounded hover:bg-gray-700">
                         Students
                     </a>
                 </li>
 
                 <li>
-                    <a href="{{ route('agent.submissions') }}"
+                    <a href="{{ route('Partner.submissions') }}"
                        class="block px-3 py-2 rounded hover:bg-gray-700">
                         Submissions
                     </a>

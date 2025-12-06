@@ -57,7 +57,7 @@ class StudentController extends Controller
         // Send password to student email (optional)
         // Mail::to($user->email)->send(new StudentAccountMail($user, $password));
 
-        return redirect()->route('agent.students.index')
+        return redirect()->route('Partner.students.index')
             ->with('success', 'Student created successfully!');
     }
 
