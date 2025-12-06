@@ -57,9 +57,9 @@ Route::middleware('auth')->group(function () {
     
     Route::get('/redirect', function () {
         $user = Auth::user();
-        if ($user->isAdmin()) {
+        if ($user->role == "super_admin") {
             return redirect()->route('admin.dashboard');
-        } elseif ($user->isAgent()) {
+        } elseif ($user->role == "agent") {
             return redirect()->route('Partner.dashboard');
         } else {
             return redirect()->route('student.dashboard');
@@ -97,9 +97,16 @@ Route::middleware(['auth', 'role:super_admin'])->prefix('admin')->name('admin.')
     // Route::get('/applications', [AdminApplicationController::class, 'index'])->name('applications.index');
     // Route::get('/applications/{id}/approve', [AdminApplicationController::class, 'approve'])->name('applications.approve');
     // Route::get('/applications/{id}/reject', [AdminApplicationController::class, 'reject'])->name('applications.reject');
-    
-    // Submissions
+
+    // Submissions / Applications Review
     Route::get('/applications', [AdminFormSubmissionController::class, 'index'])->name('submissions');
+    Route::get('/applications/{id}', [AdminFormSubmissionController::class, 'show'])->name('submissions.show'); 
+    
+    // Edit Application Route
+    Route::get('/applications/{id}/edit', [AdminFormSubmissionController::class, 'edit'])->name('submissions.edit');
+    Route::put('/applications/{id}', [AdminFormSubmissionController::class, 'update'])->name('submissions.update');
+
+    Route::post('/applications/{id}/status', [AdminFormSubmissionController::class, 'updateStatus'])->name('submissions.updateStatus'); 
     Route::post('/applications/{submission}/mark-paid', [AdminFormSubmissionController::class, 'markPaid'])->name('submissions.markPaid');
 });
 

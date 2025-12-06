@@ -19,6 +19,13 @@ class AgentApprovalController extends Controller
         return view('super_admin.agents.index', compact('agents'));
     }
 
+    public function show($id)
+    {
+        // Eager load the agent profile relationship
+        $agent = User::with('agent')->findOrFail($id);
+        return view('super_admin.agents.show', compact('agent'));
+    }
+
     public function approve($id)
     {
         $user = User::findOrFail($id);

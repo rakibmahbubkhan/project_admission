@@ -282,8 +282,20 @@
                     <div class="col-auto">
                         <div class="header-links">
                             <ul class="header-right-wrap">
-                                <li><i class="fa-solid fa-user"></i><a href="#login-form" class="popup-content">Login /
-                                        Register</a></li>
+                                {{-- Logic to toggle between Login/Register and Dashboard --}}
+                                @guest
+                                    <li>
+                                        <i class="fa-solid fa-user"></i>
+                                        <a href="#login-form" class="popup-content">Login / Register</a>
+                                    </li>
+                                @else
+                                    <li>
+                                        <i class="fa-solid fa-gauge"></i>
+                                        {{-- Points to the /redirect route defined in web.php which handles role-based redirection --}}
+                                        <a href="{{ url('/redirect') }}">Dashboard</a>
+                                    </li>
+                                @endguest
+
                                 <li>
                                     <i class="fas fa-comments"></i><a href="faq.html">FAQ</a>
                                 </li>
@@ -307,92 +319,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="sticky-wrapper">
-            <!-- Main Menu Area -->
-            <div class="menu-area">
-                <div class="container th-container4">
-                    <div class="row align-items-center justify-content-between" style="background-color: white;">
-                        <div class="col-auto">
-                            <div class="header-logo">
-                                <a href="#">
-                                    <img src="{{ asset('assets/img/logo.png') }}" style="height:80px;" alt="Aalokbortika">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-auto d-none d-xl-block">
-                            <nav class="main-menu">
-                                <ul>
-                                    <li><a href="#">Home</a></li>
-                                    <!-- <li class="menu-item-has-children">
-                                        <a href="#hero">Home</a>
-                                        <ul class="mega-menu mega-menu-content mega-scroll">
-                                            <li>
-                                                <div class="container">
-                                                    <div class="row gy-4">
-                                                        <div class="col-lg-4">
-                                                            <div class="mega-menu-box">
-                                                                <div class="mega-menu-img">
-                                                                    <img src="{{ asset('assets/img/pages/home-university.jpg') }}" alt="Home One">
-                                                                    <div class="btn-wrap">
-                                                                        <a href="home-university.html" class="th-btn">Multipage</a>
-                                                                        <a href="home-university-op.html" class="th-btn">Onepage</a>
-                                                                    </div>
-                                                                </div>
-                                                                <h3 class="mega-menu-title"><a href="home-university.html">Home University</a></h3>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-4">
-                                                            <div class="mega-menu-box">
-                                                                <div class="mega-menu-img">
-                                                                    <img src="{{ asset('assets/img/pages/home-admission.jpg') }}" alt="Home Two">
-                                                                    <div class="btn-wrap">
-                                                                        <a href="home-admission.html" class="th-btn">Multipage</a>
-                                                                        <a href="home-admission-op.html" class="th-btn">Onepage</a>
-                                                                    </div>
-                                                                </div>
-                                                                <h3 class="mega-menu-title"><a href="home-admission.html">Home Admission</a></h3>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-4">
-                                                            <div class="mega-menu-box">
-                                                                <div class="mega-menu-img">
-                                                                    <img src="{{ asset('assets/img/pages/home-courses.jpg') }}" alt="Home Three">
-                                                                    <div class="btn-wrap">
-                                                                        <a href="home-courses.html" class="th-btn">Multipage</a>
-                                                                        <a href="home-courses-op.html" class="th-btn">Onepage</a>
-                                                                    </div>
-                                                                </div>
-                                                                <h3 class="mega-menu-title"><a href="home-courses.html">Home Courses</a>
-                                                                </h3>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </li> -->
-                                    <li><a href="#about-sec">About Us</a></li>
-                                    <li><a href="#program-sec">Program</a></li>
-                                    <li><a href="#event-sec">Events</a></li>
-                                    <li><a href="#blog-sec">Blog</a></li>
-                                    <li>
-                                        <a href="#contact-sec">Contact Us</a>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
-                        <div class="col-auto">
-                            <div class="header-action d-none d-lg-block">
-                                <a href="contact.html" class="th-btn th-icon"> contact Us</a>
-                            </div>
-                            <button type="button" class="th-menu-toggle d-inline-block d-lg-none"><i class="far fa-bars"></i></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header><!--==============================
+        </div><!--==============================
 Hero Area 3
 ==============================-->
     <div class="th-hero-wrapper hero-3 position-relative overflow-hidden" id="hero">
@@ -1910,7 +1837,9 @@ Marquee Area
                 </div>
             </div>
         </div>
-    </div><!--==============================
+    </div>
+    
+    <!--==============================
 Contact Area   
 ==============================-->
     <div class="space contact-area-1 position-relative z-index-common" id="contact-sec">
@@ -1998,8 +1927,8 @@ Contact Area
         </svg>
     </div>
     <!--==============================
-modal Area  
-==============================-->
+    modal Area  
+    ==============================-->
     <div id="login-form" class="popup-login-register mfp-hide">
         <ul class="nav" id="pills-tab" role="tablist">
             <li class="nav-item" role="presentation">
@@ -2011,133 +1940,133 @@ modal Area
         </ul>
         <div class="tab-content" id="pills-tabContent">
             <div class="tab-pane fade active show" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab"> 
-    <h3 class="box-title mb-30">Sign in to your account</h3>
+                        <h3 class="box-title mb-30">Sign in to your account</h3>
 
-    <div class="th-login-form">
+                        <div class="th-login-form">
 
-        <form method="POST" action="{{ route('login') }}" class="login-form">
-            @csrf
+                            <form method="POST" action="{{ route('login') }}" class="login-form">
+                                @csrf
 
-            <div class="row">
+                                <div class="row">
 
-                <!-- Email -->
-                <div class="form-group col-12">
-                    <label>Email</label>
-                    <input 
-                        type="email" 
-                        name="email" 
-                        id="email" 
-                        value="{{ old('email') }}"
-                        class="form-control @error('email') is-invalid @enderror" 
-                        required 
-                        autofocus
-                    >
-                    @error('email')
-                        <small class="text-danger">{{ $message }}</small>
-                    @enderror
-                </div>
+                                    <!-- Email -->
+                                    <div class="form-group col-12">
+                                        <label>Email</label>
+                                        <input 
+                                            type="email" 
+                                            name="email" 
+                                            id="email" 
+                                            value="{{ old('email') }}"
+                                            class="form-control @error('email') is-invalid @enderror" 
+                                            required 
+                                            autofocus
+                                        >
+                                        @error('email')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
 
-                <!-- Password -->
-                <div class="form-group col-12 mt-3">
-                    <label>Password</label>
-                    <input 
-                        type="password" 
-                        name="password" 
-                        id="password" 
-                        class="form-control @error('password') is-invalid @enderror" 
-                        required
-                    >
-                    @error('password')
-                        <small class="text-danger">{{ $message }}</small>
-                    @enderror
-                </div>
+                                    <!-- Password -->
+                                    <div class="form-group col-12 mt-3">
+                                        <label>Password</label>
+                                        <input 
+                                            type="password" 
+                                            name="password" 
+                                            id="password" 
+                                            class="form-control @error('password') is-invalid @enderror" 
+                                            required
+                                        >
+                                        @error('password')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
 
-                <!-- Remember Me -->
-                <div class="form-group col-12 mt-2">
-                    <label class="inline-flex align-items-center">
-                        <input 
-                            id="remember_me" 
-                            type="checkbox" 
-                            name="remember"
-                            class="me-2"
-                        >
-                        Remember me
-                    </label>
-                </div>
+                                    <!-- Remember Me -->
+                                    <div class="form-group col-12 mt-2">
+                                        <label class="inline-flex align-items-center">
+                                            <input 
+                                                id="remember_me" 
+                                                type="checkbox" 
+                                                name="remember"
+                                                class="me-2"
+                                            >
+                                            Remember me
+                                        </label>
+                                    </div>
 
-                <!-- Submit Button -->
-                <div class="form-btn mb-20 col-12 mt-3">
-                    <button class="th-btn btn-fw th-radius2">Log In</button>
-                </div>
+                                    <!-- Submit Button -->
+                                    <div class="form-btn mb-20 col-12 mt-3">
+                                        <button class="th-btn btn-fw th-radius2">Log In</button>
+                                    </div>
+                                </div>
+
+                                <!-- Forgot Password -->
+                                @if (Route::has('password.request'))
+                                <div id="forgot_url">
+                                    <a href="{{ route('password.request') }}">Forgot password?</a>
+                                </div>
+                                @endif
+
+                            </form>
+
+                        </div>
             </div>
-
-            <!-- Forgot Password -->
-            @if (Route::has('password.request'))
-            <div id="forgot_url">
-                <a href="{{ route('password.request') }}">Forgot password?</a>
-            </div>
-            @endif
-
-        </form>
-
-    </div>
-</div>
 
             <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                 <h3 class="th-form-title mb-30">Sign in to your account</h3>
                 <form method="POST" action="{{ route('register') }}" class="login-form">
-    @csrf
+                    @csrf
 
-    <div class="row">
+                    <div class="row">
 
-        <!-- Name -->
-        <div class="form-group col-12">
-            <label>Name*</label>
-            <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}" required autofocus>
-            @error('name')
-                <span class="text-danger">{{ $message }}</span>
-            @enderror
-        </div>
+                        <!-- Name -->
+                        <div class="form-group col-12">
+                            <label>Name*</label>
+                            <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}" required autofocus>
+                            @error('name')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
 
-        <!-- Email -->
-        <div class="form-group col-12">
-            <label>Email*</label>
-            <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}" required>
-            @error('email')
-                <span class="text-danger">{{ $message }}</span>
-            @enderror
-        </div>
+                        <!-- Email -->
+                        <div class="form-group col-12">
+                            <label>Email*</label>
+                            <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}" required>
+                            @error('email')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
 
-        <!-- Password -->
-        <div class="form-group col-12">
-            <label>Password*</label>
-            <input type="password" class="form-control" id="password" name="password" required>
-            @error('password')
-                <span class="text-danger">{{ $message }}</span>
-            @enderror
-        </div>
+                        <!-- Password -->
+                        <div class="form-group col-12">
+                            <label>Password*</label>
+                            <input type="password" class="form-control" id="password" name="password" required>
+                            @error('password')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
 
-        <!-- Confirm Password -->
-        <div class="form-group col-12">
-            <label>Confirm Password*</label>
-            <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" required>
-            @error('password_confirmation')
-                <span class="text-danger">{{ $message }}</span>
-            @enderror
-        </div>
+                        <!-- Confirm Password -->
+                        <div class="form-group col-12">
+                            <label>Confirm Password*</label>
+                            <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" required>
+                            @error('password_confirmation')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
 
-        <!-- Login redirect -->
-        <div class="col-12 mt-2">
-            <a href="{{ route('login') }}" class="text-sm">Already registered?</a>
-        </div>
+                        <!-- Login redirect -->
+                        <div class="col-12 mt-2">
+                            <a href="{{ route('login') }}" class="text-sm">Already registered?</a>
+                        </div>
 
-        <!-- Submit button -->
-        <div class="form-btn mt-20 col-12">
-            <button type="submit" class="th-btn btn-fw th-radius2">Sign up</button>
-        </div>
-    </div>
+                        <!-- Submit button -->
+                        <div class="form-btn mt-20 col-12">
+                            <button type="submit" class="th-btn btn-fw th-radius2">Sign up</button>
+                        </div>
+                    </div>
 
-</form>
+                </form>
 
             </div>
         </div>
@@ -2169,8 +2098,12 @@ modal Area
     <script src="{{ asset('assets/js/ScrollTrigger.min.js') }}"></script>
     <!-- SplitText -->
     <script src="{{ asset('assets/js/SplitText.min.js') }}"></script>
+
+
     <!-- Lenis Js -->
-    <script src="{{ asset('assets/js/lenis.min.js') }}"></script>
+    <!-- <script src="{{ asset('assets/js/lenis.min.js') }}"></script> -->
+
+    
     <!-- Main Js File -->
     <script src="{{ asset('assets/js/main.js') }}"></script>
 
