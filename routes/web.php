@@ -170,3 +170,12 @@ Route::middleware(['auth', 'role:student'])->prefix('student')->name('student.')
     // Notifications
     Route::get('/notifications', [StudentNotificationController::class, 'index'])->name('notifications');
 });
+
+
+
+
+//Storage link
+Route::get('/link-storage', function () {
+    Artisan::call('storage:link');
+    return 'Storage link created!';
+});
