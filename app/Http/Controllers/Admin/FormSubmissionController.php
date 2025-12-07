@@ -51,7 +51,7 @@ class FormSubmissionController extends Controller
             $submission->save();
         }
 
-        return redirect()->route('admin.submissions.index')->with('success', 'Application information updated successfully.');
+        return redirect()->route('admin.submissions')->with('success', 'Application information updated successfully.');
     }
 
     // Update status and send notification

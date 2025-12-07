@@ -22,6 +22,7 @@ return new class extends Migration
 
             // Updated Enum List
             $table->enum('status', [
+                'draft',
                 'pending', 
                 'submitted', 
                 'processing', 

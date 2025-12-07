@@ -1,10 +1,19 @@
-@extends('layouts.student')
+@extends(Auth::user()->role === 'agent' ? 'layouts.agent' : 'layouts.student')
 
 @section('content')
 <div class="container mx-auto py-8 px-4">
     
+    {{-- Header Section --}}
     <div class="bg-white rounded-lg shadow-lg overflow-hidden mb-8 border-t-4 border-blue-600">
         <div class="p-6">
+            {{-- If Agent is viewing, show who they are applying for --}}
+            @if(Auth::user()->role === 'agent')
+            <div class="mb-4 p-3 bg-yellow-50 border-l-4 border-yellow-400 text-yellow-800">
+                <p class="font-bold"><i class="fas fa-user-edit mr-2"></i> Applying on behalf of:</p>
+                <p class="ml-6">{{ $student->given_name }} {{ $student->surname }} ({{ $student->email }})</p>
+            </div>
+            @endif
+
             <div class="flex justify-between items-start">
                 <div>
                     <h1 class="text-3xl font-bold text-gray-800">{{ $form->offer_title ?? $form->title }}</h1>
@@ -82,5 +91,7 @@
         </div>
     </div>
 
-    @include('student.forms.fill') </div>
+    {{-- Include the Form Filling Logic --}}
+    @include('student.forms.fill', ['form' => $form, 'student' => $student, 'customFields' => $customFields, 'submitRoute' => $submitRoute ?? route('student.forms.submit', $form->id)]) 
+</div>
 @endsection

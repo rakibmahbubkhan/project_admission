@@ -119,10 +119,18 @@ Route::middleware(['auth', 'role:agent'])->prefix('Partner')->name('Partner.')->
     Route::get('/students', [AgentDashboardController::class, 'students'])->name('students');
     Route::get('/students/create', [AgentDashboardController::class, 'createStudent'])->name('students.create');
     Route::post('/students', [AgentDashboardController::class, 'storeStudent'])->name('students.store');
+    Route::get('/students-list', [AgentDashboardController::class, 'students'])->name('students.list');
+
     // View submissions of students
     Route::get('/submissions', [AgentDashboardController::class, 'submissions'])->name('submissions');
+    Route::get('/submissions/{id}/edit', [AgentDashboardController::class, 'editSubmission'])->name('submissions.edit');
+    Route::post('/submissions/{id}/update', [AgentDashboardController::class, 'updateSubmission'])->name('submissions.update');
     //Route::resource('students', AgentStudentController::class);
-    Route::get('/students-list', [AgentDashboardController::class, 'students'])->name('students.list');
+
+    // Submit Applications (New Routes)
+    Route::get('/forms', [AgentDashboardController::class, 'formList'])->name('forms.index');
+    Route::get('/forms/{formId}/apply', [AgentDashboardController::class, 'showApplyForm'])->name('forms.apply');
+    Route::post('/forms/{formId}/submit/{studentId}', [AgentDashboardController::class, 'submitApplication'])->name('forms.submit');
     
     // Submissions
 //     Route::get('submissions', [FormSubmissionController::class, 'agentIndex'])->name('submissions.index');
@@ -154,6 +162,9 @@ Route::middleware(['auth', 'role:student'])->prefix('student')->name('student.')
     // Applications History
     Route::get('/applications', [StudentApplicationController::class, 'applications'])->name('applications');
     Route::get('/submissions', [StudentApplicationController::class, 'submissions'])->name('forms.submissions');
+    // NEW: Edit/Update Drafts
+    Route::get('/submissions/{id}/edit', [StudentApplicationController::class, 'editSubmission'])->name('submissions.edit');
+    Route::post('/submissions/{id}/update', [StudentApplicationController::class, 'updateSubmission'])->name('submissions.update');
     Route::get('/history', [StudentController::class, 'history'])->name('history');
     
     // Notifications

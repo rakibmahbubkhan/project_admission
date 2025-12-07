@@ -21,6 +21,7 @@
                     <th class="p-3 font-semibold">Form</th>
                     <th class="p-3 font-semibold">University</th>
                     <th class="p-3 font-semibold">Status</th>
+                    <th class="p-3 font-semibold">Action</th>
                     <th class="p-3 font-semibold">Submitted Date</th>
                 </tr>
             </thead>
@@ -57,6 +58,16 @@
                             </span>
                         </td>
 
+                        <td class="p-3">
+                            @if($s->status == 'draft')
+                                <a href="{{ route('student.submissions.edit', $s->id) }}" class="text-blue-600 hover:text-blue-900 font-bold">
+                                    <i class="fas fa-edit mr-1"></i> Continue Application
+                                </a>
+                            @else
+                                <span class="text-gray-400">View Details</span>
+                            @endif
+                        </td>
+
                         <!-- Date -->
                         <td class="p-3 text-gray-600">
                             {{ $s->created_at->format('d M, Y') }}
@@ -78,3 +89,5 @@
 </div>
 
 @endsection
+
+

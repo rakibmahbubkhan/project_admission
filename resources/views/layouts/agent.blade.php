@@ -5,13 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agent Panel - {{ config('app.name') }}</title>
 
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
-    <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap">
 
     <style>
@@ -21,16 +18,13 @@
     </style>
 </head>
 <body class="bg-gray-100">
-<!-- Header -->
-    <header class="bg-white shadow p-4 flex justify-between items-center">
+<header class="bg-white shadow p-4 flex justify-between items-center">
         <h1 class="text-lg font-bold">Partner Dashboard</h1>
 
-        <!-- Mobile Menu Button -->
         <button onclick="toggleSidebar()" class="md:hidden px-3 py-2 bg-gray-800 text-white rounded">
             ☰
         </button>
 
-        <!-- User Menu -->
         <div class="hidden md:block">
             <div class="flex items-center space-x-4">
                 <span class="text-gray-700">{{ Auth::user()->name }}</span>
@@ -47,7 +41,6 @@
 
     <div class="flex">
 
-        <!-- Sidebar -->
         <aside id="sidebar" class="w-64 bg-gray-900 text-white min-h-screen p-5 hidden md:block">
             <h2 class="text-xl font-bold mb-6">Partner Panel</h2>
 
@@ -56,21 +49,28 @@
                 <li>
                     <a href="{{ route('Partner.dashboard') }}"
                        class="block px-3 py-2 rounded hover:bg-gray-700">
-                        Dashboard
+                        <i class="fas fa-gauge mr-2"></i> Dashboard
                     </a>
                 </li>
 
                 <li>
                     <a href="{{ route('Partner.students') }}"
                        class="block px-3 py-2 rounded hover:bg-gray-700">
-                        Students
+                        <i class="fas fa-users mr-2"></i> Students
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ route('Partner.forms.index') }}"
+                       class="block px-3 py-2 rounded hover:bg-gray-700">
+                        <i class="fas fa-paper-plane mr-2"></i> Submit Applications
                     </a>
                 </li>
 
                 <li>
                     <a href="{{ route('Partner.submissions') }}"
                        class="block px-3 py-2 rounded hover:bg-gray-700">
-                        Submissions
+                        <i class="fas fa-file-alt mr-2"></i> Submissions
                     </a>
                 </li>
 
@@ -78,7 +78,7 @@
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
                         <button class="w-full text-left px-3 py-2 rounded hover:bg-red-600">
-                            Logout
+                            <i class="fas fa-sign-out-alt mr-2"></i> Logout
                         </button>
                     </form>
                 </li>
@@ -86,7 +86,6 @@
             </ul>
         </aside>
 
-        <!-- Main Content -->
         <main class="flex-1 p-6">
             @yield('content')
         </main>

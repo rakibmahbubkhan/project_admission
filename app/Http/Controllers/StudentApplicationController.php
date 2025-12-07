@@ -165,35 +165,31 @@ class StudentApplicationController extends Controller
         $form = AdmissionForm::findOrFail($form_id);
         $student = Auth::user()->student;
 
-        // 1. Update Permanent Profile Data
+        $action = $request->input('action');
+        $status = ($action === 'draft') ? 'draft' : 'pending';
+
+        if ($status === 'pending') {
+            $request->validate([
+                'given_name' => 'required',
+                'surname' => 'required',
+            ]);
+        }
+
+        $phone = $request->input('full_phone') ?: $request->input('mobile');
+
+        // Update Student Profile
         $student->update([
             'given_name' => $request->given_name,
             'surname' => $request->surname,
             'gender' => $request->gender,
+            'phone' => $phone,
+            'email' => $request->email,
             'nationality' => $request->nationality,
-            'religion' => $request->religion,
-            'marital_status' => $request->marital_status,
-            'city_of_birth' => $request->city_of_birth,
-            'dob' => $request->dob,
-            'native_language' => $request->native_language,
-            'height' => $request->height,
-            'weight' => $request->weight,
-            'blood_group' => $request->blood_group,
-            'in_china' => $request->has('in_china'),
-            'in_china_from' => $request->in_china_from,
-            'in_china_institute' => $request->in_china_institute,
-            'studied_in_china' => $request->has('studied_in_china'),
-            'studied_in_china_from' => $request->studied_in_china_from,
-            'studied_in_china_institute' => $request->studied_in_china_institute,
-            'passport_number' => $request->passport_number,
-            'passport_issue_date' => $request->passport_issue_date,
-            'passport_expiry_date' => $request->passport_expiry_date,
             'street' => $request->street,
             'city' => $request->city,
             'country' => $request->country,
             'zip_code' => $request->zip_code,
-            'phone' => $request->mobile,
-            'email' => $request->email,
+            'dob' => $request->dob,
             'sponsor_info' => $request->sponsor,
             'parents_info' => $request->parents,
             'education_background' => $request->education,
@@ -201,37 +197,82 @@ class StudentApplicationController extends Controller
             'other_info' => $request->other,
         ]);
 
-        // 2. Handle Documents
-        $documents = [];
-        if ($request->has('documents')) {
-            foreach ($request->file('documents') as $key => $file) {
-                $documents[$key] = $file->store('submissions/docs/' . $student->id, 'public');
+        // Check for EXISTING DRAFT to prevent duplicates
+        $submission = FormSubmission::where('student_id', $student->id)
+                                    ->where('form_id', $form->id)
+                                    ->where('status', 'draft')
+                                    ->first();
+
+        // Handle Documents (Merge if existing, create if new)
+        $documents = $submission ? ($submission->answers['documents'] ?? []) : [];
+        
+        if ($request->hasFile('documents')) {
+            foreach ($request->file('documents') as $category => $files) {
+                foreach ($files as $file) {
+                    $documents[$category][] = $file->store('submissions/docs/' . $student->id, 'public');
+                }
             }
         }
 
-        // 3. Create Submission
         $submissionData = [
             'programme' => [
                 'type' => $request->program_type,
-                'degree' => $request->degree,
-                'university' => $request->university,
                 'major' => $request->major,
+                'degree' => $request->degree,
             ],
             'service_policy' => $request->service_policy,
             'documents' => $documents,
             'custom_fields' => $request->input('custom_fields', [])
         ];
 
-        FormSubmission::create([
-            'form_id' => $form->id,
-            'student_id' => $student->id,
-            'university_id' => $form->university_id,
-            'answers' => $submissionData,
-            'status' => 'pending',
-        ]);
+        if ($submission) {
+            // Update Existing Draft
+            $submission->update([
+                'answers' => $submissionData,
+                'status' => $status, // Can change from draft -> pending here
+            ]);
+        } else {
+            // Create New Submission
+            FormSubmission::create([
+                'form_id' => $form->id,
+                'student_id' => $student->id,
+                'university_id' => $form->university_id,
+                'answers' => $submissionData,
+                'status' => $status,
+            ]);
+        }
 
-        return redirect()->route('student.forms.submissions')
-            ->with('success', 'Application submitted successfully!');
+        $msg = ($status === 'draft') ? 'Draft saved successfully.' : 'Application submitted successfully!';
+        return redirect()->route('student.forms.submissions')->with('success', $msg);
+    }
+
+    public function editSubmission($id)
+    {
+        $submission = FormSubmission::where('id', $id)
+            ->where('student_id', Auth::user()->student->id)
+            ->where('status', 'draft')
+            ->with('form.university')
+            ->firstOrFail();
+
+        $form = $submission->form;
+        $student = $submission->student;
+
+        $rawFields = $form->form_fields ?? [];
+        if (is_string($rawFields)) $rawFields = json_decode($rawFields, true) ?? [];
+        
+        $customFields = collect($rawFields)->map(function($field) {
+            if (empty($field['name']) && !empty($field['label'])) {
+                $field['name'] = Str::slug($field['label'], '_');
+            }
+            return $field;
+        })->toArray();
+
+        return view('student.forms.apply', compact('form', 'student', 'submission', 'customFields'));
+    }
+
+    public function updateSubmission(Request $request, $id)
+    {
+        return $this->submit($request, FormSubmission::findOrFail($id)->form_id);
     }
 
     public function submissions()
@@ -240,7 +281,7 @@ class StudentApplicationController extends Controller
             ->with('form.university')
             ->latest()
             ->get();
-
         return view('student.forms.submissions', compact('submissions'));
     }
+    
 }
