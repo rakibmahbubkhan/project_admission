@@ -27,8 +27,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/agent/register', [AgentRegisterController::class, 'showRegistrationForm'])->name('agent.register');
-Route::post('/agent/register', [AgentRegisterController::class, 'register'])->name('agent.register.store');
+Route::get('/partner/register', [AgentRegisterController::class, 'showRegistrationForm'])->name('partner.register');
+Route::post('/partner/register', [AgentRegisterController::class, 'register'])->name('partner.register.store');
 
 Route::get('/student/register', [StudentRegisterController::class, 'showForm'])->name('student.register');
 Route::post('/student/register', [StudentRegisterController::class, 'register'])->name('student.register.store');
