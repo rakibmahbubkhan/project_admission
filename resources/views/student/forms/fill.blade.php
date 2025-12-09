@@ -65,45 +65,45 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Surname <span class="text-red-500">*</span></label>
-                        <input type="text" name="surname" value="{{ old('surname', $student->surname) }}" class="w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500" required>
+                        <input type="text" name="surname" value="{{ old('surname', $student->surname) }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body focus:ring-blue-500 focus:border-blue-500" required>
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Given Name <span class="text-red-500">*</span></label>
-                        <input type="text" name="given_name" value="{{ old('given_name', $student->given_name) }}" class="w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500" required>
+                        <input type="text" name="given_name" value="{{ old('given_name', $student->given_name) }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body focus:ring-blue-500 focus:border-blue-500" required>
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Gender</label>
-                        <select name="gender" class="w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500">
+                        <select name="gender" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body focus:ring-blue-500 focus:border-blue-500">
                             <option value="Male" {{ $student->gender == 'Male' ? 'selected' : '' }}>Male</option>
                             <option value="Female" {{ $student->gender == 'Female' ? 'selected' : '' }}>Female</option>
                         </select>
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Date of Birth</label>
-                        <input type="date" name="dob" value="{{ old('dob', $student->dob?->format('Y-m-d')) }}" class="w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500">
+                        <input type="date" name="dob" value="{{ old('dob', $student->dob?->format('Y-m-d')) }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body focus:ring-blue-500 focus:border-blue-500">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Nationality</label>
-                        <input type="text" name="nationality" value="{{ old('nationality', $student->nationality) }}" class="w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500">
+                        <input type="text" name="nationality" value="{{ old('nationality', $student->nationality) }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body focus:ring-blue-500 focus:border-blue-500">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Passport No.</label>
-                        <input type="text" name="passport_number" value="{{ $student->passport_number }}" class="w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500">
+                        <input type="text" name="passport_number" value="{{ $student->passport_number }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body focus:ring-blue-500 focus:border-blue-500">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Passport Expiry</label>
-                        <input type="date" name="passport_expiry_date" value="{{ $student->passport_expiry_date?->format('Y-m-d') }}" class="w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500">
+                        <input type="date" name="passport_expiry_date" value="{{ $student->passport_expiry_date?->format('Y-m-d') }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body focus:ring-blue-500 focus:border-blue-500">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Marital Status</label>
-                        <select name="marital_status" class="w-full rounded-lg border-gray-300">
+                        <select name="marital_status" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
                             <option value="Single" {{ $student->marital_status == 'Single' ? 'selected' : '' }}>Single</option>
                             <option value="Married" {{ $student->marital_status == 'Married' ? 'selected' : '' }}>Married</option>
                         </select>
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Religion</label>
-                        <input type="text" name="religion" value="{{ $student->religion }}" class="w-full rounded-lg border-gray-300">
+                        <input type="text" name="religion" value="{{ $student->religion }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
                     </div>
                 </div>
 
@@ -144,19 +144,19 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="md:col-span-2">
                         <label class="block text-sm font-medium text-gray-700 mb-1">Street Address</label>
-                        <input type="text" name="street" value="{{ $student->street }}" class="w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500">
+                        <input type="text" name="street" value="{{ $student->street }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body focus:ring-blue-500 focus:border-blue-500">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">City</label>
-                        <input type="text" name="city" value="{{ $student->city }}" class="w-full rounded-lg border-gray-300">
+                        <input type="text" name="city" value="{{ $student->city }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Country</label>
-                        <input type="text" name="country" value="{{ $student->country }}" class="w-full rounded-lg border-gray-300">
+                        <input type="text" name="country" value="{{ $student->country }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
-                        <input type="email" name="email" value="{{ $student->email }}" class="w-full rounded-lg border-gray-300">
+                        <input type="email" name="email" value="{{ $student->email }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
@@ -182,9 +182,9 @@
                         <h3 class="text-md font-bold text-gray-800 mb-4 border-l-4 border-green-500 pl-3">Financial Sponsor</h3>
                         @php $sponsor = $student->sponsor_info ?? []; @endphp
                         <div class="space-y-4">
-                            <div><label class="text-xs text-gray-500">Full Name</label><input type="text" name="sponsor[name]" value="{{ $sponsor['name'] ?? '' }}" class="w-full rounded-md border-gray-300 text-sm"></div>
-                            <div><label class="text-xs text-gray-500">Relationship</label><input type="text" name="sponsor[relation]" value="{{ $sponsor['relation'] ?? '' }}" class="w-full rounded-md border-gray-300 text-sm"></div>
-                            <div><label class="text-xs text-gray-500">Contact Number</label><input type="text" name="sponsor[mobile]" value="{{ $sponsor['mobile'] ?? '' }}" class="w-full rounded-md border-gray-300 text-sm"></div>
+                            <div><label class="text-xs text-gray-500">Full Name</label><input type="text" name="sponsor[name]" value="{{ $sponsor['name'] ?? '' }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"></div>
+                            <div><label class="text-xs text-gray-500">Relationship</label><input type="text" name="sponsor[relation]" value="{{ $sponsor['relation'] ?? '' }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"></div>
+                            <div><label class="text-xs text-gray-500">Contact Number</label><input type="text" name="sponsor[mobile]" value="{{ $sponsor['mobile'] ?? '' }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"></div>
                         </div>
                     </div>
 
@@ -196,16 +196,16 @@
                         <div class="mb-4">
                             <p class="text-xs font-bold text-gray-400 uppercase mb-2">Father</p>
                             <div class="grid grid-cols-2 gap-2">
-                                <input type="text" name="parents[father][name]" value="{{ $parents['father']['name'] ?? '' }}" placeholder="Name" class="rounded-md border-gray-300 text-sm">
-                                <input type="text" name="parents[father][occupation]" value="{{ $parents['father']['occupation'] ?? '' }}" placeholder="Job" class="rounded-md border-gray-300 text-sm">
+                                <input type="text" name="parents[father][name]" value="{{ $parents['father']['name'] ?? '' }}" placeholder="Name" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
+                                <input type="text" name="parents[father][occupation]" value="{{ $parents['father']['occupation'] ?? '' }}" placeholder="Job" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
                             </div>
                         </div>
 
                         <div>
                             <p class="text-xs font-bold text-gray-400 uppercase mb-2">Mother</p>
                             <div class="grid grid-cols-2 gap-2">
-                                <input type="text" name="parents[mother][name]" value="{{ $parents['mother']['name'] ?? '' }}" placeholder="Name" class="rounded-md border-gray-300 text-sm">
-                                <input type="text" name="parents[mother][occupation]" value="{{ $parents['mother']['occupation'] ?? '' }}" placeholder="Job" class="rounded-md border-gray-300 text-sm">
+                                <input type="text" name="parents[mother][name]" value="{{ $parents['mother']['name'] ?? '' }}" placeholder="Name" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
+                                <input type="text" name="parents[mother][occupation]" value="{{ $parents['mother']['occupation'] ?? '' }}" placeholder="Job" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
                             </div>
                         </div>
                     </div>
@@ -227,7 +227,7 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-2">
                             <div>
                                 <label class="text-xs text-gray-500">Degree</label>
-                                <select name="education[{{$index}}][degree]" class="w-full rounded-md border-gray-300 text-sm">
+                                <select name="education[{{$index}}][degree]" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
                                     <option value="">Select...</option>
                                     @foreach(['Elementary', 'Secondary', 'Higher Secondary', 'Undergraduate', 'Master'] as $opt)
                                         <option value="{{ $opt }}" {{ ($edu['degree']??'') == $opt ? 'selected' : '' }}>{{ $opt }}</option>
@@ -236,12 +236,12 @@
                             </div>
                             <div>
                                 <label class="text-xs text-gray-500">Institute</label>
-                                <input type="text" name="education[{{$index}}][institute]" value="{{ $edu['institute'] ?? '' }}" class="w-full rounded-md border-gray-300 text-sm">
+                                <input type="text" name="education[{{$index}}][institute]" value="{{ $edu['institute'] ?? '' }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
                             </div>
                         </div>
                         <div class="grid grid-cols-2 gap-4">
-                            <div><label class="text-xs text-gray-500">From</label><input type="text" name="education[{{$index}}][from]" value="{{ $edu['from'] ?? '' }}" placeholder="Year" class="w-full rounded-md border-gray-300 text-sm"></div>
-                            <div><label class="text-xs text-gray-500">To</label><input type="text" name="education[{{$index}}][to]" value="{{ $edu['to'] ?? '' }}" placeholder="Year" class="w-full rounded-md border-gray-300 text-sm"></div>
+                            <div><label class="text-xs text-gray-500">From</label><input type="text" name="education[{{$index}}][from]" value="{{ $edu['from'] ?? '' }}" placeholder="Year" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"></div>
+                            <div><label class="text-xs text-gray-500">To</label><input type="text" name="education[{{$index}}][to]" value="{{ $edu['to'] ?? '' }}" placeholder="Year" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"></div>
                         </div>
                     </div>
                     @endforeach
@@ -299,7 +299,7 @@
                                 @php $fName = $field['name'] ?? 'custom_'.$loop->index; @endphp
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700 mb-1">{{ $field['label'] }}</label>
-                                    <input type="text" name="custom_fields[{{ $fName }}]" value="{{ $answers['custom_fields'][$fName] ?? '' }}" class="w-full rounded-lg border-gray-300">
+                                    <input type="text" name="custom_fields[{{ $fName }}]" value="{{ $answers['custom_fields'][$fName] ?? '' }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
                                 </div>
                             @endforeach
                         </div>
@@ -319,7 +319,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                             <label class="block text-sm font-bold text-blue-900 mb-2">Program Level</label>
-                            <select name="program_type" class="w-full rounded-lg border-blue-200">
+                            <select name="program_type" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
                                 <option>Bachelor</option>
                                 <option>Master</option>
                                 <option>PhD</option>
@@ -328,7 +328,7 @@
                         </div>
                         <div>
                             <label class="block text-sm font-bold text-blue-900 mb-2">Major</label>
-                            <input type="text" name="major" value="{{ $answers['programme']['major'] ?? $form->major }}" class="w-full rounded-lg border-blue-200">
+                            <input type="text" name="major" value="{{ $answers['programme']['major'] ?? $form->major }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
                         </div>
                     </div>
                     

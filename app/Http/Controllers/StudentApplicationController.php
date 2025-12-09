@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\AdmissionForm;
-use App\Models\University;
 use App\Models\FormSubmission;
 use App\Models\Student;
 use Illuminate\Http\Request;
@@ -13,171 +12,131 @@ use Illuminate\Support\Str;
 
 class StudentApplicationController extends Controller
 {
-
-
-    // public function index() 
-    // { 
-    //     $forms = AdmissionForm::where('isActive', 1)->get(); 
-    //     return view('student.forms.index', compact('forms')); 
-    // }
-
     public function index(Request $request)
     {
-        // Start the query for available admission forms
-        $query = AdmissionForm::with('university');
-
-        // 1. Availability Filter: Show only forms where deadline is future or null
-        $query->where(function ($q) {
-            $q->whereNull('deadline')
-              ->orWhereDate('deadline', '>=', now());
-        });
-
-        // 2. Search Keyword Filter (Program Name or University Name)
+        $query = AdmissionForm::with('university')
+            ->where(function ($q) {
+                $q->whereNull('deadline')->orWhereDate('deadline', '>=', now());
+            });
+            
         if ($request->filled('search')) {
             $search = $request->search;
-            $query->where(function($q) use ($search) {
-                $q->where('title', 'like', "%{$search}%")
-                  ->orWhereHas('university', function($subQ) use ($search) {
-                      $subQ->where('name', 'like', "%{$search}%");
-                  });
-            });
+            $query->where('title', 'like', "%{$search}%");
         }
 
-        // 3. University Filter
-        if ($request->filled('university_id')) {
-            $query->where('university_id', $request->university_id);
-        }
-
-        // 4. Language Filter
-        if ($request->filled('teaching_language')) {
-            $query->where('teaching_language', $request->teaching_language);
-        }
-
-        // Execute Query with Pagination
-        $forms = $query->latest()->paginate(9)->withQueryString();
-
-        // Fetch Filter Data
-        $universities = University::orderBy('name')->get();
+        $forms = $query->latest()->paginate(9);
+        $universities = \App\Models\University::orderBy('name')->get();
+        $languages = AdmissionForm::select('teaching_language')->distinct()->pluck('teaching_language');
         
-        // Fetch distinct languages for the dropdown to fix the "Undefined variable" error
-        $languages = AdmissionForm::select('teaching_language')
-            ->whereNotNull('teaching_language')
-            ->distinct()
-            ->pluck('teaching_language');
-
         return view('student.forms.index', compact('forms', 'universities', 'languages'));
     }
-
-    public function show($id)
-    {
-        $form = AdmissionForm::with('university', 'sections.questions')->findOrFail($id);
-        return view('student.forms.show', compact('form'));
-    }
     
-    public function availableForms()
-    {
-
-        $query = AdmissionForm::where('isPublished', 1)->with('university');
-
-        // 1. Search Filter (Title, Offer Title, or Major)
-        if ($request->filled('search')) {
-            $search = $request->search;
-            $query->where(function($q) use ($search) {
-                $q->where('title', 'LIKE', "%{$search}%")
-                  ->orWhere('offer_title', 'LIKE', "%{$search}%") // Assumes new column exists
-                  ->orWhere('major', 'LIKE', "%{$search}%");      // Assumes new column exists
-            });
-        }
-
-        // 2. University Filter
-        if ($request->filled('university')) {
-            $query->where('university_id', $request->university);
-        }
-
-        // 3. Language Filter
-        if ($request->filled('language')) {
-            $query->where('teaching_language', $request->language);
-        }
-
-        // Get results with pagination
-        $forms = $query->latest()->paginate(9);
-
-        // Get data for dropdowns
-        $universities = University::whereHas('admissionForms', function($q){
-            $q->where('isPublished', 1);
-        })->orderBy('name')->get();
-
-        // Get available languages dynamically
-        $languages = AdmissionForm::where('isPublished', 1)
-            ->whereNotNull('teaching_language')
-            ->distinct()
-            ->pluck('teaching_language');
-
-        return view('student.forms.available', compact('forms', 'universities', 'languages'));
-
-    }
-
     public function apply($form_id)
     {
         $form = AdmissionForm::with('university')->findOrFail($form_id);
+        $student = Auth::user()->student ?? Student::create(['user_id' => Auth::id()]);
         
-        $student = Auth::user()->student;
-        if (!$student) {
-            $student = Student::create(['user_id' => Auth::id()]);
+        // Check if draft exists to prevent duplicate
+        $existingDraft = FormSubmission::where('student_id', $student->id)
+            ->where('form_id', $form->id)
+            ->where('status', 'draft')
+            ->first();
+
+        if ($existingDraft) {
+            return redirect()->route('student.submissions.edit', $existingDraft->id);
         }
 
-        // 1. Get Dynamic Fields
-        $rawFields = $form->form_fields ?? [];
-        if (is_string($rawFields)) $rawFields = json_decode($rawFields, true) ?? [];
-
-        // 2. Define Reserved Keywords
-        $reservedKeywords = [
-            'name', 'given_name', 'surname', 'first_name', 'last_name', 
-            'email', 'phone', 'mobile', 'address', 'city', 'country', 'zip',
-            'passport', 'nationality', 'gender', 'sex', 'dob', 'birth',
-            'education', 'school', 'degree', 'work', 'experience', 'job',
-            'father', 'mother', 'parent', 'sponsor'
-        ];
-
-        // 3. Process Fields: Generate missing names AND Filter reserved ones
-        $customFields = collect($rawFields)->map(function($field) {
-            // Fix: Ensure 'name' exists
-            if (empty($field['name']) && !empty($field['label'])) {
-                $field['name'] = Str::slug($field['label'], '_');
-            }
-            return $field;
-        })->filter(function($field) use ($reservedKeywords) {
-            // Filter out reserved fields
-            $fieldName = strtolower($field['name'] ?? '');
-            foreach ($reservedKeywords as $keyword) {
-                if (str_contains($fieldName, $keyword)) {
-                    return false; 
-                }
-            }
-            return true; 
-        })->toArray();
-
+        $customFields = $this->getCustomFields($form);
         return view('student.forms.apply', compact('form', 'student', 'customFields'));
     }
 
+    public function editSubmission($id)
+    {
+        $submission = FormSubmission::where('id', $id)
+            ->where('student_id', Auth::user()->student->id)
+            ->where('status', 'draft')
+            ->with('form.university')
+            ->firstOrFail();
+
+        $form = $submission->form;
+        $student = $submission->student;
+        $customFields = $this->getCustomFields($form);
+
+        return view('student.forms.apply', compact('form', 'student', 'submission', 'customFields'));
+    }
+
+    // --- CREATE NEW SUBMISSION ---
     public function submit(Request $request, $form_id)
     {
         $form = AdmissionForm::findOrFail($form_id);
         $student = Auth::user()->student;
 
+        // 1. Prepare Data
+        $data = $this->processApplicationData($request, $student, $form_id);
+        
+        // 2. Double-check for existing draft to prevent race-condition duplicates
+        $submission = FormSubmission::where('student_id', $student->id)
+                                    ->where('form_id', $form->id)
+                                    ->where('status', 'draft')
+                                    ->first();
+
+        if ($submission) {
+            $submission->update([
+                'answers' => $data['answers'],
+                'status' => $data['status'],
+            ]);
+        } else {
+            FormSubmission::create([
+                'form_id' => $form->id,
+                'student_id' => $student->id,
+                'university_id' => $form->university_id,
+                'answers' => $data['answers'],
+                'status' => $data['status'],
+            ]);
+        }
+
+        $msg = ($data['status'] === 'draft') ? 'Application saved as draft.' : 'Application submitted successfully!';
+        return redirect()->route('student.forms.submissions')->with('success', $msg);
+    }
+
+    // --- UPDATE EXISTING SUBMISSION ---
+    public function updateSubmission(Request $request, $id)
+    {
+        $submission = FormSubmission::where('id', $id)
+            ->where('student_id', Auth::user()->student->id)
+            ->firstOrFail();
+
+        // 1. Prepare Data (passing existing submission documents to merge)
+        $existingDocs = $submission->answers['documents'] ?? [];
+        $data = $this->processApplicationData($request, $submission->student, $submission->form_id, $existingDocs);
+
+        // 2. Update specific ID
+        $submission->update([
+            'answers' => $data['answers'],
+            'status' => $data['status'],
+        ]);
+
+        $msg = ($data['status'] === 'draft') ? 'Draft updated successfully.' : 'Application submitted successfully!';
+        return redirect()->route('student.forms.submissions')->with('success', $msg);
+    }
+
+    // --- HELPER: Process Data ---
+    private function processApplicationData(Request $request, $student, $formId, $existingDocuments = [])
+    {
         $action = $request->input('action');
         $status = ($action === 'draft') ? 'draft' : 'pending';
 
+        // Validate only if final submit
         if ($status === 'pending') {
             $request->validate([
                 'given_name' => 'required',
                 'surname' => 'required',
+                // 'program_type' => 'required',
             ]);
         }
 
+        // 1. Update Student Profile
         $phone = $request->input('full_phone') ?: $request->input('mobile');
-
-        // Update Student Profile
         $student->update([
             'given_name' => $request->given_name,
             'surname' => $request->surname,
@@ -195,26 +154,34 @@ class StudentApplicationController extends Controller
             'education_background' => $request->education,
             'work_experience' => $request->work,
             'other_info' => $request->other,
+            'passport_number' => $request->passport_number,
+            'passport_expiry_date' => $request->passport_expiry_date,
+            'marital_status' => $request->marital_status,
+            'religion' => $request->religion,
+            'in_china' => $request->has('in_china'),
+            'in_china_from' => $request->in_china_from,
+            'in_china_institute' => $request->in_china_institute,
+            'studied_in_china' => $request->has('studied_in_china'),
+            'studied_in_china_from' => $request->studied_in_china_from,
+            'studied_in_china_institute' => $request->studied_in_china_institute,
         ]);
 
-        // Check for EXISTING DRAFT to prevent duplicates
-        $submission = FormSubmission::where('student_id', $student->id)
-                                    ->where('form_id', $form->id)
-                                    ->where('status', 'draft')
-                                    ->first();
-
-        // Handle Documents (Merge if existing, create if new)
-        $documents = $submission ? ($submission->answers['documents'] ?? []) : [];
+        // 2. Handle Documents (Merge Strategy)
+        $documents = $existingDocuments;
         
         if ($request->hasFile('documents')) {
             foreach ($request->file('documents') as $category => $files) {
-                foreach ($files as $file) {
+                if (!isset($documents[$category])) $documents[$category] = [];
+                if (!is_array($documents[$category])) $documents[$category] = [$documents[$category]]; // Handle legacy string
+
+                $fileList = is_array($files) ? $files : [$files];
+                foreach ($fileList as $file) {
                     $documents[$category][] = $file->store('submissions/docs/' . $student->id, 'public');
                 }
             }
         }
 
-        $submissionData = [
+        $answers = [
             'programme' => [
                 'type' => $request->program_type,
                 'major' => $request->major,
@@ -225,54 +192,28 @@ class StudentApplicationController extends Controller
             'custom_fields' => $request->input('custom_fields', [])
         ];
 
-        if ($submission) {
-            // Update Existing Draft
-            $submission->update([
-                'answers' => $submissionData,
-                'status' => $status, // Can change from draft -> pending here
-            ]);
-        } else {
-            // Create New Submission
-            FormSubmission::create([
-                'form_id' => $form->id,
-                'student_id' => $student->id,
-                'university_id' => $form->university_id,
-                'answers' => $submissionData,
-                'status' => $status,
-            ]);
-        }
-
-        $msg = ($status === 'draft') ? 'Draft saved successfully.' : 'Application submitted successfully!';
-        return redirect()->route('student.forms.submissions')->with('success', $msg);
+        return ['answers' => $answers, 'status' => $status];
     }
 
-    public function editSubmission($id)
+    private function getCustomFields($form)
     {
-        $submission = FormSubmission::where('id', $id)
-            ->where('student_id', Auth::user()->student->id)
-            ->where('status', 'draft')
-            ->with('form.university')
-            ->firstOrFail();
-
-        $form = $submission->form;
-        $student = $submission->student;
-
         $rawFields = $form->form_fields ?? [];
         if (is_string($rawFields)) $rawFields = json_decode($rawFields, true) ?? [];
         
-        $customFields = collect($rawFields)->map(function($field) {
+        $reservedKeywords = ['name', 'surname', 'email', 'phone', 'address'];
+
+        return collect($rawFields)->map(function($field) {
             if (empty($field['name']) && !empty($field['label'])) {
                 $field['name'] = Str::slug($field['label'], '_');
             }
             return $field;
+        })->filter(function($field) use ($reservedKeywords) {
+            $fieldName = strtolower($field['name'] ?? '');
+            foreach ($reservedKeywords as $keyword) {
+                if (str_contains($fieldName, $keyword)) return false; 
+            }
+            return true; 
         })->toArray();
-
-        return view('student.forms.apply', compact('form', 'student', 'submission', 'customFields'));
-    }
-
-    public function updateSubmission(Request $request, $id)
-    {
-        return $this->submit($request, FormSubmission::findOrFail($id)->form_id);
     }
 
     public function submissions()
@@ -283,5 +224,4 @@ class StudentApplicationController extends Controller
             ->get();
         return view('student.forms.submissions', compact('submissions'));
     }
-    
 }
