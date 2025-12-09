@@ -110,15 +110,15 @@
                 <div class="p-5 space-y-3 text-sm">
                     <div class="flex justify-between border-b border-dashed border-gray-200 pb-2">
                         <span class="text-gray-500">Tuition</span>
-                        <span class="font-bold text-gray-900">{{ $form->tuition_fees }} {{ $form->university->currency }}</span>
+                        <span class="font-bold text-gray-900">{{ $form->tuition_fees }}</span>
                     </div>
                     <div class="flex justify-between border-b border-dashed border-gray-200 pb-2">
                         <span class="text-gray-500">Dormitory</span>
-                        <span class="font-bold text-gray-900">{{ $form->dorm_fees }} {{ $form->university->currency }}</span>
+                        <span class="font-bold text-gray-900">{{ $form->dorm_fees }}</span>
                     </div>
                     <div class="flex justify-between border-b border-dashed border-gray-200 pb-2">
                         <span class="text-gray-500">Application Fee</span>
-                        <span class="font-bold text-red-600">{{ $form->application_fee > 0 ? $form->application_fee : 'Free' }} {{ $form->university->currency }}</span>
+                        <span class="font-bold text-red-600">{{ $form->application_fee > 0 ? $form->application_fee : 'Free' }}</span>
                     </div>
                     <div class="pt-2">
                         <p class="text-xs text-gray-400">Other fees (Insurance, Medical, etc) may apply upon arrival.</p>
@@ -140,12 +140,12 @@
                     @if($form->stipend_amount)
                     <div class="bg-white/10 p-3 rounded-lg">
                         <p class="text-blue-200 text-xs uppercase font-bold">Monthly Stipend</p>
-                        <p class="font-bold text-xl text-yellow-300">{{ $form->stipend_amount }} {{ $form->university->currency }}</p>
+                        <p class="font-bold text-xl text-yellow-300">{{ $form->stipend_amount }}</p>
                     </div>
                     @endif
                     <div>
                         <p class="text-blue-200 text-xs uppercase font-bold">Cost After Scholarship</p>
-                        <p class="text-sm">Tuition: <span class="font-bold">{{ $form->after_scholarship_tuition_fees }} {{ $form->university->currency }}</span></p>
+                        <p class="text-sm">Tuition: <span class="font-bold">{{ $form->after_scholarship_tuition_fees }}</span></p>
                     </div>
                 </div>
             </div>
@@ -157,8 +157,9 @@
             @include('student.forms.fill', [
                 'form' => $form, 
                 'student' => $student, 
-                'customFields' => $customFields, 
-                'submitRoute' => $submitRoute ?? route('student.forms.submit', $form->id)
+                'customFields' => $customFields ?? [], 
+                'submitRoute' => $submitRoute ?? route('student.forms.submit', $form->id),
+                'submission' => $submission ?? null
             ])
         </div>
     </div>

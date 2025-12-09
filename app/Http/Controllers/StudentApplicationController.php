@@ -36,7 +36,7 @@ class StudentApplicationController extends Controller
         $form = AdmissionForm::with('university')->findOrFail($form_id);
         $student = Auth::user()->student ?? Student::create(['user_id' => Auth::id()]);
         
-        // Check if draft exists to prevent duplicate
+        // Check for existing draft to resume
         $existingDraft = FormSubmission::where('student_id', $student->id)
             ->where('form_id', $form->id)
             ->where('status', 'draft')
@@ -50,93 +50,24 @@ class StudentApplicationController extends Controller
         return view('student.forms.apply', compact('form', 'student', 'customFields'));
     }
 
-    public function editSubmission($id)
-    {
-        $submission = FormSubmission::where('id', $id)
-            ->where('student_id', Auth::user()->student->id)
-            ->where('status', 'draft')
-            ->with('form.university')
-            ->firstOrFail();
-
-        $form = $submission->form;
-        $student = $submission->student;
-        $customFields = $this->getCustomFields($form);
-
-        return view('student.forms.apply', compact('form', 'student', 'submission', 'customFields'));
-    }
-
-    // --- CREATE NEW SUBMISSION ---
     public function submit(Request $request, $form_id)
     {
         $form = AdmissionForm::findOrFail($form_id);
         $student = Auth::user()->student;
 
-        // 1. Prepare Data
-        $data = $this->processApplicationData($request, $student, $form_id);
-        
-        // 2. Double-check for existing draft to prevent race-condition duplicates
-        $submission = FormSubmission::where('student_id', $student->id)
-                                    ->where('form_id', $form->id)
-                                    ->where('status', 'draft')
-                                    ->first();
-
-        if ($submission) {
-            $submission->update([
-                'answers' => $data['answers'],
-                'status' => $data['status'],
-            ]);
-        } else {
-            FormSubmission::create([
-                'form_id' => $form->id,
-                'student_id' => $student->id,
-                'university_id' => $form->university_id,
-                'answers' => $data['answers'],
-                'status' => $data['status'],
-            ]);
-        }
-
-        $msg = ($data['status'] === 'draft') ? 'Application saved as draft.' : 'Application submitted successfully!';
-        return redirect()->route('student.forms.submissions')->with('success', $msg);
-    }
-
-    // --- UPDATE EXISTING SUBMISSION ---
-    public function updateSubmission(Request $request, $id)
-    {
-        $submission = FormSubmission::where('id', $id)
-            ->where('student_id', Auth::user()->student->id)
-            ->firstOrFail();
-
-        // 1. Prepare Data (passing existing submission documents to merge)
-        $existingDocs = $submission->answers['documents'] ?? [];
-        $data = $this->processApplicationData($request, $submission->student, $submission->form_id, $existingDocs);
-
-        // 2. Update specific ID
-        $submission->update([
-            'answers' => $data['answers'],
-            'status' => $data['status'],
-        ]);
-
-        $msg = ($data['status'] === 'draft') ? 'Draft updated successfully.' : 'Application submitted successfully!';
-        return redirect()->route('student.forms.submissions')->with('success', $msg);
-    }
-
-    // --- HELPER: Process Data ---
-    private function processApplicationData(Request $request, $student, $formId, $existingDocuments = [])
-    {
         $action = $request->input('action');
         $status = ($action === 'draft') ? 'draft' : 'pending';
 
-        // Validate only if final submit
         if ($status === 'pending') {
             $request->validate([
                 'given_name' => 'required',
                 'surname' => 'required',
-                // 'program_type' => 'required',
             ]);
         }
 
         // 1. Update Student Profile
         $phone = $request->input('full_phone') ?: $request->input('mobile');
+        
         $student->update([
             'given_name' => $request->given_name,
             'surname' => $request->surname,
@@ -166,22 +97,44 @@ class StudentApplicationController extends Controller
             'studied_in_china_institute' => $request->studied_in_china_institute,
         ]);
 
-        // 2. Handle Documents (Merge Strategy)
-        $documents = $existingDocuments;
+        // 2. Retrieve Existing Draft (Logic Fix)
+        // We prioritize finding a draft specifically for this student and form.
+        $submission = FormSubmission::where('student_id', $student->id)
+                                    ->where('form_id', $form->id)
+                                    ->where('status', 'draft')
+                                    ->first();
+
+        // 3. Document Logic (Fixed for Array Overwriting)
+        // Load existing documents or initialize empty array
+        $documents = $submission ? ($submission->answers['documents'] ?? []) : [];
         
         if ($request->hasFile('documents')) {
             foreach ($request->file('documents') as $category => $files) {
-                if (!isset($documents[$category])) $documents[$category] = [];
-                if (!is_array($documents[$category])) $documents[$category] = [$documents[$category]]; // Handle legacy string
-
+                // IMPORTANT: 'files' is an array because input is documents[key][].
+                // We ensure it is treated as an array.
                 $fileList = is_array($files) ? $files : [$files];
+
                 foreach ($fileList as $file) {
-                    $documents[$category][] = $file->store('submissions/docs/' . $student->id, 'public');
+                    // Save file to storage
+                    $path = $file->store('submissions/docs/' . $student->id, 'public');
+
+                    // Initialize array for this category if missing
+                    if (!isset($documents[$category])) {
+                        $documents[$category] = [];
+                    }
+
+                    // Convert legacy single-string data to array if necessary
+                    if (!is_array($documents[$category])) {
+                        $documents[$category] = [$documents[$category]];
+                    }
+
+                    // Append the new file path
+                    $documents[$category][] = $path;
                 }
             }
         }
 
-        $answers = [
+        $submissionData = [
             'programme' => [
                 'type' => $request->program_type,
                 'major' => $request->major,
@@ -192,7 +145,52 @@ class StudentApplicationController extends Controller
             'custom_fields' => $request->input('custom_fields', [])
         ];
 
-        return ['answers' => $answers, 'status' => $status];
+        if ($submission) {
+            $submission->update([
+                'answers' => $submissionData,
+                'status' => $status,
+            ]);
+        } else {
+            FormSubmission::create([
+                'form_id' => $form->id,
+                'student_id' => $student->id,
+                'university_id' => $form->university_id,
+                'answers' => $submissionData,
+                'status' => $status,
+            ]);
+        }
+
+        $msg = ($status === 'draft') ? 'Application saved as draft.' : 'Application submitted successfully!';
+        return redirect()->route('student.forms.submissions')->with('success', $msg);
+    }
+
+    public function editSubmission($id)
+    {
+        $submission = FormSubmission::where('id', $id)
+            ->where('student_id', Auth::user()->student->id)
+            ->where('status', 'draft')
+            ->with('form.university')
+            ->firstOrFail();
+
+        $form = $submission->form;
+        $student = $submission->student;
+        $customFields = $this->getCustomFields($form);
+
+        return view('student.forms.apply', compact('form', 'student', 'submission', 'customFields'));
+    }
+
+    public function updateSubmission(Request $request, $id)
+    {
+        // Simply forward to submit method.
+        // The submit method handles finding the correct draft logic.
+        $submission = FormSubmission::findOrFail($id);
+        
+        // Ensure action defaults to draft if not clicked specifically
+        if(!$request->has('action')) {
+            $request->merge(['action' => 'draft']);
+        }
+
+        return $this->submit($request, $submission->form_id);
     }
 
     private function getCustomFields($form)

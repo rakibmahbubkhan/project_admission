@@ -16,8 +16,6 @@ use Illuminate\Support\Facades\Log;
 
 class AgentDashboardController extends Controller
 {
-    // ... (Keep index, students, createStudent, storeStudent, formList methods) ...
-
     public function index()
     {
         $agent = Auth::user();
@@ -122,7 +120,7 @@ class AgentDashboardController extends Controller
         $form = AdmissionForm::with('university')->findOrFail($formId);
         $student = Student::where('id', $request->student_id)->where('agent_id', Auth::id())->firstOrFail();
 
-        // Check Draft
+        // Check for existing draft
         $existingDraft = FormSubmission::where('student_id', $student->id)
             ->where('form_id', $form->id)
             ->where('status', 'draft')
@@ -143,18 +141,87 @@ class AgentDashboardController extends Controller
         $form = AdmissionForm::findOrFail($formId);
         $student = Student::where('id', $studentId)->where('agent_id', Auth::id())->firstOrFail();
         
-        $existingSubmission = FormSubmission::where('student_id', $student->id)
-            ->where('form_id', $form->id)
-            ->where('status', 'draft')
-            ->first();
-            
-        $existingDocs = $existingSubmission ? ($existingSubmission->answers['documents'] ?? []) : [];
-        $data = $this->processApplicationData($request, $student, $existingDocs);
+        $action = $request->input('action');
+        $status = ($action === 'draft') ? 'draft' : 'pending';
 
-        if ($existingSubmission) {
-            $existingSubmission->update([
-                'answers' => $data['answers'],
-                'status' => $data['status']
+        if ($status === 'pending') {
+            $request->validate([
+                'given_name' => 'required',
+                'surname' => 'required',
+            ]);
+        }
+
+        $student->update([
+            'given_name' => $request->given_name,
+            'surname' => $request->surname,
+            'gender' => $request->gender,
+            'phone' => $request->input('full_phone') ?: $request->input('mobile'),
+            'email' => $request->email,
+            'nationality' => $request->nationality,
+            'street' => $request->street,
+            'city' => $request->city,
+            'country' => $request->country,
+            'zip_code' => $request->zip_code,
+            'dob' => $request->dob,
+            'sponsor_info' => $request->sponsor,
+            'parents_info' => $request->parents,
+            'education_background' => $request->education,
+            'work_experience' => $request->work,
+            'other_info' => $request->other,
+            'passport_number' => $request->passport_number,
+            'passport_expiry_date' => $request->passport_expiry_date,
+            'marital_status' => $request->marital_status,
+            'religion' => $request->religion,
+            'in_china' => $request->has('in_china'),
+            'in_china_from' => $request->in_china_from,
+            'in_china_institute' => $request->in_china_institute,
+            'studied_in_china' => $request->has('studied_in_china'),
+            'studied_in_china_from' => $request->studied_in_china_from,
+            'studied_in_china_institute' => $request->studied_in_china_institute,
+        ]);
+
+        // Retrieve existing draft
+        $submission = FormSubmission::where('student_id', $student->id)
+                                    ->where('form_id', $form->id)
+                                    ->where('status', 'draft')
+                                    ->first();
+
+        // 3. Document Logic (Fixed)
+        $documents = $submission ? ($submission->answers['documents'] ?? []) : [];
+        
+        if ($request->hasFile('documents')) {
+            foreach ($request->file('documents') as $category => $files) {
+                // Force array for files
+                $fileList = is_array($files) ? $files : [$files];
+                foreach ($fileList as $file) {
+                    $path = $file->store('submissions/docs/' . $student->id, 'public');
+                    
+                    if (!isset($documents[$category])) {
+                        $documents[$category] = [];
+                    }
+                    if (!is_array($documents[$category])) {
+                        $documents[$category] = [$documents[$category]];
+                    }
+                    $documents[$category][] = $path;
+                }
+            }
+        }
+
+        $answers = [
+            'programme' => [
+                'type' => $request->program_type,
+                'major' => $request->major,
+                'degree' => $request->degree,
+            ],
+            'service_policy' => $request->service_policy,
+            'documents' => $documents,
+            'custom_fields' => $request->input('custom_fields', [])
+        ];
+
+        if ($submission) {
+            $submission->update([
+                'answers' => $answers,
+                'status' => $status
             ]);
         } else {
             FormSubmission::create([
@@ -162,12 +229,13 @@ class AgentDashboardController extends Controller
                 'student_id' => $student->id,
                 'agent_id' => Auth::id(),
                 'university_id' => $form->university_id,
-                'answers' => $data['answers'],
-                'status' => $data['status'],
+                'answers' => $answers,
+                'status' => $status,
             ]);
         }
 
-        return redirect()->route('Partner.submissions')->with('success', 'Application saved/submitted.');
+        $msg = ($status === 'draft') ? 'Application saved as draft.' : 'Application submitted successfully!';
+        return redirect()->route('Partner.submissions')->with('success', $msg);
     }
 
     public function editSubmission($id)
@@ -189,77 +257,15 @@ class AgentDashboardController extends Controller
 
     public function updateSubmission(Request $request, $id)
     {
-        $submission = FormSubmission::where('id', $id)->where('agent_id', Auth::id())->firstOrFail();
-        
-        $existingDocs = $submission->answers['documents'] ?? [];
-        $data = $this->processApplicationData($request, $submission->student, $existingDocs);
-
-        $submission->update([
-            'answers' => $data['answers'],
-            'status' => $data['status']
-        ]);
-
-        return redirect()->route('Partner.submissions')->with('success', 'Application updated.');
+        $submission = FormSubmission::findOrFail($id);
+        if(!$request->has('action')) {
+            $request->merge(['action' => 'draft']);
+        }
+        return $this->submitApplication($request, $submission->form_id, $submission->student_id);
     }
 
     // --- HELPERS ---
     
-    private function processApplicationData(Request $request, $student, $existingDocuments = [])
-    {
-        $action = $request->input('action') ?? 'draft';
-        $status = ($action === 'draft') ? 'draft' : 'pending';
-
-        if ($status === 'pending') {
-             // Add validations
-        }
-
-        $phone = $request->input('full_phone') ?: $request->input('mobile');
-        $student->update([
-            'given_name' => $request->given_name,
-            'surname' => $request->surname,
-            'phone' => $phone,
-            'email' => $request->email,
-            'passport_number' => $request->passport_number,
-            'dob' => $request->dob,
-            'gender' => $request->gender,
-            'nationality' => $request->nationality,
-            'street' => $request->street,
-            'city' => $request->city,
-            'country' => $request->country,
-            'sponsor_info' => $request->sponsor,
-            'parents_info' => $request->parents,
-            'education_background' => $request->education,
-            'work_experience' => $request->work,
-            'other_info' => $request->other,
-        ]);
-
-        $documents = $existingDocuments;
-        if ($request->hasFile('documents')) {
-            foreach ($request->file('documents') as $category => $files) {
-                if (!isset($documents[$category])) $documents[$category] = [];
-                if (!is_array($documents[$category])) $documents[$category] = [$documents[$category]];
-                
-                $fileList = is_array($files) ? $files : [$files];
-                foreach ($fileList as $file) {
-                    $documents[$category][] = $file->store('submissions/docs/' . $student->id, 'public');
-                }
-            }
-        }
-
-        $answers = [
-            'programme' => [
-                'type' => $request->program_type,
-                'major' => $request->major,
-                'degree' => $request->degree,
-            ],
-            'service_policy' => $request->service_policy,
-            'documents' => $documents,
-            'custom_fields' => $request->input('custom_fields', [])
-        ];
-
-        return ['answers' => $answers, 'status' => $status];
-    }
-
     private function getCustomFields($form)
     {
         $rawFields = $form->form_fields ?? [];
@@ -275,7 +281,11 @@ class AgentDashboardController extends Controller
     
     public function submissions()
     {
-        $submissions = FormSubmission::where('agent_id', Auth::id())->latest()->get();
+        $submissions = FormSubmission::where('agent_id', Auth::id())
+            ->with('student', 'form', 'university')
+            ->latest()
+            ->get();
+
         return view('agent.submissions.index', compact('submissions'));
     }
 }

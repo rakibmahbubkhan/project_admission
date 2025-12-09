@@ -44,9 +44,14 @@
         <input type="hidden" name="full_phone" id="full_phone">
 
         {{-- Progress / Header --}}
-        <div class="bg-gray-50 border-b border-gray-200 px-6 py-4">
-            <h2 class="text-lg font-bold text-gray-800">Application Form</h2>
-            <p class="text-sm text-gray-500">Please fill all required fields carefully.</p>
+        <div class="bg-gray-50 border-b border-gray-200 px-6 py-4 flex justify-between items-center">
+            <div>
+                <h2 class="text-lg font-bold text-gray-800">Application Form</h2>
+                <p class="text-sm text-gray-500">Please fill all required fields carefully.</p>
+            </div>
+            @if($isEdit)
+                <span class="bg-yellow-100 text-yellow-800 text-xs font-bold px-3 py-1 rounded-full">Editing Draft</span>
+            @endif
         </div>
 
         <div class="p-6 md:p-8">
@@ -61,7 +66,6 @@
             </div>
 
             <div id="tab-personal" class="form-section animate-fade-in">
-                <h3 class="text-md font-bold text-gray-800 mb-4 border-l-4 border-blue-500 pl-3">Basic Information</h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Surname <span class="text-red-500">*</span></label>
@@ -96,10 +100,7 @@
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Marital Status</label>
-                        <select name="marital_status" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
-                            <option value="Single" {{ $student->marital_status == 'Single' ? 'selected' : '' }}>Single</option>
-                            <option value="Married" {{ $student->marital_status == 'Married' ? 'selected' : '' }}>Married</option>
-                        </select>
+                        <input type="text" name="marital_status" value="{{ $student->marital_status }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Religion</label>
@@ -140,7 +141,6 @@
             </div>
 
             <div id="tab-contact" class="form-section hidden animate-fade-in">
-                <h3 class="text-md font-bold text-gray-800 mb-4 border-l-4 border-blue-500 pl-3">Contact Details</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="md:col-span-2">
                         <label class="block text-sm font-medium text-gray-700 mb-1">Street Address</label>
@@ -218,8 +218,6 @@
             </div>
 
             <div id="tab-education" class="form-section hidden animate-fade-in">
-                <h3 class="text-md font-bold text-gray-800 mb-4 border-l-4 border-blue-500 pl-3">Education Background</h3>
-                
                 <div class="space-y-4">
                     @php $educations = $student->education_background ?? [[]]; @endphp
                     @foreach($educations as $index => $edu)
@@ -255,31 +253,26 @@
 
             <div id="tab-documents" class="form-section hidden animate-fade-in">
                 <h3 class="text-md font-bold text-gray-800 mb-4 border-l-4 border-red-500 pl-3">Upload Required Documents</h3>
-                <p class="text-sm text-gray-500 mb-6">Only upload the documents listed below. You can select multiple files for each category.</p>
-
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     @foreach($allDocsMap as $key => $label)
-                        {{-- FILTER: Only show allowed docs --}}
                         @if(in_array($key, $allowedDocs))
                             <div class="border rounded-xl p-4 hover:shadow-md transition-shadow bg-white relative">
-                                <label class="block text-sm font-bold text-gray-700 mb-2">
-                                    {{ $label }} <span class="text-red-500">*</span>
-                                </label>
+                                <label class="block text-sm font-bold text-gray-700 mb-2">{{ $label }} <span class="text-red-500">*</span></label>
                                 
                                 {{-- Existing Files Display --}}
                                 @if(isset($answers['documents'][$key]))
-                                    <div class="mb-3">
-                                        @if(is_array($answers['documents'][$key]))
-                                            @foreach($answers['documents'][$key] as $existingFile)
-                                                <div class="flex items-center text-xs text-green-700 bg-green-50 p-2 rounded mb-1 border border-green-100">
-                                                    <i class="fas fa-file-check mr-2"></i> File Uploaded
-                                                </div>
-                                            @endforeach
-                                        @else
-                                            <div class="flex items-center text-xs text-green-700 bg-green-50 p-2 rounded mb-1">
-                                                <i class="fas fa-file-check mr-2"></i> File Uploaded
+                                    <div class="mb-3 bg-gray-50 p-2 rounded border border-gray-200">
+                                        <p class="text-xs font-semibold text-gray-600 mb-1">Uploaded:</p>
+                                        @php
+                                            $existingFiles = $answers['documents'][$key];
+                                            if(!is_array($existingFiles)) $existingFiles = [$existingFiles];
+                                        @endphp
+                                        @foreach($existingFiles as $idx => $filePath)
+                                            <div class="flex items-center justify-between text-xs mb-1">
+                                                <span class="text-gray-600 truncate max-w-[150px]">File {{ $idx + 1 }}</span>
+                                                <a href="{{ asset('storage/'.$filePath) }}" target="_blank" class="text-blue-600 hover:text-blue-800 font-bold px-2 py-0.5 border rounded bg-white">View</a>
                                             </div>
-                                        @endif
+                                        @endforeach
                                     </div>
                                 @endif
 
