@@ -18,7 +18,6 @@ class AdmissionFormController extends Controller
         if ($request->filled('search')) {
             $search = $request->search;
             $query->where(function($q) use ($search) {
-                // Checking both 'title' and 'program_name' to cover schema variations
                 $q->where('title', 'like', "%{$search}%")
                   ->orWhere('offer_title', 'like', "%{$search}%")
                   ->orWhere('intake', 'like', "%{$search}%")
@@ -28,7 +27,7 @@ class AdmissionFormController extends Controller
             });
         }
 
-        // 2. Status Filter (using isActive boolean)
+        // 2. Status Filter
         if ($request->filled('status')) {
             if ($request->status === 'active') {
                 $query->where('isActive', true);
@@ -45,8 +44,8 @@ class AdmissionFormController extends Controller
     public function create()
     {
         $universities = University::where('isActive', true)->get();
-        $agents = \App\Models\User::where('role', 'agent')->get();
-        return view('super_admin.forms.create', compact('universities', 'agents'));
+        $documentList = $this->getDocumentList();
+        return view('super_admin.forms.create', compact('universities', 'documentList'));
     }
 
     public function store(Request $request)
@@ -54,39 +53,37 @@ class AdmissionFormController extends Controller
         $request->validate([
             'university_id' => 'required|exists:universities,id',
             'title'         => 'required|string|max:255',
-            'description'   => 'nullable|string',
             'application_fee' => 'required|numeric|min:0',
-            'form_fields'   => 'required|string', // JSON string from form builder
-            // Validation for new fields can be added as needed, making them nullable for flexibility
-            'tuition_fees' => 'nullable|numeric',
-            'partner_rate' => 'nullable|numeric',
-            'student_rate' => 'nullable|numeric',
+            'form_fields'   => 'required', 
         ]);
 
         try {
             $data = $request->all();
             
-            // Handle Checkboxes (Boolean values)
-            $data['isPublished'] = $request->has('isPublished');
-            $data['accept_in_china'] = $request->has('accept_in_china');
-            $data['accept_studied_in_china'] = $request->has('accept_studied_in_china');
-            $data['has_exclusive_service_policy'] = $request->has('has_exclusive_service_policy');
-            $data['has_premium_service_policy'] = $request->has('has_premium_service_policy');
-
-            // Ensure form_fields is valid JSON
-            json_decode($data['form_fields']);
-            if (json_last_error() !== JSON_ERROR_NONE) {
-                 // Fallback if it came as an array
-                 $data['form_fields'] = json_encode($request->input('form_fields'));
+            // Handle Array/JSON fields
+            $data['required_documents'] = $request->input('required_documents', []);
+            
+            // Handle Form Fields (Builder JSON)
+            // If it comes as an array, encode it. If it's a string, leave it.
+            if (is_array($request->input('form_fields'))) {
+                $data['form_fields'] = json_encode($request->input('form_fields'));
             }
 
-            $form = AdmissionForm::create($data);
+            // Handle Booleans
+            $booleans = [
+                'isPublished', 
+                'isActive', 
+                'accept_in_china', 
+                'accept_studied_in_china', 
+                'has_exclusive_service_policy', 
+                'has_premium_service_policy'
+            ];
 
-            // Assign agents if any
-            if ($request->has('agents')) {
-                // Assuming relationship exists, otherwise skip
-                // $form->agents()->sync($request->agents); 
+            foreach ($booleans as $field) {
+                $data[$field] = $request->has($field);
             }
+
+            AdmissionForm::create($data);
 
             return redirect()->route('admin.forms.index')->with('success', 'Admission Form created successfully');
 
@@ -106,7 +103,8 @@ class AdmissionFormController extends Controller
     {
         $form = AdmissionForm::with('university')->findOrFail($id);
         $universities = University::all();
-        return view('super_admin.forms.edit', compact('form', 'universities'));
+        $documentList = $this->getDocumentList();
+        return view('super_admin.forms.edit', compact('form', 'universities', 'documentList'));
     }
 
     public function update(Request $request, $id)
@@ -116,27 +114,54 @@ class AdmissionFormController extends Controller
         $request->validate([
             'university_id' => 'required|exists:universities,id',
             'title'         => 'required|string|max:255',
+            // Add validation for critical numeric fields if necessary
+            'application_fee' => 'nullable|numeric',
         ]);
 
-        $data = $request->all();
-        
-        // Handle Booleans explicitly for update
-        $data['isPublished'] = $request->has('isPublished');
-        $data['accept_in_china'] = $request->has('accept_in_china');
-        $data['accept_studied_in_china'] = $request->has('accept_studied_in_china');
-        $data['has_exclusive_service_policy'] = $request->has('has_exclusive_service_policy');
-        $data['has_premium_service_policy'] = $request->has('has_premium_service_policy');
-        
-        // Handle JSON fields if they were re-submitted
-        if ($request->has('form_fields')) {
-             $data['form_fields'] = is_array($request->form_fields) 
-                ? json_encode($request->form_fields) 
-                : $request->form_fields;
+        try {
+            // Get all input data excluding tokens/methods
+            $data = $request->except(['_token', '_method']);
+
+            // 1. Handle Documents Array
+            // Ensure it defaults to empty array if nothing selected (clears selection)
+            $data['required_documents'] = $request->input('required_documents', []);
+
+            // 2. Handle Form Fields (JSON)
+            // Only update if present in request. If passing an array, encode it.
+            if ($request->has('form_fields')) {
+                $rawFields = $request->input('form_fields');
+                $data['form_fields'] = is_array($rawFields) ? json_encode($rawFields) : $rawFields;
+            } else {
+                // If the field isn't in the request, remove it from $data to prevent overwriting with null
+                // (Depends on if your edit form sends it back every time. Usually safer to unset if missing)
+                unset($data['form_fields']);
+            }
+
+            // 3. Handle Boolean Checkboxes
+            // We iterate through known boolean columns. 
+            // If the checkbox is unchecked, the request won't have the key, so $request->has() returns false.
+            $booleans = [
+                'isPublished', 
+                'isActive', 
+                'accept_in_china', 
+                'accept_studied_in_china', 
+                'has_exclusive_service_policy', 
+                'has_premium_service_policy'
+            ];
+
+            foreach ($booleans as $field) {
+                $data[$field] = $request->has($field);
+            }
+
+            // Perform Update
+            $form->update($data);
+
+            return redirect()->route('admin.forms.index')->with('success', 'Admission Form updated successfully');
+
+        } catch (\Exception $e) {
+            Log::error('Error updating form ID ' . $id . ': ' . $e->getMessage());
+            return back()->withInput()->with('error', 'Error updating form: ' . $e->getMessage());
         }
-
-        $form->update($data);
-
-        return redirect()->route('admin.forms.index')->with('success', 'Admission Form updated successfully');
     }
 
     public function destroy($id)
@@ -149,8 +174,31 @@ class AdmissionFormController extends Controller
     public function toggleStatus($id)
     {
         $form = AdmissionForm::findOrFail($id);
-        $form->isPublished = !$form->isPublished;
+        $form->isActive = !$form->isActive;
         $form->save();
-        return back()->with('success', 'Form status updated.');
+
+        return redirect()->back()->with('success', 'Form status updated.');
+    }
+
+    private function getDocumentList()
+    {
+        return [
+            'photo' => 'Photo', 
+            'passport' => 'Passport', 
+            'non_criminal' => 'Non-Criminal Record',
+            'degree_cert' => 'Certificate (Highest Degree)', 
+            'transcript' => 'Transcript (Highest Degree)',
+            'recommendation' => 'Two Recommendation Letters', 
+            'language_cert' => 'Language Proficiency Certificate',
+            'csca_cert' => 'CSCA Score Certificate', 
+            'medical' => 'Physical Examination Report',
+            'study_plan' => 'Study Plan / Research Proposal', 
+            'bank_statement' => 'Bank Statement',
+            'visa' => 'Chinese Visa (If Any)', 
+            'transfer_cert' => 'Transfer Certificate (If Any)',
+            'video' => 'Self-Introduction Video', 
+            'parents_id' => 'Parents ID', 
+            'others' => 'Other Documents'
+        ];
     }
 }

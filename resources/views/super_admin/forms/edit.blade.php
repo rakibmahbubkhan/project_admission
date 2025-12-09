@@ -1,79 +1,76 @@
 @extends('layouts.admin')
 
-@section('title', 'Edit Admission Form')
+@section('title', 'Edit Admission Offer')
 
 @section('content')
 <div class="container mx-auto px-4 py-8">
     
-    <div class="flex justify-between items-center mb-8">
+    {{-- Header --}}
+    <div class="flex flex-col md:flex-row justify-between items-center mb-8">
         <div>
             <h2 class="text-3xl font-bold text-gray-800">Edit Admission Offer</h2>
-            <p class="text-gray-500 text-sm mt-1">Update program details, fees, and configuration.</p>
+            <p class="text-gray-500 text-sm mt-1">Update program details, fees, and application configuration.</p>
         </div>
-        <a href="{{ route('admin.forms.index') }}" class="bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 font-semibold py-2 px-4 rounded-lg shadow-sm transition duration-150 ease-in-out flex items-center">
-            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
-            Back to List
-        </a>
+        <div class="mt-4 md:mt-0">
+            <a href="{{ route('admin.forms.index') }}" class="bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 font-semibold py-2 px-4 rounded-lg shadow-sm transition duration-150 ease-in-out flex items-center">
+                <i class="fas fa-arrow-left mr-2"></i> Back to List
+            </a>
+        </div>
     </div>
 
     @if(session('error'))
-        <div class="bg-red-50 border-l-4 border-red-500 p-4 mb-6 rounded shadow-sm">
-            <div class="flex">
-                <div class="flex-shrink-0">
-                    <svg class="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/></svg>
-                </div>
-                <div class="ml-3">
-                    <p class="text-sm text-red-700 font-medium">Error</p>
-                    <p class="text-sm text-red-600">{{ session('error') }}</p>
-                </div>
+        <div class="bg-red-50 border-l-4 border-red-500 p-4 mb-6 rounded shadow-sm flex items-center">
+            <i class="fas fa-exclamation-circle text-red-500 mr-3 text-xl"></i>
+            <div>
+                <p class="text-sm text-red-700 font-medium">Error</p>
+                <p class="text-sm text-red-600">{{ session('error') }}</p>
             </div>
         </div>
     @endif
 
-    <form action="{{ route('admin.forms.update', $form->id) }}" method="POST" id="editForm" class="space-y-6">
+    <form action="{{ route('admin.forms.update', $form->id) }}" method="POST" id="editForm" class="space-y-8">
         @csrf
         @method('PUT')
 
-        <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-            <div class="bg-gray-50 px-6 py-4 border-b border-gray-100 flex items-center">
+        {{-- 1. Basic Information Card --}}
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+            <div class="bg-gray-50 px-6 py-4 border-b border-gray-200 flex items-center">
                 <div class="bg-blue-100 text-blue-600 p-2 rounded-lg mr-3">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                    <i class="fas fa-university"></i>
                 </div>
-                <h3 class="text-lg font-semibold text-gray-800">Basic Offer Information</h3>
+                <h3 class="text-lg font-bold text-gray-800">Basic Offer Information</h3>
             </div>
             
             <div class="p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
-
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">University</label>
-                    <input type="text" 
-                        value="{{ $form->university ? $form->university->name : 'N/A' }}" 
-                        class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" 
-                        readonly>
-                    @error('university_id') 
-                        <span class="text-xs text-red-500">{{ $message }}</span> 
-                    @enderror
+                    <label class="block text-xs font-bold text-gray-500 uppercase mb-1">University</label>
+                    <div class="relative">
+                        <select name="university_id" class="block w-full rounded-lg border-gray-300 bg-gray-50 text-gray-700 focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2.5">
+                            @foreach($universities as $uni)
+                                <option value="{{ $uni->id }}" {{ $form->university_id == $uni->id ? 'selected' : '' }}>{{ $uni->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Form Title (Internal) <span class="text-red-500">*</span></label>
-                    <input type="text" name="title" value="{{ old('title', $form->title) }}" required class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
-                    @error('title') <span class="text-xs text-red-500">{{ $message }}</span> @enderror
+                    <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Form Title (Internal) <span class="text-red-500">*</span></label>
+                    <input type="text" name="title" value="{{ old('title', $form->title) }}" required class="block w-full rounded-lg border-gray-300 focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2.5">
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Offer Title (Public)</label>
-                    <input type="text" name="offer_title" value="{{ old('offer_title', $form->offer_title) }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
+                    <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Offer Title (Public)</label>
+                    <input type="text" name="offer_title" value="{{ old('offer_title', $form->offer_title) }}" class="block w-full rounded-lg border-gray-300 focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2.5">
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Intake</label>
-                    <input type="text" name="intake" value="{{ old('intake', $form->intake) }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
+                    <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Intake</label>
+                    <input type="text" name="intake" value="{{ old('intake', $form->intake) }}" placeholder="e.g. March 2025" class="block w-full rounded-lg border-gray-300 focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2.5">
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Degree</label>
-                    <select name="degree" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
+                    <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Degree</label>
+                    <select name="degree" class="block w-full rounded-lg border-gray-300 focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2.5">
                         <option value="">Select Degree</option>
                         @foreach(['Non-Degree', 'Diploma', 'Bachelor', 'Master', 'Ph.D.'] as $deg)
                             <option value="{{ $deg }}" {{ old('degree', $form->degree) == $deg ? 'selected' : '' }}>{{ $deg }}</option>
@@ -82,412 +79,330 @@
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Major</label>
-                    <input type="text" name="major" value="{{ old('major', $form->major) }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
+                    <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Major</label>
+                    <input type="text" name="major" value="{{ old('major', $form->major) }}" class="block w-full rounded-lg border-gray-300 focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2.5">
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Teaching Language</label>
-                    <select name="teaching_language" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
+                    <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Teaching Language</label>
+                    <select name="teaching_language" class="block w-full rounded-lg border-gray-300 focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2.5">
                         <option value="English" {{ old('teaching_language', $form->teaching_language) == 'English' ? 'selected' : '' }}>English</option>
                         <option value="Chinese" {{ old('teaching_language', $form->teaching_language) == 'Chinese' ? 'selected' : '' }}>Chinese</option>
+                        <option value="Bilingual" {{ old('teaching_language', $form->teaching_language) == 'Bilingual' ? 'selected' : '' }}>Bilingual</option>
                     </select>
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Location</label>
-                    <input type="text" name="location" value="{{ old('location', $form->location) }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
+                    <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Location (City/Country)</label>
+                    <input type="text" name="location" value="{{ old('location', $form->location) }}" class="block w-full rounded-lg border-gray-300 focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2.5">
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">University Name Override</label>
-                    <input type="text" name="university_name_override" value="{{ old('university_name_override', $form->university_name_override) }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
+                    <label class="block text-xs font-bold text-gray-500 uppercase mb-1">University Name Override</label>
+                    <input type="text" name="university_name_override" value="{{ old('university_name_override', $form->university_name_override) }}" class="block w-full rounded-lg border-gray-300 focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2.5">
                 </div>
 
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Scholarship Type</label>
-                    <input type="text" name="scholarship_type" value="{{ old('scholarship_type', $form->scholarship_type) }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
+                <div class="md:col-span-3">
+                    <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Description</label>
+                    <textarea name="description" rows="3" class="block w-full rounded-lg border-gray-300 focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2.5">{{ old('description', $form->description) }}</textarea>
                 </div>
-            </div>
-
-            <div class="px-6 pb-6">
-                <label class="block text-sm font-medium text-gray-700 mb-1">Description</label>
-                <textarea name="description" rows="3" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">{{ old('description', $form->description) }}</textarea>
             </div>
         </div>
 
-        <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-            <div class="bg-gray-50 px-6 py-4 border-b border-gray-100 flex items-center">
+        {{-- 2. Fees & Expenses Card --}}
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+            <div class="bg-gray-50 px-6 py-4 border-b border-gray-200 flex items-center">
                 <div class="bg-green-100 text-green-600 p-2 rounded-lg mr-3">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <i class="fas fa-money-bill-wave"></i>
                 </div>
-                <h3 class="text-lg font-semibold text-gray-800">Program Fees & Expenses</h3>
+                <h3 class="text-lg font-bold text-gray-800">Fees & Expenses</h3>
             </div>
 
-            <div class="p-6 grid grid-cols-1 md:grid-cols-4 gap-6">
-                 <!-- Tuition Fees with Type -->
-            <div>
-                <label class="block text-sm text-gray-700 dark:text-gray-400 mb-2">Tuition Fees</label>
-                <div class="flex">
-                    <input type="number" step="0.01" name="tuition_fees" value="{{ old('tuition_fees', $form->tuition_fees) }}" class="block w-2/3 text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 form-input rounded-l-md border-gray-300 focus:border-purple-400 focus:shadow-outline-purple" placeholder="Amount">
-                    <select name="tuition_fee_type" class="block w-1/3 text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 form-select rounded-r-md border-l-0 border-gray-300 focus:border-purple-400 focus:shadow-outline-purple bg-gray-50 dark:bg-gray-600">
-                        <option value="Annual" {{ old('tuition_fee_type', $form->tuition_fee_type) == 'Annual' ? 'selected' : '' }}>Annual</option>
-                        <option value="Semester" {{ old('tuition_fee_type', $form->tuition_fee_type) == 'Semester' ? 'selected' : '' }}>Semester</option>
-                    </select>
+            <div class="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {{-- Tuition --}}
+                <div class="col-span-1 md:col-span-2">
+                    <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Tuition Fees</label>
+                    <div class="flex">
+                        <input type="number" step="0.01" name="tuition_fees" value="{{ old('tuition_fees', $form->tuition_fees) }}" placeholder="Amount" class="rounded-l-lg border-gray-300 border-r-0 w-2/3 focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                        <select name="tuition_fee_type" class="rounded-r-lg border-gray-300 bg-gray-50 w-1/3 focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                            <option value="Annual" {{ $form->tuition_fee_type == 'Annual' ? 'selected' : '' }}>Annual</option>
+                            <option value="Semester" {{ $form->tuition_fee_type == 'Semester' ? 'selected' : '' }}>Semester</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Dorm Fees with Type -->
-            <div>
-                <label class="block text-sm text-gray-700 dark:text-gray-400 mb-2">Dorm Fees</label>
-                <div class="flex">
-                    <input type="text" name="dorm_fees" value="{{ old('dorm_fees', $form->dorm_fees) }}" class="block w-2/3 text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 form-input rounded-l-md border-gray-300 focus:border-purple-400 focus:shadow-outline-purple" placeholder="Amount">
-                     <select name="dorm_fee_type" class="block w-1/3 text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 form-select rounded-r-md border-l-0 border-gray-300 focus:border-purple-400 focus:shadow-outline-purple bg-gray-50 dark:bg-gray-600">
-                        <option value="Annual" {{ old('dorm_fee_type', $form->dorm_fee_type) == 'Annual' ? 'selected' : '' }}>Annual</option>
-                        <option value="Semester" {{ old('dorm_fee_type', $form->dorm_fee_type) == 'Semester' ? 'selected' : '' }}>Semester</option>
-                    </select>
+                {{-- Dorm --}}
+                <div class="col-span-1 md:col-span-2">
+                    <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Dorm Fees</label>
+                    <div class="flex">
+                        <input type="number" step="0.01" name="dorm_fees" value="{{ old('dorm_fees', $form->dorm_fees) }}" placeholder="Amount" class="rounded-l-lg border-gray-300 border-r-0 w-2/3 focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                        <select name="dorm_fee_type" class="rounded-r-lg border-gray-300 bg-gray-50 w-1/3 focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                            <option value="Annual" {{ $form->dorm_fee_type == 'Annual' ? 'selected' : '' }}>Annual</option>
+                            <option value="Semester" {{ $form->dorm_fee_type == 'Semester' ? 'selected' : '' }}>Semester</option>
+                            <option value="Monthly" {{ $form->dorm_fee_type == 'Monthly' ? 'selected' : '' }}>Monthly</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
-                <div>
-                    <label class="block text-xs font-bold text-gray-600 uppercase mb-1">App Fee <span class="text-red-500">*</span></label>
-                    <input type="number" step="0.01" name="application_fee" value="{{ old('application_fee', $form->application_fee) }}" required class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
-                </div>
-                <div>
-                    <label class="block text-xs font-bold text-gray-600 uppercase mb-1">Medical Fees</label>
-                    <input type="number" step="0.01" name="medical_fees" value="{{ old('medical_fees', $form->medical_fees) }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
-                </div>
-                <div>
-                    <label class="block text-xs font-bold text-gray-600 uppercase mb-1">Insurance Fees</label>
-                    <input type="number" step="0.01" name="insurance_fees" value="{{ old('insurance_fees', $form->insurance_fees) }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
-                </div>
-                <div>
-                    <label class="block text-xs font-bold text-gray-600 uppercase mb-1">Resident Permit</label>
-                    <input type="number" step="0.01" name="resident_permit_fee" value="{{ old('resident_permit_fee', $form->resident_permit_fee) }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
-                </div>
-                <div>
-                    <label class="block text-xs font-bold text-gray-600 uppercase mb-1">Text Book</label>
-                    <input type="number" step="0.01" name="text_book_fee" value="{{ old('text_book_fee', $form->text_book_fee) }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
-                </div>
-                <div>
-                    <label class="block text-xs font-bold text-gray-600 uppercase mb-1">Deposit</label>
-                    <input type="number" step="0.01" name="deposit_fee" value="{{ old('deposit_fee', $form->deposit_fee) }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
-                </div>
-                <div>
-                    <label class="block text-xs font-bold text-gray-600 uppercase mb-1">Dorm Deposit</label>
-                    <input type="number" step="0.01" name="dorm_deposit" value="{{ old('dorm_deposit', $form->dorm_deposit) }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
-                </div>
-                <div>
-                    <label class="block text-xs font-bold text-gray-600 uppercase mb-1">Others</label>
-                    <input type="text" name="other_fees" value="{{ old('other_fees', $form->other_fees) }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
-                </div>
+
+                {{-- Other Fees --}}
+                <div><label class="block text-xs font-bold text-gray-500 uppercase mb-1">Application Fee</label><input type="number" name="application_fee" value="{{ $form->application_fee }}" class="w-full rounded-lg border-gray-300 sm:text-sm"></div>
+                <div><label class="block text-xs font-bold text-gray-500 uppercase mb-1">Insurance Fee</label><input type="number" name="insurance_fees" value="{{ $form->insurance_fees }}" class="w-full rounded-lg border-gray-300 sm:text-sm"></div>
+                <div><label class="block text-xs font-bold text-gray-500 uppercase mb-1">Medical Fee</label><input type="number" name="medical_fees" value="{{ $form->medical_fees }}" class="w-full rounded-lg border-gray-300 sm:text-sm"></div>
+                <div><label class="block text-xs font-bold text-gray-500 uppercase mb-1">Visa/Res. Permit</label><input type="number" name="resident_permit_fee" value="{{ $form->resident_permit_fee }}" class="w-full rounded-lg border-gray-300 sm:text-sm"></div>
+                <div><label class="block text-xs font-bold text-gray-500 uppercase mb-1">Text Books</label><input type="number" name="text_book_fee" value="{{ $form->text_book_fee }}" class="w-full rounded-lg border-gray-300 sm:text-sm"></div>
+                <div><label class="block text-xs font-bold text-gray-500 uppercase mb-1">Deposit</label><input type="number" name="deposit_fee" value="{{ $form->deposit_fee }}" class="w-full rounded-lg border-gray-300 sm:text-sm"></div>
+                <div><label class="block text-xs font-bold text-gray-500 uppercase mb-1">Dorm Deposit</label><input type="number" name="dorm_deposit" value="{{ $form->dorm_deposit }}" class="w-full rounded-lg border-gray-300 sm:text-sm"></div>
+                <div><label class="block text-xs font-bold text-gray-500 uppercase mb-1">Others</label><input type="text" name="other_fees" value="{{ $form->other_fees }}" class="w-full rounded-lg border-gray-300 sm:text-sm"></div>
             </div>
         </div>
 
-        <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-            <div class="bg-gray-50 px-6 py-4 border-b border-gray-100 flex items-center">
+        {{-- 3. Scholarship Card --}}
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+            <div class="bg-gray-50 px-6 py-4 border-b border-gray-200 flex items-center">
                 <div class="bg-yellow-100 text-yellow-600 p-2 rounded-lg mr-3">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
+                    <i class="fas fa-graduation-cap"></i>
                 </div>
-                <h3 class="text-lg font-semibold text-gray-800">Scholarship Details</h3>
+                <h3 class="text-lg font-bold text-gray-800">Scholarship Information</h3>
             </div>
 
             <div class="p-6">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Coverage</label>
-                        <select name="scholarship_coverage" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
-                            <option value="">Select Coverage</option>
-                            @foreach(['Full Tuition', 'Partial Tuition', 'Dorm Fees', 'Stipend', 'Insurance', 'Others Facilities'] as $opt)
-                                <option value="{{ $opt }}" {{ old('scholarship_coverage', $form->scholarship_coverage) == $opt ? 'selected' : '' }}>{{ $opt }}</option>
+                        <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Scholarship Type</label>
+                        <input type="text" name="scholarship_type" value="{{ $form->scholarship_type }}" class="w-full rounded-lg border-gray-300 sm:text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Coverage</label>
+                        <select name="scholarship_coverage" class="w-full rounded-lg border-gray-300 sm:text-sm">
+                            <option value="">Select...</option>
+                            @foreach(['Full Tuition', 'Partial Tuition', 'Full Scholarship', 'Partial Scholarship'] as $opt)
+                                <option value="{{ $opt }}" {{ $form->scholarship_coverage == $opt ? 'selected' : '' }}>{{ $opt }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Stipend (Amount/Month)</label>
-                        <input type="number" step="0.01" name="stipend_amount" value="{{ old('stipend_amount', $form->stipend_amount) }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Other Facilities</label>
-                        <input type="text" name="scholarship_other_facilities" value="{{ old('scholarship_other_facilities', $form->scholarship_other_facilities) }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
+                        <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Stipend (Monthly)</label>
+                        <input type="text" name="stipend_amount" value="{{ $form->stipend_amount }}" class="w-full rounded-lg border-gray-300 sm:text-sm">
                     </div>
                 </div>
 
-                 <!-- Scholarship Section -->
-         <div class="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4 border border-blue-100 dark:border-blue-800 mb-6">
-            <h4 class="text-sm font-bold text-blue-800 dark:text-blue-300 mb-3 uppercase tracking-wider">Payable After Scholarship</h4>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                
-                <!-- After Scholarship Tuition with Type -->
-                <div>
-                    <label class="block text-xs text-gray-600 dark:text-gray-400 mb-1 uppercase font-bold">Tuition Fees</label>
-                    <div class="flex">
-                        <input type="number" step="0.01" name="after_scholarship_tuition_fees" value="{{ old('after_scholarship_tuition_fees', $form->after_scholarship_tuition_fees) }}" class="block w-2/3 text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 form-input rounded-l-md border-gray-300 focus:border-blue-400" placeholder="Amount">
-                        <select name="after_scholarship_tuition_fee_type" class="block w-1/3 text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 form-select rounded-r-md border-l-0 border-gray-300 focus:border-blue-400 bg-white dark:bg-gray-600">
-                            <option value="Annual" {{ old('after_scholarship_tuition_fee_type', $form->after_scholarship_tuition_fee_type) == 'Annual' ? 'selected' : '' }}>Annual</option>
-                            <option value="Semester" {{ old('after_scholarship_tuition_fee_type', $form->after_scholarship_tuition_fee_type) == 'Semester' ? 'selected' : '' }}>Semester</option>
-                        </select>
+                <div class="bg-blue-50 p-4 rounded-lg border border-blue-100">
+                    <h4 class="text-xs font-bold text-blue-700 uppercase mb-3">Payable After Scholarship</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs text-blue-600 mb-1">Tuition Fees</label>
+                            <div class="flex">
+                                <input type="number" name="after_scholarship_tuition_fees" value="{{ $form->after_scholarship_tuition_fees }}" class="w-2/3 rounded-l-lg border-blue-200 focus:ring-blue-500 sm:text-sm">
+                                <select name="after_scholarship_tuition_fee_type" class="w-1/3 rounded-r-lg border-blue-200 bg-white sm:text-sm">
+                                    <option value="Annual" {{ $form->after_scholarship_tuition_fee_type == 'Annual' ? 'selected' : '' }}>Annual</option>
+                                    <option value="Semester" {{ $form->after_scholarship_tuition_fee_type == 'Semester' ? 'selected' : '' }}>Semester</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs text-blue-600 mb-1">Dorm Fees</label>
+                            <div class="flex">
+                                <input type="number" name="after_scholarship_dorm_fees" value="{{ $form->after_scholarship_dorm_fees }}" class="w-2/3 rounded-l-lg border-blue-200 focus:ring-blue-500 sm:text-sm">
+                                <select name="after_scholarship_dorm_fee_type" class="w-1/3 rounded-r-lg border-blue-200 bg-white sm:text-sm">
+                                    <option value="Annual" {{ $form->after_scholarship_dorm_fee_type == 'Annual' ? 'selected' : '' }}>Annual</option>
+                                    <option value="Semester" {{ $form->after_scholarship_dorm_fee_type == 'Semester' ? 'selected' : '' }}>Semester</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-                <!-- After Scholarship Dorm with Type -->
-                <div>
-                    <label class="block text-xs text-gray-600 dark:text-gray-400 mb-1 uppercase font-bold">Dorm Fees</label>
-                    <div class="flex">
-                        <input type="text" name="after_scholarship_dorm_fees" value="{{ old('after_scholarship_dorm_fees', $form->after_scholarship_dorm_fees) }}" class="block w-2/3 text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 form-input rounded-l-md border-gray-300 focus:border-blue-400" placeholder="Amount">
-                         <select name="after_scholarship_dorm_fee_type" class="block w-1/3 text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 form-select rounded-r-md border-l-0 border-gray-300 focus:border-blue-400 bg-white dark:bg-gray-600">
-                            <option value="Annual" {{ old('after_scholarship_dorm_fee_type', $form->after_scholarship_dorm_fee_type) == 'Annual' ? 'selected' : '' }}>Annual</option>
-                            <option value="Semester" {{ old('after_scholarship_dorm_fee_type', $form->after_scholarship_dorm_fee_type) == 'Semester' ? 'selected' : '' }}>Semester</option>
-                        </select>
-                    </div>
-                </div>
-
-            </div>
-        </div>
             </div>
         </div>
 
-        <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-            <div class="bg-gray-50 px-6 py-4 border-b border-gray-100 flex justify-between items-center">
-                <div class="flex items-center">
-                    <div class="bg-purple-100 text-purple-600 p-2 rounded-lg mr-3">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
-                    </div>
-                    <h3 class="text-lg font-semibold text-gray-800">Additional Questions (Dynamic)</h3>
+        {{-- 4. Configuration & Policies --}}
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+            <div class="bg-gray-50 px-6 py-4 border-b border-gray-200 flex items-center">
+                <div class="bg-purple-100 text-purple-600 p-2 rounded-lg mr-3">
+                    <i class="fas fa-cogs"></i>
                 </div>
-                <button type="button" onclick="addField()" class="bg-purple-600 hover:bg-purple-700 text-white text-sm font-bold py-2 px-4 rounded-lg transition shadow-sm flex items-center">
-                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
-                    Add Question
-                </button>
-            </div>
-
-            <div class="p-6 bg-gray-50/50">
-                <div class="mb-4 p-4 bg-yellow-50 rounded-lg border border-yellow-200 text-sm text-yellow-800">
-                    <strong class="font-bold"><i class="fas fa-exclamation-circle"></i> Note:</strong> 
-                    Edit the dynamic questions specific to this offer below. Standard profile questions are already included automatically.
-                </div>
-
-                <div id="form-builder-container" class="space-y-3">
-                    </div>
-
-                <div class="mt-4 flex justify-end" id="clear-fields-btn-container" style="display: none;">
-                    <button type="button" onclick="clearFields()" class="text-red-500 hover:text-red-700 text-sm font-medium flex items-center transition">
-                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
-                        Remove All Custom Questions
-                    </button>
-                </div>
-
-                <input type="hidden" name="form_fields" id="form_fields_data" value="{{ old('form_fields', json_encode($form->form_fields)) }}">
-            </div>
-        </div>
-
-        <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-            <div class="bg-gray-50 px-6 py-4 border-b border-gray-100 flex items-center">
-                <div class="bg-red-100 text-red-600 p-2 rounded-lg mr-3">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
-                </div>
-                <h3 class="text-lg font-semibold text-gray-800">Restrictions & Policies</h3>
+                <h3 class="text-lg font-bold text-gray-800">Policies & Configuration</h3>
             </div>
 
             <div class="p-6">
+                {{-- Restrictions --}}
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Age Restriction</label>
-                        <input type="text" name="age_restriction" value="{{ old('age_restriction', $form->age_restriction) }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
+                        <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Age Limit</label>
+                        <input type="text" name="age_restriction" value="{{ $form->age_restriction }}" class="w-full rounded-lg border-gray-300 sm:text-sm">
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Country Restriction</label>
-                        <input type="text" name="country_restriction" value="{{ old('country_restriction', $form->country_restriction) }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
+                        <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Country Restrictions</label>
+                        <input type="text" name="country_restriction" value="{{ $form->country_restriction }}" class="w-full rounded-lg border-gray-300 sm:text-sm">
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                    <div class="p-4 rounded-lg border border-gray-200 bg-gray-50 flex items-center justify-between">
-                        <span class="text-sm text-gray-700 font-medium">Accept Students Currently in China?</span>
-                        <label class="relative inline-flex items-center cursor-pointer">
-                            <input type="checkbox" name="accept_in_china" value="1" {{ old('accept_in_china', $form->accept_in_china) ? 'checked' : '' }} class="sr-only peer">
-                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
-                        </label>
-                    </div>
-                    <div class="p-4 rounded-lg border border-gray-200 bg-gray-50 flex items-center justify-between">
-                        <span class="text-sm text-gray-700 font-medium">Accept Students with Previous China Study?</span>
-                        <label class="relative inline-flex items-center cursor-pointer">
-                            <input type="checkbox" name="accept_studied_in_china" value="1" {{ old('accept_studied_in_china', $form->accept_studied_in_china) ? 'checked' : '' }} class="sr-only peer">
-                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
-                        </label>
-                    </div>
+                {{-- Toggles --}}
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                    <label class="flex items-center p-3 border rounded-lg bg-gray-50 cursor-pointer hover:bg-gray-100 transition">
+                        <input type="checkbox" name="isPublished" value="1" {{ $form->isPublished ? 'checked' : '' }} class="text-blue-600 rounded focus:ring-blue-500">
+                        <span class="ml-2 text-sm font-medium text-gray-700">Published</span>
+                    </label>
+                    <label class="flex items-center p-3 border rounded-lg bg-gray-50 cursor-pointer hover:bg-gray-100 transition">
+                        <input type="checkbox" name="isActive" value="1" {{ $form->isActive ? 'checked' : '' }} class="text-blue-600 rounded focus:ring-blue-500">
+                        <span class="ml-2 text-sm font-medium text-gray-700">Active</span>
+                    </label>
+                    <label class="flex items-center p-3 border rounded-lg bg-gray-50 cursor-pointer hover:bg-gray-100 transition">
+                        <input type="checkbox" name="accept_in_china" value="1" {{ $form->accept_in_china ? 'checked' : '' }} class="text-blue-600 rounded focus:ring-blue-500">
+                        <span class="ml-2 text-sm font-medium text-gray-700">In China Accepted</span>
+                    </label>
+                    <label class="flex items-center p-3 border rounded-lg bg-gray-50 cursor-pointer hover:bg-gray-100 transition">
+                        <input type="checkbox" name="accept_studied_in_china" value="1" {{ $form->accept_studied_in_china ? 'checked' : '' }} class="text-blue-600 rounded focus:ring-blue-500">
+                        <span class="ml-2 text-sm font-medium text-gray-700">Studied in China Accepted</span>
+                    </label>
                 </div>
 
-                <!-- Service Policies & Rates (DYNAMIC SECTION) -->
-        <div class="border-t border-gray-200 dark:border-gray-700 pt-6 mb-6">
-            <h4 class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
-                Service Policy & Rates
-            </h4>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Policy Selection -->
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-400 mb-3">Available Policies</label>
-                    <div class="space-y-3">
-                        <label class="flex items-center space-x-3 cursor-pointer">
-                            <input type="checkbox" id="check_exclusive" name="has_exclusive_service_policy" value="1" {{ old('has_exclusive_service_policy', $form->has_exclusive_service_policy) ? 'checked' : '' }} 
-                                   class="rounded text-purple-600 focus:ring-purple-500 h-5 w-5 border-gray-300 dark:bg-gray-700 dark:border-gray-600"
-                                   onchange="toggleRates()">
-                            <span class="text-gray-700 dark:text-gray-300 font-medium">Exclusive Service Policy</span>
-                        </label>
-
-                        <label class="flex items-center space-x-3 cursor-pointer">
-                            <input type="checkbox" id="check_premium" name="has_premium_service_policy" value="1" {{ old('has_premium_service_policy', $form->has_premium_service_policy) ? 'checked' : '' }} 
-                                   class="rounded text-purple-600 focus:ring-purple-500 h-5 w-5 border-gray-300 dark:bg-gray-700 dark:border-gray-600"
-                                   onchange="toggleRates()">
-                            <span class="text-gray-700 dark:text-gray-300 font-medium">Premium Service Policy</span>
-                        </label>
-                    </div>
-                </div>
-
-                <!-- Dynamic Inputs Container -->
-                <div class="space-y-4">
-                    
-                    <!-- Exclusive Rates Inputs -->
-                    <div id="exclusive_rates" class="bg-purple-50 dark:bg-gray-700 p-4 rounded-lg border border-purple-100 dark:border-gray-600 hidden transition-all">
-                        <h5 class="text-xs font-bold text-purple-700 dark:text-purple-300 uppercase mb-3">Exclusive Policy Rates</h5>
-                        <div class="grid grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-xs text-gray-600 dark:text-gray-400 mb-1">Partner Rate</label>
-                                <input type="number" step="0.01" name="exclusive_partner_rate" value="{{ old('exclusive_partner_rate', $form->exclusive_partner_rate) }}" 
-                                       class="block w-full text-sm dark:bg-gray-600 dark:text-gray-200 form-input rounded border-gray-300 focus:border-purple-400">
+                {{-- Service Policies & Rates --}}
+                <div class="border-t pt-6">
+                    <h4 class="text-sm font-bold text-gray-800 uppercase mb-4">Service Policies</h4>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        {{-- Exclusive --}}
+                        <div class="bg-purple-50 p-4 rounded-lg border border-purple-100">
+                            <label class="flex items-center mb-3">
+                                <input type="checkbox" id="check_exclusive" name="has_exclusive_service_policy" value="1" {{ $form->has_exclusive_service_policy ? 'checked' : '' }} onchange="toggleRates()" class="text-purple-600 rounded">
+                                <span class="ml-2 font-bold text-purple-800">Exclusive Policy</span>
+                            </label>
+                            <div id="exclusive_rates" class="grid grid-cols-2 gap-3 {{ $form->has_exclusive_service_policy ? '' : 'hidden' }}">
+                                <div><label class="text-xs text-gray-500">Partner Rate</label><input type="number" name="exclusive_partner_rate" value="{{ $form->exclusive_partner_rate }}" class="w-full rounded text-sm border-gray-300"></div>
+                                <div><label class="text-xs text-gray-500">Student Rate</label><input type="number" name="exclusive_student_rate" value="{{ $form->exclusive_student_rate }}" class="w-full rounded text-sm border-gray-300"></div>
                             </div>
-                            <div>
-                                <label class="block text-xs text-gray-600 dark:text-gray-400 mb-1">Student Rate</label>
-                                <input type="number" step="0.01" name="exclusive_student_rate" value="{{ old('exclusive_student_rate', $form->exclusive_student_rate) }}" 
-                                       class="block w-full text-sm dark:bg-gray-600 dark:text-gray-200 form-input rounded border-gray-300 focus:border-purple-400">
+                        </div>
+
+                        {{-- Premium --}}
+                        <div class="bg-indigo-50 p-4 rounded-lg border border-indigo-100">
+                            <label class="flex items-center mb-3">
+                                <input type="checkbox" id="check_premium" name="has_premium_service_policy" value="1" {{ $form->has_premium_service_policy ? 'checked' : '' }} onchange="toggleRates()" class="text-indigo-600 rounded">
+                                <span class="ml-2 font-bold text-indigo-800">Premium Policy</span>
+                            </label>
+                            <div id="premium_rates" class="grid grid-cols-2 gap-3 {{ $form->has_premium_service_policy ? '' : 'hidden' }}">
+                                <div><label class="text-xs text-gray-500">Partner Rate</label><input type="number" name="premium_partner_rate" value="{{ $form->premium_partner_rate }}" class="w-full rounded text-sm border-gray-300"></div>
+                                <div><label class="text-xs text-gray-500">Student Rate</label><input type="number" name="premium_student_rate" value="{{ $form->premium_student_rate }}" class="w-full rounded text-sm border-gray-300"></div>
                             </div>
                         </div>
                     </div>
-
-                    <!-- Premium Rates Inputs -->
-                    <div id="premium_rates" class="bg-blue-50 dark:bg-gray-700 p-4 rounded-lg border border-blue-100 dark:border-gray-600 hidden transition-all">
-                        <h5 class="text-xs font-bold text-blue-700 dark:text-blue-300 uppercase mb-3">Premium Policy Rates</h5>
-                        <div class="grid grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-xs text-gray-600 dark:text-gray-400 mb-1">Partner Rate</label>
-                                <input type="number" step="0.01" name="premium_partner_rate" value="{{ old('premium_partner_rate', $form->premium_partner_rate) }}" 
-                                       class="block w-full text-sm dark:bg-gray-600 dark:text-gray-200 form-input rounded border-gray-300 focus:border-blue-400">
-                            </div>
-                            <div>
-                                <label class="block text-xs text-gray-600 dark:text-gray-400 mb-1">Student Rate</label>
-                                <input type="number" step="0.01" name="premium_student_rate" value="{{ old('premium_student_rate', $form->premium_student_rate) }}" 
-                                       class="block w-full text-sm dark:bg-gray-600 dark:text-gray-200 form-input rounded border-gray-300 focus:border-blue-400">
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </div>
 
+        {{-- 5. Required Documents --}}
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+            <div class="bg-gray-50 px-6 py-4 border-b border-gray-200 flex items-center">
+                <div class="bg-red-100 text-red-600 p-2 rounded-lg mr-3">
+                    <i class="fas fa-file-upload"></i>
+                </div>
+                <h3 class="text-lg font-bold text-gray-800">Required Documents</h3>
             </div>
-        </div>
-
-        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Deadline</label>
-                    <input type="date" name="deadline" value="{{ old('deadline', $form->deadline) }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
-                </div>
-                <div class="flex items-end pb-2">
-                    <label class="flex items-center space-x-3 cursor-pointer select-none">
-                        <input type="checkbox" name="isPublished" value="1" {{ old('isPublished', $form->isPublished) ? 'checked' : '' }} class="form-checkbox h-5 w-5 text-green-600 rounded focus:ring-green-500">
-                        <span class="text-gray-800 font-bold">Publish Immediately</span>
-                    </label>
-                </div>
-                <div class="flex items-end pb-2">
-                    <label class="flex items-center space-x-2 cursor-pointer">
-                        <input type="checkbox" name="isActive" value="1" {{ old('isActive', $form->isActive) ? 'checked' : '' }} class="form-checkbox h-5 w-5 text-purple-600 border-gray-300 rounded focus:ring-purple-500 dark:bg-gray-700 dark:border-gray-600">
-                        <span class="text-gray-800 font-bold">Active (Publish Form)</span>
-                    </label>
-                </div>
-            </div>
-
-            @if(isset($agents) && $agents->count() > 0)
-            <div class="mt-6">
-                <label class="block text-sm font-medium text-gray-700 mb-1">Assign to Agents (Optional)</label>
-                <select multiple name="agents[]" class="w-full rounded-lg border-gray-300 focus:border-blue-500 h-32">
-                    @foreach($agents as $agent)
-                        {{-- Assuming pivot table logic or simpler logic, adjust accordingly --}}
-                        <option value="{{ $agent->id }}">
-                            {{ $agent->name }} ({{ $agent->email }})
-                        </option>
+            <div class="p-6">
+                <p class="text-sm text-gray-500 mb-4">Check the documents that are mandatory for this application.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    @foreach($documentList as $key => $label)
+                        <label class="flex items-center p-3 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer transition">
+                            <input type="checkbox" name="required_documents[]" value="{{ $key }}" 
+                                   class="text-blue-600 rounded focus:ring-blue-500"
+                                   {{ in_array($key, $form->required_documents ?? []) ? 'checked' : '' }}>
+                            <span class="ml-2 text-sm text-gray-700">{{ $label }}</span>
+                        </label>
                     @endforeach
-                </select>
-                <p class="text-xs text-gray-500 mt-1">Hold Ctrl (Windows) or Cmd (Mac) to select multiple agents.</p>
+                </div>
             </div>
-            @endif
+        </div>
 
-            <div class="mt-8 pt-6 border-t flex justify-end space-x-4">
-                <a href="{{ route('admin.forms.index') }}" class="px-6 py-2.5 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition">Cancel</a>
-                <button type="submit" class="px-8 py-2.5 bg-green-600 hover:bg-green-700 text-white font-bold rounded-lg shadow-md hover:shadow-lg transition duration-200 transform hover:-translate-y-0.5">
-                    Update Admission Form
+        {{-- 6. Dynamic Form Builder --}}
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+            <div class="bg-gray-50 px-6 py-4 border-b border-gray-200 flex justify-between items-center">
+                <div class="flex items-center">
+                    <div class="bg-pink-100 text-pink-600 p-2 rounded-lg mr-3">
+                        <i class="fas fa-list-ul"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-800">Custom Questions</h3>
+                </div>
+                <button type="button" onclick="addField()" class="bg-pink-600 hover:bg-pink-700 text-white text-sm font-bold py-2 px-4 rounded-lg shadow-sm transition">
+                    <i class="fas fa-plus mr-1"></i> Add Question
                 </button>
             </div>
+            
+            <div class="p-6 bg-gray-50">
+                <div id="form-builder-container" class="space-y-3">
+                    {{-- JS renders items here --}}
+                </div>
+                <input type="hidden" name="form_fields" id="form_fields_data" value="{{ old('form_fields', json_encode($form->form_fields)) }}">
+                
+                <div id="empty-msg" class="text-center text-gray-400 italic py-6">
+                    No custom questions added.
+                </div>
+                
+                <div class="mt-4 flex justify-end">
+                    <button type="button" onclick="clearFields()" id="clear-btn" class="text-red-500 text-sm hover:underline hidden">Remove All</button>
+                </div>
+            </div>
+        </div>
+
+        {{-- Footer Actions --}}
+        <div class="flex justify-end pt-6 border-t border-gray-200">
+            <a href="{{ route('admin.forms.index') }}" class="mr-4 px-6 py-3 text-gray-700 font-bold hover:bg-gray-100 rounded-lg transition">Cancel</a>
+            <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg shadow-lg transition transform hover:-translate-y-0.5">
+                Save Changes
+            </button>
         </div>
     </form>
 </div>
 
-{{-- JavaScript for Dynamic Form Builder --}}
+{{-- JAVASCRIPT --}}
 <script>
+    // --- 1. Service Policy Logic ---
+    function toggleRates() {
+        const exclusive = document.getElementById('check_exclusive');
+        const premium = document.getElementById('check_premium');
+        
+        document.getElementById('exclusive_rates').classList.toggle('hidden', !exclusive.checked);
+        document.getElementById('premium_rates').classList.toggle('hidden', !premium.checked);
+    }
+    // Run on load
+    document.addEventListener('DOMContentLoaded', toggleRates);
+
+    // --- 2. Dynamic Form Builder Logic ---
     let fields = [];
 
     document.addEventListener('DOMContentLoaded', function () {
         const oldData = document.getElementById('form_fields_data').value;
-        if (oldData) {
+        if (oldData && oldData !== "null") {
             try {
-                // Handle case where data might be double encoded or empty string
                 let parsed = JSON.parse(oldData);
-                // If it was stored as a string in DB, parse again
-                if (typeof parsed === 'string') {
-                    parsed = JSON.parse(parsed);
-                }
-                
+                // Handle double encoding if necessary
+                if (typeof parsed === 'string') parsed = JSON.parse(parsed);
                 if (Array.isArray(parsed)) {
                     fields = parsed;
                     renderFields();
                 }
-            } catch (e) {
-                console.error("Error parsing form data", e);
-            }
+            } catch (e) { console.error("JSON Parse Error", e); }
         }
-        updateClearButton();
     });
 
     function addField() {
-        const label = prompt("Enter Question/Label (e.g., 'Why choose this major?'):");
-        if (!label || label.trim() === "") return;
+        const label = prompt("Enter Question Label (e.g., 'Why do you want to join?'):");
+        if (!label) return;
 
-        const type = prompt("Enter Field Type (text, email, number, date, textarea, file):", "text");
-        const validTypes = ['text', 'email', 'number', 'date', 'textarea', 'file'];
-        const finalType = validTypes.includes(type) ? type : 'text';
+        const type = prompt("Type (text, textarea, file, date):", "text");
+        // Simple name generation
+        const name = label.toLowerCase().replace(/[^a-z0-9]/g, '_') + '_' + Math.floor(Math.random() * 1000);
 
-        const name = label.toLowerCase().replace(/[^a-z0-9]/g, '_').substring(0, 20) + '_' + Date.now();
-
-        fields.push({
-            label: label,
-            name: name,
-            type: finalType,
-            required: true
-        });
-
+        fields.push({ label: label, name: name, type: type || 'text' });
         renderFields();
     }
 
     function removeField(index) {
-        if(confirm("Remove this question?")) {
+        if(confirm("Delete this question?")) {
             fields.splice(index, 1);
             renderFields();
         }
     }
 
     function clearFields() {
-        if(confirm("Are you sure you want to remove all custom questions?")) {
+        if(confirm("Clear all custom questions?")) {
             fields = [];
             renderFields();
         }
@@ -496,75 +411,34 @@
     function renderFields() {
         const container = document.getElementById('form-builder-container');
         const hiddenInput = document.getElementById('form_fields_data');
-        
+        const emptyMsg = document.getElementById('empty-msg');
+        const clearBtn = document.getElementById('clear-btn');
+
         container.innerHTML = '';
-        
+
         if (fields.length === 0) {
-            container.innerHTML = '<div class="text-center text-gray-400 py-4 italic">No custom questions added yet.</div>';
+            emptyMsg.style.display = 'block';
+            clearBtn.style.display = 'none';
         } else {
+            emptyMsg.style.display = 'none';
+            clearBtn.style.display = 'inline-block';
+
             fields.forEach((field, index) => {
-                const div = document.createElement('div');
-                div.className = 'flex items-center justify-between bg-white p-3 rounded border border-gray-200 shadow-sm hover:shadow-md transition-shadow';
-                div.innerHTML = `
-                    <div class="flex items-center">
-                        <div class="h-8 w-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 font-bold mr-3 text-xs">
-                            ${index + 1}
-                        </div>
-                        <div>
-                            <p class="font-semibold text-gray-800 text-sm">${field.label}</p>
-                            <div class="flex items-center space-x-2 mt-1">
-                                <span class="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded uppercase font-bold tracking-wide">${field.type}</span>
-                                ${field.required ? '<span class="text-xs text-red-500 font-medium">*Required</span>' : '<span class="text-xs text-gray-400">Optional</span>'}
-                            </div>
-                        </div>
+                const row = document.createElement('div');
+                row.className = 'flex items-center justify-between bg-white p-4 rounded-lg border border-gray-200 shadow-sm';
+                row.innerHTML = `
+                    <div>
+                        <span class="text-xs font-bold bg-gray-100 text-gray-600 px-2 py-1 rounded uppercase mr-2">${field.type}</span>
+                        <span class="font-medium text-gray-800">${field.label}</span>
                     </div>
-                    <button type="button" onclick="removeField(${index})" class="text-red-400 hover:text-red-600 p-2 rounded hover:bg-red-50 transition">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                    <button type="button" onclick="removeField(${index})" class="text-red-400 hover:text-red-600">
+                        <i class="fas fa-trash"></i>
                     </button>
                 `;
-                container.appendChild(div);
+                container.appendChild(row);
             });
         }
-
         hiddenInput.value = JSON.stringify(fields);
-        updateClearButton();
     }
-
-    function updateClearButton() {
-        const btn = document.getElementById('clear-fields-btn-container');
-        if (fields.length > 0) {
-            btn.style.display = 'flex';
-        } else {
-            btn.style.display = 'none';
-        }
-    }
-</script>
-
-
-<script>
-    // Javascript to handle dynamic fields display
-    function toggleRates() {
-        const exclusiveCheck = document.getElementById('check_exclusive');
-        const premiumCheck = document.getElementById('check_premium');
-        const exclusiveRates = document.getElementById('exclusive_rates');
-        const premiumRates = document.getElementById('premium_rates');
-
-        if (exclusiveCheck.checked) {
-            exclusiveRates.classList.remove('hidden');
-        } else {
-            exclusiveRates.classList.add('hidden');
-        }
-
-        if (premiumCheck.checked) {
-            premiumRates.classList.remove('hidden');
-        } else {
-            premiumRates.classList.add('hidden');
-        }
-    }
-
-    // Run on load to handle old input retention or existing data
-    document.addEventListener('DOMContentLoaded', function() {
-        toggleRates();
-    });
 </script>
 @endsection

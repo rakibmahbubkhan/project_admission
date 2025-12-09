@@ -37,12 +37,12 @@
             <div class="flex items-center space-x-4">
                 <span class="text-gray-700">{{ auth()->user()->name }}</span>
 
-                <form action="{{ route('logout') }}" method="POST" class="inline">
+                <!-- <form action="{{ route('logout') }}" method="POST" class="inline">
                     @csrf
                     <button class="px-3 py-2 bg-red-600 text-white rounded">
                         Logout
                     </button>
-                </form>
+                </form> -->
             </div>
         </div>
     </header>

@@ -407,6 +407,24 @@
                 </div>
             </div>
 
+            <div class="mb-8 border-t pt-6">
+            <h3 class="text-lg font-bold text-gray-800 mb-4">Required Documents Configuration</h3>
+            <p class="text-sm text-gray-500 mb-4">Select which documents students must upload for this specific program.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                @foreach($documentList as $key => $label)
+                    <label class="flex items-center p-3 bg-gray-50 rounded border cursor-pointer hover:bg-blue-50 transition">
+                        <input type="checkbox" 
+                               name="required_documents[]" 
+                               value="{{ $key }}"
+                               class="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                               {{ in_array($key, $form->required_documents ?? []) ? 'checked' : '' }}>
+                        <span class="ml-2 text-sm text-gray-700">{{ $label }}</span>
+                    </label>
+                @endforeach
+            </div>
+        </div>
+
             <!-- @if(isset($agents) && $agents->count() > 0)
             <div class="mt-6">
                 <label class="block text-sm font-medium text-gray-700 mb-1">Assign to Agents (Optional)</label>

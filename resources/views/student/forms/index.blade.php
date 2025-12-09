@@ -117,8 +117,8 @@
                             <span>{{ ucfirst($form->teaching_language ?? $form->language ?? 'English') }}</span>
                         </div>
                         <div class="flex items-center">
-                            <i class="fas fa-tag text-gray-400 w-5"></i>
-                            <span>{{ number_format($form->application_fee ?? 0) }} {{ $form->university->currency }}</span>
+                            <i class="fa-solid fa-money-bill-1-wave"></i> &nbsp; 
+                            <span> {{ number_format($form->application_fee ?? 0) }} {{ $form->university->currency }}</span>
                         </div>
                         <div class="flex items-center col-span-2">
                             <i class="far fa-calendar-alt text-gray-400 w-5"></i>
@@ -266,39 +266,39 @@
                                     </h4>
                                     <div class="space-y-2">
                                         @if($form->application_fee) 
-                                            <div class="flex justify-between text-sm"><span class="text-gray-600">Application Fee:</span> <span class="font-semibold">${{ $form->application_fee }}</span></div> 
+                                            <div class="flex justify-between text-sm"><span class="text-gray-600">Application Fee:</span> <span class="font-semibold">{{ $form->application_fee }} {{ $form->university->currency }}</span></div> 
                                         @endif
                                         @if($form->tuition_fees) 
-                                            <div class="flex justify-between text-sm"><span class="text-gray-600">Tuition:</span> <span class="font-semibold">{{ $form->tuition_fees }}</span></div> 
+                                            <div class="flex justify-between text-sm"><span class="text-gray-600">Tuition:</span> <span class="font-semibold">{{ $form->tuition_fees }} {{ $form->university->currency }}</span></div> 
                                         @endif
                                         @if($form->dorm_fees) 
-                                            <div class="flex justify-between text-sm"><span class="text-gray-600">Dormitory:</span> <span class="font-semibold">{{ $form->dorm_fees }}</span></div> 
+                                            <div class="flex justify-between text-sm"><span class="text-gray-600">Dormitory:</span> <span class="font-semibold">{{ $form->dorm_fees }} {{ $form->university->currency }}</span></div> 
                                         @endif
                                         @if($form->deposit_fee) 
-                                            <div class="flex justify-between text-sm"><span class="text-gray-600">Deposit:</span> <span class="font-semibold">{{ $form->deposit_fee }}</span></div> 
+                                            <div class="flex justify-between text-sm"><span class="text-gray-600">Deposit:</span> <span class="font-semibold">{{ $form->deposit_fee }} {{ $form->university->currency }}</span></div> 
                                         @endif
                                         @if($form->medical_fees) 
-                                            <div class="flex justify-between text-sm"><span class="text-gray-600">Medical:</span> <span class="font-semibold">{{ $form->medical_fees }}</span></div> 
+                                            <div class="flex justify-between text-sm"><span class="text-gray-600">Medical:</span> <span class="font-semibold">{{ $form->medical_fees }} {{ $form->university->currency }}</span></div> 
                                         @endif
                                         @if($form->insurance_fees) 
-                                            <div class="flex justify-between text-sm"><span class="text-gray-600">Insurance:</span> <span class="font-semibold">{{ $form->insurance_fees }}</span></div> 
+                                            <div class="flex justify-between text-sm"><span class="text-gray-600">Insurance:</span> <span class="font-semibold">{{ $form->insurance_fees }} {{ $form->university->currency }}</span></div> 
                                         @endif
                                         @if($form->resident_permit_fee) 
-                                            <div class="flex justify-between text-sm"><span class="text-gray-600">Visa/Permit:</span> <span class="font-semibold">{{ $form->resident_permit_fee }}</span></div> 
+                                            <div class="flex justify-between text-sm"><span class="text-gray-600">Visa/Permit:</span> <span class="font-semibold">{{ $form->resident_permit_fee }} {{ $form->university->currency }}</span></div> 
                                         @endif
                                         @if($form->text_book_fee) 
-                                            <div class="flex justify-between text-sm"><span class="text-gray-600">Books:</span> <span class="font-semibold">{{ $form->text_book_fee }}</span></div> 
+                                            <div class="flex justify-between text-sm"><span class="text-gray-600">Books:</span> <span class="font-semibold">{{ $form->text_book_fee }} {{ $form->university->currency }}</span></div> 
                                         @endif
                                         @if($form->other_fees) 
-                                            <div class="flex justify-between text-sm"><span class="text-gray-600">Other Fees:</span> <span class="font-semibold">{{ $form->other_fees }}</span></div> 
+                                            <div class="flex justify-between text-sm"><span class="text-gray-600">Other Fees:</span> <span class="font-semibold">{{ $form->other_fees }} {{ $form->university->currency }}</span></div> 
                                         @endif
                                         
                                         {{-- Rates --}}
                                         @if($form->student_rate) 
-                                            <div class="flex justify-between text-sm pt-2 mt-2 border-t border-gray-100"><span class="text-gray-600">Student Rate:</span> <span class="font-semibold">{{ $form->student_rate }}</span></div> 
+                                            <div class="flex justify-between text-sm pt-2 mt-2 border-t border-gray-100"><span class="text-gray-600">Student Rate:</span> <span class="font-semibold">{{ $form->student_rate }} {{ $form->university->currency }}</span></div> 
                                         @endif
                                         @if($form->partner_rate) 
-                                            <div class="flex justify-between text-sm"><span class="text-gray-600">Partner Rate:</span> <span class="font-semibold">{{ $form->partner_rate }}</span></div> 
+                                            <div class="flex justify-between text-sm"><span class="text-gray-600">Partner Rate:</span> <span class="font-semibold">{{ $form->partner_rate }} {{ $form->university->currency }}</span></div> 
                                         @endif
                                     </div>
                                 </div>
@@ -319,10 +319,10 @@
                                                 <div><span class="text-blue-600 font-medium">Coverage:</span> <span class="text-gray-700">{{ $form->scholarship_coverage }}</span></div>
                                             @endif
                                             @if($form->stipend_amount)
-                                                <div><span class="text-blue-600 font-medium">Stipend:</span> <span class="text-gray-700">{{ $form->stipend_amount }}</span></div>
+                                                <div><span class="text-blue-600 font-medium">Stipend:</span> <span class="text-gray-700">{{ $form->stipend_amount }} {{ $form->university->currency }}</span></div>
                                             @endif
-                                            @if($form->after_scholarship_tuition_fees)
-                                                <div><span class="text-blue-600 font-medium">Tuition after Scholarship:</span> <span class="text-green-600 font-bold">{{ $form->after_scholarship_tuition_fees }}</span></div>
+                                            @if($form->after_scholarship_tuition_fees) 
+                                                <div><span class="text-blue-600 font-medium">Tuition after Scholarship:</span> <span class="text-green-600 font-bold">{{ $form->after_scholarship_tuition_fees }} {{ $form->university->currency }}</span></div>
                                             @endif
                                         </div>
                                     </div>

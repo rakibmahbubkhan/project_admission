@@ -57,7 +57,7 @@
                 <div class="text-sm text-gray-500 space-y-1 mb-4">
                     <p><i class="fas fa-language w-5"></i> {{ $form->teaching_language ?? 'English' }}</p>
                     <p><i class="fas fa-map-marker-alt w-5"></i> {{ $form->location ?? 'China' }}</p>
-                    <p><i class="fas fa-yen-sign w-5"></i> {{ $form->tuition_fees ?? 'N/A' }} / year</p>
+                    <p><i class="fa-solid fa-money-bill-1-wave"></i> {{ $form->tuition_fees ?? 'N/A' }} {{ $form->university->currency }} / year</p>
                 </div>
             </div>
 
