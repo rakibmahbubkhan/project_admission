@@ -62,7 +62,7 @@ class AdmissionForm extends Model
 
     protected $casts = [
         'form_fields' => 'array',
-        'required_documents' => 'array', // <--- Add this casting
+        'required_documents' => 'array',
         'isPublished' => 'boolean',
         'isActive' => 'boolean',
         'accept_in_china' => 'boolean',

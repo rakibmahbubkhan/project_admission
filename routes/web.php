@@ -149,22 +149,36 @@ Route::middleware(['auth', 'role:student'])->prefix('student')->name('student.')
     Route::put('/profile', [StudentProfileController::class, 'update'])->name('profile.update');
     
     // Forms & Applications
-    
+    // Route::get('/forms', [StudentApplicationController::class, 'index'])->name('forms');
+    // Route::get('/forms/{id}', [StudentApplicationController::class, 'show'])->name('forms.show');
+    // Route::get('/forms/{id}/apply', [StudentApplicationController::class, 'apply'])->name('forms.apply');
+    // Route::post('/forms/{id}/apply', [StudentApplicationController::class, 'submit'])->name('forms.submit');
+
 
     Route::get('/forms', [StudentApplicationController::class, 'index'])->name('forms');
     Route::get('/forms/{id}', [StudentApplicationController::class, 'show'])->name('forms.show');
-    Route::get('/forms/{id}/apply', [StudentApplicationController::class, 'apply'])->name('forms.apply');
-    Route::post('/forms/{id}/apply', [StudentApplicationController::class, 'submit'])->name('forms.submit');
+    Route::get('/forms/{form_id}/apply', [StudentApplicationController::class, 'apply'])->name('forms.apply');
+    Route::post('/forms/{form_id}/apply', [StudentApplicationController::class, 'submit'])->name('forms.submit');
+    
+    // Applications History
+    Route::get('/submissions', [StudentApplicationController::class, 'submissions'])->name('forms.submissions');
+    
+    // Edit/Update Drafts - Use PUT method with consistent naming
+    Route::get('/submissions/{submission}/edit', [StudentApplicationController::class, 'editSubmission'])->name('submissions.edit');
+    Route::put('/submissions/{submission}', [StudentApplicationController::class, 'updateSubmission'])->name('submissions.update');
 
-    // Route::get('/forms/{form}/apply', [StudentApplicationController::class, 'apply'])->name('forms.apply');
-    // Route::post('/forms/{form}/submit', [StudentApplicationController::class, 'submit'])->name('forms.submit');
+
+
+
     
     // Applications History
     Route::get('/applications', [StudentApplicationController::class, 'applications'])->name('applications');
     Route::get('/submissions', [StudentApplicationController::class, 'submissions'])->name('forms.submissions');
-    // NEW: Edit/Update Drafts
-    Route::get('/submissions/{id}/edit', [StudentApplicationController::class, 'editSubmission'])->name('submissions.edit');
-    Route::post('/submissions/{id}/update', [StudentApplicationController::class, 'updateSubmission'])->name('submissions.update');
+    
+    // Edit/Update Drafts - FIXED: Changed to PUT method
+    // Route::get('/submissions/{id}/edit', [StudentApplicationController::class, 'editSubmission'])->name('submissions.edit');
+    // Route::post('/submissions/{id}', [StudentApplicationController::class, 'updateSubmission'])->name('submissions.update');
+    
     Route::get('/history', [StudentController::class, 'history'])->name('history');
     
     // Notifications

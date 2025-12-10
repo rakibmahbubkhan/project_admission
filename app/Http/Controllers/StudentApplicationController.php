@@ -8,13 +8,16 @@ use App\Models\FormSubmission;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Http\UploadedFile;
 
 class StudentApplicationController extends Controller
 {
     public function index(Request $request)
     {
         $query = AdmissionForm::with('university')
+            ->where('isPublished', 1)
             ->where(function ($q) {
                 $q->whereNull('deadline')->orWhereDate('deadline', '>=', now());
             });
@@ -36,7 +39,9 @@ class StudentApplicationController extends Controller
         $form = AdmissionForm::with('university')->findOrFail($form_id);
         $student = Auth::user()->student ?? Student::create(['user_id' => Auth::id()]);
         
-        // Check for existing draft to resume
+        $fields = $this->decodeFields($form->form_fields);
+        
+        // Resume Draft Logic
         $existingDraft = FormSubmission::where('student_id', $student->id)
             ->where('form_id', $form->id)
             ->where('status', 'draft')
@@ -47,157 +52,301 @@ class StudentApplicationController extends Controller
         }
 
         $customFields = $this->getCustomFields($form);
-        return view('student.forms.apply', compact('form', 'student', 'customFields'));
+        return view('student.forms.apply', compact('form', 'student', 'fields', 'customFields'));
     }
 
+    // ========== CREATE NEW SUBMISSION ==========
     public function submit(Request $request, $form_id)
     {
         $form = AdmissionForm::findOrFail($form_id);
         $student = Auth::user()->student;
+        
+        $fields = $this->decodeFields($form->form_fields);
+        $requiredDocs = $form->required_documents ?? [];
 
         $action = $request->input('action');
         $status = ($action === 'draft') ? 'draft' : 'pending';
 
-        if ($status === 'pending') {
-            $request->validate([
-                'given_name' => 'required',
-                'surname' => 'required',
-            ]);
+        // 1. Validation
+        $this->validateRequest($request, $fields, $requiredDocs, $status);
+
+        // 2. Process Files & Data
+        $newDocuments = $this->processDocuments($request, $form->id);
+        $dynamicData = $this->processDynamicFields($request, $fields);
+        $standardData = $this->getStandardFields($request);
+
+        // 3. Update Student Profile (if submitted)
+        if ($status !== 'draft') {
+            $student->update($standardData);
         }
 
-        // 1. Update Student Profile
-        $phone = $request->input('full_phone') ?: $request->input('mobile');
-        
-        $student->update([
-            'given_name' => $request->given_name,
-            'surname' => $request->surname,
-            'gender' => $request->gender,
-            'phone' => $phone,
-            'email' => $request->email,
-            'nationality' => $request->nationality,
-            'street' => $request->street,
-            'city' => $request->city,
-            'country' => $request->country,
-            'zip_code' => $request->zip_code,
-            'dob' => $request->dob,
-            'sponsor_info' => $request->sponsor,
-            'parents_info' => $request->parents,
-            'education_background' => $request->education,
-            'work_experience' => $request->work,
-            'other_info' => $request->other,
-            'passport_number' => $request->passport_number,
-            'passport_expiry_date' => $request->passport_expiry_date,
-            'marital_status' => $request->marital_status,
-            'religion' => $request->religion,
-            'in_china' => $request->has('in_china'),
-            'in_china_from' => $request->in_china_from,
-            'in_china_institute' => $request->in_china_institute,
-            'studied_in_china' => $request->has('studied_in_china'),
-            'studied_in_china_from' => $request->studied_in_china_from,
-            'studied_in_china_institute' => $request->studied_in_china_institute,
+        // 4. Prepare Submission Data
+        $submissionData = array_merge($standardData, [
+            'programme' => [
+                'type' => $request->input('program_type'),
+                'major' => $request->input('major'),
+                'degree' => $request->input('degree'),
+            ],
+            'service_policy' => $request->input('service_policy'),
+            'documents' => $newDocuments, // Saves the newly processed documents
+            'custom_fields' => $request->input('custom_fields', []),
+            'dynamic_fields' => $dynamicData,
         ]);
 
-        // 2. Retrieve Existing Draft (Logic Fix)
-        // We prioritize finding a draft specifically for this student and form.
-        $submission = FormSubmission::where('student_id', $student->id)
-                                    ->where('form_id', $form->id)
-                                    ->where('status', 'draft')
-                                    ->first();
-
-        // 3. Document Logic (Fixed for Array Overwriting)
-        // Load existing documents or initialize empty array
-        $documents = $submission ? ($submission->answers['documents'] ?? []) : [];
-        
-        if ($request->hasFile('documents')) {
-            foreach ($request->file('documents') as $category => $files) {
-                // IMPORTANT: 'files' is an array because input is documents[key][].
-                // We ensure it is treated as an array.
-                $fileList = is_array($files) ? $files : [$files];
-
-                foreach ($fileList as $file) {
-                    // Save file to storage
-                    $path = $file->store('submissions/docs/' . $student->id, 'public');
-
-                    // Initialize array for this category if missing
-                    if (!isset($documents[$category])) {
-                        $documents[$category] = [];
-                    }
-
-                    // Convert legacy single-string data to array if necessary
-                    if (!is_array($documents[$category])) {
-                        $documents[$category] = [$documents[$category]];
-                    }
-
-                    // Append the new file path
-                    $documents[$category][] = $path;
-                }
-            }
-        }
-
-        $submissionData = [
-            'programme' => [
-                'type' => $request->program_type,
-                'major' => $request->major,
-                'degree' => $request->degree,
-            ],
-            'service_policy' => $request->service_policy,
-            'documents' => $documents,
-            'custom_fields' => $request->input('custom_fields', [])
-        ];
-
-        if ($submission) {
-            $submission->update([
-                'answers' => $submissionData,
-                'status' => $status,
-            ]);
-        } else {
-            FormSubmission::create([
-                'form_id' => $form->id,
-                'student_id' => $student->id,
-                'university_id' => $form->university_id,
-                'answers' => $submissionData,
-                'status' => $status,
-            ]);
-        }
+        // 5. Create Record
+        FormSubmission::create([
+            'form_id' => $form->id,
+            'student_id' => $student->id,
+            'university_id' => $form->university_id,
+            'answers' => $submissionData,
+            'status' => $status,
+            'fee_paid' => 0,
+            'data' => $submissionData,
+        ]);
 
         $msg = ($status === 'draft') ? 'Application saved as draft.' : 'Application submitted successfully!';
         return redirect()->route('student.forms.submissions')->with('success', $msg);
     }
 
+    // ========== EDIT DRAFT ==========
     public function editSubmission($id)
     {
         $submission = FormSubmission::where('id', $id)
             ->where('student_id', Auth::user()->student->id)
-            ->where('status', 'draft')
             ->with('form.university')
             ->firstOrFail();
 
-        $form = $submission->form;
-        $student = $submission->student;
-        $customFields = $this->getCustomFields($form);
-
-        return view('student.forms.apply', compact('form', 'student', 'submission', 'customFields'));
-    }
-
-    public function updateSubmission(Request $request, $id)
-    {
-        // Simply forward to submit method.
-        // The submit method handles finding the correct draft logic.
-        $submission = FormSubmission::findOrFail($id);
-        
-        // Ensure action defaults to draft if not clicked specifically
-        if(!$request->has('action')) {
-            $request->merge(['action' => 'draft']);
+        if ($submission->status !== 'draft') {
+            return redirect()->route('student.forms.show', $id)->with('error', 'Cannot edit submitted application.');
         }
 
-        return $this->submit($request, $submission->form_id);
+        $form = $submission->form;
+        $student = $submission->student;
+
+        // Populate student object with saved draft data so the view shows it
+        if (!empty($submission->answers)) {
+            $student->forceFill(collect($submission->answers)->only($student->getFillable())->toArray());
+        }
+
+        $fields = $this->decodeFields($form->form_fields);
+        $customFields = $this->getCustomFields($form);
+
+        return view('student.forms.apply', compact('form', 'student', 'submission', 'fields', 'customFields'));
+    }
+
+    // ========== UPDATE SUBMISSION ==========
+    public function updateSubmission(Request $request, $id)
+    {
+        $submission = FormSubmission::where('id', $id)
+            ->where('student_id', Auth::user()->student->id)
+            ->firstOrFail();
+        
+        $form = $submission->form;
+        $student = Auth::user()->student;
+        
+        $fields = $this->decodeFields($form->form_fields);
+        $requiredDocs = $form->required_documents ?? [];
+
+        $action = $request->input('action');
+        $status = ($action === 'draft') ? 'draft' : 'pending';
+
+        $existingAnswers = $submission->answers ?? [];
+        $existingDocs = $existingAnswers['documents'] ?? [];
+
+        // 1. Validation
+        $this->validateRequest($request, $fields, $requiredDocs, $status, $existingDocs);
+
+        // 2. Process New Files
+        $newDocuments = $this->processDocuments($request, $form->id);
+        $newDynamicData = $this->processDynamicFields($request, $fields);
+
+        // 3. Smart Merge Documents: Keep existing unless new ones are uploaded
+        $mergedDocuments = $existingDocs;
+        foreach ($newDocuments as $key => $paths) {
+            // If we have new files for this key, append them or create the key
+            if (!empty($paths)) {
+                if (!isset($mergedDocuments[$key])) {
+                    $mergedDocuments[$key] = [];
+                }
+                $mergedDocuments[$key] = array_merge($mergedDocuments[$key], $paths);
+            }
+        }
+
+        // 4. Merge Dynamic Fields
+        $mergedDynamicData = array_merge($existingAnswers['dynamic_fields'] ?? [], $newDynamicData);
+
+        // 5. Collect Standard Data
+        $standardData = $this->getStandardFields($request);
+
+        // 6. Update Student Profile (if submitted)
+        if ($status !== 'draft') {
+            $student->update($standardData);
+        }
+
+        // 7. Prepare & Save
+        $submissionData = array_merge($standardData, [
+            'programme' => [
+                'type' => $request->input('program_type', $existingAnswers['programme']['type'] ?? null),
+                'major' => $request->input('major', $existingAnswers['programme']['major'] ?? null),
+                'degree' => $request->input('degree', $existingAnswers['programme']['degree'] ?? null),
+            ],
+            'service_policy' => $request->input('service_policy', $existingAnswers['service_policy'] ?? null),
+            'documents' => $mergedDocuments,
+            'custom_fields' => $request->input('custom_fields', $existingAnswers['custom_fields'] ?? []),
+            'dynamic_fields' => $mergedDynamicData,
+        ]);
+
+        $submission->update([
+            'answers' => $submissionData,
+            'status' => $status,
+            'data' => $submissionData,
+        ]);
+
+        $msg = ($status === 'draft') ? 'Application saved as draft.' : 'Application updated successfully!';
+        return redirect()->route('student.forms.submissions')->with('success', $msg);
+    }
+
+    // ========== HELPER FUNCTIONS ==========
+
+    private function validateRequest(Request $request, $fields, $requiredDocs, $status, $existingDocs = [])
+    {
+        $validated = [];
+
+        // Standard Rules
+        if ($status !== 'draft') {
+            $validated['given_name'] = 'required|string|max:255';
+            $validated['surname'] = 'required|string|max:255';
+            $validated['email'] = 'required|email';
+            $validated['passport_number'] = 'required';
+        }
+
+        // Dynamic Fields Rules
+        foreach ($fields as $field) {
+            $name = $field['name'];
+            $type = $field['type'];
+            $required = $field['required'] ?? false;
+
+            $rule = [];
+            if ($required && $status !== 'draft') $rule[] = 'required';
+            
+            if ($type === 'file') {
+                $rule[] = 'file|mimes:jpg,jpeg,png,pdf|max:2048';
+            } elseif ($type === 'email') {
+                $rule[] = 'email';
+            }
+
+            if (!empty($rule)) {
+                $validated[$name] = implode('|', $rule);
+            }
+        }
+
+        // Document Rules
+        if ($status !== 'draft' && !empty($requiredDocs)) {
+            $validated['documents'] = 'nullable|array'; 
+            
+            foreach ($requiredDocs as $docKey) {
+                // Only require if NOT in DB already
+                if (empty($existingDocs[$docKey])) {
+                     $validated["documents.{$docKey}"] = 'required';
+                }
+            }
+        }
+
+        // Validate ANY uploaded file strictly
+        $validated['documents.*.*'] = 'file|mimes:jpg,jpeg,png,pdf|max:2048';
+
+        $request->validate($validated);
+    }
+
+    private function processDocuments(Request $request, $formId)
+    {
+        $paths = [];
+        
+        // Use allFiles() to ensure we get the array even if validation was skipped or loose
+        $allFiles = $request->allFiles();
+        $documentInput = $allFiles['documents'] ?? [];
+
+        foreach ($documentInput as $key => $content) {
+            // $content might be a single UploadedFile or an array of them
+            // Normalize to array
+            $filesToProcess = is_array($content) ? $content : [$content];
+
+            foreach ($filesToProcess as $file) {
+                if ($file instanceof UploadedFile && $file->isValid()) {
+                    $path = $file->store("applications/{$formId}/{$key}", 'public');
+                    $paths[$key][] = 'storage/' . $path;
+                }
+            }
+        }
+        
+        return $paths;
+    }
+
+    private function processDynamicFields(Request $request, $fields)
+    {
+        $data = [];
+        foreach ($fields as $field) {
+            $name = $field['name'];
+            $type = $field['type'];
+
+            if ($type === 'file' && $request->hasFile($name)) {
+                $path = $request->file($name)->store('student_uploads', 'public');
+                $data[$name] = 'storage/' . $path;
+            } elseif ($request->has($name)) {
+                $data[$name] = $request->input($name);
+            }
+        }
+        return $data;
+    }
+
+    private function getStandardFields(Request $request)
+    {
+        // Map Input Names to Database Columns
+        $map = [
+            'surname' => 'surname', 'given_name' => 'given_name', 'gender' => 'gender',
+            'dob' => 'dob', 'nationality' => 'nationality', 'religion' => 'religion',
+            'passport_number' => 'passport_number', 'passport_expiry_date' => 'passport_expiry_date',
+            'marital_status' => 'marital_status', 'native_language' => 'native_language',
+            'street' => 'street', 'city' => 'city', 'country' => 'country', 'zip_code' => 'zip_code',
+            'email' => 'email', 
+            'sponsor' => 'sponsor_info', 'parents' => 'parents_info',
+            'education' => 'education_background', 'work' => 'work_experience', 
+            'other' => 'other_info',
+            'in_china_from' => 'in_china_from', 'in_china_institute' => 'in_china_institute',
+            'studied_in_china_from' => 'studied_in_china_from', 
+            'studied_in_china_institute' => 'studied_in_china_institute',
+        ];
+
+        $data = [];
+        foreach ($map as $input => $column) {
+            if ($request->has($input)) {
+                $data[$column] = $request->input($input);
+            }
+        }
+
+        $data['in_china'] = $request->has('in_china');
+        $data['studied_in_china'] = $request->has('studied_in_china');
+
+        if ($request->filled('full_phone')) {
+            $data['phone'] = $request->input('full_phone');
+        } elseif ($request->filled('phone')) {
+            $data['phone'] = $request->input('phone');
+        }
+
+        return $data;
+    }
+
+    private function decodeFields($fields)
+    {
+        if (is_string($fields)) {
+            return json_decode($fields, true) ?? [];
+        }
+        return $fields ?? [];
     }
 
     private function getCustomFields($form)
     {
-        $rawFields = $form->form_fields ?? [];
-        if (is_string($rawFields)) $rawFields = json_decode($rawFields, true) ?? [];
-        
+        $rawFields = $this->decodeFields($form->form_fields);
         $reservedKeywords = ['name', 'surname', 'email', 'phone', 'address'];
 
         return collect($rawFields)->map(function($field) {
@@ -214,6 +363,7 @@ class StudentApplicationController extends Controller
         })->toArray();
     }
 
+
     public function submissions()
     {
         $submissions = FormSubmission::where('student_id', Auth::user()->student->id)
@@ -221,5 +371,16 @@ class StudentApplicationController extends Controller
             ->latest()
             ->get();
         return view('student.forms.submissions', compact('submissions'));
+    }
+
+    public function show($id)
+    {
+        $form = AdmissionForm::with('university')->findOrFail($id);
+        return view('student.forms.show', compact('form'));
+    }
+
+    public function applications()
+    {
+        return $this->submissions();
     }
 }

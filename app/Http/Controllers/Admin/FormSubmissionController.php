@@ -97,7 +97,7 @@ class FormSubmissionController extends Controller
         return [
             'pending' => 'Pending',
             'processing' => 'Processing',
-            'correct_and_resubmit' => 'Correct and Resubmit',
+            'draft' => 'Correct and Resubmit',
             'pay_application_fees' => 'Pay Application Fees',
             'pay_required_deposit' => 'Pay Required Deposit',
             'passed_initial_review' => 'Passed Initial Review',

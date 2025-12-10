@@ -13,6 +13,8 @@ class FormSubmission extends Model
         'form_id',
         'answers',
         'status',
+        'commission',
+        'commission_paid',
     ];
 
     protected $casts = [

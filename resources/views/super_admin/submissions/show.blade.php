@@ -77,7 +77,16 @@
                     <div class="text-right">
                         <div class="w-32 h-32 border-2 border-dashed border-gray-300 flex items-center justify-center bg-gray-50">
                             @if(isset($submission->answers['documents']['photo']))
-                                <img src="{{ asset($submission->answers['documents']['photo']) }}" class="w-full h-full object-cover">
+                                {{-- Handle photo specifically (take first if array) --}}
+                                @php 
+                                    $photo = $submission->answers['documents']['photo'];
+                                    $photoPath = is_array($photo) ? ($photo[0] ?? null) : $photo;
+                                @endphp
+                                @if($photoPath)
+                                    <img src="{{ asset($photoPath) }}" class="w-full h-full object-cover">
+                                @else
+                                    <span class="text-gray-400 text-xs text-center">No Photo</span>
+                                @endif
                             @else
                                 <span class="text-gray-400 text-xs text-center">Applicant<br>Photo</span>
                             @endif
@@ -281,21 +290,39 @@
                     <h3 class="text-lg font-bold text-blue-800 border-b-2 border-blue-800 mb-4 pb-1 uppercase">8. Attached Documents</h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                         @if(isset($submission->answers['documents']) && is_array($submission->answers['documents']))
-                            @foreach($submission->answers['documents'] as $key => $path)
-                                <div class="flex items-center p-2 border rounded bg-gray-50 no-print">
-                                    <i class="fas fa-file-pdf text-red-500 mr-2"></i>
-                                    <div class="overflow-hidden">
-                                        <p class="text-xs font-bold text-gray-700 uppercase truncate">{{ str_replace('_', ' ', $key) }}</p>
-                                        <div class="flex gap-2 text-xs mt-1">
-                                            <a href="{{ asset($path) }}" target="_blank" class="text-blue-600 hover:underline">View</a>
-                                            <span class="text-gray-300">|</span>
-                                            <a href="{{ asset($path) }}" download class="text-green-600 hover:underline">Download</a>
-                                        </div>
+                            @foreach($submission->answers['documents'] as $key => $files)
+                                @php
+                                    // Handle both legacy string format and new array format
+                                    $fileList = is_array($files) ? $files : [$files];
+                                @endphp
+
+                                <div class="flex flex-col p-3 border rounded bg-gray-50 no-print h-full">
+                                    <div class="flex items-center mb-2">
+                                        <i class="fas fa-folder text-blue-500 mr-2"></i>
+                                        <p class="text-xs font-bold text-gray-700 uppercase truncate" title="{{ str_replace('_', ' ', $key) }}">
+                                            {{ str_replace('_', ' ', $key) }}
+                                        </p>
+                                    </div>
+                                    
+                                    <div class="space-y-1 mt-auto">
+                                        @foreach($fileList as $index => $path)
+                                            @if(is_string($path) && !empty($path))
+                                                <div class="flex items-center justify-between bg-white p-1.5 rounded border">
+                                                    <span class="text-[10px] text-gray-500 truncate max-w-[80px]">File {{ $index + 1 }}</span>
+                                                    <div class="flex gap-2 text-xs">
+                                                        <a href="{{ asset($path) }}" target="_blank" class="text-blue-600 hover:underline">View</a>
+                                                        <span class="text-gray-300">|</span>
+                                                        <a href="{{ asset($path) }}" download class="text-green-600 hover:underline">DL</a>
+                                                    </div>
+                                                </div>
+                                            @endif
+                                        @endforeach
                                     </div>
                                 </div>
+
                                 {{-- Print Version of Doc List --}}
-                                <div class="hidden print:block text-sm">
-                                    <span class="font-semibold capitalize">{{ str_replace('_', ' ', $key) }}:</span> [Attached]
+                                <div class="hidden print:block text-sm mb-1">
+                                    <span class="font-semibold capitalize">{{ str_replace('_', ' ', $key) }}:</span> {{ count($fileList) }} File(s)
                                 </div>
                             @endforeach
                         @else

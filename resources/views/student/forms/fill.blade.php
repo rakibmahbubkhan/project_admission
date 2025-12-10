@@ -3,13 +3,22 @@
     {{-- Route & Data Setup --}}
     @php
         $isEdit = isset($submission);
-        $route = $submitRoute ?? ($isEdit 
-            ? route('student.submissions.update', $submission->id) 
-            : route('student.forms.submit', $form->id));
-        $answers = $isEdit ? $submission->answers : [];
+        
+        // Calculate route based on context
+        if($isEdit) {
+            // When editing, use update route with submission ID
+            $route = route('student.submissions.update', $submission->id);
+        } else {
+            // When creating new, use submit route with form ID
+            $route = route('student.forms.submit', $form->id);
+        }
+        
+        // Safely access answers
+        $answers = $isEdit ? ($submission->answers ?? []) : [];
         
         // Allowed Documents Logic
         $allowedDocs = $form->required_documents ?? [];
+        
         // Standard full list
         $allDocsMap = [
             'photo' => 'Passport Photo', 
@@ -31,16 +40,26 @@
         ];
         
         // If legacy (null) show all, otherwise strictly filter
-        // If empty array, it means NONE allowed (or user didn't configure, fallback to common?)
-        // Let's assume strict: only show what is checked.
-        // Fallback for legacy data where required_documents might be null
-        if(is_null($form->required_documents)) {
-             $allowedDocs = array_keys($allDocsMap);
+        // if(is_null($form->required_documents)) {
+        //     $allowedDocs = array_keys($allDocsMap);
+        // }
+        
+        // Ensure $fields is always an array
+        $fields = $fields ?? [];
+        if(!is_array($fields)) {
+            $fields = [];
         }
+        
+        // Get existing data from answers or student
+        $existingData = $answers;
     @endphp
 
     <form action="{{ $route }}" method="POST" enctype="multipart/form-data" id="applicationForm">
         @csrf
+        @if($isEdit)
+            @method('PUT')
+        @endif
+        
         <input type="hidden" name="full_phone" id="full_phone">
 
         {{-- Progress / Header --}}
@@ -56,15 +75,20 @@
 
         <div class="p-6 md:p-8">
             
+            {{-- TABS --}}
             <div class="flex flex-wrap gap-2 mb-8 border-b border-gray-200 pb-2" id="form-tabs">
                 <button type="button" onclick="switchTab('personal', this)" class="tab-active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200">Personal</button>
                 <button type="button" onclick="switchTab('contact', this)" class="px-4 py-2 rounded-lg text-sm font-medium text-gray-500 hover:bg-gray-50 transition-all">Contact</button>
                 <button type="button" onclick="switchTab('family', this)" class="px-4 py-2 rounded-lg text-sm font-medium text-gray-500 hover:bg-gray-50 transition-all">Family</button>
                 <button type="button" onclick="switchTab('education', this)" class="px-4 py-2 rounded-lg text-sm font-medium text-gray-500 hover:bg-gray-50 transition-all">Education</button>
                 <button type="button" onclick="switchTab('documents', this)" class="px-4 py-2 rounded-lg text-sm font-medium text-gray-500 hover:bg-gray-50 transition-all">Documents</button>
+                @if(count($fields) > 0)
+                    <button type="button" onclick="switchTab('dynamic-fields', this)" class="px-4 py-2 rounded-lg text-sm font-medium text-gray-500 hover:bg-gray-50 transition-all">Additional Info</button>
+                @endif
                 <button type="button" onclick="switchTab('finish', this)" class="px-4 py-2 rounded-lg text-sm font-medium text-gray-500 hover:bg-gray-50 transition-all">Review & Submit</button>
             </div>
 
+            {{-- PERSONAL TAB --}}
             <div id="tab-personal" class="form-section animate-fade-in">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div>
@@ -78,8 +102,8 @@
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Gender</label>
                         <select name="gender" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body focus:ring-blue-500 focus:border-blue-500">
-                            <option value="Male" {{ $student->gender == 'Male' ? 'selected' : '' }}>Male</option>
-                            <option value="Female" {{ $student->gender == 'Female' ? 'selected' : '' }}>Female</option>
+                            <option value="Male" {{ old('gender', $student->gender) == 'Male' ? 'selected' : '' }}>Male</option>
+                            <option value="Female" {{ old('gender', $student->gender) == 'Female' ? 'selected' : '' }}>Female</option>
                         </select>
                     </div>
                     <div>
@@ -92,19 +116,19 @@
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Passport No.</label>
-                        <input type="text" name="passport_number" value="{{ $student->passport_number }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body focus:ring-blue-500 focus:border-blue-500">
+                        <input type="text" name="passport_number" value="{{ old('passport_number', $student->passport_number) }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body focus:ring-blue-500 focus:border-blue-500">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Passport Expiry</label>
-                        <input type="date" name="passport_expiry_date" value="{{ $student->passport_expiry_date?->format('Y-m-d') }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body focus:ring-blue-500 focus:border-blue-500">
+                        <input type="date" name="passport_expiry_date" value="{{ old('passport_expiry_date', $student->passport_expiry_date?->format('Y-m-d')) }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body focus:ring-blue-500 focus:border-blue-500">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Marital Status</label>
-                        <input type="text" name="marital_status" value="{{ $student->marital_status }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
+                        <input type="text" name="marital_status" value="{{ old('marital_status', $student->marital_status) }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Religion</label>
-                        <input type="text" name="religion" value="{{ $student->religion }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
+                        <input type="text" name="religion" value="{{ old('religion', $student->religion) }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
                     </div>
                 </div>
 
@@ -114,7 +138,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                             <label class="flex items-center space-x-2 mb-2 font-medium text-gray-700">
-                                <input type="checkbox" name="in_china" value="1" {{ $student->in_china ? 'checked' : '' }} class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                <input type="checkbox" name="in_china" value="1" {{ old('in_china', $student->in_china) ? 'checked' : '' }} class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
                                 <span>Currently in China?</span>
                             </label>
                             <div class="pl-6 space-y-2">
@@ -124,7 +148,7 @@
                         </div>
                         <div>
                             <label class="flex items-center space-x-2 mb-2 font-medium text-gray-700">
-                                <input type="checkbox" name="studied_in_china" value="1" {{ $student->studied_in_china ? 'checked' : '' }} class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                <input type="checkbox" name="studied_in_china" value="1" {{ old('studied_in_china', $student->studied_in_china) ? 'checked' : '' }} class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
                                 <span>Studied in China Before?</span>
                             </label>
                             <div class="pl-6 space-y-2">
@@ -140,23 +164,24 @@
                 </div>
             </div>
 
+            {{-- CONTACT TAB --}}
             <div id="tab-contact" class="form-section hidden animate-fade-in">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="md:col-span-2">
                         <label class="block text-sm font-medium text-gray-700 mb-1">Street Address</label>
-                        <input type="text" name="street" value="{{ $student->street }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body focus:ring-blue-500 focus:border-blue-500">
+                        <input type="text" name="street" value="{{ old('street', $student->street) }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body focus:ring-blue-500 focus:border-blue-500">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">City</label>
-                        <input type="text" name="city" value="{{ $student->city }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
+                        <input type="text" name="city" value="{{ old('city', $student->city) }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Country</label>
-                        <input type="text" name="country" value="{{ $student->country }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
+                        <input type="text" name="country" value="{{ old('country', $student->country) }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
-                        <input type="email" name="email" value="{{ $student->email }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
+                        <input type="email" name="email" value="{{ old('email', $student->email) }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
@@ -164,8 +189,12 @@
                             <select id="country_code" class="rounded-l-lg border-gray-300 bg-gray-50 text-gray-600 text-sm focus:ring-blue-500 focus:border-blue-500 min-w-[100px]">
                                 <option value="">Code</option>
                             </select>
-                            <input type="text" id="phone_number" value="{{ $student->phone }}" placeholder="12345678" class="flex-1 rounded-r-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500">
+                            <input type="text" id="phone_number" value="{{ old('phone', $student->phone) }}" placeholder="12345678" class="flex-1 rounded-r-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500">
                         </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">ZIP/Postal Code</label>
+                        <input type="text" name="zip_code" value="{{ old('zip_code', $student->zip_code) }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
                     </div>
                 </div>
 
@@ -175,12 +204,17 @@
                 </div>
             </div>
 
+           {{-- FAMILY TAB --}}
             <div id="tab-family" class="form-section hidden animate-fade-in">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     {{-- Sponsor --}}
                     <div>
                         <h3 class="text-md font-bold text-gray-800 mb-4 border-l-4 border-green-500 pl-3">Financial Sponsor</h3>
-                        @php $sponsor = $student->sponsor_info ?? []; @endphp
+                        @php 
+                            $sponsor = old('sponsor', $student->sponsor_info ?? []); 
+                            if(is_string($sponsor)) $sponsor = json_decode($sponsor, true) ?? [];
+                            if(!is_array($sponsor)) $sponsor = [];
+                        @endphp
                         <div class="space-y-4">
                             <div><label class="text-xs text-gray-500">Full Name</label><input type="text" name="sponsor[name]" value="{{ $sponsor['name'] ?? '' }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"></div>
                             <div><label class="text-xs text-gray-500">Relationship</label><input type="text" name="sponsor[relation]" value="{{ $sponsor['relation'] ?? '' }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"></div>
@@ -191,7 +225,11 @@
                     {{-- Parents --}}
                     <div>
                         <h3 class="text-md font-bold text-gray-800 mb-4 border-l-4 border-purple-500 pl-3">Parents Information</h3>
-                        @php $parents = $student->parents_info ?? []; @endphp
+                        @php 
+                            $parents = old('parents', $student->parents_info ?? []); 
+                            if(is_string($parents)) $parents = json_decode($parents, true) ?? [];
+                            if(!is_array($parents)) $parents = [];
+                        @endphp
                         
                         <div class="mb-4">
                             <p class="text-xs font-bold text-gray-400 uppercase mb-2">Father</p>
@@ -211,15 +249,52 @@
                     </div>
                 </div>
 
+                {{-- Work Experience & Other Info --}}
+                <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-md font-bold text-gray-800 mb-4 border-l-4 border-blue-500 pl-3">Work Experience</h3>
+                        @php 
+                            // FIX: Handle both string and array cases
+                            $work = old('work', $student->work_experience ?? '');
+                            if(is_array($work)) {
+                                $work = is_string($work[0] ?? '') ? $work[0] : json_encode($work);
+                            } elseif(!is_string($work)) {
+                                $work = '';
+                            }
+                        @endphp
+                        <textarea name="work" rows="4" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">{{ $work }}</textarea>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-md font-bold text-gray-800 mb-4 border-l-4 border-orange-500 pl-3">Other Information</h3>
+                        @php 
+                            // FIX: Handle both string and array cases
+                            $other = old('other', $student->other_info ?? '');
+                            if(is_array($other)) {
+                                $other = is_string($other[0] ?? '') ? $other[0] : json_encode($other);
+                            } elseif(!is_string($other)) {
+                                $other = '';
+                            }
+                        @endphp
+                        <textarea name="other" rows="4" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">{{ $other }}</textarea>
+                    </div>
+                </div>
+
                 <div class="mt-6 flex justify-between">
                     <button type="button" onclick="prevTab('contact')" class="text-gray-600 hover:text-gray-900 font-medium">Back</button>
                     <button type="button" onclick="nextTab('education')" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">Next <i class="fas fa-arrow-right ml-1"></i></button>
                 </div>
             </div>
 
+            {{-- EDUCATION TAB --}}
             <div id="tab-education" class="form-section hidden animate-fade-in">
                 <div class="space-y-4">
-                    @php $educations = $student->education_background ?? [[]]; @endphp
+                    @php 
+                        $educations = old('education', $student->education_background ?? [[]]); 
+                        if(is_string($educations)) $educations = json_decode($educations, true) ?? [[]];
+                        if(empty($educations)) $educations = [[]];
+                    @endphp
+                    
                     @foreach($educations as $index => $edu)
                     <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-2">
@@ -227,7 +302,7 @@
                                 <label class="text-xs text-gray-500">Degree</label>
                                 <select name="education[{{$index}}][degree]" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
                                     <option value="">Select...</option>
-                                    @foreach(['Elementary', 'Secondary', 'Higher Secondary', 'Undergraduate', 'Master'] as $opt)
+                                    @foreach(['Elementary', 'Secondary', 'Higher Secondary', 'Undergraduate', 'Master', 'PhD'] as $opt)
                                         <option value="{{ $opt }}" {{ ($edu['degree']??'') == $opt ? 'selected' : '' }}>{{ $opt }}</option>
                                     @endforeach
                                 </select>
@@ -245,19 +320,44 @@
                     @endforeach
                 </div>
                 
+                {{-- Add More Education Button --}}
+                <div class="mt-4 text-center">
+                    <button type="button" onclick="addEducationField()" class="text-blue-600 hover:text-blue-800 font-medium text-sm">
+                        <i class="fas fa-plus-circle mr-1"></i> Add Another Education
+                    </button>
+                </div>
+
                 <div class="mt-6 flex justify-between">
                     <button type="button" onclick="prevTab('family')" class="text-gray-600 hover:text-gray-900 font-medium">Back</button>
                     <button type="button" onclick="nextTab('documents')" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">Next <i class="fas fa-arrow-right ml-1"></i></button>
                 </div>
             </div>
 
+            {{-- DOCUMENTS TAB --}}
             <div id="tab-documents" class="form-section hidden animate-fade-in">
                 <h3 class="text-md font-bold text-gray-800 mb-4 border-l-4 border-red-500 pl-3">Upload Required Documents</h3>
+                
+                <div class="bg-blue-50 border border-blue-200 rounded-md p-3 mb-6 text-sm text-blue-700">
+                    <i class="fas fa-info-circle mr-1"></i> <strong>Note:</strong> Maximum file size is <strong>2MB</strong> per document. Accepted formats: PDF, JPG, PNG.
+                </div>
+
+                @if ($errors->any())
+                    <div class="bg-red-50 border border-red-200 text-red-600 rounded-md p-4 mb-6">
+                        <ul class="list-disc list-inside text-sm">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     @foreach($allDocsMap as $key => $label)
                         @if(in_array($key, $allowedDocs))
                             <div class="border rounded-xl p-4 hover:shadow-md transition-shadow bg-white relative">
-                                <label class="block text-sm font-bold text-gray-700 mb-2">{{ $label }} <span class="text-red-500">*</span></label>
+                                <label class="block text-sm font-bold text-gray-700 mb-1">
+                                    {{ $label }} <span class="text-red-500">*</span>
+                                </label>
                                 
                                 {{-- Existing Files Display --}}
                                 @if(isset($answers['documents'][$key]))
@@ -270,41 +370,111 @@
                                         @foreach($existingFiles as $idx => $filePath)
                                             <div class="flex items-center justify-between text-xs mb-1">
                                                 <span class="text-gray-600 truncate max-w-[150px]">File {{ $idx + 1 }}</span>
-                                                <a href="{{ asset('storage/'.$filePath) }}" target="_blank" class="text-blue-600 hover:text-blue-800 font-bold px-2 py-0.5 border rounded bg-white">View</a>
+                                                <a href="{{ asset($filePath) }}" target="_blank" class="text-blue-600 hover:text-blue-800 font-bold px-2 py-0.5 border rounded bg-white">View</a>
                                             </div>
                                         @endforeach
                                     </div>
                                 @endif
 
-                                <input type="file" name="documents[{{$key}}][]" multiple 
-                                       class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+                                <input type="file" 
+                                       name="documents[{{$key}}][]" 
+                                       multiple 
+                                       accept=".pdf,.jpg,.jpeg,.png"
+                                       class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 cursor-pointer">
+                                <p class="text-[10px] text-gray-400 mt-1">Max 2MB. PDF/JPG/PNG.</p>
                             </div>
                         @endif
                     @endforeach
                 </div>
 
-                {{-- Additional Questions if any --}}
-                @if(isset($customFields) && count($customFields) > 0)
-                    <div class="mt-8 pt-6 border-t">
-                        <h4 class="font-bold text-gray-800 mb-4">Additional Questions</h4>
-                        <div class="space-y-4">
-                            @foreach($customFields as $field)
-                                @php $fName = $field['name'] ?? 'custom_'.$loop->index; @endphp
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">{{ $field['label'] }}</label>
-                                    <input type="text" name="custom_fields[{{ $fName }}]" value="{{ $answers['custom_fields'][$fName] ?? '' }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
-                @endif
-
                 <div class="mt-6 flex justify-between">
                     <button type="button" onclick="prevTab('education')" class="text-gray-600 hover:text-gray-900 font-medium">Back</button>
-                    <button type="button" onclick="nextTab('finish')" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">Review <i class="fas fa-arrow-right ml-1"></i></button>
+                    @if(count($fields) > 0)
+                        <button type="button" onclick="nextTab('dynamic-fields')" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">Next <i class="fas fa-arrow-right ml-1"></i></button>
+                    @else
+                        <button type="button" onclick="nextTab('finish')" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">Review <i class="fas fa-arrow-right ml-1"></i></button>
+                    @endif
                 </div>
             </div>
 
+            {{-- DYNAMIC FIELDS TAB --}}
+            @if(count($fields) > 0)
+            <div id="tab-dynamic-fields" class="form-section hidden animate-fade-in">
+                <h3 class="text-md font-bold text-gray-800 mb-4 border-l-4 border-purple-500 pl-3">Additional Information</h3>
+                
+                <div class="bg-purple-50 border border-purple-200 rounded-md p-3 mb-6 text-sm text-purple-700">
+                    <i class="fas fa-info-circle mr-1"></i> Please fill out the following additional information required for this application.
+                </div>
+
+                <div class="space-y-6">
+                    @foreach($fields as $field)
+                        @php
+                            $fieldName = $field['name'] ?? 'field_' . $loop->index;
+                            $fieldLabel = $field['label'] ?? $fieldName;
+                            $fieldType = $field['type'] ?? 'text';
+                            $fieldRequired = $field['required'] ?? false;
+                            $fieldOptions = $field['options'] ?? [];
+                            $fieldValue = old($fieldName, $answers['dynamic_fields'][$fieldName] ?? '');
+                        @endphp
+                        
+                        <div class="border rounded-xl p-4 bg-white">
+                            <label class="block text-sm font-bold text-gray-700 mb-2">
+                                {{ $fieldLabel }} 
+                                @if($fieldRequired)
+                                    <span class="text-red-500">*</span>
+                                @endif
+                            </label>
+                            
+                            @if($fieldType === 'textarea')
+                                <textarea name="{{ $fieldName }}" 
+                                          class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+                                          rows="4"
+                                          @if($fieldRequired && !$isEdit) required @endif>{{ $fieldValue }}</textarea>
+                            @elseif($fieldType === 'select')
+                                <select name="{{ $fieldName }}" 
+                                        class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+                                        @if($fieldRequired && !$isEdit) required @endif>
+                                    <option value="">Select...</option>
+                                    @foreach($fieldOptions as $option)
+                                        <option value="{{ $option }}" {{ $fieldValue == $option ? 'selected' : '' }}>{{ $option }}</option>
+                                    @endforeach
+                                </select>
+                            @elseif($fieldType === 'file')
+                                {{-- Existing File Display --}}
+                                @if($fieldValue && str_starts_with($fieldValue, 'storage/'))
+                                    <div class="mb-3 bg-gray-50 p-2 rounded border border-gray-200">
+                                        <p class="text-xs font-semibold text-gray-600 mb-1">Uploaded:</p>
+                                        <div class="flex items-center justify-between text-xs">
+                                            <span class="text-gray-600 truncate max-w-[200px]">{{ basename($fieldValue) }}</span>
+                                            <a href="{{ asset($fieldValue) }}" target="_blank" class="text-blue-600 hover:text-blue-800 font-bold px-2 py-0.5 border rounded bg-white">View</a>
+                                        </div>
+                                    </div>
+                                @endif
+                                <input type="file" 
+                                       name="{{ $fieldName }}" 
+                                       accept=".pdf,.jpg,.jpeg,.png"
+                                       class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+                                       @if($fieldRequired && empty($fieldValue) && !$isEdit) required @endif>
+                                <p class="text-[10px] text-gray-400 mt-1">Max 2MB. PDF/JPG/PNG.</p>
+                            @else
+                                <input type="{{ $fieldType }}" 
+                                       name="{{ $fieldName }}" 
+                                       value="{{ $fieldValue }}"
+                                       class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+                                       @if($fieldRequired && !$isEdit) required @endif>
+                            @endif
+                        </div>
+                    @endforeach
+                </div>
+
+                <div class="mt-6 flex justify-between">
+                    <button type="button" onclick="prevTab('documents')" class="text-gray-600 hover:text-gray-900 font-medium">Back</button>
+                    <button type="button" onclick="nextTab('finish')" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">Review <i class="fas fa-arrow-right ml-1"></i></button>
+                </div>
+            </div>
+            @endif
+
+            {{-- FINISH TAB --}}
             <div id="tab-finish" class="form-section hidden animate-fade-in">
                 <h3 class="text-md font-bold text-gray-800 mb-4 border-l-4 border-green-500 pl-3">Program & Service Policy</h3>
                 
@@ -313,22 +483,49 @@
                         <div>
                             <label class="block text-sm font-bold text-blue-900 mb-2">Program Level</label>
                             <select name="program_type" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
-                                <option>Bachelor</option>
-                                <option>Master</option>
-                                <option>PhD</option>
-                                <option>Non-Degree</option>
+                                <option value="">Select...</option>
+                                <option value="Bachelor" {{ old('program_type', $answers['programme']['type'] ?? '') == 'Bachelor' ? 'selected' : '' }}>Bachelor</option>
+                                <option value="Master" {{ old('program_type', $answers['programme']['type'] ?? '') == 'Master' ? 'selected' : '' }}>Master</option>
+                                <option value="PhD" {{ old('program_type', $answers['programme']['type'] ?? '') == 'PhD' ? 'selected' : '' }}>PhD</option>
+                                <option value="Non-Degree" {{ old('program_type', $answers['programme']['type'] ?? '') == 'Non-Degree' ? 'selected' : '' }}>Non-Degree</option>
                             </select>
                         </div>
                         <div>
                             <label class="block text-sm font-bold text-blue-900 mb-2">Major</label>
-                            <input type="text" name="major" value="{{ $answers['programme']['major'] ?? $form->major }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
+                            <input type="text" name="major" value="{{ old('major', $answers['programme']['major'] ?? ($form->major ?? '')) }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
                         </div>
                     </div>
                     
+                    {{-- Degree Field --}}
+                    <div class="mt-4">
+                        <label class="block text-sm font-bold text-blue-900 mb-2">Degree</label>
+                        <input type="text" name="degree" value="{{ old('degree', $answers['programme']['degree'] ?? ($form->degree ?? '')) }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
+                    </div>
+                    
+                    {{-- Custom Fields Section --}}
+                    @if(isset($customFields) && count($customFields) > 0)
+                        <div class="mt-6 pt-6 border-t border-blue-200">
+                            <h4 class="font-bold text-gray-800 mb-4">Additional Questions</h4>
+                            <div class="space-y-4">
+                                @foreach($customFields as $field)
+                                    @php 
+                                        $fName = $field['name'] ?? 'custom_'.$loop->index;
+                                        $fieldValue = old("custom_fields.{$fName}", $answers['custom_fields'][$fName] ?? '');
+                                    @endphp
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">{{ $field['label'] }}</label>
+                                        <input type="text" name="custom_fields[{{ $fName }}]" value="{{ $fieldValue }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    @endif
+                    
+                    {{-- Service Policy --}}
                     <div class="mt-6 pt-6 border-t border-blue-200">
                         <label class="block text-sm font-bold text-blue-900 mb-3">Service Policy Selection</label>
                         <div class="flex flex-col sm:flex-row gap-4">
-                            @php $pol = $answers['service_policy'] ?? ''; @endphp
+                            @php $pol = old('service_policy', $answers['service_policy'] ?? ''); @endphp
                             <label class="flex-1 border border-blue-200 bg-white p-4 rounded-lg cursor-pointer hover:shadow-md transition {{ $form->has_exclusive_service_policy ? '' : 'opacity-50 pointer-events-none' }}">
                                 <div class="flex items-center">
                                     <input type="radio" name="service_policy" value="exclusive" {{ $pol == 'exclusive' ? 'checked' : '' }} class="h-5 w-5 text-blue-600">
@@ -352,7 +549,11 @@
                 </div>
 
                 <div class="flex flex-col md:flex-row items-center justify-between gap-4 mt-8 pt-6 border-t">
-                    <button type="button" onclick="prevTab('documents')" class="text-gray-600 font-medium hover:underline">Back to Documents</button>
+                    @if(count($fields) > 0)
+                        <button type="button" onclick="prevTab('dynamic-fields')" class="text-gray-600 font-medium hover:underline">Back to Additional Info</button>
+                    @else
+                        <button type="button" onclick="prevTab('documents')" class="text-gray-600 font-medium hover:underline">Back to Documents</button>
+                    @endif
                     
                     <div class="flex gap-4 w-full md:w-auto">
                         <button type="submit" name="action" value="draft" class="flex-1 md:flex-none bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg shadow transition">
@@ -400,7 +601,42 @@
     }
     
     function prevTab(tabId) {
-        nextTab(tabId); // Logic is same, just targeting previous ID
+        nextTab(tabId);
+    }
+
+    // Add Education Field
+    function addEducationField() {
+        const educationContainer = document.querySelector('#tab-education .space-y-4');
+        const index = educationContainer.querySelectorAll('.bg-gray-50').length;
+        
+        const newField = document.createElement('div');
+        newField.className = 'bg-gray-50 p-4 rounded-lg border border-gray-200';
+        newField.innerHTML = `
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-2">
+                <div>
+                    <label class="text-xs text-gray-500">Degree</label>
+                    <select name="education[${index}][degree]" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
+                        <option value="">Select...</option>
+                        <option value="Elementary">Elementary</option>
+                        <option value="Secondary">Secondary</option>
+                        <option value="Higher Secondary">Higher Secondary</option>
+                        <option value="Undergraduate">Undergraduate</option>
+                        <option value="Master">Master</option>
+                        <option value="PhD">PhD</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="text-xs text-gray-500">Institute</label>
+                    <input type="text" name="education[${index}][institute]" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
+                </div>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <div><label class="text-xs text-gray-500">From</label><input type="text" name="education[${index}][from]" placeholder="Year" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"></div>
+                <div><label class="text-xs text-gray-500">To</label><input type="text" name="education[${index}][to]" placeholder="Year" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"></div>
+            </div>
+        `;
+        
+        educationContainer.appendChild(newField);
     }
 
     // Initialize
@@ -415,7 +651,7 @@
             .then(response => response.json())
             .then(data => {
                 data.sort((a, b) => a.name.common.localeCompare(b.name.common));
-                const existingPhone = "{{ $student->phone ?? '' }}";
+                const existingPhone = "{{ old('phone', $student->phone) }}";
                 let matchedCode = "";
 
                 data.forEach(country => {
