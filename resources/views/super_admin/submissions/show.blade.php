@@ -131,43 +131,51 @@
                     <div class="grid grid-cols-2 md:grid-cols-3 gap-y-4 gap-x-6 text-sm">
                         <div class="col-span-1">
                             <span class="text-gray-500 block">Surname</span>
-                            <span class="font-semibold">{{ $submission->student->surname }}</span>
+                            <span class="font-semibold">{{ $submission->answers['surname'] ?? $submission->student->surname }}</span>
                         </div>
                         <div class="col-span-1">
                             <span class="text-gray-500 block">Given Name</span>
-                            <span class="font-semibold">{{ $submission->student->given_name }}</span>
+                            <span class="font-semibold">{{ $submission->answers['given_name'] ?? $submission->student->given_name }}</span>
                         </div>
                         <div class="col-span-1">
                             <span class="text-gray-500 block">Gender</span>
-                            <span class="font-semibold">{{ $submission->student->gender }}</span>
+                            <span class="font-semibold">{{ $submission->answers['gender'] ?? $submission->student->gender }}</span>
                         </div>
                         <div class="col-span-1">
                             <span class="text-gray-500 block">Date of Birth</span>
-                            <span class="font-semibold">{{ $submission->student->dob ? $submission->student->dob->format('d M, Y') : 'N/A' }}</span>
+                            @php
+                                $dob = $submission->answers['dob'] ?? $submission->student->dob;
+                                if(is_string($dob)) $dob = \Carbon\Carbon::parse($dob);
+                            @endphp
+                            <span class="font-semibold">{{ $dob ? $dob->format('d M, Y') : 'N/A' }}</span>
                         </div>
                         <div class="col-span-1">
                             <span class="text-gray-500 block">Nationality</span>
-                            <span class="font-semibold">{{ $submission->student->nationality }}</span>
+                            <span class="font-semibold">{{ $submission->answers['nationality'] ?? $submission->student->nationality }}</span>
                         </div>
                         <div class="col-span-1">
                             <span class="text-gray-500 block">Religion</span>
-                            <span class="font-semibold">{{ $submission->student->religion }}</span>
+                            <span class="font-semibold">{{ $submission->answers['religion'] ?? $submission->student->religion }}</span>
                         </div>
                         <div class="col-span-1">
                             <span class="text-gray-500 block">Marital Status</span>
-                            <span class="font-semibold">{{ $submission->student->marital_status }}</span>
+                            <span class="font-semibold">{{ $submission->answers['marital_status'] ?? $submission->student->marital_status }}</span>
                         </div>
                         <div class="col-span-1">
                             <span class="text-gray-500 block">Native Language</span>
-                            <span class="font-semibold">{{ $submission->student->native_language }}</span>
+                            <span class="font-semibold">{{ $submission->answers['native_language'] ?? $submission->student->native_language }}</span>
                         </div>
                         <div class="col-span-1">
                             <span class="text-gray-500 block">Passport Number</span>
-                            <span class="font-semibold">{{ $submission->student->passport_number }}</span>
+                            <span class="font-semibold">{{ $submission->answers['passport_number'] ?? $submission->student->passport_number }}</span>
                         </div>
                         <div class="col-span-1">
                             <span class="text-gray-500 block">Passport Expiry</span>
-                            <span class="font-semibold">{{ $submission->student->passport_expiry_date ? $submission->student->passport_expiry_date->format('d M, Y') : 'N/A' }}</span>
+                            @php
+                                $passExpiry = $submission->answers['passport_expiry_date'] ?? $submission->student->passport_expiry_date;
+                                if(is_string($passExpiry)) $passExpiry = \Carbon\Carbon::parse($passExpiry);
+                            @endphp
+                            <span class="font-semibold">{{ $passExpiry ? $passExpiry->format('d M, Y') : 'N/A' }}</span>
                         </div>
                     </div>
                 </div>
@@ -179,16 +187,19 @@
                         <div class="col-span-2">
                             <span class="text-gray-500 block">Address</span>
                             <span class="font-semibold">
-                                {{ $submission->student->street }}, {{ $submission->student->city }}, {{ $submission->student->country }} - {{ $submission->student->zip_code }}
+                                {{ $submission->answers['street'] ?? $submission->student->street }}, 
+                                {{ $submission->answers['city'] ?? $submission->student->city }}, 
+                                {{ $submission->answers['country'] ?? $submission->student->country }} - 
+                                {{ $submission->answers['zip_code'] ?? $submission->student->zip_code }}
                             </span>
                         </div>
                         <div>
                             <span class="text-gray-500 block">Phone / Mobile</span>
-                            <span class="font-semibold">{{ $submission->student->phone }}</span>
+                            <span class="font-semibold">{{ $submission->answers['phone'] ?? $submission->student->phone }}</span>
                         </div>
                         <div>
                             <span class="text-gray-500 block">Email</span>
-                            <span class="font-semibold">{{ $submission->student->email }}</span>
+                            <span class="font-semibold">{{ $submission->answers['email'] ?? $submission->student->email }}</span>
                         </div>
                     </div>
                 </div>
@@ -196,7 +207,12 @@
                 {{-- 4. Education Background --}}
                 <div class="text-left mb-8 print-break-inside">
                     <h3 class="text-lg font-bold text-blue-800 border-b-2 border-blue-800 mb-4 pb-1 uppercase">4. Education Background</h3>
-                    @if(!empty($submission->student->education_background) && is_array($submission->student->education_background))
+                    @php
+                        $educations = $submission->answers['education'] ?? ($submission->student->education_background ?? []);
+                        if(is_string($educations)) $educations = json_decode($educations, true);
+                    @endphp
+
+                    @if(!empty($educations) && is_array($educations))
                         <table class="w-full text-sm text-left border border-gray-200">
                             <thead class="bg-gray-100">
                                 <tr>
@@ -207,7 +223,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($submission->student->education_background as $edu)
+                                @foreach($educations as $edu)
                                 <tr>
                                     <td class="px-3 py-2 border">{{ $edu['degree'] ?? '-' }}</td>
                                     <td class="px-3 py-2 border">{{ $edu['institute'] ?? '-' }}</td>
@@ -226,7 +242,10 @@
                 <div class="text-left mb-8 print-break-inside">
                     <h3 class="text-lg font-bold text-blue-800 border-b-2 border-blue-800 mb-4 pb-1 uppercase">5. Family Information</h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
-                        @php $parents = $submission->student->parents_info ?? []; @endphp
+                        @php 
+                            $parents = $submission->answers['parents'] ?? ($submission->student->parents_info ?? []);
+                            if(is_string($parents)) $parents = json_decode($parents, true);
+                        @endphp
                         
                         {{-- Father --}}
                         <div class="bg-gray-50 p-3 rounded">
@@ -249,7 +268,10 @@
                 {{-- 6. Financial Sponsor --}}
                 <div class="text-left mb-8 print-break-inside">
                     <h3 class="text-lg font-bold text-blue-800 border-b-2 border-blue-800 mb-4 pb-1 uppercase">6. Financial Sponsor</h3>
-                    @php $sponsor = $submission->student->sponsor_info ?? []; @endphp
+                    @php 
+                        $sponsor = $submission->answers['sponsor'] ?? ($submission->student->sponsor_info ?? []);
+                        if(is_string($sponsor)) $sponsor = json_decode($sponsor, true);
+                    @endphp
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
                         <div>
                             <span class="text-gray-500 block">Name</span>

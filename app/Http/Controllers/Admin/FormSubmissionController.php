@@ -54,7 +54,6 @@ class FormSubmissionController extends Controller
         return redirect()->route('admin.submissions')->with('success', 'Application information updated successfully.');
     }
 
-    // Update status and send notification
     public function updateStatus(Request $request, $id)
     {
         $request->validate([
@@ -62,24 +61,29 @@ class FormSubmissionController extends Controller
             'custom_message' => 'nullable|string',
         ]);
 
-        $submission = FormSubmission::findOrFail($id);
+        $submission = FormSubmission::with(['student.user', 'university'])->findOrFail($id);
         $newStatus = $request->status;
         
         $submission->status = $newStatus;
         $submission->save();
 
         // Notification Logic
-        $userToNotify = $submission->student->user;
-        $notificationText = $this->getNotificationText($newStatus, $request->custom_message);
+        if ($submission->student && $submission->student->user) {
+            $userToNotify = User::email;
+            $notificationText = $this->getNotificationText($newStatus, $request->custom_message);
 
-        // Send Email
-        try {
-            Mail::to($userToNotify->email)->send(new ApplicationStatusNotification($submission, $notificationText));
-        } catch (\Exception $e) {
-            \Log::error('Failed to send application status email: ' . $e->getMessage());
+            // Send Email (Queued)
+            try {
+                Mail::to($userToNotify->email)->send(new ApplicationStatusNotification($submission, $notificationText));
+            } catch (\Exception $e) {
+                Log::error('Failed to queue application status email: ' . $e->getMessage());
+                // We don't stop the request, just log the error so the admin knows the status changed but email failed
+            }
+        } else {
+            Log::warning("Submission #{$submission->id} status updated but no associated student user found to email.");
         }
 
-        return redirect()->back()->with('success', "Status updated to " . ucfirst(str_replace('_', ' ', $newStatus)) . " and notification sent.");
+        return redirect()->back()->with('success', "Status updated to " . ucfirst(str_replace('_', ' ', $newStatus)) . ".");
     }
 
     // Mark commission as paid
@@ -112,17 +116,19 @@ class FormSubmissionController extends Controller
     // Helper: Generate notification text
     private function getNotificationText($status, $customMessage = null)
     {
-        // Statuses that require custom messages typically override defaults if provided
-        if ($customMessage) {
+        if (!empty($customMessage)) {
             return $customMessage;
         }
 
         $messages = [
             'pending' => 'Your application is currently pending review.',
             'processing' => 'Your application is being processed by our team.',
+            'draft' => 'Your application requires corrections. Please log in to edit and resubmit.',
             'pay_application_fees' => 'Please pay the required application fees to proceed.',
+            'pay_required_deposit' => 'Please pay the required deposit to secure your admission.',
             'passed_initial_review' => 'Congratulations! Your application has passed the initial review.',
             'pre_admitted' => 'You have been pre-admitted. Please check your dashboard for next steps.',
+            'admitted' => 'Congratulations! You have been officially admitted.',
             'successful' => 'Your application was successful!',
             'rejected' => 'We regret to inform you that your application was rejected.',
             'refunded' => 'Your payment has been refunded.',

@@ -8,9 +8,10 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
+use Illuminate\Mail\Mailables\Address;
 use Illuminate\Queue\SerializesModels;
 
-class ApplicationStatusNotification extends Mailable
+class ApplicationStatusNotification extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
@@ -32,7 +33,8 @@ class ApplicationStatusNotification extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Application Status Update - ' . $this->submission->university->name,
+            from: new Address(config('mail.from.address'), config('mail.from.name')),
+            subject: 'Application Status Update - ' . ($this->submission->university->name ?? 'University Application'),
         );
     }
 
@@ -41,11 +43,15 @@ class ApplicationStatusNotification extends Mailable
      */
     public function content(): Content
     {
+        // Safe access to data to prevent crashes if a relationship is missing
+        $studentName = $this->submission->student->user->name ?? 'Applicant';
+        $universityName = $this->submission->university->name ?? 'the university';
+        
         return new Content(
-            view: 'emails.application_status', // You need to create this view
+            view: 'emails.application_status',
             with: [
-                'studentName' => $this->submission->student->user->name,
-                'universityName' => $this->submission->university->name,
+                'studentName' => $studentName,
+                'universityName' => $universityName,
                 'status' => ucfirst(str_replace('_', ' ', $this->submission->status)),
                 'messageBody' => $this->notificationText,
             ],
