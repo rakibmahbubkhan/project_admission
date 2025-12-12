@@ -72,7 +72,7 @@
                 $requiredDocsList = $form->required_documents ?? [];
                 // Map keys to readable labels
                 $docLabels = [
-                    'photo' => 'Passport Photo', 'passport' => 'Passport Scan', 'non_criminal' => 'Non-Criminal Record',
+                    'photo' => 'Photo', 'passport' => 'Passport Scan', 'non_criminal' => 'Non-Criminal Record',
                     'degree_cert' => 'Highest Degree Certificate', 'transcript' => 'Academic Transcript',
                     'recommendation' => 'Two Recommendation Letters', 'language_cert' => 'Language Certificate',
                     'csca_cert' => 'CSCA Score', 'medical' => 'Physical Exam Report',

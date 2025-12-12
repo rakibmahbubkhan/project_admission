@@ -21,7 +21,7 @@
         
         // Standard full list
         $allDocsMap = [
-            'photo' => 'Passport Photo', 
+            'photo' => 'Photo', 
             'passport' => 'Passport Front Page', 
             'non_criminal' => 'Non-Criminal Record',
             'degree_cert' => 'Highest Degree Certificate', 
